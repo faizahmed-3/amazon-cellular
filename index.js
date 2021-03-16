@@ -6,6 +6,7 @@ app.use(express.static('public'));
 
 require('./startup/logging')();
 require('./startup/config')();
+require('./startup/db')();
 require('./startup/validation')();
 require('./startup/routes')(app);
 
