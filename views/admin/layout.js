@@ -61,10 +61,7 @@ module.exports = ({content}) => {
                 <div class="collapse collapseMenu" id="productsList">
                     <div class="card card-body">
                         <ul class="mt-0 px-0">
-                            <li class="list-group-item list-group-item-action " onclick="location.href='products.html'">Add Product</li>
-                            <li class="list-group-item list-group-item-action ">Featured Products</li>
-                            <li class="list-group-item list-group-item-action ">New Arrivals</li>
-                            <li class="list-group-item list-group-item-action ">Sale</li>
+                            <li class="list-group-item list-group-item-action " onclick="location.href='/products'">Add Product</li>
                             <li class="list-group-item list-group-item-action ">Phones List</li>
                             <li class="list-group-item list-group-item-action ">Brands</li>
                             <li class="list-group-item list-group-item-action ">Cases</li>
@@ -77,6 +74,18 @@ module.exports = ({content}) => {
                             <li class="list-group-item list-group-item-action ">Computer Accessories</li>
                             <li class="list-group-item list-group-item-action ">TV Accessories</li>
                             <li class="list-group-item list-group-item-action ">Other Categories</li>
+                        </ul>
+                    </div>
+                </div>
+                <li class="list-group-item list-group-item-action" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#specialsList" aria-expanded="false" aria-controls="specialsList">
+                    <i class="fas fa-award"></i></i>Special Categories<i class="fas fa-caret-down ms-1"></i></li>
+                <div class="collapse collapseMenu" id="specialsList">
+                    <div class="card card-body">
+                        <ul class="mt-0 px-0">
+                            <li class="list-group-item list-group-item-action ">Featured Products</li>
+                            <li class="list-group-item list-group-item-action ">New Arrivals</li>
+                            <li class="list-group-item list-group-item-action ">Sale</li>
                         </ul>
                     </div>
                 </div>

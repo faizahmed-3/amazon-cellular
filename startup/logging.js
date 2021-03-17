@@ -20,7 +20,7 @@ module.exports = function () {
             winston.format.colorize(),
             winston.format.simple()
         )}));
-    winston.add(new winston.transports.File({filename: 'logfile.log'}));
+    // winston.add(new winston.transports.File({filename: 'logfile.log'}));
     // winston.add(new winston.transports.MongoDB({db: 'mongodb://localhost/', level: 'warn'}));
 
 }
