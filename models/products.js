@@ -10,6 +10,9 @@ const productSchema = new mongoose.Schema({
         maxlength: 255,
         trim: true
     },
+    categoryID: mongoose.Schema.Types.ObjectId,
+    specialID: mongoose.Schema.Types.ObjectId,
+    brandID: mongoose.Schema.Types.ObjectId,
     colour: {
         type: String,
         minlength: 3,
@@ -53,8 +56,13 @@ const productSchema = new mongoose.Schema({
     discountEnd: {
         type: Date
     },
-    Status: {
-        type: Boolean
+    images: {
+        data: Buffer,
+        contentType: String
+    },
+    status: {
+        type: Boolean,
+        default: false
     },
     dateCreated: {
         type: Date,
@@ -63,10 +71,12 @@ const productSchema = new mongoose.Schema({
     unitsSold: {
         type: Number,
         min: 0,
+        default: 0
     },
-    revenueGenerated: {
+    income: {
         type: Number,
         min: 0,
+        default: 0
     }
 });
 
@@ -75,7 +85,17 @@ const Product = mongoose.model('Product', productSchema);
 
 function validate(product) {
     const schema =Joi.object({
-        name: Joi.string().required().min(3).max(255)
+        name: Joi.string().required().min(3).max(255),
+        colour: Joi.string().min(3).max(255),
+        material: Joi.string().min(3).max(255),
+        description: Joi.string().min(3).max(255),
+        inBox: Joi.string().min(3).max(255),
+        quantity: Joi.number(),
+        price: Joi.number(),
+        discountPrice: Joi.number(),
+        discountStart: Joi.date(),
+        discountEnd: Joi.date(),
+        status: Joi.boolean()
     });
     return schema.validate(product);
 }

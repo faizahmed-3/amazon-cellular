@@ -90,7 +90,7 @@ body .to-top.active {
 }
 .navbar .active {
   transition: border 0.3s ease-in-out 1s;
-  border-bottom: 2.5px solid #FF0000;
+  border-bottom: 2.5px solid #DC3545;
 }
 .navbar .dropdown-menu {
   text-transform: none;
@@ -114,7 +114,7 @@ body .to-top.active {
   top: -9px;
   height: 18px;
   width: 18px;
-  background: #FF0000;
+  background: #DC3545;
   font-style: normal;
   font-size: 10px;
   font-weight: 700;
@@ -259,13 +259,13 @@ body .to-top.active {
   bottom: -4px;
   height: 2px;
   width: 40px;
-  background: #FF0000;
+  background: #DC3545;
   content: "";
 }
 .featured .see-all {
   display: inline-block;
   float: right;
-  background: #FF0000;
+  background: #DC3545;
   color: white;
 }
 .featured .card {
@@ -297,7 +297,7 @@ body .to-top.active {
   margin-left: 0.2rem;
   font-size: 0.6rem;
   font-weight: normal;
-  text-decoration: line-through #FF0000;
+  text-decoration: line-through #DC3545;
 }
 .featured .card-img-top {
   height: 14rem;
@@ -499,7 +499,7 @@ body .to-top.active {
 }
 #checkout-body #checkout-main label[required]:after {
   content: " *";
-  color: #FF0000;
+  color: #DC3545;
 }
 #checkout-body #checkout-main input[placeholder], #checkout-body #checkout-main textarea[placeholder], #checkout-body #checkout-main select, #checkout-body #checkout-main option, #checkout-body #checkout-main .form-check-label {
   font-size: 0.8rem;
@@ -610,7 +610,7 @@ body .to-top.active {
   margin-left: 0.2rem;
   font-size: 0.6rem;
   font-weight: normal;
-  text-decoration: line-through #FF0000;
+  text-decoration: line-through #DC3545;
 }
 .tp .row .card-img-top {
   height: 14rem;
@@ -712,7 +712,7 @@ body .to-top.active {
   margin-left: 0.2rem;
   font-size: 0.6rem;
   font-weight: normal;
-  text-decoration: line-through #FF0000;
+  text-decoration: line-through #DC3545;
 }
 .category-main #category-display .mainContent .card-img-top {
   height: 14rem;
@@ -774,7 +774,7 @@ body .to-top.active {
 }
 .register label[required]:after {
   content: " *";
-  color: #FF0000;
+  color: #DC3545;
 }
 .register label {
   font-size: 0.93rem;
@@ -949,7 +949,7 @@ body .to-top.active {
   color: #198754;
 }
 #admin .mainPanel #stats .loss {
-  color: #FF0000;
+  color: #DC3545;
 }
 
 #admin.toggled .sidebar {
@@ -969,7 +969,7 @@ body .to-top.active {
 }
 #add-product label[required]:after {
   content: " *";
-  color: #FF0000;
+  color: #DC3545;
 }
 #add-product select:hover {
   cursor: pointer;
@@ -1007,6 +1007,8 @@ body .to-top.active {
 #add-product .imgCol {
   height: 14rem;
   background: #f4f4f4;
+  object-fit: cover;
+  object-position: center center;
 }
 #add-product .far, #add-product .fa-plus {
   font-size: 1.35rem;
@@ -1074,6 +1076,85 @@ body .to-top.active {
 }
 #add-product .save {
   font-weight: 800;
+}
+
+#viewProducts {
+  margin: 2rem 2.5rem 2rem 1rem;
+}
+#viewProducts .card-header {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+#viewProducts .tableHeaderName {
+  width: 20%;
+  text-align: center;
+}
+#viewProducts .tableHeader {
+  width: 10%;
+  text-align: center;
+}
+#viewProducts td {
+  text-align: center;
+}
+#viewProducts .switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin-left: 0.5rem;
+  /* The slider */
+  /* Rounded sliders */
+}
+#viewProducts .switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ec5555;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+#viewProducts .switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+#viewProducts .switch input:checked + .slider {
+  background-color: #198754;
+}
+#viewProducts .switch input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+#viewProducts .switch input:checked + .slider:before {
+  -webkit-transform: translateX(19px);
+  -ms-transform: translateX(19px);
+  transform: translateX(19px);
+}
+#viewProducts .switch .slider.round {
+  border-radius: 34px;
+}
+#viewProducts .switch .slider.round:before {
+  border-radius: 50%;
+}
+#viewProducts .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+#viewProducts .far {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+#viewProducts .fa-trash-alt {
+  color: #DC3545;
 }
 
 @media (max-width: 1199.98px) {
@@ -1749,7 +1830,7 @@ body .to-top.active {
     color: #198754;
   }
   #admin .mainPanel #stats .loss {
-    color: #FF0000;
+    color: #DC3545;
   }
   #admin .mainPanel .order {
     width: 95%;

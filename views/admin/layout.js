@@ -1,4 +1,4 @@
-module.exports = ({content}) => {
+module.exports = ({title, content}) => {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -32,20 +32,20 @@ module.exports = ({content}) => {
     <!--    Chart JS-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 
-    <title>Products | Amazon Cellular</title>
+    <title>${title} | Amazon Cellular</title>
 </head>
 <body>
 
 <!--Pre Loader-->
 <div class="loader">
-    <img src="../img/loader.gif" alt="Loading...">
+    <img src="/img/loader.gif" alt="Loading...">
 </div>
 
 <!--Admin Layout-->
 <section id="admin">
     <!--    Sidebar-->
     <div class="sidebar border border-end ">
-        <div class="text-center mt-2 sidebarItem"><img src="../img/logo.jpg" alt="Logo" class="img-fluid">
+        <div class="text-center mt-2 sidebarItem"><img src="/img/logo.jpg" alt="Logo" class="img-fluid">
         </div>
         <div class="sidebarItem ">
             <ul class="list-group list-group-flush">
@@ -61,7 +61,7 @@ module.exports = ({content}) => {
                 <div class="collapse collapseMenu" id="productsList">
                     <div class="card card-body">
                         <ul class="mt-0 px-0">
-                            <li class="list-group-item list-group-item-action " onclick="location.href='/products'">Add Product</li>
+                            <li class="list-group-item list-group-item-action " onclick="location.href='/admin/products/new'">Add Product</li>
                             <li class="list-group-item list-group-item-action ">Phones List</li>
                             <li class="list-group-item list-group-item-action ">Brands</li>
                             <li class="list-group-item list-group-item-action ">Cases</li>
@@ -104,42 +104,42 @@ module.exports = ({content}) => {
 
     <!--    Main Panel-->
     <div class="mainPanel">
-        <!--        Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-            <div class="container-fluid">
-                <button class="btn btn-primary rounded-circle" id="sidebarToggle"><i class="fas fa-plus"></i></button>
-                <a class="navbar-brand" href="#">Add Product</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <button class="btn btn-primary addBtn" onclick="location.href='products.html'">Add Product</button>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container-fluid">
+        <button class="btn btn-primary rounded-circle" id="sidebarToggle"><i class="fas fa-plus"></i></button>
+        <a class="navbar-brand" href="#">${title}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <button class="btn btn-primary addBtn" onclick="location.href='/admin/products/new'">Add Product</button>
+                </li>
+                <li class="nav-item notiCount">
+                    <i class="bi bi-bell notification"><span class="tip">4</span></i>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Faiz Ahmed
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Activity Log</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
                         </li>
-                        <li class="nav-item notiCount">
-                            <i class="bi bi-bell notification"><span class="tip">4</span></i>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Faiz Ahmed
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Activity Log</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Log Out</a></li>
-                            </ul>
-                        </li>
+                        <li><a class="dropdown-item" href="#">Log Out</a></li>
                     </ul>
-                </div>
-            </div>
-        </nav>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
         
         ${content}
 

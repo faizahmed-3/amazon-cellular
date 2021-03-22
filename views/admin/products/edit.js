@@ -1,7 +1,7 @@
 const layout = require('../layout');
-const title = 'Add Product'
+const title = 'Edit Product'
 
-module.exports = () => {
+module.exports = ({product}) => {
     return layout({
         title: title,
         content: `
@@ -11,10 +11,10 @@ module.exports = () => {
         Product Information
     </div>
     <div class="card-body">
-        <form id="addProductsForm" method="POST" action="/admin/products">
+        <form id="editProductsForm" method="POST" action="/admin/products/edit/${product.id}">
             <div class="mb-3 form-group">
                 <label for="name" class="form-label">Product Name</label>
-                <input name="name" type="text" class="form-control" id="name" aria-describedby="product name">
+                <input name="name" value="${product.productName}" type="text" class="form-control" id="name" aria-describedby="product name">
             </div>
             <div>
                 <!--                    <div class="row">-->
@@ -91,17 +91,17 @@ module.exports = () => {
                         <th scope="col">Quantity</th>
                         <th scope="col">Price (ksh)</th>
                         <th scope="col">Discount Price (ksh)</th>
-                        <th scope="col">Discount Start</th>
-                        <th scope="col">Discount End</th>
+<!--                        <th scope="col">Discount Start</th>-->
+<!--                        <th scope="col">Discount End</th>-->
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td><input type="number" name="quantity"></td>
-                        <td><input type="number" name="price"></td>
-                        <td><input type="number" name="discountPrice"></td>
-                        <td><input type="date" name="discountStart"></td>
-                        <td><input type="date" name="discountEnd"></td>
+                        <td><input type="number" name="quantity" value="${product.quantity}"></td>
+                        <td><input type="number" name="price" value="${product.price}"></td>
+                        <td><input type="number" name="discountPrice" value="${product.discountPrice}"></td>
+<!--                        <td><input type="date" name="discountStart" value="${product.discountStart}"></td>-->
+<!--                        <td><input type="date" name="discountEnd"value="${product.discountStart}"></td>-->
                     </tr>
                     </tbody>
                 </table>
