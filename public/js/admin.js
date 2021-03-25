@@ -73,8 +73,11 @@ if (imgRow) {
 
 
 //visibility switch
-const checkbox = document.querySelector('.visibilitySwitch')
-if (checkbox.checked) checkbox.value = true;
+if (document.querySelector('.visibilitySwitch')){
+    const checkbox = document.querySelector('.visibilitySwitch')
+    if (checkbox.checked) checkbox.value = true;
+}
+
 
 
 
