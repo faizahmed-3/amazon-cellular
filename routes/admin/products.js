@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const mongoose = require('mongoose');
 const {Product, validate} = require('../../models/admin/products');
 const addProductTemplate = require('../../views/admin/products/new');
@@ -19,20 +20,8 @@ router.post('/', async (req, res) => {
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const product = new Product(
-        {
-            productName: req.body.name,
-            colour: req.body.colour,
-            material: req.body.material,
-            quantity: req.body.quantity,
-            price: req.body.price,
-            discountPrice: req.body.discountPrice,
-            discountStart: req.body.discountStart,
-            discountEnd: req.body.discountEnd,
-            status: req.body.status
-        }
-    );
-
+    const product = new Product(_.pick(req.body,
+        ['productName', 'colour', 'material', 'quantity', 'price', 'discountPrice', 'discountStart', 'discountEnd', 'status']));
 
     await product.save();
 
@@ -57,17 +46,9 @@ router.post('/edit/:id', async (req, res) => {
     if (!valid) return res.status(400).send('Invalid ID passed');
 
 
-    const product = await Product.findByIdAndUpdate(req.params.id, {
-        productName: req.body.name,
-        colour: req.body.colour,
-        material: req.body.material,
-        quantity: req.body.quantity,
-        price: req.body.price,
-        discountPrice: req.body.discountPrice,
-        discountStart: req.body.discountStart,
-        discountEnd: req.body.discountEnd,
-        status: req.body.status
-    }, {new: true});
+    const product = await Product.findByIdAndUpdate(req.params.id,
+        _.pick(req.body, ['productName', 'colour', 'material', 'quantity', 'price', 'discountPrice', 'discountStart', 'discountEnd', 'status']),
+        {new: true});
     if (!product) return res.status(404).send(`Sorry, that product doesn't exist`);
 
 

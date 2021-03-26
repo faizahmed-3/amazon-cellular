@@ -466,7 +466,7 @@ body .to-top.active {
 #footer .footer1 .reg {
   font-weight: 700;
   width: 10rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 #footer .footer2 {
   background: #171717;
@@ -766,8 +766,8 @@ body .to-top.active {
   place-items: center;
 }
 .register .card {
-  margin-top: 4rem;
-  width: 50%;
+  margin: 2rem;
+  width: 60%;
 }
 .register .card-header {
   text-transform: uppercase;
@@ -779,16 +779,14 @@ body .to-top.active {
   content: " *";
   color: #DC3545;
 }
-.register label {
-  font-size: 0.93rem;
-}
 .register input[placeholder], .register textarea[placeholder], .register select, .register option, .register .form-check-label {
-  font-size: 0.83rem;
+  font-size: 0.9rem;
 }
 .register p {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
+  margin-bottom: 0;
 }
-.register p a {
+.register a {
   font-weight: 700;
   text-decoration: none;
   color: black;
@@ -1088,7 +1086,10 @@ body .to-top.active {
   font-size: 1.5rem;
   font-weight: 700;
 }
-#viewProducts .tableHeaderName {
+#viewProducts .table {
+  margin-bottom: 0;
+}
+#viewProducts .tableHeaderBig {
   width: 20%;
   text-align: center;
 }
@@ -2283,4 +2284,4 @@ body .to-top.active {
   }
 }
 
-/*# sourceMappingURL=custom.css.map */
+/*# sourceMappingURL=app.css.map */

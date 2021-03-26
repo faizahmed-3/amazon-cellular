@@ -532,7 +532,7 @@ body {
     .reg {
       font-weight: 700;
       width: 10rem;
-      margin-top: 2rem;
+      margin-top: 1rem;
     }
   }
 
@@ -796,8 +796,8 @@ body {
   place-items: center;
 
   .card {
-    margin-top: 4rem;
-    width: 50%;
+    margin: 2rem;
+    width: 60%;
   }
 
   .card-header {
@@ -810,21 +810,22 @@ body {
   @include required;
 
   label {
-    font-size: 0.93rem;
+    //font-size: 0.93rem;
   }
 
   input[placeholder], textarea[placeholder], select, option, .form-check-label {
-    font-size: 0.83rem;
+    font-size: 0.9rem;
   }
 
   p {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
 
-    a {
-      font-weight: 700;
-      text-decoration: none;
-      color: black;
-    }
+  a {
+    font-weight: 700;
+    text-decoration: none;
+    color: black;
   }
 }
 
@@ -1134,7 +1135,11 @@ body {
     font-weight: 700;
   }
 
-  .tableHeaderName{
+  .table{
+    margin-bottom: 0;
+  }
+
+  .tableHeaderBig{
     width: 20%;
     text-align: center
   }

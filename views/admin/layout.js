@@ -20,7 +20,7 @@ module.exports = ({title, content}) => {
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
 
     <!--    Custom CSS -->
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/app.css">
 
     <!--    Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"

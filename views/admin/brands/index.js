@@ -30,7 +30,7 @@ module.exports = ({brands}) => {
         <table class="table table-hover table-bordered border-dark">
             <thead>
             <tr class="table-dark">
-                <th scope="col" class="tableHeaderName">Brand Name</th>
+                <th scope="col" class="tableHeader">Brand Name</th>
                 <th scope="col" class="tableHeader">Date Created</th>
                 <th scope="col" class="tableHeader">Quantity</th>
                 <th scope="col" class="tableHeader">Units Sold</th>

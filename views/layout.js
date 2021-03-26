@@ -20,7 +20,7 @@ module.exports = ({title, content}) => {
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
 
     <!--    Custom CSS -->
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/app.css">
 
     <!--    Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
@@ -42,7 +42,7 @@ module.exports = ({title, content}) => {
 <!--extra navbar-->
 <div class="container-fluid" id="extraNav">
     <div class="d-flex justify-content-center" id="cred">
-        <div class="clickable" onclick="location.href='register.html'">Sign Up</div>
+        <div class="clickable" onclick="location.href='/users/register'">Register</div>
         <div class="separator mx-2">|</div>
         <div class="clickable" onclick="location.href='login.html'">Log In</div>
         <div class="separator mx-2">|</div>
@@ -156,10 +156,13 @@ ${content}
             </div>
             <div class="col-md-2 offset-lg-1">
                 <div class="d-flex justify-content-evenly justify-content-md-between flex-md-column ">
-                    <button type="button" class="btn btn-warning reg" onclick="location.href='register.html'">SIGN UP
+                    <button type="button" class="btn btn-success reg" onclick="location.href='/'">CHECKOUT
+                    </button>
+                    <button type="button" class="btn btn-warning reg" onclick="location.href='/users/register'">REGISTER
                     </button>
                     <button type="button" class="btn btn-warning reg" onclick="location.href='login.html'">LOGIN
                     </button>
+
                 </div>
             </div>
         </div>
@@ -409,16 +412,19 @@ ${content}
         crossorigin="anonymous"></script>
 
 <!--Custom JS -->
-<script src="/js/custom.js"></script>
+<script src="/js/app.js"></script>
 
 <!--Modals-->
 <script>
     let myModal = document.getElementById('myModal')
     let myInput = document.getElementById('myInput')
-
-    myModal.addEventListener('shown.bs.modal', function () {
+    
+    if (myModal){
+        myModal.addEventListener('shown.bs.modal', function () {
         myInput.focus()
-    })
+    })    
+    }
+    
 </script>
 
 </body>

@@ -42,7 +42,7 @@ module.exports = ({products}) => {
         <table class="table table-hover table-bordered border-dark">
             <thead>
             <tr class="table-dark">
-                <th scope="col" class="tableHeaderName">Name</th>
+                <th scope="col" class="tableHeaderBig">Name</th>
                 <th scope="col" class="tableHeader">Date Created</th>
                 <th scope="col" class="tableHeader">Quantity</th>
                 <th scope="col" class="tableHeader">Price</th>

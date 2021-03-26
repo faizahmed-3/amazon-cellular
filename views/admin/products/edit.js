@@ -13,8 +13,8 @@ module.exports = ({product}) => {
     <div class="card-body">
         <form id="editProductsForm" method="POST" action="/admin/products/edit/${product.id}">
             <div class="mb-3 form-group">
-                <label for="name" class="form-label">Product Name</label>
-                <input name="name" value="${product.productName}" type="text" class="form-control" id="name" aria-describedby="product name">
+                <label for="productName" class="form-label">Product Name</label>
+                <input name="productName" value="${product.productName}" type="text" class="form-control" id="productName" aria-describedby="product name">
             </div>
             <div>
                 <!--                    <div class="row">-->
