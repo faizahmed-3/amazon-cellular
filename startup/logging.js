@@ -2,11 +2,13 @@ const winston = require('winston');
 require('winston-mongodb');
 require('express-async-errors');
 
-const { format } = require('winston');
+const {format} = require('winston');
 const customFormat = winston.format.combine(
     format.colorize(),
     format.align(),
-    format.printf(info => `${info.level}:${info.message}`)
+    format.timestamp({format: 'hh:mm DD-MM'}),
+    format.printf(info => `${info.timestamp} ${info.level}:${info.message}`
+    )
 )
 
 module.exports = function () {

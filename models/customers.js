@@ -1,8 +1,10 @@
+const jwt = require('jsonwebtoken');
+const config = require('config');
 const mongoose = require('mongoose');
 const Joi =  require('joi');
 
 
-const userSchema = new mongoose.Schema({
+const customerSchema = new mongoose.Schema({
     fullName: {
         type: String,
         minlength: 3,
@@ -64,10 +66,14 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-const User = mongoose.model('User', userSchema);
+customerSchema.methods.generateAuthToken = function () {
+    return jwt.sign({_id: this._id}, config.get('jwtKey'));
+}
+
+const Customer = mongoose.model('Customer', customerSchema);
 
 
-function validate(user) {
+function validate(customer) {
     const schema = Joi.object({
         fullName: Joi.string().min(3).max(255),
         email: Joi.string().email().min(3).max(255),
@@ -78,9 +84,9 @@ function validate(user) {
         town: Joi.string().min(3).max(255),
         street: Joi.string().min(3).max(255),
     })
-    return schema.validate(user);
+    return schema.validate(customer);
 }
 
 
-exports.User = User;
+exports.Customer = Customer;
 exports.validate = validate;

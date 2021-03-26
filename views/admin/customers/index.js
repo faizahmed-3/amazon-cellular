@@ -1,19 +1,19 @@
 const {displayDate} = require('../../../middlewares/otherFunctions');
 const layout = require('../layout');
-const title = 'View Users';
+const title = 'View Customers';
 
-module.exports = ({users}) => {
-    const renderedUsers = users.map(
-        user => {
+module.exports = ({customers}) => {
+    const renderedCustomers = customers.map(
+        customer => {
             return `
 <tr>
-    <td>${user.fullName}</td>
-    <td>${displayDate(user.dateCreated)}</td>
-    <td>${user.email}</td>
-    <td>${user.phone}</td>
-    <td>${user.county}</td>
-    <td>${user.town}</td>
-    <td>${user.street}</td>
+    <td>${customer.fullName}</td>
+    <td>${displayDate(customer.dateCreated)}</td>
+    <td>${customer.email}</td>
+    <td>${customer.phone}</td>
+    <td>${customer.county}</td>
+    <td>${customer.town}</td>
+    <td>${customer.street}</td>
 </tr>
             `}).join('')
 
@@ -35,7 +35,7 @@ module.exports = ({users}) => {
             </tr>
             </thead>
             <tbody>
-            ${renderedUsers}
+            ${renderedCustomers}
             </tbody>
         </table>
     </div>

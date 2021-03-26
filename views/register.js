@@ -10,7 +10,7 @@ module.exports = () =>{
             Register
         </div>
         <div class="card-body">
-            <form method="POST" action="/users/register">
+            <form method="POST" action="/register">
                 <div class="mb-2 form-group">
                     <label for="fullName" class="form-label" required>Full Name</label>
                     <input name="fullName" type="text" class="form-control" id="fullName" aria-describedby="name" placeholder="Name">
@@ -42,9 +42,9 @@ module.exports = () =>{
                 <div class="form-group">
                     <label for="county" class="form-label" required="">County</label>
                     <select name="county" class="form-select mb-3" aria-label="Select County" id="county">
-                        <option value="nairobi" type="text" selected>Nairobi</option>
-                        <option value="mombasa" type="text">Mombasa</option>
-                        <option value="kisumu" type="text">Kisumu</option>
+                        <option value="Nairobi" type="text" selected>Nairobi</option>
+                        <option value="Mombasa" type="text">Mombasa</option>
+                        <option value="Kisumu" type="text">Kisumu</option>
                     </select>
                 </div>
                 <div class="mb-2 form-group">
@@ -59,7 +59,7 @@ module.exports = () =>{
                 </div>
                 <div class="text-center mt-4">
                     <button type="submit" value="submit" class="btn btn-success">SUBMIT</button>
-                    <p class="mt-2">Already have an account? <a href="">Log in here</a></p>
+                    <p class="mt-2">Already have an account? <a href="/login">Log in here</a></p>
                 </div>
             </form>
         </div>

@@ -1,40 +1,34 @@
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const registerTemplate = require('../views/register');
-const viewUsersTemplate = require('../views/admin/users/index');
-const {User, validate } = require('../models/users');
+const {Customer, validate } = require('../models/customers');
 const express = require('express');
 const router = express.Router();
 
-router.get('/', async(req, res) => {
-    const users = await User.find().sort('name');
-    res.send(viewUsersTemplate({users}));
-})
 
-
-router.get('/register', (req, res) => {
+router.get('/', (req, res) => {
     res.send(registerTemplate());
 })
 
 
-router.post('/register', async(req, res) => {
+router.post('/', async(req, res) => {
    const {error} = validate(req.body);
    if (error) return res.status(400).send(error.details[0].message);
 
-   const user = new User(
+   const customer = new Customer(
        _.pick(req.body, ['fullName', 'email', 'phone', 'password', 'county', 'town', 'street'])
    );
 
     const salt = await bcrypt.genSalt(10);
 
-    user.password = await bcrypt.hash(user.password, salt);
+    customer.password = await bcrypt.hash(customer.password, salt);
 
-    await user.save();
+    await customer.save();
 
-    res.redirect('/');
+    const token = customer.generateAuthToken();
+
+    res.header('x-auth-token', token).redirect('/');
 })
-
-
 
 
 module.exports = router;

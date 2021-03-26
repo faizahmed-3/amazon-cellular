@@ -42,9 +42,9 @@ module.exports = ({title, content}) => {
 <!--extra navbar-->
 <div class="container-fluid" id="extraNav">
     <div class="d-flex justify-content-center" id="cred">
-        <div class="clickable" onclick="location.href='/users/register'">Register</div>
+        <div class="clickable" onclick="location.href='/register'">Register</div>
         <div class="separator mx-2">|</div>
-        <div class="clickable" onclick="location.href='login.html'">Log In</div>
+        <div class="clickable" onclick="location.href='/login'">Log In</div>
         <div class="separator mx-2">|</div>
         <div class="clickable" onclick="location.href='track.html'">Track Order</div>
     </div>
@@ -158,9 +158,9 @@ ${content}
                 <div class="d-flex justify-content-evenly justify-content-md-between flex-md-column ">
                     <button type="button" class="btn btn-success reg" onclick="location.href='/'">CHECKOUT
                     </button>
-                    <button type="button" class="btn btn-warning reg" onclick="location.href='/users/register'">REGISTER
+                    <button type="button" class="btn btn-warning reg" onclick="location.href='/register'">REGISTER
                     </button>
-                    <button type="button" class="btn btn-warning reg" onclick="location.href='login.html'">LOGIN
+                    <button type="button" class="btn btn-warning reg" onclick="location.href='/login'">LOGIN
                     </button>
 
                 </div>
