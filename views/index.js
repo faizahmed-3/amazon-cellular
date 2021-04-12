@@ -12,8 +12,13 @@ module.exports = ({products}) => {
             <h6 class="card-title" data-bs-toggle="modal" data-bs-target="#product-view">${product.productName}</h6>
             <p class="card-text mb-0">ksh. ${product.discountPrice} <span>${product.price}</span></p>
             <div class="action">
-                <i class="bi bi-heart"></i>
-                <i class="bi bi-cart3"></i>
+                <form method="post" action="/wishlist">
+                <input type="hidden" name="productID" value="${product._id}">
+                <button type="submit" class="formBtn"><i class="bi bi-heart"></i></button>
+                </form>                
+                <form method="post" action="/cart">
+                    <button type="submit" class="formBtn"><i class="bi bi-cart3"></i></button>
+                </form>
             </div>
         </div>
     </div>

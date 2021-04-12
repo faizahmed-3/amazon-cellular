@@ -15,7 +15,7 @@ module.exports = ({categories}) => {
     <td>
         <a href="/admin/categories/edit/${category._id}"><i class="far fa-edit"></i></a>
         <form method="POST" action="/admin/categories/delete/${category._id}" class="deleteForm ms-4">
-            <button type="submit" value="submit" class="deleteBtn">
+            <button type="submit" value="submit" class="formBtn">
                 <i class="far fa-trash-alt "></i>
             </button>
         </form>

@@ -1,6 +1,5 @@
 module.exports = ({title, content}) => {
-    return `
-<!DOCTYPE html>
+    return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -66,7 +65,7 @@ module.exports = ({title, content}) => {
 
             <div id="nav-icons" class="order-lg-last ml-lg-auto row justify-content-center">
                 <form class="form-inline d-flex col-10 col-md-7 col-lg-10 col-xl-11">
-                    <div class="input-group mb-3">
+                    <div class="input-group">
                         <label for="search-nav"></label>
                         <input type="text" class="form-control" placeholder="Search" id="search-nav">
                         <div class="input-group-append">
@@ -75,10 +74,15 @@ module.exports = ({title, content}) => {
                     </span>
                         </div>
                     </div>
-                    <i class="bi bi-heart mx-2 notification mt-1" data-bs-toggle="modal"
-                       data-bs-target="#favs"><span class="tip">4</span></i>
-                    <i class="bi bi-cart3 mx-2 notification mt-1" data-bs-toggle="modal"
-                       data-bs-target="#cart"><span class="tip">2</span></i>
+                    <a class="formBtn" href="/wishlist">
+                    <i class="bi bi-heart mx-2 notification mt-1">
+                    <span class="tip">4</span>
+                       </i>
+                       </a>
+
+                    <a class="formBtn" >
+                        <i class="bi bi-cart3 mx-2 notification mt-1" data-bs-toggle="modal"
+                           data-bs-target="#cart"><span class="tip">2</span></i></a>
                 </form>
             </div>
 
@@ -118,6 +122,8 @@ module.exports = ({title, content}) => {
 
 
 ${content}
+
+
 
 <!--Footer-->
 <section id="footer" class="container-fluid px-0">
@@ -181,7 +187,8 @@ ${content}
 
 <!-- Modals -->
 <!--Wishlist Modal-->
-<div class="modal fade" id="favs" tabindex="-1" aria-labelledby="Wishlist" aria-hidden="true">
+
+<div class="modal fade"  tabindex="-1" aria-labelledby="Wishlist" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -205,41 +212,7 @@ ${content}
                         </div>
                     </div>
                     <hr class="mt-2">
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <img src="/img/home/featured/1.jpg" alt="" class="img-thumbnail">
-                    </div>
-                    <div class="col-9">
-                        <h5 class="prod-title">Nillkin Textured nylon fiber case for Apple iPhone 12 Mini</h5>
-                        <div class="mt-3 mt-lg-4">
-                            <div class="price"><span>  ksh.</span> 800</div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-3 mt-lg-4">
-                            <div class="remove btn btn-sm btn-outline-success">Add to cart <i class="bi bi-cart3"></i>
-                            </div>
-                            <div class="remove btn btn-sm btn-outline-danger">Remove <i class="bi bi-trash"></i></div>
-                        </div>
-                    </div>
-                    <hr class="mt-2">
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <img src="/img/home/featured/3.jpg" alt="" class="img-thumbnail">
-                    </div>
-                    <div class="col-9">
-                        <h5 class="prod-title">Nillkin Flex PURE Pro MagSafe cover case</h5>
-                        <div class="mt-3 mt-lg-4">
-                            <div class="price"><span>  ksh.</span> 800</div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-3 mt-lg-4">
-                            <div class="remove btn btn-sm btn-outline-success">Add to cart <i class="bi bi-cart3"></i>
-                            </div>
-                            <div class="remove btn btn-sm btn-outline-danger">Remove <i class="bi bi-trash"></i></div>
-                        </div>
-                    </div>
-                    <hr class="mt-2">
-                </div>
+                </div> 
             </div>
             <div class="modal-footer d-flex justify-content-between">
                 <button type="button" class="btn btn-success favs-footer">Add all to cart</button>
@@ -418,17 +391,18 @@ ${content}
 <script>
     let myModal = document.getElementById('myModal')
     let myInput = document.getElementById('myInput')
-    
-    if (myModal){
+
+    if (myModal) {
         myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-    })    
+            myInput.focus()
+        })
     }
-    
+
 </script>
 
 </body>
 </html>
 
 
-`}
+`
+}

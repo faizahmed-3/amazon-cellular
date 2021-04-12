@@ -11,11 +11,11 @@ const categoriesSchema = new mongoose.Schema({
         trim: true
     },
     productIDs: [{
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'
     }],
     topPicks: [{
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'
     }],
     unitsSold: {

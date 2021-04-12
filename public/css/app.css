@@ -15,6 +15,11 @@ body {
 body .card-header {
   background: white;
 }
+body .formBtn {
+  border: none;
+  outline: none;
+  background: transparent;
+}
 body .loader {
   position: fixed;
   top: 0;
@@ -101,6 +106,11 @@ body .to-top.active {
 }
 .navbar #search-nav {
   font-size: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+.navbar .formBtn {
+  margin: 0.2rem 0.3rem;
+  color: black;
 }
 .navbar .notification {
   position: relative;
@@ -124,35 +134,41 @@ body .to-top.active {
   border-radius: 50%;
 }
 
-#favs .modal-title {
+#wishlist .modal-title {
   font-weight: 800;
 }
-#favs .prod-title {
+#wishlist .prod-title {
   font-weight: 600;
+  font-size: 1.3rem;
 }
-#favs .modal-body {
+#wishlist .modal-body {
   padding-bottom: 0;
 }
-#favs .img-thumbnail {
+#wishlist .img-thumbnail {
   height: 10rem;
   width: 10rem;
   object-fit: cover;
   object-position: center center;
 }
-#favs .form-select:hover {
+#wishlist .form-select:hover {
   cursor: pointer;
 }
-#favs .remove:hover {
+#wishlist .remove:hover {
   cursor: pointer;
 }
-#favs .price {
+#wishlist .price {
   font-weight: 600;
 }
-#favs span {
+#wishlist span {
   font-size: 0.75rem;
   font-weight: normal;
 }
-#favs .modal-footer {
+#wishlist .priceSpan {
+  font-size: 0.85rem;
+  margin-left: 0.5rem;
+  text-decoration: line-through #DC3545;
+}
+#wishlist .modal-footer {
   border-top: 0;
   padding-top: 0;
 }
@@ -1162,10 +1178,6 @@ body .to-top.active {
 }
 #viewProducts .deleteForm {
   display: inline;
-}
-#viewProducts .deleteBtn {
-  border: none;
-  outline: none;
 }
 
 @media (max-width: 1199.98px) {

@@ -21,6 +21,13 @@ body {
     background: white;
   }
 
+  //buttons in forms
+  .formBtn{
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+
   //Pre Loader
   .loader {
     position: fixed;
@@ -35,7 +42,6 @@ body {
     z-index: 1000;
     transition: opacity 0.5s ease-out;
   }
-
   .loader-finish {
     opacity: 0;
     pointer-events: none;
@@ -61,7 +67,6 @@ body {
     pointer-events: none;
     transition: all .4s;
   }
-
   .to-top.active {
     bottom: 37px;
     pointer-events: auto;
@@ -124,14 +129,18 @@ body {
   }
 
   #nav-icons {
-    //margin-left: 12rem;
-    //margin-right: 0;
     margin-top: 1rem;
     font-size: 1.2rem;
   }
 
   #search-nav {
     font-size: 0.8rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .formBtn{
+    margin: 0.2rem 0.3rem;
+    color: black;
   }
 
   .notification {
@@ -158,13 +167,14 @@ body {
 }
 
 
-#favs {
+#wishlist {
   .modal-title {
     font-weight: 800;
   }
 
   .prod-title {
     font-weight: 600;
+    font-size: 1.3rem;
   }
 
   .modal-body {
@@ -194,10 +204,18 @@ body {
     font-weight: normal;
   }
 
+  .priceSpan{
+    font-size: 0.85rem;
+    margin-left: 0.5rem;
+    text-decoration: line-through $red;
+  }
+
   .modal-footer {
     border-top: 0;
     padding-top: 0;
   }
+
+
 
 }
 
@@ -1166,11 +1184,6 @@ body {
 
   .deleteForm{
     display: inline;
-  }
-
-  .deleteBtn{
-    border: none;
-    outline: none;
   }
 }
 

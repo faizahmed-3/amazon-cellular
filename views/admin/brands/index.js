@@ -15,7 +15,7 @@ module.exports = ({brands}) => {
     <td>
         <a href="/admin/brands/edit/${brand._id}"><i class="far fa-edit"></i></a>
         <form method="POST" action="/admin/brands/delete/${brand._id}" class="deleteForm ms-4">
-            <button type="submit" value="submit" class="deleteBtn">
+            <button type="submit" value="submit" class="formBtn">
                 <i class="far fa-trash-alt "></i>
             </button>
         </form>
