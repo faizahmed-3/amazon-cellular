@@ -59,6 +59,36 @@ if (addNum){
 }
 
 
+//calculate price on cart
+const qtyInputs = document.querySelectorAll('.qty');
+const priceInputs = document.querySelectorAll('.itemPrice');
+const subtotalInputs = document.querySelectorAll('.subtotal');
+const total = document.querySelector('.total');
+let sum =0;
+
+if (qtyInputs){
+    for (let i=0; i<qtyInputs.length; i++){
+        qtyInputs[i].addEventListener('change', evt => {
+            subtotalInputs[i].innerHTML = `${evt.target.value * parseInt(priceInputs[i].innerHTML)}`
+            sum=0;
+
+            subtotalInputs.forEach(sub => {
+                sum += parseInt(sub.innerHTML);
+            })
+            total.innerHTML = sum;
+        })
+    }
+
+    subtotalInputs.forEach(sub => {
+        sum += parseInt(sub.innerHTML);
+    })
+    total.innerHTML = sum;
+}
+
+
+
+
+
 
 
 

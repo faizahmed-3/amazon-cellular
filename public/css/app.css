@@ -139,7 +139,7 @@ body .to-top.active {
 }
 #wishlist .prod-title {
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
 }
 #wishlist .modal-body {
   padding-bottom: 0;
@@ -178,6 +178,7 @@ body .to-top.active {
 }
 #cart .prod-title {
   font-weight: 600;
+  font-size: 1.15rem;
 }
 #cart .modal-body {
   padding-bottom: 0;
@@ -195,12 +196,19 @@ body .to-top.active {
 #cart .remove:hover {
   cursor: pointer;
 }
-#cart .price {
+#cart .itemPrice, #cart .subtotal {
+  display: inline;
   font-weight: 600;
+  font-size: 1.2rem;
 }
 #cart span {
   font-size: 0.75rem;
   font-weight: normal;
+}
+#cart .priceSpan {
+  font-size: 0.85rem;
+  margin-left: 0.5rem;
+  text-decoration: line-through #DC3545;
 }
 #cart .modal-footer {
   border-top: 0;

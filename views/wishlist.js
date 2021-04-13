@@ -15,8 +15,8 @@ module.exports = ({wishlist}) => {
                             <div class="price"><span>  ksh.</span> ${wishItem._id.discountPrice}<span class="priceSpan">${wishItem._id.price}</span></div>
                         </div>
                         <div class="d-flex justify-content-between mt-3 mt-lg-4">
-                            <form method="post" action="/wishlist/delete/${wishItem._id._id}"><button type="submit" class="remove btn btn-sm btn-outline-danger" >Remove <i class="bi bi-trash"></i></button></form>
-                            <div class="remove btn btn-sm btn-outline-success">Add to cart <i class="bi bi-cart3"></i>
+                            <form method="post" action="/wishlist/delete/${wishItem._id._id}"><button type="submit" class="remove btn btn-sm btn-danger" >Remove <i class="bi bi-trash"></i></button></form>
+                            <div class="remove btn btn-sm btn-success">Add to cart <i class="bi bi-cart3"></i>
                             </div>
                         </div>
                     </div>

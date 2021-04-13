@@ -174,7 +174,7 @@ body {
 
   .prod-title {
     font-weight: 600;
-    font-size: 1.3rem;
+    font-size: 1.15rem;
   }
 
   .modal-body {
@@ -227,6 +227,7 @@ body {
 
   .prod-title {
     font-weight: 600;
+    font-size: 1.15rem;
   }
 
   .modal-body {
@@ -248,13 +249,21 @@ body {
     @include pointer;
   }
 
-  .price {
+  .itemPrice, .subtotal {
+    display: inline;
     font-weight: 600;
+    font-size: 1.2rem;
   }
 
   span {
     font-size: 0.75rem;
     font-weight: normal;
+  }
+
+  .priceSpan{
+    font-size: 0.85rem;
+    margin-left: 0.5rem;
+    text-decoration: line-through $red;
   }
 
   .modal-footer {

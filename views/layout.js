@@ -80,9 +80,8 @@ module.exports = ({title, content}) => {
                        </i>
                        </a>
 
-                    <a class="formBtn" >
-                        <i class="bi bi-cart3 mx-2 notification mt-1" data-bs-toggle="modal"
-                           data-bs-target="#cart"><span class="tip">2</span></i></a>
+                    <a class="formBtn" href="/cart">
+                        <i class="bi bi-cart3 mx-2 notification mt-1" ><span class="tip">2</span></i></a>
                 </form>
             </div>
 
@@ -186,99 +185,9 @@ ${content}
 </a>
 
 <!-- Modals -->
-<!--Wishlist Modal-->
-
-<div class="modal fade"  tabindex="-1" aria-labelledby="Wishlist" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="favsTitle">Wishlist</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="/img/home/featured/3.jpg" alt="" class="img-thumbnail">
-                    </div>
-                    <div class="col-9">
-                        <h5 class="prod-title">Nillkin Flex PURE Pro MagSafe cover case</h5>
-                        <div class="mt-3 mt-lg-4">
-                            <div class="price"><span>  ksh.</span> 800</div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-3 mt-lg-4">
-                            <div class="remove btn btn-sm btn-outline-success">Add to cart <i class="bi bi-cart3"></i>
-                            </div>
-                            <div class="remove btn btn-sm btn-outline-danger">Remove <i class="bi bi-trash"></i></div>
-                        </div>
-                    </div>
-                    <hr class="mt-2">
-                </div> 
-            </div>
-            <div class="modal-footer d-flex justify-content-between">
-                <button type="button" class="btn btn-success favs-footer">Add all to cart</button>
-                <button type="button" class="btn btn-danger favs-footer">Remove all</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!--Cart Modal-->
-<div class="modal fade" id="cart" tabindex="-1" aria-labelledby="Cart" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cartTitle">Shopping Cart</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="/img/home/featured/3.jpg" alt="" class="img-thumbnail">
-                    </div>
-                    <div class="col-9">
-                        <h5 class="prod-title">Nillkin Flex PURE Pro MagSafe cover case</h5>
-                        <div class="d-flex justify-content-between mt-3 mt-lg-4">
-                            <div>
-                                <input type="number" placeholder="Quantity" class="form-control qty">
-                            </div>
-                            <div class="price"><span>  ksh.</span> 1200</div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-3 mt-lg-4">
-                            <div class="remove btn btn-sm btn-danger">Remove <i class="bi bi-trash"></i></div>
-                            <div class="price"><span>Subtotal (ksh):</span> 2000</div>
-                        </div>
-                    </div>
-                    <hr class="mt-2">
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <img src="/img/home/featured/1.jpg" alt="" class="img-thumbnail">
-                    </div>
-                    <div class="col-9">
-                        <h5 class="prod-title">Nillkin Textured nylon fiber case for Apple iPhone 12 Mini</h5>
-                        <div class="d-flex justify-content-between mt-3 mt-lg-4">
-                            <div>
-                                <input type="number" placeholder="Quantity" class="form-control qty">
-                            </div>
-                            <div class="price"><span>  ksh</span> 800</div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-3 mt-lg-4">
-                            <div class="remove btn btn-sm btn-danger">Remove <i class="bi bi-trash"></i></div>
-                            <div class="price"><span>Subtotal (ksh):</span> 800</div>
-                        </div>
-                    </div>
-                    <hr class="mt-2">
-                </div>
-            </div>
-            <div class="modal-footer d-flex justify-content-between">
-                <div>Total (ksh): <span class="total">3250</span></div>
-                <button type="button" class="btn btn-success" id="checkout" onclick="location.href='checkout.html'">
-                    Checkout
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <!--Product view Modal-->
 <div class="modal fade" id="product-view" tabindex="-1" aria-labelledby="Product view" aria-hidden="true">

@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     res.send(wishlistTemplate({wishlist: wishlist.products}));
 });
 
-router.post('/', async (req, res) => {
+router.post('/:id', async (req, res) => {
     let wishlist;
 
     if (!req.session.wishlistID) {
@@ -22,13 +22,13 @@ router.post('/', async (req, res) => {
     }
 
 
-    const product = wishlist.products.id(req.body.productID);
+    const product = wishlist.products.id(req.params.id);
 
     if (!product) {
         wishlist = await Wishlist.findByIdAndUpdate(wishlist._id, {
             $push: {
                 products: {
-                    _id: req.body.productID,
+                    _id: req.params.id,
                 }
             }
         }, {new: true})
@@ -43,15 +43,13 @@ router.post('/delete/:id', async (req, res) => {
     const valid = mongoose.isValidObjectId(req.params.id);
     if (!valid) return res.status(400).send('Invalid ID passed');
 
-    let wishlist = await Wishlist.findByIdAndUpdate(req.session.wishlistID, {
+    await Wishlist.findByIdAndUpdate(req.session.wishlistID, {
         $pull: {
             products: {
                 _id: req.params.id
             }
         }
     }, {new: true})
-
-    console.log(wishlist);
 
     res.redirect('/wishlist');
 })

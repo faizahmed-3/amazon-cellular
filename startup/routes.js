@@ -9,6 +9,7 @@ const homepage = require('../routes/');
 const register = require('../routes/register');
 const login = require('../routes/login');
 const wishlist = require('../routes/wishlist');
+const cart = require('../routes/cart');
 
 
 
@@ -27,6 +28,7 @@ module.exports = function (app) {
     app.use('/register', register);
     app.use('/login', login);
     app.use('/wishlist', wishlist);
+    app.use('/cart', cart);
 
     app.use(error);
 }
