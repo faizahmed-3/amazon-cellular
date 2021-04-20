@@ -49,7 +49,7 @@ module.exports = ({title, content}) => {
         </div>
         <div class="sidebarItem ">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action  active">
+                <li class="list-group-item list-group-item-action ">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </li>
                 <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
@@ -57,38 +57,33 @@ module.exports = ({title, content}) => {
                     <span class="badge bg-danger rounded-pill">14</span></li>
                 <li class="list-group-item list-group-item-action" type="button" data-bs-toggle="collapse"
                     data-bs-target="#productsList" aria-expanded="false" aria-controls="productsList">
-                    <i class="fas fa-store-alt"></i>Products<i class="fas fa-caret-down ms-1"></i></li>
+                    <i class="fas fa-store-alt"></i>Categories<i class="fas fa-caret-down ms-1"></i></li>
                 <div class="collapse collapseMenu" id="productsList">
                     <div class="card card-body">
                         <ul class="mt-0 px-0">
-                            <li class="list-group-item list-group-item-action " onclick="location.href='/admin/products/new'">Add Product</li>
-                            <li class="list-group-item list-group-item-action ">Phones List</li>
-                            <li class="list-group-item list-group-item-action ">Brands</li>
-                            <li class="list-group-item list-group-item-action ">Cases</li>
-                            <li class="list-group-item list-group-item-action ">Protectors</li>
-                            <li class="list-group-item list-group-item-action ">Power</li>
-                            <li class="list-group-item list-group-item-action ">Audio</li>
-                            <li class="list-group-item list-group-item-action ">Smart Watch</li>
-                            <li class="list-group-item list-group-item-action ">Camera Accessories</li>
-                            <li class="list-group-item list-group-item-action ">Car Accessories</li>
-                            <li class="list-group-item list-group-item-action ">Computer Accessories</li>
-                            <li class="list-group-item list-group-item-action ">TV Accessories</li>
-                            <li class="list-group-item list-group-item-action ">Other Categories</li>
+                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">All Products</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/categories/'">Categories List</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/new'">Phones List</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/new'">Brands</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/new'">Cases</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/new'">Protectors</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/new'">Power</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/new'">Audio</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/new'">Smart Watch</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/new'">Camera Accessories</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/new'">Car Accessories</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/new'">Computer Accessories</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/new'">TV Accessories</li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/new'">Other Categories</li>
                         </ul>
                     </div>
                 </div>
-                <li class="list-group-item list-group-item-action" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#specialsList" aria-expanded="false" aria-controls="specialsList">
-                    <i class="fas fa-award"></i></i>Special Categories<i class="fas fa-caret-down ms-1"></i></li>
-                <div class="collapse collapseMenu" id="specialsList">
-                    <div class="card card-body">
-                        <ul class="mt-0 px-0">
-                            <li class="list-group-item list-group-item-action ">Featured Products</li>
-                            <li class="list-group-item list-group-item-action ">New Arrivals</li>
-                            <li class="list-group-item list-group-item-action ">Sale</li>
-                        </ul>
-                    </div>
-                </div>
+                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/brands/'">
+                    <i class="fas fa-copyright"></i> Brands
+                </li>
+                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/special/'">
+                    <i class="fas fa-award"></i> Special Categories
+                </li>
                 <li class="list-group-item list-group-item-action ">
                     <i class="fas fa-chart-line"></i> Reports
                 </li>

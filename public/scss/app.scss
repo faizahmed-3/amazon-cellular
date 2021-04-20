@@ -17,17 +17,6 @@ body {
   background: $grey;
   font-family: 'Montserrat', sans-serif;
 
-  .card-header{
-    background: white;
-  }
-
-  //buttons in forms
-  .formBtn{
-    border: none;
-    outline: none;
-    background: transparent;
-  }
-
   //Pre Loader
   .loader {
     position: fixed;
@@ -71,6 +60,24 @@ body {
     bottom: 37px;
     pointer-events: auto;
     opacity: 1;
+  }
+
+  .card-header{
+    background: white;
+  }
+
+  //buttons in forms
+  .formBtn{
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+
+  //input field errors
+  .inputError{
+    font-size: 0.9rem;
+    color: $red;
+    margin-left: 0.5rem;
   }
 }
 
@@ -1151,6 +1158,42 @@ body {
     font-weight: 800;
   }
 
+  .subBrandBtn{
+    margin: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .subBrandsList{
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .subBrandItem{
+    width: 90%;
+  }
+
+  .subBrandDelete{
+    font-size: 1.5rem;
+    color: $red;
+    margin-top: 0.4rem;
+    @include pointer;
+  }
+
+  .rectangle{
+    height: 19px;
+    width: 25px;
+  }
+
+  option{
+    text-transform: capitalize;
+    //font-weight: 800;
+  }
+
+  .subBrandOption{
+    font-size: 0.9rem;
+    font-weight: normal;
+  }
+
 }
 
 
@@ -1163,12 +1206,13 @@ body {
   }
 
   .table{
-    margin-bottom: 0;
+    margin-bottom: 2rem;
   }
 
   .tableHeaderBig{
     width: 20%;
-    text-align: center
+    text-align: center;
+    text-transform: capitalize;
   }
 
   .tableHeader{
@@ -1178,6 +1222,17 @@ body {
 
   td{
     text-align: center;
+  }
+
+  .view_table_name{
+    text-transform: capitalize;
+    text-align: start;
+  }
+
+  .subBrandsCollapse{
+    text-transform: capitalize;
+    font-size: 0.9rem;
+    text-align: start;
   }
 
   @include switch;
@@ -1193,6 +1248,10 @@ body {
 
   .deleteForm{
     display: inline;
+  }
+
+  .hasSub{
+    @include pointer;
   }
 }
 

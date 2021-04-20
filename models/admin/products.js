@@ -4,16 +4,25 @@ Joi.objectId = require('joi-objectid')(Joi);
 
 
 const productSchema = new mongoose.Schema({
-    productName: {
+    product_name: {
         type: String,
         required: true,
         minlength: 3,
         maxlength: 255,
         trim: true
     },
-    categoryID: mongoose.Schema.Types.ObjectId,
-    specialID: mongoose.Schema.Types.ObjectId,
-    brandID: mongoose.Schema.Types.ObjectId,
+    categoryID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category'
+    },
+    brandID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Brand'
+    },
+    specialCategoryID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'SpecialCategory'
+    },
     colour: {
         type: String,
         minlength: 3,
@@ -86,19 +95,28 @@ const Product = mongoose.model('Product', productSchema);
 
 function validate(product) {
     const schema =Joi.object({
-        productName: Joi.string().required().min(3).max(255),
-        colour: Joi.string().min(3).max(255),
-        material: Joi.string().min(3).max(255),
-        description: Joi.string().min(3).max(255),
-        inBox: Joi.string().min(3).max(255),
-        quantity: Joi.number(),
-        price: Joi.number(),
-        discountPrice: Joi.number(),
-        discountStart: Joi.date(),
-        discountEnd: Joi.date(),
-        status: Joi.boolean()
+        product_name: Joi.string().min(3).max(255).required(),
+        colour: Joi.string().min(3).max(255).required(),
+        Material: Joi.string().min(3).max(255),
+        Description: Joi.string().min(3).max(255),
+        InBox: Joi.string().min(3).max(255),
+        Quantity: Joi.number(),
+        Price: Joi.number(),
+        DiscountPrice: Joi.number(),
+        DiscountStart: Joi.date(),
+        DiscountEnd: Joi.date(),
+        Status: Joi.boolean()
     });
-    return schema.validate(product);
+
+    const options = {
+        errors: {
+            wrap: {
+                label: ''
+            }
+        }
+    };
+
+    return schema.validate(product, options);
 }
 
 

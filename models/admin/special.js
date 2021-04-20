@@ -1,14 +1,14 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
-const categoriesSchema = new mongoose.Schema({
-    category_name: {
+const specialSchema = new mongoose.Schema({
+    special_name: {
         type: String,
         required: true,
+        unique: true,
         minlength: 3,
         maxlength: 255,
-        trim: true,
-        unique: true
+        trim: true
     },
     productIDs: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -39,12 +39,12 @@ const categoriesSchema = new mongoose.Schema({
     }
 });
 
-const Category = mongoose.model('Category', categoriesSchema);
+const Special = mongoose.model('Special', specialSchema);
 
 
-function validate(category) {
+function validate(special) {
     const schema = Joi.object({
-        category_name: Joi.string().required().min(3).max(255)
+        special_name: Joi.string().required().min(3).max(255)
     });
 
     const options = {
@@ -55,10 +55,10 @@ function validate(category) {
         }
     };
 
-    return schema.validate(category, options);
+    return schema.validate(special, options);
 }
 
 
-exports.Category = Category;
+exports.Special = Special;
 exports.validate = validate;
 

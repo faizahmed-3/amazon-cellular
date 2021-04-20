@@ -6,7 +6,7 @@ module.exports = ({categories}) => {
     const renderedCategories = categories.map(
         category => {
             return `<tr>
-    <td>${category.categoryName}</td>
+    <td class="view_table_name">${category.category_name}</td>
     <td>${displayDate(category.dateCreated)}</td>
     <td>${category.quantity}</td>
     <td>${category.unitsSold}</td>
@@ -26,11 +26,14 @@ module.exports = ({categories}) => {
     return layout({
         title: title,
         content: `<div id="viewProducts" class="card ">
-    <div class="card-body table-responsive-md">
+    <div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-primary mt-3 me-3" style="font-size: 0.8rem" onclick="location.href='/admin/categories/new'">Add New Category</button>
+    </div>    
+    <div class="card-body table-responsive-md ">
         <table class="table table-hover table-bordered border-dark">
             <thead>
             <tr class="table-dark">
-                <th scope="col" class="tableHeader">Category Name</th>
+                <th scope="col" class="tableHeaderBig">Category Name</th>
                 <th scope="col" class="tableHeader">Date Created</th>
                 <th scope="col" class="tableHeader">Quantity</th>
                 <th scope="col" class="tableHeader">Units Sold</th>

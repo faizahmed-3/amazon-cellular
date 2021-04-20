@@ -8,7 +8,7 @@ module.exports = ({products}) => {
         product => {
             return `
 <tr>
-    <td>${product.productName}</td>
+    <td>${product.product_name}</td>
     <td>${displayDate(product.dateCreated)}</td>
     <td>${product.quantity}</td>
     <td>${product.price}</td>
@@ -42,7 +42,7 @@ module.exports = ({products}) => {
         <table class="table table-hover table-bordered border-dark">
             <thead>
             <tr class="table-dark">
-                <th scope="col" class="tableHeaderBig">Name</th>
+                <th scope="col" class="tableHeaderBig view_table_name">Name</th>
                 <th scope="col" class="tableHeader">Date Created</th>
                 <th scope="col" class="tableHeader">Quantity</th>
                 <th scope="col" class="tableHeader">Price</th>

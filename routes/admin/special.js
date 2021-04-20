@@ -1,64 +1,81 @@
 const mongoose = require('mongoose');
-const viewSpecialTemplate = require('../../views/admin/special/index');
-const addSpecialCategoryTemplate = require('../../views/admin/special/new');
-const editspecialTemplate = require('../../views/admin/special/edit');
-const {Specialcategory, validate} = require('../../models/admin/specialCategories');
+const viewSpecialsTemplate = require('../../views/admin/special/index');
+const addSpecialTemplate = require('../../views/admin/special/new');
+const editSpecialTemplate = require('../../views/admin/special/edit');
+const {Special, validate} = require('../../models/admin/special');
 const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const specialcategory = await Specialcategory.find().sort('specialCategoriesName');
-    res.send(viewSpecialTemplate({specialcategory}));
+    const specials = await Special.find().sort('specialName');
+    res.send(viewSpecialsTemplate({specials}));
 });
 
 router.get('/new', (req, res) => {
-    res.send(addSpecialCategoryTemplate());
+    res.send(addSpecialTemplate({}));
 });
 
 router.post('/', async (req, res) => {
     const {error} = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
-    const specialcategory = new Specialcategory({
-        specialCategoriesName: req.body.specialCategoriesName
-    })
-    await specialcategory.save();
+    if (error) return res.status(400).send(addSpecialTemplate({input: req.body, error: error.details[0]}))
 
-    res.redirect('/admin/specialCategories');
+    const special = new Special({
+        special_name: req.body.special_name
+    })
+    await special.save();
+
+    res.redirect('/admin/special');
 });
+
+router.post('/copy', async (req, res) => {
+    const {error} = validate(req.body);
+    if (error) return res.status(400).send(addSpecialTemplate({input: req.body, error: error.details[0]}))
+
+    const special = new Special({
+        special_name: req.body.special_name
+    })
+
+    await special.save();
+
+    res.send(addSpecialTemplate({input: req.body}))
+})
 
 router.get('/edit/:id', async (req, res) => {
     const valid = mongoose.isValidObjectId(req.params.id);
     if (!valid) return res.status(400).send('Invalid ID passed');
 
-    const specialcategory = await Specialcategory.findById(req.params.id);
-    if (!specialcategory) return res.status(400).send(`Sorry, that specialcategory doesn't exist`);
+    const special = await Special.findById(req.params.id);
+    if (!special) return res.status(400).send(`Sorry, that special category doesn't exist`);
 
-    res.send(editspecialTemplate({specialcategory}));
+    res.send(editSpecialTemplate({special}));
 });
 
 router.post('/edit/:id', async (req, res) => {
     const valid = mongoose.isValidObjectId(req.params.id);
     if (!valid) return res.status(400).send('Invalid ID passed');
 
+    let special = await Special.findById(req.params.id);
+    if (!special) return res.status(400).send(`Sorry, that category doesn't exist`);
+
     const {error} = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) return res.status(400).send(editSpecialTemplate({special, error: error.details[0]}));
 
-    const spCategory = await Specialcategory.findByIdAndUpdate(req.params.id, {
-        specialCategoriesName: req.body.specialCategoriesName
+    special = await Special.findByIdAndUpdate(req.params.id, {
+        special_name: req.body.special_name
     }, {new: true});
-    if (!spCategory) return res.status(400).send(`Sorry, that brand doesn't exist`);
+    if (!special) return res.status(400).send(`Sorry, that special category doesn't exist`);
 
-    res.redirect('/admin/specialCategories');
+    res.redirect('/admin/special');
 });
 
 router.post('/delete/:id', async (req, res) => {
     const valid = mongoose.isValidObjectId(req.params.id);
     if (!valid) return res.status(400).send('Invalid ID passed');
 
-    const spCategory = await Specialcategory.findByIdAndDelete(req.params.id);
-    if (!spCategory) return res.status(400).send(`Sorry, that Specialcategory doesn't exist`);
+    const special = await Special.findByIdAndDelete(req.params.id);
+    if (!special) return res.status(400).send(`Sorry, that special category doesn't exist`);
 
-    res.redirect('/admin/specialCategories');
+    res.redirect('/admin/special');
 })
 
 module.exports = router;

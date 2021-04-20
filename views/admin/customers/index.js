@@ -25,7 +25,7 @@ module.exports = ({customers}) => {
         <table class="table table-hover table-bordered border-dark">
             <thead>
             <tr class="table-dark">
-                <th scope="col" class="tableHeader">Full Name</th>
+                <th scope="col" class="tableHeader view_table_name">Full Name</th>
                 <th scope="col" class="tableHeader">Date Created</th>
                 <th scope="col" class="tableHeader">Email</th>
                 <th scope="col" class="tableHeader">Phone</th>

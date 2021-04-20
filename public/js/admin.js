@@ -1,10 +1,3 @@
-// Pre Loader
-window.addEventListener("load", () => {
-    let loader = document.querySelector(".loader")
-    loader.classList.add("loader-finish");
-});
-
-
 // Back to top button
 const toTop = document.querySelector(".to-top");
 
@@ -15,6 +8,14 @@ window.addEventListener("scroll", () => {
         toTop.classList.remove("active");
     }
 })
+
+
+// Pre Loader
+window.addEventListener("load", () => {
+    let loader = document.querySelector(".loader")
+    loader.classList.add("loader-finish");
+});
+
 
 // Copyright year
 let year = new Date().getFullYear();
@@ -71,11 +72,50 @@ if (imgRow) {
 } else {}
 
 
-
 //visibility switch
 if (document.querySelector('.visibilitySwitch')){
     const checkbox = document.querySelector('.visibilitySwitch')
     if (checkbox.checked) checkbox.value = true;
+}
+
+
+//sub-brand
+if (document.querySelector('#subBrand')){
+    const subBrand = document.querySelector('#subBrand');
+    const addSubBtn = document.querySelector('.subBrandBtn');
+    let subBrandsList = document.querySelector('.subBrandsList');
+    let subBrandDeleteBtns = document.querySelectorAll('.subBrandDelete');
+
+    subBrand.addEventListener('change', evt => {
+        addSubBtn.disabled = !evt.target[1].selected;
+        subBrandsList.innerHTML = ``
+    });
+
+
+    addSubBtn.addEventListener('click', evt => {
+        const li = document.createElement('li');
+        li.classList.add('d-flex', 'justify-content-evenly');
+        li.innerHTML = `
+            <input type="text" class="form-control mb-2 subBrandItem" name="subBrandItems">
+            <i class="fas fa-trash-alt subBrandDelete"></i>
+        `
+        subBrandsList.append(li);
+
+        subBrandDeleteBtns = document.querySelectorAll('.subBrandDelete');
+        subBrandDeleteBtns.forEach(subBrandDelete => {
+            subBrandDelete.addEventListener('click', evt => {
+                evt.path[1].remove()
+            })
+        })
+    })
+
+    subBrandDeleteBtns.forEach(subBrandDelete => {
+        subBrandDelete.addEventListener('click', evt => {
+            evt.path[1].remove()
+        })
+    })
+
+
 }
 
 

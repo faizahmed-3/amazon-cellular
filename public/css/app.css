@@ -12,14 +12,6 @@ body {
   background: #f4f4f4;
   font-family: "Montserrat", sans-serif;
 }
-body .card-header {
-  background: white;
-}
-body .formBtn {
-  border: none;
-  outline: none;
-  background: transparent;
-}
 body .loader {
   position: fixed;
   top: 0;
@@ -59,6 +51,19 @@ body .to-top.active {
   bottom: 37px;
   pointer-events: auto;
   opacity: 1;
+}
+body .card-header {
+  background: white;
+}
+body .formBtn {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+body .inputError {
+  font-size: 0.9rem;
+  color: #DC3545;
+  margin-left: 0.5rem;
 }
 
 .index {
@@ -1102,6 +1107,36 @@ body .to-top.active {
 #add-product .save {
   font-weight: 800;
 }
+#add-product .subBrandBtn {
+  margin: 1rem;
+  font-size: 0.8rem;
+}
+#add-product .subBrandsList {
+  padding-left: 0;
+  list-style: none;
+}
+#add-product .subBrandItem {
+  width: 90%;
+}
+#add-product .subBrandDelete {
+  font-size: 1.5rem;
+  color: #DC3545;
+  margin-top: 0.4rem;
+}
+#add-product .subBrandDelete:hover {
+  cursor: pointer;
+}
+#add-product .rectangle {
+  height: 19px;
+  width: 25px;
+}
+#add-product option {
+  text-transform: capitalize;
+}
+#add-product .subBrandOption {
+  font-size: 0.9rem;
+  font-weight: normal;
+}
 
 #viewProducts {
   margin: 2rem 2.5rem 2rem 1rem;
@@ -1111,11 +1146,12 @@ body .to-top.active {
   font-weight: 700;
 }
 #viewProducts .table {
-  margin-bottom: 0;
+  margin-bottom: 2rem;
 }
 #viewProducts .tableHeaderBig {
   width: 20%;
   text-align: center;
+  text-transform: capitalize;
 }
 #viewProducts .tableHeader {
   width: 10%;
@@ -1123,6 +1159,15 @@ body .to-top.active {
 }
 #viewProducts td {
   text-align: center;
+}
+#viewProducts .view_table_name {
+  text-transform: capitalize;
+  text-align: start;
+}
+#viewProducts .subBrandsCollapse {
+  text-transform: capitalize;
+  font-size: 0.9rem;
+  text-align: start;
 }
 #viewProducts .switch {
   position: relative;
@@ -1186,6 +1231,9 @@ body .to-top.active {
 }
 #viewProducts .deleteForm {
   display: inline;
+}
+#viewProducts .hasSub:hover {
+  cursor: pointer;
 }
 
 @media (max-width: 1199.98px) {

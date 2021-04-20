@@ -2,7 +2,7 @@ const Joi = require('joi');
 const mongoose = require('mongoose');
 
 const brandsSchema = new mongoose.Schema({
-    brandName: {
+    brand_name: {
         type: String,
         required: true,
         unique: true,
@@ -10,6 +10,25 @@ const brandsSchema = new mongoose.Schema({
         maxlength: 255,
         trim: true
     },
+    subBrands: [{
+        // subBrandID: mongoose.Types.ObjectId,
+        subBrandName: String,
+        unitsSold: {
+            type: Number,
+            min: 0,
+            default: 0
+        },
+        quantity: {
+            type: Number,
+            min: 0,
+            default: 0
+        },
+        income: {
+            type: Number,
+            min: 0,
+            default: 0
+        },
+    }],
     productIDs: [{
         type: mongoose.Types.ObjectId,
         ref: 'Product'
@@ -44,9 +63,18 @@ const Brand = mongoose.model('Brand', brandsSchema);
 
 function validate(brand) {
     const schema = Joi.object({
-        name: Joi.string().required().min(3).max(255)
-    });
-    return schema.validate(brand);
+        brand_name: Joi.string().required().min(3).max(255),
+    }).unknown(true);
+
+    const options = {
+        errors: {
+            wrap: {
+                label: ''
+            }
+        }
+    };
+
+    return schema.validate(brand, options);
 }
 
 

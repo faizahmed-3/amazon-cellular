@@ -1,22 +1,24 @@
 const layout = require('../layout');
-const title = 'Add SpecialCategories';
+const title = 'Add Special Categories';
+const {getInput, getError}= require('../../../middlewares/otherFunctions');
 
-module.exports = () => {
+module.exports = ({input, error}) => {
     return layout({
         title: title,
         content: `<div id="add-product" class="container card my-5">
     <div class="card-header">
-        Brand Information
+        Special Categories Information
     </div>
     <div class="card-body">
-        <form method="POST" action="/admin/specialCategories">
+        <form method="POST" >
             <div class="mb-3 form-group">
-                <label for="name" class="form-label">specialCategory Name</label>
-                <input name="specialCategoriesName" type="text" class="form-control" id="specialCategoriesName" aria-describedby="product name">
+                <label for="special_name" class="form-label">Special Category Name</label>
+                <input name="special_name" type="text" class="form-control" id="special_name" aria-describedby="special_name" value="${getInput(input, 'special_name')}">
+                <div class="inputError">${getError(error, 'special_name')}</div>
             </div>
             <div class="my-3 d-flex justify-content-evenly">
-                <button class="btn btn-success save" type="submit" value="submit">SAVE</button>
-                <button class="btn btn-warning save">SAVE AND CREATE COPY</button>
+                <button class="btn btn-success save" type="submit" value="submit" formaction="/admin/special">SAVE</button>
+                <button class="btn btn-warning save" type="submit" value="submit" formaction="/admin/special/copy">SAVE AND CREATE COPY</button>
             </div>
         </form>
     </div>
