@@ -19,6 +19,7 @@ module.exports = ({input, error}) => {
             <div class="my-3 d-flex justify-content-evenly">
                 <button class="btn btn-success save" type="submit" value="submit" formaction="/admin/special">SAVE</button>
                 <button class="btn btn-warning save" type="submit" value="submit" formaction="/admin/special/copy">SAVE AND CREATE COPY</button>
+                <a class="btn btn-secondary save" onclick="location.href='/admin/special'">CANCEL</a>
             </div>
         </form>
     </div>

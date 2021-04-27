@@ -23,11 +23,6 @@ const categoriesSchema = new mongoose.Schema({
         min: 0,
         default: 0
     },
-    types: {
-        type: Number,
-        min: 0,
-        default: 0
-    },
     income: {
         type: Number,
         min: 0,

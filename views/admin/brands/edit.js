@@ -64,8 +64,9 @@ module.exports = ({brand, error}) => {
                 <label for="sub-brand" class="form-label">Sub Brand</label>
                 ${subBrand(brand)}
             </div>
-            <div class="my-3 d-flex justify-content-center">
+            <div class="my-3 d-flex justify-content-evenly">
                 <button class="btn btn-success save" type="submit" value="submit">SAVE</button>
+                <a class="btn btn-secondary save" onclick="location.href='/admin/brands'">CANCEL</a>
             </div>
         </form>
     </div>

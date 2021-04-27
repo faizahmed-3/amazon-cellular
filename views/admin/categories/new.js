@@ -17,8 +17,9 @@ module.exports = ({input, error}) => {
                 <div class="inputError">${getError(error, 'category_name')}</div>
             </div>
             <div class="my-3 d-flex justify-content-evenly">
-                <button class="btn btn-success save" type="submit" value="submit" formaction="/admin/categories">SAVE</button>
-                <button class="btn btn-warning save" type="submit" value="submit" formaction="/admin/categories/copy">SAVE AND CREATE COPY</button>
+                <button class="btn btn-success save" type="submit"  formaction="/admin/categories">SAVE</button>
+                <button class="btn btn-warning save" type="submit"  formaction="/admin/categories/copy">SAVE AND CREATE COPY</button>
+                <a class="btn btn-secondary save" onclick="location.href='/admin/categories'">CANCEL</a>
             </div>
         </form>
     </div>

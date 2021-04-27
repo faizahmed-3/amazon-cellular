@@ -17,8 +17,9 @@ module.exports = ({category, error}) => {
                 <input name="category_name" value="${category.category_name}" type="text" class="form-control" id="name" aria-describedby="category name" required>
                 <div class="inputError">${getError(error, 'category_name')}</div>
             </div>
-            <div class="my-3 d-flex justify-content-center">
+            <div class="my-3 d-flex justify-content-evenly">
                 <button class="btn btn-success save" type="submit" value="submit" >SAVE</button>
+                <a class="btn btn-secondary save" onclick="location.href='/admin/categories'">CANCEL</a>
             </div>
         </form>
     </div>

@@ -17,11 +17,6 @@ const brandsSchema = new mongoose.Schema({
             min: 0,
             default: 0
         },
-        types: {
-            type: Number,
-            min: 0,
-            default: 0
-        },
         income: {
             type: Number,
             min: 0,
@@ -37,11 +32,6 @@ const brandsSchema = new mongoose.Schema({
         ref: 'Product'
     }],
     unitsSold: {
-        type: Number,
-        min: 0,
-        default: 0
-    },
-    types: {
         type: Number,
         min: 0,
         default: 0

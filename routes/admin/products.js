@@ -47,36 +47,14 @@ async function post(req, res) {
 
     product.product_images = product_images;
 
-    product.types = 1;
-
     await product.save();
-
-    await Category.findByIdAndUpdate(product.categoryID, {
-        $inc: { types: 1 }
-    }, {new: true} )
-
-    await Special.findByIdAndUpdate(product.specialID, {
-        $inc: { types: 1 }
-    }, {new: true} )
-
-    await Brand.findByIdAndUpdate(product.brandID, {
-        $inc: {types: 1}
-    }, {new: true})
-    if (product.subBrandID) {
-        const brand = await Brand.findById(product.brandID)
-        let subBrand = brand.subBrands.id(product.subBrandID)
-        subBrand.set(subBrand.types++)
-
-        await brand.save()
-    }
-
 
 }
 
 
 router.get('/', async (req, res) => {
     const products = await Product.find().sort('product_name');
-    res.send(viewProductsTemplate({products}));
+    res.send(viewProductsTemplate({title: 'All Products', products}));
 });
 
 router.get('/new', async (req, res) => {
@@ -203,6 +181,41 @@ router.post('/delete/:id', async (req, res) => {
     if (!product) return res.status(404).send(`Sorry, that product doesn't exist`);
 
     res.redirect('/admin/products');
+})
+
+router.get('/categories/:id', async (req, res) => {
+    const valid = mongoose.isValidObjectId(req.params.id);
+    if (!valid) return res.status(400).send('Invalid ID passed');
+
+    const products = await Product.find({categoryID: req.params.id}).sort('product_name');
+
+    const category = await Category.findById(req.params.id).select('category_name')
+
+    res.send(viewProductsTemplate({title: category.category_name , products}));
+})
+
+router.get('/brands/:id', async (req, res) => {
+    const valid = mongoose.isValidObjectId(req.params.id);
+    if (!valid) return res.status(400).send('Invalid ID passed');
+
+    const products = await Product.find({brandID: req.params.id}).sort('product_name');
+
+    const brand = await Brand.findById(req.params.id).select('brand_name')
+
+    res.send(viewProductsTemplate({title: brand.brand_name , products}));
+})
+
+router.get('/special/:id', async (req, res) => {
+    const valid = mongoose.isValidObjectId(req.params.id);
+    if (!valid) return res.status(400).send('Invalid ID passed');
+
+    const products = await Product.find({specialID: req.params.id}).sort('product_name');
+
+    const special = await Special.findById(req.params.id).select('special_name')
+
+    console.log(special);
+
+    res.send(viewProductsTemplate({title: special.special_name , products}));
 })
 
 module.exports = router;

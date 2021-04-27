@@ -30,6 +30,7 @@ module.exports = ({input, error}) => {
             <div class="my-3 d-flex justify-content-evenly">
                 <button class="btn btn-success save" type="submit" value="submit" formaction="/admin/brands">SAVE</button>
                 <button class="btn btn-warning save" type="submit" value="submit" formaction="/admin/brands/copy">SAVE AND CREATE COPY</button>
+                <a class="btn btn-secondary save" onclick="location.href='/admin/brands'">CANCEL</a>
             </div>
         </form>
     </div>

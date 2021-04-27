@@ -242,6 +242,7 @@ module.exports = ({categories, brands, specials, input, error}) => {
                 </div>
                 <button class="btn btn-success save" type="submit" formaction="/admin/products">SAVE</button>
                 <button class="btn btn-warning save" type="submit" formaction="/admin/products/copy">SAVE AND CREATE COPY</button>
+                <a class="btn btn-secondary save" onclick="location.href='/admin/products'">CANCEL</a>
             </div>
         </form>
     </div>

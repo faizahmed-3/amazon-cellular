@@ -55,27 +55,9 @@ module.exports = ({title, content}) => {
                 <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                     <div>Orders</div>
                     <span class="badge bg-danger rounded-pill">14</span></li>
-                <li class="list-group-item list-group-item-action" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#productsList" aria-expanded="false" aria-controls="productsList">
-                    Products<i class="fas fa-caret-down ms-1"></i></li>
-                <div class="collapse collapseMenu" id="productsList">
-                    <div class="card card-body">
-                        <ul class="mt-0 px-0">
-                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">All Products</li>
-                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">Brands</li>
-                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">Cases</li>
-                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">Protectors</li>
-                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">Power</li>
-                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">Audio</li>
-                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">Smart Watches</li>
-                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">Camera Accessories</li>
-                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">Car Accessories</li>
-                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">Computer Accessories</li>
-                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">TV Accessories</li>
-                        <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products'">Other Categories</li>
-                        </ul>
-                    </div>
-                </div>
+                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/'">
+                     Products
+                </li>
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/categories/'">
                      Categories
                 </li>

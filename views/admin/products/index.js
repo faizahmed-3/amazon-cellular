@@ -1,7 +1,6 @@
 const layout = require('../layout');
-const title = 'All Products'
 
-module.exports = ({products}) => {
+module.exports = ({title, products}) => {
 
     function visibility(status) {
         if (status){
@@ -40,22 +39,21 @@ module.exports = ({products}) => {
             </button>
         </div>
         
-        
-            <div class="modal fade" id="_${product._id}" tabindex="-1" aria-labelledby="deleteProductModal" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                    <form method="POST" >
-                        <div class="modal-body">
-                            <p><b>DELETE</b> ${product.product_name}?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button class="btn btn-danger" type="submit" formaction="/admin/products/delete/${product._id}">Confirm</button>
-                        </div>
-                    </form>
+        <div class="modal fade" id="_${product._id}" tabindex="-1" aria-labelledby="deleteProductModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <form method="POST" >
+                    <div class="modal-body">
+                        <p><b>DELETE</b> ${product.product_name}?</p>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-danger" type="submit" formaction="/admin/products/delete/${product._id}">Confirm</button>
+                    </div>
+                </form>
                 </div>
             </div>
+        </div>
             
     </td>
 </tr>
