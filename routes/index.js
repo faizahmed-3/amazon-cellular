@@ -11,6 +11,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', async(req, res) => {
+
     const featured_products = await Product.find({specialID: '6088050e65de8726600704b6'}).sort('product_name');
 
     const new_arrivals = await Product.find({specialID: '6088051765de8726600704b7'}).sort('product_name');

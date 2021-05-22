@@ -1,7 +1,8 @@
-const {getCount} = require('../middlewares/otherFunctions');
+const {extraNav, footer, getCount} = require('../middlewares/otherFunctions');
 
 module.exports = ({title, content}) => {
-    return `<!DOCTYPE html>
+    return `
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -30,6 +31,9 @@ module.exports = ({title, content}) => {
     <!--    Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
+    <!-- Maps   -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
 
     <title>${title} | Amazon Cellular</title>
 </head>
@@ -42,16 +46,11 @@ module.exports = ({title, content}) => {
 
 <!--extra navbar-->
 <div class="container-fluid" id="extraNav">
-    <div class="d-flex justify-content-center" id="cred">
-        <div class="clickable" onclick="location.href='/register'">Register</div>
-        <div class="separator mx-2">|</div>
-        <div class="clickable" onclick="location.href='/login'">Log In</div>
-        <div class="separator mx-2">|</div>
-        <div class="clickable" onclick="location.href='track.html'">Track Order</div>
+    
+    <div class="d-flex" id="cred">
+        ${extraNav()}
     </div>
-    <div>
-        <div class="">Need Help?</div>
-    </div>
+    
 </div>
 
 <!--Navbar -->
@@ -158,13 +157,7 @@ ${content}
             </div>
             <div class="col-md-2 offset-lg-1">
                 <div class="d-flex justify-content-evenly justify-content-md-between flex-md-column ">
-                    <button type="button" class="btn btn-success reg" onclick="location.href='/'">CHECKOUT
-                    </button>
-                    <button type="button" class="btn btn-warning reg" onclick="location.href='/register'">REGISTER
-                    </button>
-                    <button type="button" class="btn btn-warning reg" onclick="location.href='/login'">LOGIN
-                    </button>
-
+                    ${footer()}
                 </div>
             </div>
         </div>
@@ -201,14 +194,10 @@ ${content}
             myInput.focus()
         })
     }
-    
-  
-
 </script>
+
 
 </body>
 </html>
 
-
-`
-}
+`}

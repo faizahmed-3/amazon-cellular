@@ -1,10 +1,21 @@
 const layout = require('./layout');
 const title = 'Register';
+const {getInput, getError}= require('../middlewares/otherFunctions');
 
-module.exports = () =>{
+module.exports = ({input, error, exists}) =>{
+    function existsCheck(exists) {
+        if (exists){
+            return`
+                <div class="inputError">The email you entered already exists</div>
+            `}
+        else {
+            return ` `
+        }
+    }
     return layout({
         title: title,
-        content: `<section class="register">
+        content: `
+<section class="register">
     <div class="card">
         <div class="card-header">
             Register
@@ -12,48 +23,44 @@ module.exports = () =>{
         <div class="card-body">
             <form method="POST" action="/register">
                 <div class="mb-2 form-group">
-                    <label for="fullName" class="form-label" required>Full Name</label>
-                    <input name="fullName" type="text" class="form-control" id="fullName" aria-describedby="name" >
+                    <label for="full_name" class="form-label" required>Full Name</label>
+                    <input name="full_name" type="text" class="form-control" id="full_name" aria-describedby="name" value="${getInput(input, 'full_name')}" required>
+                    <div class="inputError">${getError(error, 'full_name')}</div>
                 </div>
                 <div class="row">
                     <div class="mb-2 col-md-6 form-group">
                         <label for="email" class="form-label" required>Email Address</label>
-                        <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" value="${getInput(input, 'email')}" required>
+                        <div class="inputError">${getError(error, 'email')}</div>
+                        ${existsCheck(exists)}
                     </div>
                     <div class="mb-2 col-md-6 form-group">
                         <label for="phone" class="form-label" required>Phone Number</label>
-                        <input name="phone" type="number" class="form-control" id="phone"
-                               aria-describedby="phone number" >
+                        <input name="phone" type="number" class="form-control" id="phone" aria-describedby="phone number" value="${getInput(input, 'phone')}" required>
+                        <div class="inputError">${getError(error, 'phone')}</div>
                     </div>
+                        
                 </div>
                 <div class="row">
                     <div class="mb-2 col-md-6 form-group">
                         <label for="password" class="form-label" required>Password</label>
-                        <input name="password" type="password" class="form-control" id="password">
+                        <input name="password" type="password" class="form-control" id="password" value="${getInput(input, 'password')}" required>
+                        <div class="inputError">${getError(error, 'password')}</div>
                     </div>
                     <div class="mb-2 col-md-6 form-group">
-                        <label for="passwordRepeat" class="form-label" required>Confirm Password</label>
-                        <input name="passwordRepeat" type="password" class="form-control" id="passwordRepeat">
+                        <label for="password_confirmation" class="form-label" required>Confirm Password</label>
+                        <input name="password_confirmation" type="password" class="form-control" id="password_confirmation" value="${getInput(input, 'password_confirmation')}" required>
+                        <div class="inputError">${getError(error, 'password_confirmation')}</div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="county" class="form-label" required="">County</label>
-                    <select name="county" class="form-select mb-3" aria-label="Select County" id="county">
-                        <option value="Nairobi" type="text" selected>Nairobi</option>
-                        <option value="Mombasa" type="text">Mombasa</option>
-                        <option value="Kisumu" type="text">Kisumu</option>
-                    </select>
-                </div>
                 <div class="mb-2 form-group">
-                    <label for="town" class="form-label" required>Town/ City</label>
-                    <input name="town" type="text" class="form-control" id="town" aria-describedby="town"
-                           placeholder="e.g Embakasi, Kasarani etc.">
+                    <label for="address" class="form-label" required>Shipping Address</label>
                 </div>
-                <div class="mb-2 form-group">
-                    <label for="street" class="form-label" required>Street Address</label>
-                    <input name="street" type="text" class="form-control" id="street" aria-describedby="street"
-                           placeholder="Estate/ Building/ Floor">
-                </div>
+                <input id="pac-input" class="controls border border-dark border-3" type="text" aria-describedby="address" placeholder="Search">
+                <div id="map" class="form-control"></div>
+                <input type="hidden" name="latitude" id="latitude">
+                <input type="hidden" name="longitude" id="longitude">
+                
                 <div class="text-center mt-4">
                     <button type="submit" value="submit" class="btn btn-success">SUBMIT</button>
                     <p class="mt-2">Already have an account? <a href="/login">Log in here</a></p>
@@ -62,5 +69,9 @@ module.exports = () =>{
         </div>
     </div>
 </section>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP7SB8pRSs-0zGJ0ySIuhW32CUMjkvC0s&callback=initMap&libraries=places&v=weekly" async >
+</script>
+
         `})
 }

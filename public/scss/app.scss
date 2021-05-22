@@ -99,10 +99,14 @@ body {
 #extraNav {
   background: $grey;
   display: flex;
-  justify-content: space-around;
-  font-size: 0.8rem;
+  justify-content: flex-end;
+  font-size: 0.9rem;
   font-weight: 600;
   padding: 0.3rem 0;
+
+  #cred{
+    margin-right: 17rem;
+  }
 
   .clickable {
     @include pointer;
@@ -888,6 +892,19 @@ body {
     text-decoration: none;
     color: black;
   }
+
+  .controls{
+    width: 90%;
+    font-size: 1rem !important;
+    top: 10px !important;
+    left: 10px !important;
+    padding: 0.5rem;
+  }
+
+  .loginError{
+    color: $red;
+    text-align: center;
+  }
 }
 
 
@@ -1333,6 +1350,11 @@ body {
       cursor: no-drop;
     }
   }
+}
+
+#map {
+  height: 500px;
+  width: 100%;
 }
 
 

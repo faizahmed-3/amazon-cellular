@@ -21,8 +21,11 @@ window.addEventListener('scroll', function() {
     localStorage.setItem('scrollPosition', window.scrollY);
 }, false);
 window.addEventListener('load', function() {
-    if(localStorage.getItem('scrollPosition') !== null)
-        window.scrollTo(0, localStorage.getItem('scrollPosition'));
+    if ( document.referrer === window.location.href && window.location.pathname !== '/register'){
+        if(localStorage.getItem('scrollPosition') !== null){
+            window.scrollTo(0, localStorage.getItem('scrollPosition'));
+        }
+    }
 }, false);
 
 
@@ -120,6 +123,105 @@ if (wishlistBtns.length>0){
         console.log(wishlistBtns[i]);
     }
 }
+
+
+
+//maps
+let latitude = document.querySelector('#latitude')
+if (latitude){
+    let map;
+    let marker;
+
+    let longitude = document.querySelector('#longitude')
+
+    function initMap() {
+        let shopLocation = { lat: -1.2843393595008854, lng: 36.82790154887997 };
+
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: shopLocation,
+            zoom: 13,
+            mapTypeId: "roadmap",
+            mapTypeControl: false
+        });
+
+        // Create the search box and link it to the UI element.
+        const input = document.getElementById("pac-input");
+        const searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener("bounds_changed", () => {
+            searchBox.setBounds(map.getBounds());
+        });
+        let markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener("places_changed", () => {
+            const places = searchBox.getPlaces();
+
+            if (places.length == 0) {
+                return;
+            }
+            // Clear out the old markers.
+            markers.forEach((marker) => {
+                marker.setMap(null);
+            });
+            markers = [];
+            // For each place, get the icon, name and location.
+            const bounds = new google.maps.LatLngBounds();
+            places.forEach((place) => {
+                if (!place.geometry || !place.geometry.location) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+                const icon = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25),
+                };
+                // Create a marker for each place.
+                markers.push(
+                    new google.maps.Marker({
+                        map,
+                        icon,
+                        title: place.name,
+                        position: place.geometry.location,
+                    })
+                );
+
+                if (place.geometry.viewport) {
+                    // Only geocodes have viewport.
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            map.fitBounds(bounds);
+        });
+
+        marker = new google.maps.Marker({
+            map,
+            draggable: true,
+            animation: google.maps.Animation.BOUNCE,
+            position: shopLocation,
+            title: "Delivery Address"
+        });
+
+        latitude.value = shopLocation.lat;
+        longitude.value = shopLocation.lng;
+
+        google.maps.event.addListener(marker, 'dragend', function(evt){
+            latitude.value = evt.latLng.lat();
+            longitude.value = evt.latLng.lng();
+        });
+
+
+    }
+}
+
+
+
 
 
 

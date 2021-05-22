@@ -79,10 +79,13 @@ body .actionSelected {
 #extraNav {
   background: #f4f4f4;
   display: flex;
-  justify-content: space-around;
-  font-size: 0.8rem;
+  justify-content: flex-end;
+  font-size: 0.9rem;
   font-weight: 600;
   padding: 0.3rem 0;
+}
+#extraNav #cred {
+  margin-right: 17rem;
 }
 #extraNav .clickable:hover {
   cursor: pointer;
@@ -843,6 +846,17 @@ body .actionSelected {
   text-decoration: none;
   color: black;
 }
+.register .controls {
+  width: 90%;
+  font-size: 1rem !important;
+  top: 10px !important;
+  left: 10px !important;
+  padding: 0.5rem;
+}
+.register .loginError {
+  color: #DC3545;
+  text-align: center;
+}
 
 #order {
   width: 80%;
@@ -1301,6 +1315,11 @@ body .actionSelected {
 }
 #viewProducts .products-view-switch:hover {
   cursor: no-drop;
+}
+
+#map {
+  height: 500px;
+  width: 100%;
 }
 
 @media (max-width: 1199.98px) {

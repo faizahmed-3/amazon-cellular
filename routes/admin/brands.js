@@ -197,7 +197,6 @@ router.post('/edit/:id', async (req, res) => {
             //adding new sub brands
             if (typeof req.body.subBrandItems === "string") {
                 if (req.body.subBrandItems.length > 0) {
-                    console.log('got here')
                     brand = await Brand.findByIdAndUpdate(req.params.id, {
                         brand_name: req.body.brand_name,
                         $push: {

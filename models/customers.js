@@ -5,7 +5,7 @@ const Joi =  require('joi');
 
 
 const customerSchema = new mongoose.Schema({
-    fullName: {
+    full_name: {
         type: String,
         minlength: 3,
         maxlength: 255,
@@ -16,7 +16,7 @@ const customerSchema = new mongoose.Schema({
         minlength: 3,
         maxlength: 255,
         trim: true,
-        // unique: true
+        unique: true
     },
     phone: {
         type: Number,
@@ -26,27 +26,11 @@ const customerSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        // minlength: 8,
+        minlength: 8,
         trim: true,
     },
-    county: {
-        type: String,
-        // minlength: 3,
-        // maxlength: 255,
-        // trim: true,
-    },
-    town: {
-        type: String,
-        minlength: 3,
-        maxlength: 255,
-        trim: true,
-    },
-    street: {
-        type: String,
-        minlength: 3,
-        maxlength: 255,
-        trim: true,
-    },
+    latitude: Number,
+    longitude: Number,
     orderNotes: {
         type: String,
         minlength: 3,
@@ -66,27 +50,33 @@ const customerSchema = new mongoose.Schema({
     }
 });
 
-customerSchema.methods.generateAuthToken = function () {
+customerSchema.methods.generateLoginToken = function () {
     return jwt.sign({_id: this._id}, config.get('JWTKEY'));
 }
 
 const Customer = mongoose.model('Customer', customerSchema);
 
-
 function validate(customer) {
     const schema = Joi.object({
-        fullName: Joi.string().min(3).max(255),
+        full_name: Joi.string().min(3).max(255),
         email: Joi.string().email().min(3).max(255),
         phone: Joi.number(),
         password: Joi.string().min(8).max(50),
-        passwordRepeat: Joi.ref('password'),
-        county: Joi.string().min(3).max(255),
-        town: Joi.string().min(3).max(255),
-        street: Joi.string().min(3).max(255),
+        password_confirmation: Joi.any().equal(Joi.ref('password')).options({ messages: { 'any.only': 'Passwords do not match'} }),
+        latitude: Joi.number(),
+        longitude: Joi.number(),
     })
-    return schema.validate(customer);
-}
 
+    const options = {
+        errors: {
+            wrap: {
+                label: ''
+            }
+        }
+    };
+
+    return schema.validate(customer, options);
+}
 
 exports.Customer = Customer;
 exports.validate = validate;

@@ -1,3 +1,4 @@
+const localstorage = require('local-storage');
 const loginTemplate = require('../views/login');
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
@@ -7,24 +8,34 @@ const router = express.Router();
 const {Customer} = require('../models/customers');
 
 router.get('/', (req, res) => {
-    res.send(loginTemplate())
+    res.send(loginTemplate({}))
 })
-
 
 router.post('/', async (req, res) => {
     const {error} = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) return res.status(400).send(loginTemplate({input: req.body, error: error.details[0]}))
 
     let customer = await Customer.findOne({email: req.body.email});
-    if (!customer) return res.status(400).send('Invalid email or password');
+    if (!customer) return res.status(400).send(loginTemplate({incorrect: true}));
 
     const validPassword = await bcrypt.compare(req.body.password, customer.password);
-    if (!validPassword) return res.status(400).send('Invalid email or password');
+    if (!validPassword) return res.status(400).send(loginTemplate({error: true}));
 
+    const token = customer.generateLoginToken();
 
-    const token = customer.generateAuthToken();
+    localstorage.set( "full_name", customer.full_name );
 
-    res.header('x-auth-token', token).redirect('/');
+    localstorage.set( "token", token );
+
+    res.redirect(req.session.returnTo || '/');
+    delete req.session.returnTo;
+})
+
+router.get('/logout', (req, res) => {
+    localstorage.set( "token", null );
+    localstorage.set( "full_name", null );
+
+    res.redirect('back')
 })
 
 function validate(req) {
@@ -33,8 +44,15 @@ function validate(req) {
         password: Joi.string().min(8).max(255).required(),
     })
 
-    return schema.validate(req);
-}
+    const options = {
+        errors: {
+            wrap: {
+                label: ''
+            }
+        }
+    };
 
+    return schema.validate(req, options);
+}
 
 module.exports = router;

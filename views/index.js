@@ -30,8 +30,6 @@ ${printProductModal(product, wishlist, cart)}
             `}).join('');
     }
 
-
-
     return layout({
         title: title,
         content: `

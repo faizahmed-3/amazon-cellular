@@ -1,3 +1,4 @@
+const localstorage = require('local-storage');
 let sessionstorage = require('sessionstorage');
 
 function displayDate(date) {
@@ -43,7 +44,7 @@ function printProductModal(product, wishlist, cart) {
                             <div class="row small-img-row">
                                 ${printProductViewSmallImages(product)}
                             </div>
-                            <div>
+                            <form method="post" >
                                 <div id="prod-price">
                                     <span>ksh.</span> <div class="d-inline pricePV">${product.price}</div>
                                 </div>
@@ -56,11 +57,11 @@ function printProductModal(product, wishlist, cart) {
                                     ${cartBtnPV(product._id, cart)}
                                 </div>
                                 <div class="mt-2 mt-md-1 mt-lg-2  d-flex justify-content-center">
-                                    <button class="btn btn-success checkout" onclick="location.href='checkout.html'">
+                                    <button type="submit" class="btn btn-success checkout" formaction="/checkout">
                                         Checkout
                                     </button>
                                 </div>
-                            </div>
+                            </form>
 
                             <div id="share" class="text-center">
                                 <i class="bi bi-share-fill px-2"></i>
@@ -138,7 +139,7 @@ function printWishlistModal(wishlist) {
             `}).join('');
             } else {
                 return `
-                    <h6 class="text-center py-5 text-muted">Your wishlist is empty at the moment<br>Click <i class="bi bi-heart"></i> to add items to your wishlist</h6>
+                    <h6 class="text-center py-5 text-muted">Your wishlist is empty at the moment<br>Click <i class="fas fa-heart"></i> to add items to your wishlist</h6>
                 `   }
         }
 
@@ -171,7 +172,7 @@ function printWishlistModal(wishlist) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <h6 class="text-center py-5 text-muted">Your wishlist is empty at the moment<br>Click <i class="bi bi-heart"></i> to add items to your wishlist</h6>     
+            <h6 class="text-center py-5 text-muted">Your wishlist is empty at the moment<br>Click <i class="fas fa-heart"></i> to add items to your wishlist</h6>     
             </div>
         </div>
     </div>
@@ -205,9 +206,8 @@ function printCartModal(cart) {
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mt-3 mt-lg-4">
-                            <form method="post" action="/cart/delete/${cartItem._id._id}">
-                            <button type="submit" class="remove btn btn-sm btn-danger">Remove <i class="bi bi-trash"></i></button>
-                            </form>
+                        
+                            <button type="submit" class="remove btn btn-sm btn-danger" formaction="/cart/delete/${cartItem._id._id}">Remove <i class="bi bi-trash"></i></button>
                             <div>
                             <span>subtotal (ksh):</span>
                             <div class="subtotal">${cartItem._id.price} </div>
@@ -219,7 +219,27 @@ function printCartModal(cart) {
             `}).join('');
             } else {
                 return `
-                    <h6 class="text-center py-5 text-muted">Your cart is empty at the moment<br>Click <i class="bi bi-cart3"></i> to add items to your cart</h6>  
+                    <h6 class="text-center py-5 text-muted">Your cart is empty at the moment<br>Click <i class="fas fa-shopping-cart"></i> to add items to your cart</h6>  
+                `}
+        }
+
+        function cartModalFooter(cart) {
+            if (cart.products.length>0){
+                return `
+                   <div class="modal-footer d-flex justify-content-between">
+                <div>Total (ksh): <span class="total">0</span></div>
+                <button type="submit" class="btn btn-success" id="checkout" formaction="/checkout">
+                   Proceed to checkout
+                </button>
+            </div> 
+                `} else {
+                return `
+                    <div class="modal-footer d-flex justify-content-between">
+                <div>Total (ksh): <span class="total">0</span></div>
+                <button type="button" class="btn btn-success" id="checkout" disabled>
+                    Checkout
+                </button>
+            </div>
                 `}
         }
 
@@ -232,14 +252,11 @@ function printCartModal(cart) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+            <form method="post">
                 ${renderedCartItems(cart)}
+                ${cartModalFooter(cart)}
             </div>
-            <div class="modal-footer d-flex justify-content-between">
-                <div>Total (ksh): <span class="total">0</span></div>
-                <button type="button" class="btn btn-success" id="checkout" onclick="location.href='checkout.html'">
-                    Checkout
-                </button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -256,7 +273,7 @@ function printCartModal(cart) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h6 class="text-center py-5 text-muted">Your cart is empty at the moment<br>Click <i class="bi bi-cart3"></i> to add items to your cart</h6>  
+                <h6 class="text-center py-5 text-muted">Your cart is empty at the moment<br>Click <i class="fas fa-shopping-cart"></i> to add items to your cart</h6>  
             </div>
         </div>
     </div>
@@ -341,25 +358,24 @@ function wishBtnPV(productID, wishlist) {
         const product = wishlist.products.id(productID);
         if (product) {
             return `
-                <form method="post" action="/wishlist/${productID}">
-                    <button type="submit" class="btn btn-success prod-start"> Added 
+               
+                    <button type="submit" class="btn btn-success prod-start" formaction="/wishlist/${productID}"> Added 
                         <i class="bi bi-heart-fill"></i></button>
-                </form>
-            `
-        } else {
+                
+            `} else {
             return `
-                <form method="post" action="/wishlist/${productID}">
-                    <button type="submit" class="btn btn-outline-success prod-start"> Wishlist 
+               
+                    <button type="submit" class="btn btn-outline-success prod-start" formaction="/wishlist/${productID}"> Wishlist 
                         <i class="bi bi-heart"></i></button>
-                </form>
+               
             `
         }
     } else {
         return `
-                <form method="post" action="/wishlist/${productID}">
-                    <button type="submit" class="btn btn-outline-success prod-start"> Wishlist 
+                
+                    <button type="submit" class="btn btn-outline-success prod-start" formaction="/wishlist/${productID}"> Wishlist 
                         <i class="bi bi-heart"></i></button>
-                </form>
+               
             `
     }
 }
@@ -369,27 +385,70 @@ function cartBtnPV(productID, cart) {
         const product = cart.products.id(productID);
         if (product) {
             return `
-                <form method="post" action="/cart/${productID}">
-                    <button type="submit" class="btn btn-success prod-start"> Added 
+                
+                    <button type="submit" class="btn btn-success prod-start" formaction="/cart/${productID}"> Added 
                         <i class="bi bi-cart-fill"></i></button>
-                </form>
+                
             `
         } else {
             return `
-                <form method="post" action="/cart/${productID}">
-                    <button type="submit" class="btn btn-outline-success prod-start"> Cart 
+                
+                    <button type="submit" class="btn btn-outline-success prod-start" formaction="/cart/${productID}"> Cart 
                         <i class="bi bi-cart3"></i></button>
-                </form>
+                
             `
         }
     } else {
         return `
-                <form method="post" action="/cart/${productID}">
-                    <button type="submit" class="btn btn-outline-success prod-start"> Cart 
+                
+                    <button type="submit" class="btn btn-outline-success prod-start" formaction="/cart/${productID}"> Cart 
                         <i class="bi bi-cart3"></i></button>
-                </form>
+                
             `
     }
+}
+
+function extraNav() {
+    let name = localstorage.get( 'full_name' )
+    let token = localstorage.get( 'token' )
+
+    if (token){
+        return `
+        <div class="me-1" >${name} : </div>
+        <div class="clickable" data-bs-toggle="modal" data-bs-target="#cart">Checkout</div>
+        <div class="separator mx-2">|</div>
+        <div class="clickable" >Orders</div>
+        <div class="separator mx-2">|</div>
+        <div class="clickable" onclick="location.href='/login/logout'">Log Out</div>
+        `}
+    else {
+        return `
+        <div class="clickable" onclick="location.href='/register'">Register</div>
+        <div class="separator mx-2">|</div>
+        <div class="clickable" onclick="location.href='/login'">Log In</div>
+        `}
+}
+
+function footer() {
+    let token = localstorage.get( 'token' )
+
+    if (token){
+        return `
+        <button type="button" class="btn btn-warning reg" data-bs-toggle="modal" data-bs-target="#cart">CHECKOUT
+        </button>
+        <button type="button" class="btn btn-warning reg" onclick="location.href='/orders'">ORDERS
+        </button>        
+        <button type="button" class="btn btn-danger reg" onclick="location.href='/login/logout'">LOG OUT
+        </button>
+        `}
+    else {
+        return `
+        <button type="button" class="btn btn-warning reg" data-bs-toggle="modal" data-bs-target="#cart">CHECKOUT</button>
+        <button type="button" class="btn btn-warning reg" onclick="location.href='/register'">REGISTER
+        </button>
+        <button type="button" class="btn btn-warning reg" onclick="location.href='/login'">LOGIN
+        </button>
+        `}
 }
 
 
@@ -404,3 +463,5 @@ exports.getCount = getCount;
 exports.getModals = getModals;
 exports.wishlistButton = wishlistButton;
 exports.cartButton = cartButton;
+exports.extraNav = extraNav;
+exports.footer = footer;

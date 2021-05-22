@@ -202,8 +202,6 @@ if (editImgRow) {
         if (target.matches('.fa-trash-alt')) {
 
             for (let j=2; j<evt.path[4].children.length; j++){
-                console.log(j)
-                console.log(evt.path[4].children.length);
                 evt.path[4].children[j].remove()
                 j--;
                 i--;

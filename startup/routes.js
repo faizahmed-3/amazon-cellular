@@ -10,6 +10,7 @@ const register = require('../routes/register');
 const login = require('../routes/login');
 const wishlist = require('../routes/wishlist');
 const cart = require('../routes/cart');
+const checkout = require('../routes/checkout');
 
 
 
@@ -24,11 +25,12 @@ module.exports = function (app) {
     app.use('/admin/categories', adminCategories);
     app.use('/admin/brands', adminBrands);
     app.use('/admin/special', adminSpecial);
-    app.use('/', homepage);
     app.use('/register', register);
     app.use('/login', login);
     app.use('/wishlist', wishlist);
     app.use('/cart', cart);
+    app.use('/checkout', checkout);
+    app.use('/', homepage);
 
     app.use(error);
 }
