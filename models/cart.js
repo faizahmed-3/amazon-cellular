@@ -16,7 +16,7 @@ const cartSchema = new mongoose.Schema({
             min: 1
         }
     }],
-    cartTotal: {
+    total: {
         type: Number
     }
 })

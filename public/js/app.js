@@ -21,7 +21,7 @@ window.addEventListener('scroll', function() {
     localStorage.setItem('scrollPosition', window.scrollY);
 }, false);
 window.addEventListener('load', function() {
-    if ( document.referrer === window.location.href && window.location.pathname !== '/register'){
+    if ( document.referrer === window.location.href && window.location.pathname !== '/register' && window.location.pathname !== '/login' && window.location.pathname !== '/register/edit' && window.location.pathname !== '/checkout'){
         if(localStorage.getItem('scrollPosition') !== null){
             window.scrollTo(0, localStorage.getItem('scrollPosition'));
         }
@@ -64,15 +64,15 @@ if (smallImages.length>0){
 
 
 //Add number in checkout page
-const addNum = document.querySelector('#add-num');
-if (addNum){
-    addNum.addEventListener('click', () => {
-        let anotherNumber = document.querySelector('.anotherNumber');
-        anotherNumber.innerHTML += `
-       <input type="number" class="form-control mb-2" id="phone" aria-describedby="phone number" placeholder="Add another number (optional)">
-    `;
-    })
-}
+// const addNum = document.querySelector('#add-num');
+// if (addNum){
+//     addNum.addEventListener('click', () => {
+//         let anotherNumber = document.querySelector('.anotherNumber');
+//         anotherNumber.innerHTML += `
+//        <input type="number" class="form-control mb-2" id="phone" aria-describedby="phone number" placeholder="Add another number (optional)">
+//     `;
+//     })
+// }
 
 
 //calculate price on cart
@@ -81,9 +81,11 @@ if (qtyInputs.length>0){
     const priceInputs = document.querySelectorAll('.itemPrice');
     const subtotalInputs = document.querySelectorAll('.subtotal');
     const total = document.querySelector('.total');
+    const totalOutput = document.querySelector('.totalOutput')
     let sum =0;
 
     for (let i=0; i<qtyInputs.length; i++){
+        subtotalInputs[i].innerHTML = `${qtyInputs[i].value * parseInt(priceInputs[i].innerHTML)}`
         qtyInputs[i].addEventListener('change', evt => {
             subtotalInputs[i].innerHTML = `${evt.target.value * parseInt(priceInputs[i].innerHTML)}`
             sum=0;
@@ -92,6 +94,7 @@ if (qtyInputs.length>0){
                 sum += parseInt(sub.innerHTML);
             })
             total.innerHTML = sum;
+            totalOutput.value= sum
         })
     }
 
@@ -99,6 +102,7 @@ if (qtyInputs.length>0){
         sum += parseInt(sub.innerHTML);
     })
     total.innerHTML = sum;
+    totalOutput.value = sum;
 }
 
 
@@ -136,10 +140,17 @@ if (latitude){
 
     function initMap() {
         let shopLocation = { lat: -1.2843393595008854, lng: 36.82790154887997 };
+        let userLocation = {lat: parseFloat(latitude.value), lng: parseFloat(longitude.value)}
+
+        function getLatLng() {
+            if (latitude.value){
+                return userLocation
+            } else return shopLocation;
+        }
 
         map = new google.maps.Map(document.getElementById("map"), {
-            center: shopLocation,
-            zoom: 13,
+            center: getLatLng(),
+            zoom: 15,
             mapTypeId: "roadmap",
             mapTypeControl: false
         });
@@ -204,12 +215,14 @@ if (latitude){
             map,
             draggable: true,
             animation: google.maps.Animation.BOUNCE,
-            position: shopLocation,
+            position: getLatLng(),
             title: "Delivery Address"
         });
 
-        latitude.value = shopLocation.lat;
-        longitude.value = shopLocation.lng;
+        if (!latitude.value){
+            latitude.value = shopLocation.lat;
+            longitude.value = shopLocation.lng;
+        }
 
         google.maps.event.addListener(marker, 'dragend', function(evt){
             latitude.value = evt.latLng.lat();
@@ -219,6 +232,17 @@ if (latitude){
 
     }
 }
+
+
+//checkout total
+let checkoutTotal = document.querySelector('#checkoutTotal');
+if (checkoutTotal){
+    let cartTotal = document.querySelector('#cartTotal')
+    let deliveryFee = document.querySelector('#deliveryFee')
+
+    checkoutTotal.innerHTML = parseInt(cartTotal.innerHTML) + parseInt(deliveryFee.innerHTML);
+}
+
 
 
 

@@ -438,25 +438,12 @@ body {
     }
   }
 
-  .count {
-    display: flex;
-    justify-content: space-between;
-
-    .form-control {
-      width: 7.3rem;
-      font-size: 0.8rem;
-    }
-
-    .count-sub {
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    span {
-      font-size: 0.8rem;
-      font-weight: normal;
-    }
+  .pvBtns{
+    text-align: center;
+    margin: 2rem 0;
   }
+
+
 
   .prod-start {
     width: 10rem;
@@ -621,7 +608,7 @@ body {
 
     @include required;
 
-    input[placeholder], textarea[placeholder], select, option, .form-check-label {
+    input[placeholder], textarea[placeholder], select, option {
       font-size: 0.8rem;
     }
 
@@ -634,6 +621,14 @@ body {
     #add-num {
       text-align: right;
       @include pointer;
+    }
+
+    .controls{
+      width: 90%;
+      font-size: 1rem !important;
+      top: 10px !important;
+      left: 10px !important;
+      padding: 0.5rem;
     }
 
     .final-text {
@@ -679,6 +674,7 @@ body {
       position: sticky;
       top: 10rem;
       z-index: 3;
+      margin-bottom: 2rem;
     }
 
     .card-header {
@@ -697,6 +693,7 @@ body {
     }
 
     .checkoutItemName {
+      text-transform: capitalize;
       overflow: hidden;
       display: -webkit-box;
       -webkit-box-orient: vertical;

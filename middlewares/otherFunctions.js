@@ -37,10 +37,10 @@ function printProductModal(product, wishlist, cart) {
             <div class="modal-body pt-0">
                 <div class="container-fluid">
                     <div class="row ">
-                        <div class="col-md-7 col-lg-8">
+                        <div class="col-6">
                             <img src="/img/products/${printMainImage(product)}" alt="" id="prod-main-img">
                         </div>
-                        <div class="col-md-5 col-lg-4 d-flex flex-column justify-content-between">
+                        <div class="col-6 d-flex flex-column justify-content-between">
                             <div class="row small-img-row">
                                 ${printProductViewSmallImages(product)}
                             </div>
@@ -48,18 +48,11 @@ function printProductModal(product, wishlist, cart) {
                                 <div id="prod-price">
                                     <span>ksh.</span> <div class="d-inline pricePV">${product.price}</div>
                                 </div>
-                                <div class="mt-2 mt-md-1 mt-lg-2 count">
-                                    <input type="number" placeholder="Quantity" class="form-control qtyPV" value="1" min="1">
-                                    <div class="count-sub"><span>subtotal (ksh.):</span> <div class="d-inline subPV">${product.price}</div></div>
-                                </div>
-                                <div class="mt-2 mt-md-1 mt-lg-2  d-flex justify-content-evenly">
+                                <div class="pvBtns">
                                     ${wishBtnPV(product._id, wishlist)}
-                                    ${cartBtnPV(product._id, cart)}
                                 </div>
-                                <div class="mt-2 mt-md-1 mt-lg-2  d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-success checkout" formaction="/checkout">
-                                        Checkout
-                                    </button>
+                                <div class="pvBtns">
+                                    ${cartBtnPV(product._id, cart)}
                                 </div>
                             </form>
 
@@ -109,7 +102,6 @@ function printProductViewSmallImages(product) {
 }
 
 function printWishlistModal(wishlist) {
-
     if (Object.keys(wishlist).length>0){
         sessionstorage.setItem( "wishlistCount", wishlist.products.length );
 
@@ -182,7 +174,6 @@ function printWishlistModal(wishlist) {
 }
 
 function printCartModal(cart) {
-
     if (Object.keys(cart).length>0){
         sessionstorage.setItem( "cartCount", cart.products.length );
 
@@ -198,7 +189,7 @@ function printCartModal(cart) {
                         <h5 class="prod-title">${cartItem._id.product_name}</h5>
                         <div class="d-flex justify-content-between mt-3 mt-lg-4">
                             <div>
-                                <input type="number"  class="form-control qty" name="cartQuantity" value="1" min="1">
+                                <input type="number" class="form-control qty" name="${cartItem._id._id}" value="${cartItem.quantity}" min="1">
                             </div>
                             <div> 
                                 <span>  ksh.</span> 
@@ -210,7 +201,7 @@ function printCartModal(cart) {
                             <button type="submit" class="remove btn btn-sm btn-danger" formaction="/cart/delete/${cartItem._id._id}">Remove <i class="bi bi-trash"></i></button>
                             <div>
                             <span>subtotal (ksh):</span>
-                            <div class="subtotal">${cartItem._id.price} </div>
+                            <div class="subtotal"></div>
                             </div>
                         </div>
                     </div>
@@ -228,8 +219,9 @@ function printCartModal(cart) {
                 return `
                    <div class="modal-footer d-flex justify-content-between">
                 <div>Total (ksh): <span class="total">0</span></div>
+                <input type="hidden" name="total" class="totalOutput">
                 <button type="submit" class="btn btn-success" id="checkout" formaction="/checkout">
-                   Proceed to checkout
+                   Checkout
                 </button>
             </div> 
                 `} else {

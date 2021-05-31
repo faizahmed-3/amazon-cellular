@@ -396,21 +396,9 @@ body .actionSelected {
   font-size: 0.9rem;
   font-weight: normal;
 }
-.product-view .count {
-  display: flex;
-  justify-content: space-between;
-}
-.product-view .count .form-control {
-  width: 7.3rem;
-  font-size: 0.8rem;
-}
-.product-view .count .count-sub {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-.product-view .count span {
-  font-size: 0.8rem;
-  font-weight: normal;
+.product-view .pvBtns {
+  text-align: center;
+  margin: 2rem 0;
 }
 .product-view .prod-start {
   width: 10rem;
@@ -547,7 +535,7 @@ body .actionSelected {
   content: " *";
   color: #DC3545;
 }
-#checkout-body #checkout-main input[placeholder], #checkout-body #checkout-main textarea[placeholder], #checkout-body #checkout-main select, #checkout-body #checkout-main option, #checkout-body #checkout-main .form-check-label {
+#checkout-body #checkout-main input[placeholder], #checkout-body #checkout-main textarea[placeholder], #checkout-body #checkout-main select, #checkout-body #checkout-main option {
   font-size: 0.8rem;
 }
 #checkout-body #checkout-main .optional {
@@ -558,6 +546,13 @@ body .actionSelected {
 }
 #checkout-body #checkout-main #add-num:hover {
   cursor: pointer;
+}
+#checkout-body #checkout-main .controls {
+  width: 90%;
+  font-size: 1rem !important;
+  top: 10px !important;
+  left: 10px !important;
+  padding: 0.5rem;
 }
 #checkout-body #checkout-main .final-text {
   text-transform: uppercase;
@@ -593,6 +588,7 @@ body .actionSelected {
   position: sticky;
   top: 10rem;
   z-index: 3;
+  margin-bottom: 2rem;
 }
 #checkout-body #checkout-sidebar .card:hover {
   cursor: default;
@@ -611,6 +607,7 @@ body .actionSelected {
   font-size: 0.8rem;
 }
 #checkout-body #checkout-sidebar .checkoutItemName {
+  text-transform: capitalize;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;

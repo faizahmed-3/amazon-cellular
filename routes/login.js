@@ -1,5 +1,9 @@
+const {getModals} = require('../middlewares/otherFunctions');
+const {Wishlist} = require('../models/wishlist')
+const {Cart} = require('../models/cart')
 const localstorage = require('local-storage');
 const loginTemplate = require('../views/login');
+const checkoutTemplate = require('../views/checkout');
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const _ = require('lodash');
@@ -7,33 +11,49 @@ const express = require('express');
 const router = express.Router();
 const {Customer} = require('../models/customers');
 
-router.get('/', (req, res) => {
-    res.send(loginTemplate({}))
+router.get('/', async (req, res) => {
+    let [wishlist, cart] = await getModals(req, Wishlist, Cart)
+
+    req.session.signUpIn = req.headers.referer.split(req.headers.host).pop()
+
+    res.send(loginTemplate({wishlist, cart}))
 })
 
 router.post('/', async (req, res) => {
+    let [wishlist, cart] = await getModals(req, Wishlist, Cart)
+
     const {error} = validate(req.body);
-    if (error) return res.status(400).send(loginTemplate({input: req.body, error: error.details[0]}))
+    if (error) return res.status(400).send(loginTemplate({input: req.body, error: error.details[0], wishlist, cart}))
 
     let customer = await Customer.findOne({email: req.body.email});
-    if (!customer) return res.status(400).send(loginTemplate({incorrect: true}));
+    if (!customer) return res.status(400).send(loginTemplate({incorrect: true, wishlist, cart}));
 
     const validPassword = await bcrypt.compare(req.body.password, customer.password);
-    if (!validPassword) return res.status(400).send(loginTemplate({error: true}));
+    if (!validPassword) return res.status(400).send(loginTemplate({incorrect: true, wishlist, cart}));
 
     const token = customer.generateLoginToken();
 
     localstorage.set( "full_name", customer.full_name );
 
+    localstorage.set( "email", customer.email );
+
     localstorage.set( "token", token );
 
-    res.redirect(req.session.returnTo || '/');
-    delete req.session.returnTo;
+    if (req.session.checkout){
+        res.redirect('/checkout')
+    } else {
+        res.redirect(req.session.signUpIn)
+    }
+
+    req.session.signUpIn = null;
+    req.session.checkout = false;
 })
 
 router.get('/logout', (req, res) => {
     localstorage.set( "token", null );
+    localstorage.set( "email", null );
     localstorage.set( "full_name", null );
+    req.session.checkout = false;
 
     res.redirect('back')
 })

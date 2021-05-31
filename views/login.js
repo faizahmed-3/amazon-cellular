@@ -1,8 +1,8 @@
 const layout = require('./layout');
 const title = 'Log In';
-const {getInput, getError}= require('../middlewares/otherFunctions');
+const {getInput, getError, printWishlistModal, printCartModal}= require('../middlewares/otherFunctions');
 
-module.exports = ({input, error, incorrect}) => {
+module.exports = ({wishlist, cart, input, error, incorrect}) => {
     function showIncorrect(incorrect) {
         if (incorrect){
             return `
@@ -43,5 +43,9 @@ module.exports = ({input, error, incorrect}) => {
         </div>
     </div>
 </section>
+
+${printWishlistModal(wishlist)}
+
+${printCartModal(cart)}
         `})
 }
