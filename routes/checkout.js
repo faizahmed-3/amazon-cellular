@@ -15,7 +15,13 @@ async function goToCheckout(req, res) {
 
     const customer = await Customer.find({email: localstorage.get( 'email' )})
 
-    res.send(checkoutTemplate({customer: customer[0], wishlist, cart}))
+    let paymentError;
+
+    if (req.session.paymentError){
+        paymentError = req.session.paymentError
+    }
+
+    res.send(checkoutTemplate({customer: customer[0], wishlist, cart, paymentError}))
 }
 
 router.get('/', logged, async (req, res) => {
@@ -32,7 +38,6 @@ router.get('/', logged, async (req, res) => {
 
         cartUpdate.total = req.session.notLoggedCart.total;
     }
-
 
 
     await cartUpdate.save();

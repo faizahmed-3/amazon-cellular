@@ -646,6 +646,9 @@ body {
       font-weight: normal;
     }
 
+    .paymentSpan{
+      font-size: 0.8rem;
+    }
 
     #placeOrder {
       margin-top: 1rem;
@@ -708,6 +711,11 @@ body {
       font-size: 0.75rem;
     }
 
+  }
+
+  #paymentError{
+    color: $red;
+    text-align: center;
   }
 }
 
@@ -906,19 +914,41 @@ body {
 
 
 #order {
-  width: 80%;
+  width: 90%;
 
   thead {
     text-transform: uppercase;
   }
 
-  td {
+  th{
+    width: 12%;
+    text-align: center;
+  }
+
+  .itemsTh {
+    width: 52%;
+    text-align: center;
+  }
+
+  td{
+    text-align: center;
+  }
+
+  .orderItems{
+    text-transform: capitalize;
+    text-align: start;
     font-size: 0.9rem;
   }
 
   .btn {
     width: 8rem;
     font-size: 0.8rem;
+  }
+
+  .orderItemSpan{
+    text-transform: lowercase;
+    margin-left: 0.5rem;
+    font-size: 0.85rem;
   }
 
 }
@@ -1348,6 +1378,7 @@ body {
     }
   }
 }
+
 
 #map {
   height: 500px;

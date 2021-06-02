@@ -37,6 +37,7 @@ module.exports = ({wishlist, cart, input, error, exists}) =>{
                     <div class="mb-2 col-md-6 form-group">
                         <label for="phone" class="form-label" required>Phone Number</label>
                         <input name="phone" type="number" class="form-control" id="phone" aria-describedby="phone number" value="${getInput(input, 'phone')}" required>
+                        <div class="form-text">For M-Pesa payments, please enter a safaricom number</div>
                         <div class="inputError">${getError(error, 'phone')}</div>
                     </div>
                         

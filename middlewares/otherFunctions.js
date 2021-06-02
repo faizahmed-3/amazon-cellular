@@ -55,7 +55,6 @@ function printProductModal(product, wishlist, cart) {
                                     ${cartBtnPV(product._id, cart)}
                                 </div>
                             </form>
-
                             <div id="share" class="text-center">
                                 <i class="bi bi-share-fill px-2"></i>
                                 <a href="https://www.facebook.com/sharer/sharer.php?u=http://192.168.1.104:3000/#_${product._id}" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -64,7 +63,6 @@ function printProductModal(product, wishlist, cart) {
                                 <a href="whatsapp://send?text=http://192.168.1.104:3000/#_${product._id}"><i class="fab fa-whatsapp"></i></a>
                                 <p class="mb-0 mt-1 scroll d-none d-lg-block">Scroll down for more details</p>
                             </div>
-
                         </div>
                         <div>
                             <div class="description mt-3"> Description</div>
@@ -409,7 +407,7 @@ function extraNav() {
         <div class="me-1" >${name} : </div>
         <div class="clickable" data-bs-toggle="modal" data-bs-target="#cart">Checkout</div>
         <div class="separator mx-2">|</div>
-        <div class="clickable" >Orders</div>
+        <div class="clickable" onclick="location.href='/orders'">Orders</div>
         <div class="separator mx-2">|</div>
         <div class="clickable" onclick="location.href='/login/logout'">Log Out</div>
         `}

@@ -3,7 +3,7 @@ const {printMainImage, printWishlistModal, printCartModal} = require('../middlew
 const layout = require('./layout');
 const title = 'Checkout'
 
-module.exports = function ({customer, wishlist, cart}) {
+module.exports = function ({customer, wishlist, cart, paymentError}) {
 
     async function getAddress(customer) {
         try {
@@ -70,6 +70,14 @@ module.exports = function ({customer, wishlist, cart}) {
         ).join('')
     }
 
+    function printPaymentError(paymentError) {
+        if (paymentError){
+            return `
+                <p id="paymentError">${paymentError}</p>
+            `}
+        else return ``
+    }
+
     return layout({
         title: title,
         content: `
@@ -96,13 +104,13 @@ module.exports = function ({customer, wishlist, cart}) {
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="mpesa" value="false" id="cash" checked>
                         <label class="form-check-label" for="cash">
-                            Payment on delivery (only available for Nairobi and its environs)
+                            Payment on delivery <span class="paymentSpan text-muted">(only available for Nairobi and its environs)</span>
                         </label>
                     </div>
                     <div class="form-check mb-5">
                         <input class="form-check-input" type="radio" name="mpesa" value="true" id="mpesaBtn">
                         <label class="form-check-label" for="mpesaBtn">
-                            M-Pesa
+                            Lipa na M-PESA <span class="paymentSpan text-muted">(you need a safaricom number for this option)</span>
                         </label>
                     </div>
                     <div class=" d-flex justify-content-between">

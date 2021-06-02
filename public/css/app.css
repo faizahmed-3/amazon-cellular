@@ -566,6 +566,9 @@ body .actionSelected {
   text-transform: lowercase;
   font-weight: normal;
 }
+#checkout-body #checkout-main .paymentSpan {
+  font-size: 0.8rem;
+}
 #checkout-body #checkout-main #placeOrder {
   margin-top: 1rem;
   width: 30rem;
@@ -618,6 +621,10 @@ body .actionSelected {
 }
 #checkout-body #checkout-sidebar .btn-sm {
   font-size: 0.75rem;
+}
+#checkout-body #paymentError {
+  color: #DC3545;
+  text-align: center;
 }
 
 .tp {
@@ -856,17 +863,35 @@ body .actionSelected {
 }
 
 #order {
-  width: 80%;
+  width: 90%;
 }
 #order thead {
   text-transform: uppercase;
 }
+#order th {
+  width: 12%;
+  text-align: center;
+}
+#order .itemsTh {
+  width: 52%;
+  text-align: center;
+}
 #order td {
+  text-align: center;
+}
+#order .orderItems {
+  text-transform: capitalize;
+  text-align: start;
   font-size: 0.9rem;
 }
 #order .btn {
   width: 8rem;
   font-size: 0.8rem;
+}
+#order .orderItemSpan {
+  text-transform: lowercase;
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
 }
 
 #faq {
