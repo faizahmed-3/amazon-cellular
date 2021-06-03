@@ -940,9 +940,10 @@ body {
     font-size: 0.9rem;
   }
 
-  .btn {
+  .statusBtn {
     width: 8rem;
     font-size: 0.8rem;
+    text-transform: capitalize;
   }
 
   .orderItemSpan{
@@ -1376,6 +1377,44 @@ body {
     &:hover{
       cursor: no-drop;
     }
+  }
+
+  .orderItems{
+    text-transform: capitalize;
+    text-align: start;
+    font-size: 0.8rem;
+  }
+
+  .orderRows{
+    font-size: 0.85rem;
+  }
+
+  .statusBtn {
+    width: 6.5rem;
+    font-size: 0.7rem;
+    text-transform: capitalize;
+  }
+
+  .orderItemSpan{
+    text-transform: lowercase;
+    margin-left: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .ordersHeadingBig{
+    width: 40%  ;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  .ordersHeading{
+    width: 8.1%;
+    text-align: center;
+  }
+
+  .ordersEmail{
+    text-align: center;
+    width: 12.4%;
   }
 }
 

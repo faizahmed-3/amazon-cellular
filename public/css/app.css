@@ -884,9 +884,10 @@ body .actionSelected {
   text-align: start;
   font-size: 0.9rem;
 }
-#order .btn {
+#order .statusBtn {
   width: 8rem;
   font-size: 0.8rem;
+  text-transform: capitalize;
 }
 #order .orderItemSpan {
   text-transform: lowercase;
@@ -1337,6 +1338,37 @@ body .actionSelected {
 }
 #viewProducts .products-view-switch:hover {
   cursor: no-drop;
+}
+#viewProducts .orderItems {
+  text-transform: capitalize;
+  text-align: start;
+  font-size: 0.8rem;
+}
+#viewProducts .orderRows {
+  font-size: 0.85rem;
+}
+#viewProducts .statusBtn {
+  width: 6.5rem;
+  font-size: 0.7rem;
+  text-transform: capitalize;
+}
+#viewProducts .orderItemSpan {
+  text-transform: lowercase;
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+#viewProducts .ordersHeadingBig {
+  width: 40%;
+  text-align: center;
+  text-transform: capitalize;
+}
+#viewProducts .ordersHeading {
+  width: 8.1%;
+  text-align: center;
+}
+#viewProducts .ordersEmail {
+  text-align: center;
+  width: 12.4%;
 }
 
 #map {

@@ -5,6 +5,7 @@ const adminProducts = require('../routes/admin/products');
 const adminCategories = require('../routes/admin/categories');
 const adminBrands = require('../routes/admin/brands');
 const adminSpecial= require('../routes/admin/special');
+const adminOrders= require('../routes/admin/orders');
 const homepage = require('../routes/');
 const register = require('../routes/register');
 const login = require('../routes/login');
@@ -25,6 +26,7 @@ module.exports = function (app) {
     app.use('/admin/categories', adminCategories);
     app.use('/admin/brands', adminBrands);
     app.use('/admin/special', adminSpecial);
+    app.use('/admin/orders', adminOrders);
     app.use('/register', register);
     app.use('/login', login);
     app.use('/wishlist', wishlist);

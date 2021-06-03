@@ -25,6 +25,10 @@ const ordersSchema = new mongoose.Schema({
         amount: Number,
         mpesaCode: String,
         transactionDate: Date
+    },
+    orderType: {
+        type: String,
+        default: 'From user'
     }
 });
 

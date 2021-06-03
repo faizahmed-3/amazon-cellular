@@ -52,7 +52,7 @@ module.exports = ({title, content}) => {
                 <li class="list-group-item list-group-item-action ">
                      Dashboard
                 </li>
-                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" onclick="location.href='/admin/orders/'">
                     <div>Orders</div>
                     <span class="badge bg-danger rounded-pill">14</span></li>
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/'">

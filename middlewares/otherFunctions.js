@@ -441,6 +441,39 @@ function footer() {
         `}
 }
 
+exports.printProducts = function (products) {
+    return products.map(
+        product => {
+            return `
+                <li>${product.product_name}<span class="orderItemSpan">- (qty ${product.quantity})</span></li>
+            `}
+    ).join('');
+}
+
+exports.printPaymentMethod = function(order) {
+    if (order.mpesa === 'true'){
+        return `MPESA`
+    } else if (order.mpesa === 'false'){
+        return 'On delivery'
+    }
+}
+
+exports.printStatusBtn = function (order) {
+    switch (order.orderStatus) {
+        case 'Order placed':
+            return `<td class="text-center orderRows"><div class="btn btn-primary statusBtn">${order.orderStatus}</div></td>`
+
+        case 'In transit':
+            return `<td class="text-center orderRows"><div class="btn btn-warning statusBtn">${order.orderStatus}</div></td>`
+
+        case 'Delivered':
+            return `<td class="text-center orderRows"><div class="btn btn-success statusBtn">${order.orderStatus}</div></td>`
+
+        case 'Cancelled':
+            return `<td class="text-center orderRows"><div class="btn btn-danger statusBtn">${order.orderStatus}</div></td>`
+    }
+}
+
 
 exports.displayDate = displayDate;
 exports.getInput = getInput;

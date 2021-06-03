@@ -1,4 +1,4 @@
-const {displayDate, printWishlistModal, printCartModal} = require('../middlewares/otherFunctions');
+const {displayDate, printWishlistModal, printCartModal, printProducts, printPaymentMethod, printStatusBtn} = require('../middlewares/otherFunctions');
 const layout = require('./layout');
 const title = 'Orders'
 
@@ -15,27 +15,10 @@ module.exports = function ({orders, wishlist, cart}) {
                     </td>
                     <td>${order.total}</td>
                     <td>${printPaymentMethod(order)}</td>
-                    <td class="text-center"><div class="btn btn-primary">${order.orderStatus}</div></td>
+                    ${printStatusBtn(order)}
                 </tr>
             `}
     ).join('');
-
-    function printProducts (products) {
-        return products.map(
-            product => {
-                return `
-                <li>${product.product_name}<span class="orderItemSpan">- (qty ${product.quantity})</span></li>
-            `}
-        ).join('');
-    }
-
-    function printPaymentMethod(order) {
-        if (order.mpesa === 'true'){
-            return `MPESA`
-        } else if (order.mpesa === 'false'){
-            return 'On delivery'
-        }
-    }
 
     return layout({
         title: title,
