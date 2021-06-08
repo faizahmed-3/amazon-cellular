@@ -1,3 +1,4 @@
+const sessionstorage = require('sessionstorage')
 const {displayDate, printProducts, printPaymentMethod, printStatusBtn} = require('../../../middlewares/otherFunctions');
 const layout = require('../layout');
 const title = 'View Orders'
@@ -8,7 +9,7 @@ module.exports = ({orders}) => {
             return `
 <tr>
     <td class="orderRows">${displayDate(order.orderDate)}</td>
-    <td class="orderRows">${order.customerID.email}</td>
+    <td class="orderRows">${order._id}</td>
     <td class="orderRows">${order.customerID.phone}</td>
     <td>
         <ul class="orderItems">
@@ -23,6 +24,13 @@ module.exports = ({orders}) => {
     </td>
 </tr>
             `}).join('')
+
+    function printNewBadge(order) {
+        if (order.new === true){
+            return `
+                <span class="badge bg-danger rounded-pill">new</span>
+            `}
+    }
 
     return layout({
         title: title,

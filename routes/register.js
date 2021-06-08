@@ -1,4 +1,4 @@
-const {getModals} = require('../middlewares/otherFunctions');
+const {getModals, emailRegistration} = require('../middlewares/otherFunctions');
 const {Wishlist} = require('../models/wishlist')
 const {Cart} = require('../models/cart')
 const localstorage = require('local-storage');
@@ -45,6 +45,8 @@ router.post('/', async(req, res) => {
     localstorage.set( "email", customer.email );
 
     localstorage.set( "token", token );
+
+    await emailRegistration(customer).catch(console.error)
 
     if (req.session.checkout){
         res.redirect('/checkout')

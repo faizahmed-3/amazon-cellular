@@ -32,6 +32,7 @@ module.exports = function ({customer, wishlist, cart, paymentError}) {
                     <div class="mb-2 col-md-6 form-group">
                         <label for="email" class="form-label" required>Email Address</label>
                         <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" value="${customer.email}" disabled>
+                        <div class="form-text">This email will be used to send you updates on the status of your orders</div>
                     </div>
                     <div class="mb-2 col-md-6 form-group">
                         <label for="phone" class="form-label" required>Phone Number</label>
@@ -110,7 +111,7 @@ module.exports = function ({customer, wishlist, cart, paymentError}) {
                     <div class="form-check mb-5">
                         <input class="form-check-input" type="radio" name="mpesa" value="true" id="mpesaBtn">
                         <label class="form-check-label" for="mpesaBtn">
-                            Lipa na M-PESA <span class="paymentSpan text-muted">(you need a safaricom number for this option)</span>
+                            Lipa na M-PESA <span class="paymentSpan text-muted">(you need a safaricom number for this option. Also make sure you have the phone with that number close to you as after clicking the place order button a pop up will show up on your phone to confirm the payment)</span>
                         </label>
                     </div>
                     <div class=" d-flex justify-content-between">

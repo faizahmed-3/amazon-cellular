@@ -1,3 +1,4 @@
+const {emailOrderStatus} = require('../../middlewares/otherFunctions')
 const viewOrdersTemplate = require('../../views/admin/orders/index');
 const newOrderTemplate = require('../../views/admin/orders/new');
 const editOrderTemplate = require('../../views/admin/orders/edit');
@@ -24,9 +25,9 @@ router.get('/edit/:id', async(req, res) => {
 router.post('/edit/:id', async (req, res) => {
     const order = await Order.findByIdAndUpdate(req.params.id, {
         orderStatus: req.body.orderStatus
-    }, {new: true})
+    }, {new: true}).populate('customerID', 'email phone full_name');
 
-    console.log(order);
+    emailOrderStatus(order, order.customerID.email, order.customerID.full_name).catch(console.error);
 
     res.redirect('/admin/orders/')
 })

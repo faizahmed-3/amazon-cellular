@@ -1,16 +1,17 @@
 const localstorage = require('local-storage');
 let sessionstorage = require('sessionstorage');
+const nodemailer = require("nodemailer");
 
 function displayDate(date) {
     let day = date.getDate();
     let month = date.getMonth();
     let year = date.getFullYear();
 
-    return `${day}/${month+1}/${year}`
+    return `${day}/${month + 1}/${year}`
 }
 
 function getInput(input, key) {
-    if (input){
+    if (input) {
         if (input[key]) {
             return input[key];
         } else return ''
@@ -82,7 +83,7 @@ function printProductModal(product, wishlist, cart) {
 function printMainImage(product) {
     let mainImage;
     product.product_images.forEach(productImage => {
-        if (productImage.filename.includes('image1')){
+        if (productImage.filename.includes('image1')) {
             mainImage = productImage.filename
         }
     })
@@ -100,11 +101,11 @@ function printProductViewSmallImages(product) {
 }
 
 function printWishlistModal(wishlist) {
-    if (Object.keys(wishlist).length>0){
-        sessionstorage.setItem( "wishlistCount", wishlist.products.length );
+    if (Object.keys(wishlist).length > 0) {
+        sessionstorage.setItem("wishlistCount", wishlist.products.length);
 
         function renderedWishlistItems(wishlist) {
-            if (wishlist.products.length>0){
+            if (wishlist.products.length > 0) {
                 return wishlist.products.map(wishItem => {
                     return `
                 <div class="row">
@@ -126,11 +127,13 @@ function printWishlistModal(wishlist) {
                     <span class="my-2 border-bottom border-2">
                 </span> 
             </div>
-            `}).join('');
+            `
+                }).join('');
             } else {
                 return `
                     <h6 class="text-center py-5 text-muted">Your wishlist is empty at the moment<br>Click <i class="fas fa-heart"></i> to add items to your wishlist</h6>
-                `   }
+                `
+            }
         }
 
         return `
@@ -151,7 +154,7 @@ function printWishlistModal(wishlist) {
     `
 
     } else {
-        sessionstorage.setItem( "wishlistCount", 0 );
+        sessionstorage.setItem("wishlistCount", 0);
 
         return `
 <div class="modal fade" id="wishlist" tabindex="-1" aria-labelledby="Wishlist" aria-hidden="true">
@@ -168,15 +171,16 @@ function printWishlistModal(wishlist) {
     </div>
 </div>
              
-        `}
+        `
+    }
 }
 
 function printCartModal(cart) {
-    if (Object.keys(cart).length>0){
-        sessionstorage.setItem( "cartCount", cart.products.length );
+    if (Object.keys(cart).length > 0) {
+        sessionstorage.setItem("cartCount", cart.products.length);
 
         function renderedCartItems(cart) {
-            if (cart.products.length>0){
+            if (cart.products.length > 0) {
                 return cart.products.map(cartItem => {
                     return `
                 <div class="row">
@@ -205,15 +209,17 @@ function printCartModal(cart) {
                     </div>
                     <hr class="mt-2">
                 </div>
-            `}).join('');
+            `
+                }).join('');
             } else {
                 return `
                     <h6 class="text-center py-5 text-muted">Your cart is empty at the moment<br>Click <i class="fas fa-shopping-cart"></i> to add items to your cart</h6>  
-                `}
+                `
+            }
         }
 
         function cartModalFooter(cart) {
-            if (cart.products.length>0){
+            if (cart.products.length > 0) {
                 return `
                    <div class="modal-footer d-flex justify-content-between">
                 <div>Total (ksh): <span class="total">0</span></div>
@@ -222,7 +228,8 @@ function printCartModal(cart) {
                    Checkout
                 </button>
             </div> 
-                `} else {
+                `
+            } else {
                 return `
                     <div class="modal-footer d-flex justify-content-between">
                 <div>Total (ksh): <span class="total">0</span></div>
@@ -230,7 +237,8 @@ function printCartModal(cart) {
                     Checkout
                 </button>
             </div>
-                `}
+                `
+            }
         }
 
         return `
@@ -252,7 +260,7 @@ function printCartModal(cart) {
 </div>
     `
     } else {
-        sessionstorage.setItem( "cartCount", 0 );
+        sessionstorage.setItem("cartCount", 0);
 
         return `
 <div class="modal fade" id="cart" tabindex="-1" aria-labelledby="Cart" aria-hidden="true">
@@ -269,32 +277,33 @@ function printCartModal(cart) {
     </div>
 </div>
              
-        `}
+        `
+    }
 
 }
 
 function getCount(countFor) {
-    let count = sessionstorage.getItem( countFor )
+    let count = sessionstorage.getItem(countFor)
     return count ? parseInt(count) : 0
 }
 
 async function getModals(req, Wishlist, Cart) {
     let wishlist = {};
-    if (req.session.wishlistID){
+    if (req.session.wishlistID) {
         wishlist = await Wishlist.findById(req.session.wishlistID).populate('products._id', '_id product_name price product_images');
-    }  else wishlist = [];
+    } else wishlist = [];
 
 
     let cart;
-    if (req.session.cartID){
+    if (req.session.cartID) {
         cart = await Cart.findById(req.session.cartID).populate('products._id', '_id product_name price product_images');
-    }  else cart = [];
+    } else cart = [];
 
     return [wishlist, cart]
 }
 
 function wishlistButton(productID, wishlist) {
-    if (wishlist.length>0 || Object.keys(wishlist).length > 0) {
+    if (wishlist.length > 0 || Object.keys(wishlist).length > 0) {
         const product = wishlist.products.id(productID);
         if (product) {
             return `
@@ -319,7 +328,7 @@ function wishlistButton(productID, wishlist) {
 }
 
 function cartButton(productID, cart) {
-    if (cart.length>0 || Object.keys(cart).length > 0) {
+    if (cart.length > 0 || Object.keys(cart).length > 0) {
         const product = cart.products.id(productID);
         if (product) {
             return `
@@ -344,7 +353,7 @@ function cartButton(productID, cart) {
 }
 
 function wishBtnPV(productID, wishlist) {
-    if (wishlist.length>0 || Object.keys(wishlist).length > 0) {
+    if (wishlist.length > 0 || Object.keys(wishlist).length > 0) {
         const product = wishlist.products.id(productID);
         if (product) {
             return `
@@ -352,7 +361,8 @@ function wishBtnPV(productID, wishlist) {
                     <button type="submit" class="btn btn-success prod-start" formaction="/wishlist/${productID}"> Added 
                         <i class="bi bi-heart-fill"></i></button>
                 
-            `} else {
+            `
+        } else {
             return `
                
                     <button type="submit" class="btn btn-outline-success prod-start" formaction="/wishlist/${productID}"> Wishlist 
@@ -371,7 +381,7 @@ function wishBtnPV(productID, wishlist) {
 }
 
 function cartBtnPV(productID, cart) {
-    if (cart.length>0 || Object.keys(cart).length > 0) {
+    if (cart.length > 0 || Object.keys(cart).length > 0) {
         const product = cart.products.id(productID);
         if (product) {
             return `
@@ -399,10 +409,10 @@ function cartBtnPV(productID, cart) {
 }
 
 function extraNav() {
-    let name = localstorage.get( 'full_name' )
-    let token = localstorage.get( 'token' )
+    let name = localstorage.get('full_name')
+    let token = localstorage.get('token')
 
-    if (token){
+    if (token) {
         return `
         <div class="me-1" >${name} : </div>
         <div class="clickable" data-bs-toggle="modal" data-bs-target="#cart">Checkout</div>
@@ -410,19 +420,20 @@ function extraNav() {
         <div class="clickable" onclick="location.href='/orders'">Orders</div>
         <div class="separator mx-2">|</div>
         <div class="clickable" onclick="location.href='/login/logout'">Log Out</div>
-        `}
-    else {
+        `
+    } else {
         return `
         <div class="clickable" onclick="location.href='/register'">Register</div>
         <div class="separator mx-2">|</div>
         <div class="clickable" onclick="location.href='/login'">Log In</div>
-        `}
+        `
+    }
 }
 
 function footer() {
-    let token = localstorage.get( 'token' )
+    let token = localstorage.get('token')
 
-    if (token){
+    if (token) {
         return `
         <button type="button" class="btn btn-warning reg" data-bs-toggle="modal" data-bs-target="#cart">CHECKOUT
         </button>
@@ -430,15 +441,16 @@ function footer() {
         </button>        
         <button type="button" class="btn btn-danger reg" onclick="location.href='/login/logout'">LOG OUT
         </button>
-        `}
-    else {
+        `
+    } else {
         return `
         <button type="button" class="btn btn-warning reg" data-bs-toggle="modal" data-bs-target="#cart">CHECKOUT</button>
         <button type="button" class="btn btn-warning reg" onclick="location.href='/register'">REGISTER
         </button>
         <button type="button" class="btn btn-warning reg" onclick="location.href='/login'">LOGIN
         </button>
-        `}
+        `
+    }
 }
 
 exports.printProducts = function (products) {
@@ -446,14 +458,15 @@ exports.printProducts = function (products) {
         product => {
             return `
                 <li>${product.product_name}<span class="orderItemSpan">- (qty ${product.quantity})</span></li>
-            `}
+            `
+        }
     ).join('');
 }
 
-exports.printPaymentMethod = function(order) {
-    if (order.mpesa === 'true'){
+exports.printPaymentMethod = function (order) {
+    if (order.mpesa === 'true') {
         return `MPESA`
-    } else if (order.mpesa === 'false'){
+    } else if (order.mpesa === 'false') {
         return 'On delivery'
     }
 }
@@ -474,17 +487,125 @@ exports.printStatusBtn = function (order) {
     }
 }
 
+exports.emailRegistration = async function (customer) {
 
-exports.displayDate = displayDate;
-exports.getInput = getInput;
-exports.getError = getError;
-exports.printProductModal = printProductModal;
-exports.printMainImage = printMainImage;
-exports.printWishlistModal = printWishlistModal;
-exports.printCartModal = printCartModal;
-exports.getCount = getCount;
-exports.getModals = getModals;
-exports.wishlistButton = wishlistButton;
-exports.cartButton = cartButton;
-exports.extraNav = extraNav;
-exports.footer = footer;
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        secure: false,
+        auth: {
+            user: 'amazon.cellular.outfitters@gmail.com',
+            pass: 'Nozama_2020'
+        },
+        debug: false,
+        logger: true
+    });
+
+    let info = await transporter.sendMail({
+        from: '"Amazon Cellular 🛒" amazon.cellular.outfitters@gmail.com',
+        to: customer.email,
+        subject: `SUCCESSFUL REGISTRATION ON AMAZON CELLULAR OUTFITTERS`,
+        html: `
+Dear ${customer.full_name},
+<br><br>
+Your registration process at Amazon Cellular Outfitters was successful. You will be receiving communication from us to this email e.g. the status of your orders. We are happy to have you on board and remember "<i>if you can't stop thinking about it, buy it 😉"</i>
+<br><br>
+Kind regards,<br>
+Amazon Cellular Outfitters
+
+ 
+`,
+    });
+
+    console.log("Message sent: %s", info.messageId);
+}
+
+exports.emailOrderStatus = async function (order, email, fullName) {
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        secure: false,
+        auth: {
+            user: 'amazon.cellular.outfitters@gmail.com',
+            pass: 'Nozama_2020'
+        },
+        debug: false,
+        logger: true
+    });
+
+    let info = await transporter.sendMail({
+        from: '"Amazon Cellular 🛒" amazon.cellular.outfitters@gmail.com',
+        to: email,
+        subject: `UPDATE ON STATUS FOR ORDER ${order._id}`,
+        html: `
+Dear ${fullName},
+<br><br>
+The status for your order ${order._id} has been updated to ${emailStatusBtn(order)} Please see the details of the order below:<br>
+${orderData(order)}
+<br><br>
+Kind regards,<br>
+Amazon Cellular Outfitters
+
+ 
+`,
+    });
+
+    console.log("Message sent: %s", info.messageId);
+}
+
+function orderData(order) {
+    function printProducts(order) {
+        return order.products.map(
+            product => {
+                return `
+            <li>${product.product_name} &nbsp;<span>- Qty ${product.quantity}</span></li>
+        `
+            }).join('');
+    }
+
+    function printPaymentType(order) {
+        if (order.mpesa === 'true'){
+            return `Lipa na M-PESA`
+        } else if (order.mpesa === 'false'){
+            return `On delivery`
+        }
+    }
+
+    return `
+<ul>
+        ${printProducts(order)}
+        <p>Payment Type:&nbsp;${printPaymentType(order)}</p>
+        <p>Amount: (ksh.)&nbsp;${order.total}</p>
+</ul>
+    `
+    }
+    
+function emailStatusBtn(order) {
+    switch (order.orderStatus) {
+        case 'Order placed':
+            return `<button style="background-color: blue; color: white">${order.orderStatus.toUpperCase()}</button>`
+
+        case 'In transit':
+            return `<button style="background-color: yellow">${order.orderStatus.toUpperCase()}</button>`
+
+        case 'Delivered':
+            return `<button style="background-color: green; color: white">${order.orderStatus.toUpperCase()}</button>`
+
+        case 'Cancelled':
+            return `<button style="background-color: red; color: white">${order.orderStatus.toUpperCase()}</button>`
+    }
+}
+
+
+    exports.displayDate = displayDate;
+    exports.getInput = getInput;
+    exports.getError = getError;
+    exports.printProductModal = printProductModal;
+    exports.printMainImage = printMainImage;
+    exports.printWishlistModal = printWishlistModal;
+    exports.printCartModal = printCartModal;
+    exports.getCount = getCount;
+    exports.getModals = getModals;
+    exports.wishlistButton = wishlistButton;
+    exports.cartButton = cartButton;
+    exports.extraNav = extraNav;
+    exports.footer = footer;

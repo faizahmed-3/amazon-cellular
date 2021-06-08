@@ -889,6 +889,9 @@ body .actionSelected {
   font-size: 0.8rem;
   text-transform: capitalize;
 }
+#order .statusBtn:hover {
+  cursor: default;
+}
 #order .orderItemSpan {
   text-transform: lowercase;
   margin-left: 0.5rem;
@@ -1351,6 +1354,9 @@ body .actionSelected {
   width: 6.5rem;
   font-size: 0.7rem;
   text-transform: capitalize;
+}
+#viewProducts .statusBtn:hover {
+  cursor: default;
 }
 #viewProducts .orderItemSpan {
   text-transform: lowercase;

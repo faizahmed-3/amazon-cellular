@@ -944,6 +944,7 @@ body {
     width: 8rem;
     font-size: 0.8rem;
     text-transform: capitalize;
+    @include pointerRemove()
   }
 
   .orderItemSpan{
@@ -1393,6 +1394,7 @@ body {
     width: 6.5rem;
     font-size: 0.7rem;
     text-transform: capitalize;
+    @include pointerRemove()
   }
 
   .orderItemSpan{

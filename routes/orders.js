@@ -1,3 +1,4 @@
+const {emailOrderStatus} = require('../middlewares/otherFunctions')
 const localstorage = require('local-storage');
 const _ = require('lodash');
 const {accessToken, stkPush} = require('../middlewares/mpesa')
@@ -41,7 +42,9 @@ async function placeOrder(req) {
 
         order.mpesa = req.session.mpesa;
 
-        await order.save()
+        order = await order.save()
+
+        emailOrderStatus(order, customer[0].email, customer[0].full_name).catch(console.error);
 
         return Order.find({customerID: order.customerID}).sort('-orderDate')
     } else {

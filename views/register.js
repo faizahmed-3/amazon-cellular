@@ -31,6 +31,7 @@ module.exports = ({wishlist, cart, input, error, exists}) =>{
                     <div class="mb-2 col-md-6 form-group">
                         <label for="email" class="form-label" required>Email Address</label>
                         <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" value="${getInput(input, 'email')}" required>
+                        <div class="form-text">This email will be used to send you updates on the status of your orders</div>
                         <div class="inputError">${getError(error, 'email')}</div>
                         ${existsCheck(exists)}
                     </div>

@@ -29,6 +29,10 @@ const ordersSchema = new mongoose.Schema({
     orderType: {
         type: String,
         default: 'From user'
+    },
+    new:{
+        type: Boolean,
+        default: true
     }
 });
 
