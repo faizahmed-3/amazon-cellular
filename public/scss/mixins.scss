@@ -37,7 +37,6 @@
     height: 42.86px;
     text-transform: capitalize;
     font-size: 0.75rem;
-    font-weight: bold;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -49,7 +48,7 @@
 
   .card-text {
     font-size: 0.75rem;
-    font-weight: bold;
+    font-weight: 500;
   }
 
   .featured-card-price{
@@ -84,12 +83,16 @@
   }
 
   .card-img-top{
-    height: 11rem;
+    height: 12rem;
   }
 
   .card-title {
     font-size: 0.6rem;
     margin-bottom: 0.2rem;
+  }
+
+  .card-body {
+    height: 106px;
   }
 
   .card-text {

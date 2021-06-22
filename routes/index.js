@@ -6,6 +6,7 @@ const {Category} = require('../models/admin/categories');
 const {Wishlist} = require('../models/wishlist');
 const {Cart} = require('../models/cart');
 const seeAllTemplate = require('../views/see-all');
+const categoriesTemplate = require('../views/view-categories');
 const {Product} = require('../models/admin/products');
 const homepageTemplate = require('../views/index');
 const express = require('express');
@@ -99,6 +100,14 @@ router.get('/', async(req, res) => {
         res.send(homepageTemplate({categories, featured_products, new_arrivals, sale, wishlist, cart}));
     }
 
+})
+
+router.get('/categories', async (req, res) => {
+    const categories = await Category.find().select('category_name').sort('dateCreated')
+
+    let [wishlist, cart] = await getModals(req, Wishlist, Cart)
+
+    res.send(categoriesTemplate({categories,  wishlist, cart}));
 })
 
 router.get('/:id', async (req, res) => {

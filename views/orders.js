@@ -10,6 +10,7 @@ module.exports = function ({orders, wishlist, cart}) {
                     <td>${displayDate(order.orderDate)}</td>
                     <td>
                         <ul class="orderItems">
+                            <span class="orderID">Order ID: ${order._id}</span>
                             ${printProducts(order.products)}
                         </ul>
                     </td>
@@ -31,7 +32,7 @@ module.exports = function ({orders, wishlist, cart}) {
             Orders
         </div>
         <div class="card-body table-responsive-md">
-            <table class="table table-striped table-bordered border-dark">
+            <table class="table table-striped table-bordered">
                 <thead >
                 <tr>
                     <th scope="col">Date</th>

@@ -39,7 +39,7 @@ module.exports = ({categories, featured_products, new_arrivals, sale, wishlist, 
                 <div class="card" onclick="location.href='/${categories[4]._id}'">
                     <img src="/img/products/${categories[4].image}" class="card-img-top image-tile" alt="...">
                     <div class="card-footer text-center">
-                        ${categories[4].category_name}
+                        ${newLiner(categories[4].category_name)}
                     </div>
                 </div>
             </div>
@@ -145,7 +145,7 @@ ${printProductModal(product, wishlist, cart)}
         Featured Products
     </h4>
 <!--    <button type="button" class="btn btn-sm see-all" onclick="location.href='/special/6088050e65de8726600704b6'">SEE ALL</button>-->
-    <div class="row">
+    <div class="row special-row">
         ${renderSpecial(featured_products, wishlist, cart)}
     </div>
 </section>
@@ -156,7 +156,7 @@ ${printProductModal(product, wishlist, cart)}
         New Arrivals
     </h4>
 <!--    <button type="button" class="btn btn-sm see-all" onclick="location.href='/special/6088051765de8726600704b7'">SEE ALL</button>-->
-    <div class="row">
+    <div class="row special-row">
         ${renderSpecial(new_arrivals, wishlist, cart)}
     </div>
 </section>
@@ -167,7 +167,7 @@ ${printProductModal(product, wishlist, cart)}
         Sale
     </h4>
 <!--    <button type="button" class="btn btn-sm see-all" onclick="location.href='/special/60891d6820824d1308bc6946'">SEE ALL</button>-->
-    <div class="row">
+    <div class="row special-row">
         ${renderSpecial(sale,wishlist, cart)}
     </div>
 </section>

@@ -1,9 +1,8 @@
 const {getModals} = require('../middlewares/otherFunctions');
 const {Wishlist} = require('../models/wishlist')
 const {Cart} = require('../models/cart')
-const localstorage = require('local-storage');
+const sessionstorage = require('sessionstorage');
 const loginTemplate = require('../views/login');
-const checkoutTemplate = require('../views/checkout');
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const _ = require('lodash');
@@ -33,14 +32,16 @@ router.post('/', async (req, res) => {
 
     const token = customer.generateLoginToken();
 
-    localstorage.set( "full_name", customer.full_name );
+    sessionstorage.setItem( "full_name", customer.full_name );
 
-    localstorage.set( "email", customer.email );
+    sessionstorage.setItem( "email", customer.email );
 
-    localstorage.set( "token", token );
+    sessionstorage.setItem( "token", token );
 
     if (req.session.checkout){
         res.redirect('/checkout')
+    } else if (req.session.signUpIn === '/register' || req.session.signUpIn === '/login'){
+        res.redirect('/')
     } else {
         res.redirect(req.session.signUpIn)
     }
@@ -50,12 +51,12 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-    localstorage.set( "token", null );
-    localstorage.set( "email", null );
-    localstorage.set( "full_name", null );
+    sessionstorage.setItem( "token", null );
+    sessionstorage.setItem( "email", null );
+    sessionstorage.setItem( "full_name", null );
     req.session.checkout = false;
 
-    res.redirect('back')
+    res.redirect('/')
 })
 
 function validate(req) {

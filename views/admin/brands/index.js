@@ -45,7 +45,6 @@ module.exports = ({brands, categories}) => {
 
     function categoryName(categoryID, categories) {
         const result = categories.filter(value => value._id.toString() === categoryID.toString())
-
         return result[0].category_name;
     }
 
@@ -90,8 +89,8 @@ module.exports = ({brands, categories}) => {
         title: title,
         content: `
 <div id="viewProducts" class="card ">
-        <div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-primary mt-4 me-3" style="font-size: 0.8rem" onclick="location.href='/admin/brands/new'">Add New Brand</button>
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-primary mt-4 me-3" style="font-size: 0.8rem" onclick="location.href='/admin/brands/new'">Add New Brand</button>
     </div>  
     <div class="card-body table-responsive-md">
         <table class="table table-bordered border-dark">

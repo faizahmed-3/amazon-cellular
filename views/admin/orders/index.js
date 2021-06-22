@@ -44,7 +44,7 @@ module.exports = ({orders}) => {
             <thead>
             <tr class="table-dark">
                 <th scope="col" class="ordersHeading">Date</th>
-                <th scope="col" class="ordersEmail">Email</th>
+                <th scope="col" class="ordersEmail">ID</th>
                 <th scope="col" class="ordersHeading">Phone</th>
                 <th scope="col" class="ordersHeadingBig">Products</th>
                 <th scope="col" class="ordersHeading">Amount</th>

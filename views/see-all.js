@@ -92,39 +92,43 @@ module.exports = ({category, products, brands, wishlist, cart}) => {
         title: category.category_name,
         content: `
 <!--Cases Main-->
-<section class="category-main pb-5">
+<section class="category-main">
     <!--    Filters-->
     <div class="container-fluid" id="category-filters">
-        <div class="card p-3">
+        <div class="card p-3 filterCard">
             <div>
                 <form method="post" action="/price-filter/${category._id}">
                     <div class="d-flex justify-content-between price-heading">
                         <div>PRICE <span>(ksh.)</span></div>
-                        <button type="submit" class="btn btn-sm btn-warning">Apply</button>
+                        <div>
+                            <button type="button" class="btn btn-sm btn-secondary" onclick="location.href='/${category._id}'">Reset</button>
+                            <button type="submit" class="btn btn-sm btn-warning">Apply</button>
+                        </div>
                     </div>
     
                     <div class="mt-3">
-                        <a href="/${category._id}" class="btn btn-sm btn-secondary mb-2" >Reset</a>
                         <div class="d-flex justify-content-evenly">
                             <div class="form-group text-center">
                                 <input type="number" class="form-control h-50 " id="min" name="min" min="1">
-                                <label for="min" class="form-label rangeM">Min</label>
+                                <label for="min" class="form-label rangeM">min</label>
                             </div>
                             <span class="mx-2">-</span>
                             <div class="form-group text-center">
                                 <input type="number" class="form-control h-50 " id="max" name="max">
-                                <label for="max" class="form-label rangeM">Max</label>
+                                <label for="max" class="form-label rangeM">max</label>
                             </div>
                         </div>
                     </div>
                 </form>
 
-                <form method="post" action="/brands-filter/${category._id}">
+                <form method="post" action="/brands-filter/${category._id}" class="mt-4">
                     <div class="d-flex justify-content-between price-heading mt-2">
                         <div>FILTER</div>
-                        <button type="submit" class="btn btn-sm btn-warning">Apply</button>
+                        <div>
+                            <button type="button" class="btn btn-sm btn-secondary" onclick="location.href='/${category._id}'">Reset</button>
+                            <button type="submit" class="btn btn-sm btn-warning">Apply</button>
+                        </div>
                     </div>
-                        <a href="/${category._id}" class="btn btn-sm btn-secondary mb-2" >Reset</a>   
                         ${printBrands(brands, category)}
                 </form>                
             </div>
@@ -135,6 +139,7 @@ module.exports = ({category, products, brands, wishlist, cart}) => {
     <div class="container-fluid" id="category-display">
         <div class="card">
             <div class="card-header">
+            <button class="btn btn-primary rounded-pill" id="filterButton"><i class="fas fa-plus"></i>&nbsp;Filter</button>
                 <div class="categoryTitle">${category.category_name}</div>
 <!--                <div class="sortBy mt-2">-->
 <!--                    Sort by:-->

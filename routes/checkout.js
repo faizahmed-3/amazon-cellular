@@ -1,4 +1,4 @@
-const localstorage = require('local-storage');
+const sessionstorage = require('sessionstorage');
 const {getModals} = require('../middlewares/otherFunctions');
 const {Customer} = require('../models/customers')
 const {Wishlist} = require('../models/wishlist')
@@ -13,7 +13,7 @@ async function goToCheckout(req, res) {
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    const customer = await Customer.find({email: localstorage.get( 'email' )})
+    const customer = await Customer.find({email: sessionstorage.getItem( 'email' )})
 
     let paymentError;
 

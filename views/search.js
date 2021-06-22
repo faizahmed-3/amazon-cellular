@@ -92,7 +92,7 @@ module.exports = ({query, products, brands, wishlist, cart}) => {
         title: query,
         content: `
 <!--Cases Main-->
-<section class="category-main pb-5">
+<section class="category-main">
     <!--    Display-->
     <div class="container-fluid" id="category-display">
         <div class="card">

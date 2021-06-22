@@ -57,7 +57,7 @@ let smallImages = document.querySelectorAll('.prod-small-img');
 if (smallImages.length>0){
     smallImages.forEach(smallImage => {
         smallImage.addEventListener('click', (evt) => {
-            evt.path[4].children[0].children[0].src = smallImage.src;
+            evt.path[4].children[0].children[0].src = smallImage.src
         })
     })
 }
@@ -243,6 +243,36 @@ if (checkoutTotal){
     checkoutTotal.innerHTML = parseInt(cartTotal.innerHTML) + parseInt(deliveryFee.innerHTML);
 }
 
+
+//search panel mobile
+let search = document.querySelector('#bpSearch');
+let searchPanel = document.querySelector('#myOverlay')
+if (search){
+    search.addEventListener('click', ()=> {
+        searchPanel.style.display = 'block'
+        console.log(searchPanel.style.display);
+    })
+}
+
+let closeSearch = document.querySelector('.closebtn');
+if (closeSearch){
+    closeSearch.addEventListener('click', ()=> {
+        console.log('got here')
+        searchPanel.style.display = 'none'
+        console.log(searchPanel.style.display);
+    })
+}
+
+
+// side filter toggle
+const filterButton = document.querySelector('#filterButton');
+if (filterButton){
+    filterButton.addEventListener('click', (e) => {
+        let categoryPage = document.querySelector('.category-main');
+        e.preventDefault();
+        categoryPage.classList.toggle('toggled');
+    })
+}
 
 
 

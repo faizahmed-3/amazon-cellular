@@ -1,5 +1,5 @@
 const {emailOrderStatus} = require('../middlewares/otherFunctions')
-const localstorage = require('local-storage');
+const sessionstorage = require('sessionstorage');
 const _ = require('lodash');
 const {accessToken, stkPush} = require('../middlewares/mpesa')
 const {getModals} = require('../middlewares/otherFunctions');
@@ -11,51 +11,62 @@ const ordersTemplate = require('../views/orders');
 const express = require('express');
 const router = express.Router();
 
-async function placeOrder(req) {
+async function placeOrder(req, res) {
     if (req.session.newOrder){
-        const updateCart = await Cart.findById(req.session.cartID).populate('products._id', ' product_name');
+        let checkOrder = await Cart.findById(req.session.cartID);
 
-        const products = updateCart.products.map(
-            product => {
-                return {
-                    product_name: product._id.product_name,
-                    quantity: product.quantity
+        console.log(checkOrder);
+
+        if (checkOrder.products.length > 0){
+            const updateCart = await Cart.findById(req.session.cartID).populate('products._id', ' product_name');
+
+            const products = updateCart.products.map(
+                product => {
+                    return {
+                        product_name: product._id.product_name,
+                        quantity: product.quantity
+                    }
                 }
-            }
-        )
+            )
 
-        let order = new Order({
-            total: updateCart.total,
-            products: products
-        });
+            let order = new Order({
+                total: updateCart.total,
+                products: products
+            });
 
-        await Cart.findByIdAndUpdate(req.session.cartID, {
-            products: [],
-            total: 0
-        }, {new: true})
+            await Cart.findByIdAndUpdate(req.session.cartID, {
+                products: [],
+                total: 0
+            }, {new: true})
 
-        const customer = await Customer.find({email: localstorage.get('email')})
+            const customer = await Customer.find({email: sessionstorage.getItem('email')})
 
-        order.customerID = customer[0]._id;
+            order.customerID = customer[0]._id;
 
-        order.orderStatus = 'Order placed';
+            order.orderStatus = 'Order placed';
 
-        order.mpesa = req.session.mpesa;
+            order.mpesa = req.session.mpesa;
 
-        order = await order.save()
+            order = await order.save()
 
-        emailOrderStatus(order, customer[0].email, customer[0].full_name).catch(console.error);
+            emailOrderStatus(order, customer[0].email, customer[0].full_name).catch(console.error);
 
-        return Order.find({customerID: order.customerID}).sort('-orderDate')
+            return Order.find({customerID: order.customerID}).sort('-orderDate')
+        }
+        else {
+            req.session.newOrder = false
+            res.redirect('/orders')
+        }
+
     } else {
-        const customer = await Customer.find({email: localstorage.get('email')})
+        const customer = await Customer.find({email: sessionstorage.getItem('email')})
 
         return Order.find({customerID: customer[0]._id}).sort('-orderDate');
     }
 }
 
 router.get('/', async (req, res) => {
-    const orders = await placeOrder(req)
+    const orders = await placeOrder(req, res)
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
@@ -69,7 +80,7 @@ router.post('/', async (req, res) => {
     req.session.newOrder = true;
 
     if (req.session.mpesa === 'false') {
-        const orders = await placeOrder(req);
+        const orders = await placeOrder(req, res);
 
         req.session.newOrder = false;
 

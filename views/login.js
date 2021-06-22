@@ -17,8 +17,8 @@ module.exports = ({wishlist, cart, input, error, incorrect}) => {
     return layout({
         title: title,
         content: `
-<section class="register">
-    <div class="card">
+<section class="register ">
+    <div class="card" id="login_card">
         <div class="card-header">
             LOG IN
         </div>

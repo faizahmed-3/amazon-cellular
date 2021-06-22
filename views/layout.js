@@ -1,6 +1,7 @@
 const {extraNav, footer, getCount} = require('../middlewares/otherFunctions');
 
 module.exports = ({title, content}) => {
+
     return `
 <!DOCTYPE html>
 <html lang="en">
@@ -15,8 +16,7 @@ module.exports = ({title, content}) => {
 
     <!--    Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Montserrat&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
@@ -166,6 +166,38 @@ ${content}
         &copy; Amazon Cellular <span id="copyright"> 2021</span>. All Rights Reserved.
     </div>
 </section>
+
+<!--Seach overlay-->
+<div id="myOverlay" class="overlay">
+  <span class="closebtn" title="Close Overlay">x</span>
+  <div class="overlay-content">
+    <form method="get" action="/search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="query">
+          <button type="submit"><i class="bi bi-search mx-2 "></i></button>
+        </div>
+    </form>
+  </div>
+</div>
+
+<!--bottom panel-->
+<section id="bottom-panel" >
+   <div id="wrapper">
+        <div class="b-item" onclick="window.location.href='/'"><i class="fas fa-home"></i> <br>Home</div>
+        <div class="b-item" onclick="window.location.href='/categories'"><i class="fas fa-list-alt"></i> <br>Categories</div>
+        <div class="b-item">                    
+            <i class="fas fa-heart mx-2 notification mt-1" data-bs-toggle="modal" data-bs-target="#wishlist"><span class="tip">${getCount('wishlistCount')}</span></i>
+            <br> Wishlist
+        </div>
+        <div class="b-item">
+            <i class="fas fa-shopping-cart mx-2 notification mt-1" data-bs-toggle="modal" data-bs-target="#cart"><span class="tip">${getCount('cartCount')}</span></i>
+            <br> Cart
+        </div>
+        <div class="b-item" id="bpSearch"><i class="fas fa-search"></i> <br> Search</div>
+   </div>
+</section>
+
+
 
 
 <!--Back to top -->

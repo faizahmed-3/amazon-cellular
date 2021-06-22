@@ -29,12 +29,12 @@ module.exports = function ({customer, wishlist, cart, paymentError}) {
                     <input name="full_name" type="text" class="form-control" id="full_name" aria-describedby="name" value="${customer.full_name}" disabled>
                 </div>
                 <div class="row">
-                    <div class="mb-2 col-md-6 form-group">
+                    <div class="mb-2 col-lg-6 form-group">
                         <label for="email" class="form-label" required>Email Address</label>
                         <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" value="${customer.email}" disabled>
                         <div class="form-text">This email will be used to send you updates on the status of your orders</div>
                     </div>
-                    <div class="mb-2 col-md-6 form-group">
+                    <div class="mb-2 col-lg-6 form-group">
                         <label for="phone" class="form-label" required>Phone Number</label>
                         <input name="phone" type="number" class="form-control" id="phone" aria-describedby="phone number" value="${customer.phone}" disabled>
                     </div>    

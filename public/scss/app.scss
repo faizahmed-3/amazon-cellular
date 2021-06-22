@@ -122,6 +122,10 @@ body {
   left: 0;
   z-index: 100;
 
+  .sideButton{
+    display: none;
+  }
+
   #logo {
     width: 155px;
     height: auto;
@@ -135,7 +139,12 @@ body {
 
   .navbar-collapse {
     text-transform: uppercase;
-    font-weight: 800;
+    font-weight: 500;
+  }
+
+  .nav-link{
+    font-size: 1.15rem;
+    color: black !important;
   }
 
 
@@ -159,6 +168,10 @@ body {
     height: 38px;
   }
 
+  .input-group-text{
+    padding: 0;
+  }
+
   .formBtn{
     margin: 0.2rem 0.3rem;
     color: black;
@@ -180,7 +193,7 @@ body {
     background: $red;
     font-style: normal;
     font-size: 10px;
-    font-weight: 700;
+    font-weight: 600;
     color: #ffffff;
     line-height: 18px;
     text-align: center;
@@ -191,11 +204,11 @@ body {
 
 #wishlist {
   .modal-title {
-    font-weight: 800;
+    font-weight: 500;
   }
 
   .prod-title {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.15rem;
     text-transform: capitalize;
   }
@@ -219,7 +232,7 @@ body {
   }
 
   .price {
-    font-weight: 600;
+    font-weight: 500;
   }
 
   span {
@@ -245,11 +258,11 @@ body {
 
 #cart {
   .modal-title {
-    font-weight: 800;
+    font-weight: 500;
   }
 
   .prod-title {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.15rem;
     text-transform: capitalize;
   }
@@ -275,7 +288,7 @@ body {
 
   .itemPrice, .subtotal {
     display: inline;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.2rem;
   }
 
@@ -296,7 +309,7 @@ body {
   }
 
   .total {
-    font-weight: 800;
+    font-weight: 500;
     font-size: 1.7rem;
   }
 }
@@ -309,12 +322,12 @@ body {
   .why-title {
     color: #111111;
     font-size: 1.5rem;
-    font-weight: 800;
+    font-weight: 600;
     text-transform: uppercase;
   }
 
   h5 {
-    font-weight: 700;
+    font-weight: 500;
     display: inline;
     text-transform: uppercase;
   }
@@ -353,7 +366,7 @@ body {
 
   .card-footer {
     font-size: 0.9rem;
-    font-weight: 800;
+    font-weight: 500;
   }
 
 }
@@ -365,7 +378,7 @@ body {
   .section-title {
     margin-bottom: 2rem;
     color: #111111;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
     position: relative;
     display: inline-block;
@@ -403,7 +416,7 @@ body {
   }
 
   .modal-title {
-    font-weight: 800;
+    font-weight: 600;
     text-transform: capitalize;
   }
 
@@ -432,7 +445,7 @@ body {
   #prod-price {
     text-align: center;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 500;
 
     span {
       font-size: 0.9rem;
@@ -494,7 +507,7 @@ body {
   .description {
     text-transform: uppercase;
     font-size: 1.2rem;
-    font-weight: 700;
+    font-weight: 600;
     margin-left: 1rem;
   }
 
@@ -510,7 +523,7 @@ body {
     .info-heading {
       color: white;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 1.2rem;
       margin-left: 2rem;
     }
@@ -532,7 +545,7 @@ body {
     #reach {
       color: white;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 1.2rem;
     }
 
@@ -573,7 +586,7 @@ body {
     }
 
     .reg {
-      font-weight: 700;
+      font-weight: 500;
       width: 10rem;
       margin-top: 1rem;
     }
@@ -604,14 +617,14 @@ body {
     .card-header {
       text-transform: uppercase;
       font-size: 1.2rem;
-      font-weight: 700;
+      font-weight: 600;
     }
 
 
     @include required;
 
-    input[placeholder], textarea[placeholder], select, option {
-      font-size: 0.8rem;
+    .final-text, .final-price {
+      font-size: 1.1rem;
     }
 
 
@@ -635,11 +648,11 @@ body {
 
     .final-text {
       text-transform: uppercase;
-      font-weight: bolder;
+      font-weight: 600;
     }
 
     .final-price {
-      font-weight: bolder;
+      font-weight: 600;
       font-size: 1.2rem;
     }
 
@@ -649,13 +662,13 @@ body {
     }
 
     .paymentSpan{
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
 
     #placeOrder {
       margin-top: 1rem;
       width: 30rem;
-      font-weight: 700;
+      font-weight: 600;
     }
   }
 
@@ -671,7 +684,7 @@ body {
 
     #help-button {
       width: 16rem;
-      font-weight: 800;
+      font-weight: 500;
     }
 
     .card {
@@ -683,7 +696,7 @@ body {
     }
 
     .card-header {
-      font-weight: 800;
+      font-weight: 600;
       text-align: center;
     }
 
@@ -728,7 +741,7 @@ body {
   .card-header {
     text-transform: uppercase;
     font-size: 1.15rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   .row {
@@ -750,7 +763,7 @@ body {
 
 .category-main {
   display: flex;
-  margin-top: 2rem;
+  margin: 2rem 0;
 
   #category-filters {
     flex-basis: 20vw;
@@ -763,7 +776,7 @@ body {
 
 
     .price-heading {
-      font-weight: 700;
+      font-weight: 500;
       font-size: 0.9rem;
 
       span {
@@ -795,16 +808,20 @@ body {
 
     .card-header {
 
+      #filterButton{
+        display: none;
+      }
+
       .categoryTitle {
         text-transform: uppercase;
         font-size: 1.3rem;
-        font-weight: 800;
+        font-weight: 600;
       }
 
       .queryDisplay{
         text-transform: initial;
         font-size: 1.15rem;
-        font-weight: 600;
+        font-weight: 500;
       }
     }
 
@@ -850,6 +867,7 @@ body {
       }
 
     }
+
   }
 }
 
@@ -875,12 +893,16 @@ body {
 
   .card {
     margin: 2rem;
+    width: 75%;
+  }
+
+  #login_card{
     width: 60%;
   }
 
   .card-header {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1.3rem;
     text-align: center;
   }
@@ -901,7 +923,7 @@ body {
   }
 
   a {
-    font-weight: 700;
+    font-weight: 600;
     text-decoration: none;
     color: black;
   }
@@ -948,6 +970,10 @@ body {
     font-size: 0.9rem;
   }
 
+  .orderID{
+    font-weight: 500;
+  }
+
   .statusBtn {
     width: 8rem;
     font-size: 0.8rem;
@@ -964,6 +990,95 @@ body {
 }
 
 
+#bottom-panel{
+  display: none;
+}
+
+
+.overlay {
+    height: 100%;
+    width: 100%;
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+
+
+  .overlay-content {
+    position: relative;
+    top: 46%;
+    width: 80%;
+    text-align: center;
+    margin-top: 30px;
+    margin: auto;
+  }
+
+  #search-nav {
+    font-size: 0.8rem;
+    margin-bottom: 1.6rem;
+    height: 38px;
+  }
+
+  .input-group-text{
+    padding: 0;
+  }
+
+  .formBtn{
+    margin: 0.2rem 0.3rem;
+    color: black;
+  }
+
+  .notification {
+    position: relative;
+    @include pointer;
+    height: 38px;
+  }
+
+  .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+  }
+
+  .closebtn:hover {
+    color: #ccc;
+  }
+
+  input[type=text] {
+    padding: 15px;
+    font-size: 17px;
+    border: none;
+    float: left;
+    width: 80%;
+    background: white;
+  }
+
+  input[type=text]:hover {
+    background: #f1f1f1;
+  }
+
+  button {
+    float: left;
+    width: 20%;
+    padding: 15px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #bbb;
+  }
+}
+
+
 #faq {
   display: grid;
   place-items: center;
@@ -976,11 +1091,11 @@ body {
   .faqHeading {
     text-transform: uppercase;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   .subHeading{
-    font-weight: 600;
+    font-weight: 500;
   }
 
   p {
@@ -1046,7 +1161,7 @@ body {
         margin-left: 2rem;
         text-transform: uppercase;
         font-size: 1.5rem;
-        font-weight: 800;
+        font-weight: 600;
       }
 
       .addBtn {
@@ -1077,7 +1192,7 @@ body {
 
       .card-header {
         text-transform: uppercase;
-        font-weight: 800;
+        font-weight: 600;
         font-size: 1.2rem;
       }
 
@@ -1112,7 +1227,7 @@ body {
       }
 
       .card-title{
-        font-weight: 700;
+        font-weight: 600;
       }
 
       .firstRow{
@@ -1130,7 +1245,7 @@ body {
 
       .percentage{
         font-size: 1.2rem;
-        font-weight: 600;
+        font-weight: 500;
       }
 
       span{
@@ -1170,17 +1285,17 @@ body {
   .card-header {
     text-transform: uppercase;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   @include required;
 
   label{
-    font-weight: 700;
+    font-weight: 600;
   }
 
   .form-text{
-    font-size: 0.7rem;
+    font-size: 0.9rem;
   }
 
   select{
@@ -1255,14 +1370,14 @@ body {
 
   #visibility {
     text-transform: uppercase;
-    font-weight: 800;
+    font-weight: 600;
     font-size: 1.5rem;
   }
 
   @include switch;
 
   .save {
-    font-weight: 800;
+    font-weight: 600;
   }
 
   .subBrandBtn{
@@ -1303,7 +1418,7 @@ body {
   }
 
   .noSubBrand{
-    font-weight: 700;
+    font-weight: 600;
   }
 
   .richTitle{
@@ -1327,7 +1442,7 @@ body {
 
   .card-header{
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   .tableHeaderBig{
@@ -1360,7 +1475,7 @@ body {
 
   .far{
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   .fa-trash-alt{

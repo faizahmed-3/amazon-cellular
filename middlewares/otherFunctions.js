@@ -29,7 +29,7 @@ function getError(error, key) {
 
 function printProductModal(product, wishlist, cart) {
     return `
-        <div class="modal fade product-view" id="_${product._id}" tabindex="-1" aria-labelledby="Product view" aria-hidden="true">
+<div class="modal fade product-view" id="_${product._id}" tabindex="-1" aria-labelledby="Product view" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -38,11 +38,11 @@ function printProductModal(product, wishlist, cart) {
             </div>
             <div class="modal-body pt-0">
                 <div class="container-fluid">
-                    <div class="row ">
-                        <div class="col-6">
+                    <div class="row pvRow1">
+                        <div class="col-xl-6 col-lg-7 ">
                             <img src="/img/products/${printMainImage(product)}" alt="" id="prod-main-img">
                         </div>
-                        <div class="col-6 d-flex flex-column justify-content-between">
+                        <div class="col-xl-6 col-lg-5 d-flex flex-column justify-content-between">
                             <div class="row small-img-row">
                                 ${printProductViewSmallImages(product)}
                             </div>
@@ -410,12 +410,12 @@ function cartBtnPV(productID, cart) {
 }
 
 function extraNav() {
-    let name = localstorage.get('full_name')
-    let token = localstorage.get('token')
+    let name = sessionstorage.getItem('full_name')
+    let token = sessionstorage.getItem('token')
 
     if (token) {
         return `
-        <div class="me-1" >${name} : </div>
+        <div class="me-1" >${name.split(" ")[0]} : </div>
         <div class="clickable" data-bs-toggle="modal" data-bs-target="#cart">Checkout</div>
         <div class="separator mx-2">|</div>
         <div class="clickable" onclick="location.href='/orders'">Orders</div>
@@ -432,7 +432,7 @@ function extraNav() {
 }
 
 function footer() {
-    let token = localstorage.get('token')
+    let token = sessionstorage.getItem('token')
 
     if (token) {
         return `
