@@ -19,7 +19,10 @@ window.addEventListener("load", () => {
 
 // Copyright year
 let year = new Date().getFullYear();
-document.querySelector('#copyright').innerHTML = year;
+if (document.querySelector('#copyright')){
+    document.querySelector('#copyright').innerHTML = year;
+}
+
 
 //modals
 let myModal = document.getElementById('myModal')
@@ -35,11 +38,13 @@ if (myModal){
 
 // sidebar toggle
 const toggleButton = document.querySelector('#sidebarToggle');
-toggleButton.addEventListener('click', (e) => {
-    let admin = document.querySelector('#admin');
-    e.preventDefault();
-    admin.classList.toggle('toggled');
-})
+if (toggleButton){
+    toggleButton.addEventListener('click', (e) => {
+        let admin = document.querySelector('#admin');
+        e.preventDefault();
+        admin.classList.toggle('toggled');
+    })
+}
 
 
 // description input and what's in the box

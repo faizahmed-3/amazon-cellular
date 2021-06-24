@@ -1131,7 +1131,7 @@ body {
     }
 
     li {
-      font-weight: 600;
+      font-weight: 500;
       @include pointer;
     }
 
@@ -1165,8 +1165,8 @@ body {
       }
 
       .addBtn {
-        margin: 0 2rem;
-        font-size: 0.8rem;
+        margin-right: 1.2rem;
+        font-size: 0.9rem;
       }
 
       .notiCount {
@@ -1192,7 +1192,7 @@ body {
 
       .card-header {
         text-transform: uppercase;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 1.2rem;
       }
 
@@ -1227,7 +1227,7 @@ body {
       }
 
       .card-title{
-        font-weight: 600;
+        font-weight: 500;
       }
 
       .firstRow{
@@ -1285,13 +1285,13 @@ body {
   .card-header {
     text-transform: uppercase;
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
   }
 
   @include required;
 
   label{
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .form-text{
@@ -1329,12 +1329,12 @@ body {
 
   .subHeading {
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.4rem;
   }
 
   .subHeadingCategory {
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .imgRow, .editImgRow {
@@ -1370,14 +1370,14 @@ body {
 
   #visibility {
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.5rem;
   }
 
   @include switch;
 
   .save {
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .subBrandBtn{
@@ -1418,7 +1418,7 @@ body {
   }
 
   .noSubBrand{
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .richTitle{
@@ -1442,7 +1442,7 @@ body {
 
   .card-header{
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .tableHeaderBig{
@@ -1475,7 +1475,7 @@ body {
 
   .far{
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .fa-trash-alt{
@@ -1561,6 +1561,16 @@ body {
 #map {
   height: 500px;
   width: 100%;
+}
+
+
+.adminLogin{
+  position: absolute;
+  top:  50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 70%;
+
 }
 
 

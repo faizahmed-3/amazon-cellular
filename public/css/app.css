@@ -1042,7 +1042,7 @@ body .actionSelected {
   margin-top: 3rem;
 }
 #admin .sidebar li {
-  font-weight: 600;
+  font-weight: 500;
 }
 #admin .sidebar li:hover {
   cursor: pointer;
@@ -1068,8 +1068,8 @@ body .actionSelected {
   font-weight: 600;
 }
 #admin .mainPanel .navbar .addBtn {
-  margin: 0 2rem;
-  font-size: 0.8rem;
+  margin-right: 1.2rem;
+  font-size: 0.9rem;
 }
 #admin .mainPanel .navbar .notiCount {
   margin-right: 0.5rem;
@@ -1089,7 +1089,7 @@ body .actionSelected {
 }
 #admin .mainPanel .order .card-header {
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.2rem;
 }
 #admin .mainPanel .order td {
@@ -1117,7 +1117,7 @@ body .actionSelected {
   margin-right: 1rem;
 }
 #admin .mainPanel #stats .card-title {
-  font-weight: 600;
+  font-weight: 500;
 }
 #admin .mainPanel #stats .firstRow {
   display: flex;
@@ -1158,14 +1158,14 @@ body .actionSelected {
 #add-product .card-header {
   text-transform: uppercase;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 #add-product label[required]:after, #add-product th[required]:after {
   content: " *";
   color: #DC3545;
 }
 #add-product label {
-  font-weight: 600;
+  font-weight: 500;
 }
 #add-product .form-text {
   font-size: 0.9rem;
@@ -1198,11 +1198,11 @@ body .actionSelected {
 }
 #add-product .subHeading {
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.4rem;
 }
 #add-product .subHeadingCategory {
-  font-weight: 600;
+  font-weight: 500;
 }
 #add-product .imgRow, #add-product .editImgRow {
   display: flex;
@@ -1235,7 +1235,7 @@ body .actionSelected {
 }
 #add-product #visibility {
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.5rem;
 }
 #add-product .switch {
@@ -1292,7 +1292,7 @@ body .actionSelected {
   height: 0;
 }
 #add-product .save {
-  font-weight: 600;
+  font-weight: 500;
 }
 #add-product .subBrandBtn {
   margin: 1rem;
@@ -1326,7 +1326,7 @@ body .actionSelected {
   font-weight: normal;
 }
 #add-product .noSubBrand {
-  font-weight: 600;
+  font-weight: 500;
 }
 #add-product .richTitle {
   margin-top: 0.3rem;
@@ -1345,7 +1345,7 @@ body .actionSelected {
 }
 #viewProducts .card-header {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 #viewProducts .tableHeaderBig {
   width: 20%;
@@ -1423,7 +1423,7 @@ body .actionSelected {
 }
 #viewProducts .far {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 #viewProducts .fa-trash-alt {
   color: #DC3545;
@@ -1492,6 +1492,14 @@ body .actionSelected {
 #map {
   height: 500px;
   width: 100%;
+}
+
+.adminLogin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
 }
 
 @media (max-width: 1199.98px) {

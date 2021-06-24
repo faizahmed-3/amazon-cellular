@@ -48,10 +48,10 @@ module.exports = ({title, content}) => {
         </div>
         <div class="sidebarItem ">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action ">
+                <li class="list-group-item list-group-item-action">
                      Dashboard
                 </li>
-                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" onclick="location.href='/admin/orders/'">
+                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/orders/'">
                     <div>Orders</div></li>
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/'">
                      Products
@@ -65,13 +65,13 @@ module.exports = ({title, content}) => {
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/special/'">
                      Special Categories
                 </li>
-                <li class="list-group-item list-group-item-action ">
+                <li class="list-group-item list-group-item-action">
                      Reports
                 </li>
-                <li class="list-group-item list-group-item-action ">
+                <li class="list-group-item list-group-item-action" >
                      Customers
                 </li>
-                <li class="list-group-item list-group-item-action ">
+                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/admins/'">
                      Admins
                 </li>
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/settings/'">
@@ -98,22 +98,8 @@ module.exports = ({title, content}) => {
                 <li class="nav-item">
                     <button class="btn btn-primary addBtn" onclick="location.href='/admin/products/new'">Add Product</button>
                 </li>
-                <li class="nav-item notiCount">
-                    <i class="bi bi-bell notification"></i>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Faiz Ahmed
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Activity Log</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Log Out</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <button class="btn btn-danger addBtn" onclick="location.href='/admin/login/logout'">Log Out</button>
                 </li>
             </ul>
         </div>

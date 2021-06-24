@@ -12,6 +12,7 @@ module.exports = ({req, wishlist, cart, input, error, exists}) =>{
             return ` `
         }
     }
+
     return layout({
         title: title,
         req: req,

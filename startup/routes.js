@@ -1,6 +1,9 @@
 const express = require('express');
 const cookieSession = require('cookie-session');
 const error = require('../middlewares/error');
+const adminLoginMW = require('../middlewares/adminLoginMW');
+const adminLogin = require('../routes/admin/login');
+const admins = require('../routes/admin/admins');
 const adminProducts = require('../routes/admin/products');
 const adminCategories = require('../routes/admin/categories');
 const adminBrands = require('../routes/admin/brands');
@@ -25,12 +28,6 @@ module.exports = function (app) {
         name: 'session',
         keys:['cookieSessionKey']
     }));
-    app.use('/admin/products', adminProducts);
-    app.use('/admin/categories', adminCategories);
-    app.use('/admin/brands', adminBrands);
-    app.use('/admin/special', adminSpecial);
-    app.use('/admin/orders', adminOrders);
-    app.use('/admin/settings', adminSettings);
     app.use('/register', register);
     app.use('/login', login);
     app.use('/wishlist', wishlist);
@@ -40,6 +37,16 @@ module.exports = function (app) {
     app.use('/search', search);
     app.use('/contact', contact);
     app.use('/', homepage);
+    app.use('/admin/login', adminLogin);
+    app.use(adminLoginMW)
+    app.use('/admin/admins', admins);
+    app.use('/admin/products', adminProducts);
+    app.use('/admin/categories', adminCategories);
+    app.use('/admin/brands', adminBrands);
+    app.use('/admin/special', adminSpecial);
+    app.use('/admin/orders', adminOrders);
+    app.use('/admin/settings', adminSettings);
+
 
     app.use(error);
 }
