@@ -2,7 +2,7 @@ const layout = require('./layout');
 const title = 'Register';
 const {getInput, getError, printWishlistModal, printCartModal}= require('../middlewares/otherFunctions');
 
-module.exports = ({wishlist, cart, input, error, exists}) =>{
+module.exports = ({req, wishlist, cart, input, error, exists}) =>{
     function existsCheck(exists) {
         if (exists){
             return`
@@ -14,6 +14,7 @@ module.exports = ({wishlist, cart, input, error, exists}) =>{
     }
     return layout({
         title: title,
+        req: req,
         content: `
 <section class="register">
     <div class="card">
@@ -75,9 +76,9 @@ module.exports = ({wishlist, cart, input, error, exists}) =>{
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP7SB8pRSs-0zGJ0ySIuhW32CUMjkvC0s&callback=initMap&libraries=places&v=weekly" async >
 </script>
 
-${printWishlistModal(wishlist)}
+${printWishlistModal(req, wishlist)}
 
-${printCartModal(cart)}
+${printCartModal(req, cart)}
 
         `})
 }

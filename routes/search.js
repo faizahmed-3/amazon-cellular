@@ -15,7 +15,7 @@ router.get('/', async(req, res) => {
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    res.send(searchTemplate({ query: req.query.query, products, brands, wishlist, cart}))
+    res.send(searchTemplate({req,  query: req.query.query, products, brands, wishlist, cart}))
 })
 
 module.exports = router;

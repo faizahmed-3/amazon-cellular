@@ -1,5 +1,4 @@
 const {emailOrderStatus} = require('../middlewares/otherFunctions')
-const sessionstorage = require('sessionstorage');
 const _ = require('lodash');
 const {accessToken, stkPush} = require('../middlewares/mpesa')
 const {getModals} = require('../middlewares/otherFunctions');
@@ -14,8 +13,6 @@ const router = express.Router();
 async function placeOrder(req, res) {
     if (req.session.newOrder){
         let checkOrder = await Cart.findById(req.session.cartID);
-
-        console.log(checkOrder);
 
         if (checkOrder.products.length > 0){
             const updateCart = await Cart.findById(req.session.cartID).populate('products._id', ' product_name');
@@ -39,7 +36,7 @@ async function placeOrder(req, res) {
                 total: 0
             }, {new: true})
 
-            const customer = await Customer.find({email: sessionstorage.getItem('email')})
+            const customer = await Customer.find({email: req.session.email})
 
             order.customerID = customer[0]._id;
 
@@ -59,7 +56,7 @@ async function placeOrder(req, res) {
         }
 
     } else {
-        const customer = await Customer.find({email: sessionstorage.getItem('email')})
+        const customer = await Customer.find({email: req.session.email})
 
         return Order.find({customerID: customer[0]._id}).sort('-orderDate');
     }
@@ -70,7 +67,7 @@ router.get('/', async (req, res) => {
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    res.send(ordersTemplate({orders, wishlist, cart}))
+    res.send(ordersTemplate({req, orders, wishlist, cart}))
 })
 
 router.post('/', async (req, res) => {
@@ -86,7 +83,7 @@ router.post('/', async (req, res) => {
 
         let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-        res.send(ordersTemplate({orders, wishlist, cart}))
+        res.send(ordersTemplate({req, orders, wishlist, cart}))
     } else if (req.session.mpesa === 'true') {
         req.session.newOrder = false;
         console.log(req.session.newOrder);

@@ -1,4 +1,3 @@
-const sessionstorage = require('sessionstorage');
 const mongoose = require('mongoose');
 const {Wishlist} = require('../models/wishlist');
 const express = require('express');
@@ -37,7 +36,7 @@ router.post('/:id', async (req, res) => {
 
     await wishlist.save();
 
-    sessionstorage.setItem( "wishlistCount", wishlist.products.length );
+    req.session.wishlistCount = wishlist.products.length
 
     res.redirect('back');
 });
@@ -54,7 +53,7 @@ router.post('/delete/:id', async (req, res) => {
         }
     }, {new: true})
 
-    sessionstorage.setItem( "wishlistCount", wishlist.products.length );
+    req.session.wishlistCount = wishlist.products.length
 
     res.redirect('back');
 })

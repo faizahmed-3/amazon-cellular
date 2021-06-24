@@ -2,7 +2,7 @@ const layout = require('./layout');
 const title = 'Edit My Information';
 const {getInput, getError, printWishlistModal, printCartModal}= require('../middlewares/otherFunctions');
 
-module.exports = ({customer, wishlist, cart, input, error}) =>{
+module.exports = ({req, customer, wishlist, cart, input, error}) =>{
 
     function getValue(customer, input, key) {
         if (customer){
@@ -14,6 +14,7 @@ module.exports = ({customer, wishlist, cart, input, error}) =>{
 
     return layout({
         title: title,
+        req: req,
         content: `
 <section class="register">
     <div class="card">
@@ -53,9 +54,9 @@ module.exports = ({customer, wishlist, cart, input, error}) =>{
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP7SB8pRSs-0zGJ0ySIuhW32CUMjkvC0s&callback=initMap&libraries=places&v=weekly" async >
 </script>
 
-${printWishlistModal(wishlist)}
+${printWishlistModal(req, wishlist)}
 
-${printCartModal(cart)}
+${printCartModal(req, cart)}
 
         `})
 }

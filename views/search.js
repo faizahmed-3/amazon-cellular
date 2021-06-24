@@ -1,7 +1,7 @@
 const {printProductModal, printMainImage, printWishlistModal, printCartModal, wishlistButton, cartButton} = require('../middlewares/otherFunctions');
 const layout = require('./layout');
 
-module.exports = ({query, products, brands, wishlist, cart}) => {
+module.exports = ({req, query, products, brands, wishlist, cart}) => {
     function renderProducts(products, wishlist, cart) {
         if (products.length>0) {
 
@@ -90,6 +90,7 @@ module.exports = ({query, products, brands, wishlist, cart}) => {
 
     return layout({
         title: query,
+        req: req,
         content: `
 <!--Cases Main-->
 <section class="category-main">
@@ -121,9 +122,9 @@ module.exports = ({query, products, brands, wishlist, cart}) => {
     </div>
 </section>
 
-${printWishlistModal(wishlist)}
+${printWishlistModal(req, wishlist)}
       
-${printCartModal(cart)} 
+${printCartModal(req, cart)} 
   
         `})
 }

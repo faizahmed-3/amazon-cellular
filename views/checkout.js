@@ -3,7 +3,7 @@ const {printMainImage, printWishlistModal, printCartModal} = require('../middlew
 const layout = require('./layout');
 const title = 'Checkout'
 
-module.exports = function ({customer, wishlist, cart, paymentError}) {
+module.exports = function ({req, customer, wishlist, cart, paymentError}) {
 
     async function getAddress(customer) {
         try {
@@ -81,6 +81,7 @@ module.exports = function ({customer, wishlist, cart, paymentError}) {
 
     return layout({
         title: title,
+        req: req,
         content: `
 <div id="checkout-body" class="container-fluid">
     <!--    Main Content-->
@@ -163,9 +164,9 @@ module.exports = function ({customer, wishlist, cart, paymentError}) {
 </div>
 
 
-${printWishlistModal(wishlist)}
+${printWishlistModal(req, wishlist)}
 
-${printCartModal(cart)}
+${printCartModal(req, cart)}
 
       
         `})

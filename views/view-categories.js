@@ -2,7 +2,7 @@ const { printWishlistModal, printCartModal, wishlistButton, cartButton} = requir
 const layout = require('./layout');
 const title = 'Categories'
 
-module.exports = ( {categories, wishlist, cart}) => {
+module.exports = ( {req, categories, wishlist, cart}) => {
     const renderedCategories = categories.map(
         category => {
             return `
@@ -12,6 +12,7 @@ module.exports = ( {categories, wishlist, cart}) => {
 
     return layout({
         title: title,
+        req: req,
         content: `
 
 <ul class="list-group viewCat">

@@ -1,4 +1,3 @@
-const sessionstorage = require('sessionstorage');
 const mongoose = require('mongoose');
 const {Product} = require('../models/admin/products');
 const {Cart} = require('../models/cart');
@@ -39,7 +38,7 @@ router.post('/:id', async (req, res) => {
 
     await cart.save();
 
-    sessionstorage.setItem( "cartCount", cart.products.length );
+    req.session.cartCount = cart.products.length
 
     res.redirect('back')
 })
@@ -73,7 +72,7 @@ router.post('/from-wish/:id', async (req, res) => {
 
     await cart.save();
 
-    sessionstorage.setItem( "cartCount", cart.products.length );
+    req.session.cartCount = cart.products.length
 
     const valid = mongoose.isValidObjectId(req.params.id);
     if (!valid) return res.status(400).send('Invalid ID passed');
@@ -86,7 +85,7 @@ router.post('/from-wish/:id', async (req, res) => {
         }
     }, {new: true})
 
-    sessionstorage.setItem( "wishlistCount", wishlist.products.length );
+    req.session.wishlistCount = wishlist.products.length
 
     res.redirect('back');
 
@@ -114,7 +113,7 @@ router.post('/delete/:id', async (req, res) => {
 
     await cart.save()
 
-    sessionstorage.setItem( "cartCount", cart.products.length );
+    req.session.cartCount = cart.products.length
 
     res.redirect('back');
 })

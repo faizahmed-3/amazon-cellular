@@ -1,7 +1,6 @@
 const {getModals} = require('../middlewares/otherFunctions');
 const {Wishlist} = require('../models/wishlist')
 const {Cart} = require('../models/cart')
-const sessionstorage = require('sessionstorage');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const loginTemplate = require('../views/login');
@@ -9,11 +8,11 @@ const loginTemplate = require('../views/login');
 module.exports =async function (req, res, next) {
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    let token = sessionstorage.getItem('token')
+    let token = req.session.token
     if (!token) {
         req.session.checkout = true;
         req.session.notLoggedCart = req.body;
-        return res.status(401).send(loginTemplate({wishlist, cart}))
+        return res.status(401).send(loginTemplate({req, wishlist, cart}))
     }
 
     try{

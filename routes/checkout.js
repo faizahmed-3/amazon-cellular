@@ -1,4 +1,3 @@
-const sessionstorage = require('sessionstorage');
 const {getModals} = require('../middlewares/otherFunctions');
 const {Customer} = require('../models/customers')
 const {Wishlist} = require('../models/wishlist')
@@ -13,7 +12,7 @@ async function goToCheckout(req, res) {
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    const customer = await Customer.find({email: sessionstorage.getItem( 'email' )})
+    const customer = await Customer.find({email: req.session.email})
 
     let paymentError;
 
@@ -21,7 +20,7 @@ async function goToCheckout(req, res) {
         paymentError = req.session.paymentError
     }
 
-    res.send(checkoutTemplate({customer: customer[0], wishlist, cart, paymentError}))
+    res.send(checkoutTemplate({req, customer: customer[0], wishlist, cart, paymentError}))
 }
 
 router.get('/', logged, async (req, res) => {

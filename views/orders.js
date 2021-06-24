@@ -2,7 +2,7 @@ const {displayDate, printWishlistModal, printCartModal, printProducts, printPaym
 const layout = require('./layout');
 const title = 'Orders'
 
-module.exports = function ({orders, wishlist, cart}) {
+module.exports = function ({req, orders, wishlist, cart}) {
     const renderedOrders = orders.map(
         order => {
             return `
@@ -23,6 +23,7 @@ module.exports = function ({orders, wishlist, cart}) {
 
     return layout({
         title: title,
+        req: req,
         content: `
 
 
@@ -51,9 +52,9 @@ module.exports = function ({orders, wishlist, cart}) {
 </section>
 
 
-${printWishlistModal(wishlist)}
+${printWishlistModal(req, wishlist)}
 
-${printCartModal(cart)}
+${printCartModal(req, cart)}
 
       
         `})

@@ -2,7 +2,7 @@ const {printProductModal, printMainImage, printWishlistModal, printCartModal, wi
 const layout = require('./layout');
 const title = 'Home';
 
-module.exports = ({categories, featured_products, new_arrivals, sale, wishlist, cart}) => {
+module.exports = ({req, categories, featured_products, new_arrivals, sale, wishlist, cart}) => {
 
     function tilesRow1(categories) {
         let row1 = `
@@ -86,6 +86,7 @@ ${printProductModal(product, wishlist, cart)}
 
     return layout({
         title: title,
+        req: req,
         content: `
 <div class="index">
 <!--Tiles-->
@@ -173,8 +174,8 @@ ${printProductModal(product, wishlist, cart)}
 </section>
 </div> 
 
-${printWishlistModal(wishlist)}
+${printWishlistModal(req, wishlist)}
       
-${printCartModal(cart)}      
+${printCartModal(req, cart)}      
 `})
 }

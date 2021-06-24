@@ -1,6 +1,6 @@
-const {extraNav, footer, getCount} = require('../middlewares/otherFunctions');
+const {extraNav, footer, wishlistCount, cartCount} = require('../middlewares/otherFunctions');
 
-module.exports = ({title, content}) => {
+module.exports = ({title, req, content}) => {
 
     return `
 <!DOCTYPE html>
@@ -48,7 +48,7 @@ module.exports = ({title, content}) => {
 <div class="container-fluid" id="extraNav">
     
     <div class="d-flex" id="cred">
-        ${extraNav()}
+        ${extraNav(req)}
     </div>
     
 </div>
@@ -76,10 +76,9 @@ module.exports = ({title, content}) => {
                         </div>
                     </div>
                     
-                    <i class="bi bi-heart mx-2 notification mt-1" data-bs-toggle="modal" data-bs-target="#wishlist"><span class="tip">${getCount('wishlistCount')}</span></i>
+                    <i class="bi bi-heart mx-2 notification mt-1" data-bs-toggle="modal" data-bs-target="#wishlist"><span class="tip">${wishlistCount(req)}</span></i>
                        
-
-                    <i class="bi bi-cart3 mx-2 notification mt-1" data-bs-toggle="modal" data-bs-target="#cart"><span class="tip">${getCount('cartCount')}</span></i>
+                    <i class="bi bi-cart3 mx-2 notification mt-1" data-bs-toggle="modal" data-bs-target="#cart"><span class="tip">${cartCount(req)}</span></i>
                 </form>
             </div>
 
@@ -156,7 +155,7 @@ ${content}
             </div>
             <div class="col-md-2 offset-lg-1">
                 <div class="d-flex justify-content-evenly justify-content-md-between flex-md-column ">
-                    ${footer()}
+                    ${footer(req)}
                 </div>
             </div>
         </div>
@@ -186,11 +185,11 @@ ${content}
         <div class="b-item" onclick="window.location.href='/'"><i class="fas fa-home"></i> <br>Home</div>
         <div class="b-item" onclick="window.location.href='/categories'"><i class="fas fa-list-alt"></i> <br>Categories</div>
         <div class="b-item">                    
-            <i class="fas fa-heart mx-2 notification mt-1" data-bs-toggle="modal" data-bs-target="#wishlist"><span class="tip">${getCount('wishlistCount')}</span></i>
+            <i class="fas fa-heart mx-2 notification mt-1" data-bs-toggle="modal" data-bs-target="#wishlist"><span class="tip">${wishlistCount(req)}</span></i>
             <br> Wishlist
         </div>
         <div class="b-item">
-            <i class="fas fa-shopping-cart mx-2 notification mt-1" data-bs-toggle="modal" data-bs-target="#cart"><span class="tip">${getCount('cartCount')}</span></i>
+            <i class="fas fa-shopping-cart mx-2 notification mt-1" data-bs-toggle="modal" data-bs-target="#cart"><span class="tip">${cartCount(req)}</span></i>
             <br> Cart
         </div>
         <div class="b-item" id="bpSearch"><i class="fas fa-search"></i> <br> Search</div>

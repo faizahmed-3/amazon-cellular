@@ -8,7 +8,7 @@ const {Cart} = require('../models/cart');
 const seeAllTemplate = require('../views/see-all');
 const categoriesTemplate = require('../views/view-categories');
 const {Product} = require('../models/admin/products');
-const homepageTemplate = require('../views/index');
+const homepageTemplate =  require('../views/index');
 const express = require('express');
 const router = express.Router();
 
@@ -45,7 +45,7 @@ async function priceFilter(req, res, filter) {
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    res.send(seeAllTemplate({category, products, brands, wishlist, cart}))
+    res.send(seeAllTemplate({req, category, products, brands, wishlist, cart}))
 }
 
 async function brandsFilter(req, res, filter) {
@@ -62,7 +62,7 @@ async function brandsFilter(req, res, filter) {
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    res.send(seeAllTemplate({category, products, brands, wishlist, cart}))
+    res.send(seeAllTemplate({req, category, products, brands, wishlist, cart}))
 }
 
 router.get('/', async(req, res) => {
@@ -84,7 +84,7 @@ router.get('/', async(req, res) => {
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
     try{
-        res.send(homepageTemplate({categories, featured_products, new_arrivals, sale, wishlist, cart}));
+        res.send(homepageTemplate({req, categories, featured_products, new_arrivals, sale, wishlist, cart}));
     }
     catch (e) {
         const featured_products = await Product.find({specialID: '6088050e65de8726600704b6'}).sort('-dateCreated').limit(6);
@@ -93,11 +93,7 @@ router.get('/', async(req, res) => {
 
         const sale = await Product.find({specialID: '60891d6820824d1308bc6946'}).sort('-dateCreated').limit(6);
 
-        let [wishlist, cart] = await getModals(req, Wishlist, Cart)
-
-        const categories = await Category.find().sort('dateCreated')
-
-        res.send(homepageTemplate({categories, featured_products, new_arrivals, sale, wishlist, cart}));
+        res.send(homepageTemplate({req, categories, featured_products, new_arrivals, sale, wishlist, cart}));
     }
 
 })
@@ -107,7 +103,7 @@ router.get('/categories', async (req, res) => {
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    res.send(categoriesTemplate({categories,  wishlist, cart}));
+    res.send(categoriesTemplate({req, categories,  wishlist, cart}));
 })
 
 router.get('/:id', async (req, res) => {
@@ -119,7 +115,7 @@ router.get('/:id', async (req, res) => {
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    res.send(seeAllTemplate({category, products, brands, wishlist, cart}))
+    res.send(seeAllTemplate({req, category, products, brands, wishlist, cart}))
 })
 
 router.get('/price-filter/:id', async(req, res) => {

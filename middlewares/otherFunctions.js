@@ -1,5 +1,3 @@
-const localstorage = require('local-storage');
-let sessionstorage = require('sessionstorage');
 const nodemailer = require("nodemailer");
 const config = require('config');
 
@@ -101,9 +99,9 @@ function printProductViewSmallImages(product) {
     }).join('');
 }
 
-function printWishlistModal(wishlist) {
+function printWishlistModal(req, wishlist) {
     if (Object.keys(wishlist).length > 0) {
-        sessionstorage.setItem("wishlistCount", wishlist.products.length);
+        req.session.wishlistCount = wishlist.products.length
 
         function renderedWishlistItems(wishlist) {
             if (wishlist.products.length > 0) {
@@ -155,7 +153,7 @@ function printWishlistModal(wishlist) {
     `
 
     } else {
-        sessionstorage.setItem("wishlistCount", 0);
+        req.session.wishlistCount = 0
 
         return `
 <div class="modal fade" id="wishlist" tabindex="-1" aria-labelledby="Wishlist" aria-hidden="true">
@@ -176,9 +174,9 @@ function printWishlistModal(wishlist) {
     }
 }
 
-function printCartModal(cart) {
+function printCartModal(req, cart) {
     if (Object.keys(cart).length > 0) {
-        sessionstorage.setItem("cartCount", cart.products.length);
+        req.session.cartCount = cart.products.length
 
         function renderedCartItems(cart) {
             if (cart.products.length > 0) {
@@ -261,7 +259,7 @@ function printCartModal(cart) {
 </div>
     `
     } else {
-        sessionstorage.setItem("cartCount", 0);
+        req.session.cartCount = 0
 
         return `
 <div class="modal fade" id="cart" tabindex="-1" aria-labelledby="Cart" aria-hidden="true">
@@ -283,9 +281,12 @@ function printCartModal(cart) {
 
 }
 
-function getCount(countFor) {
-    let count = sessionstorage.getItem(countFor)
-    return count ? parseInt(count) : 0
+exports.wishlistCount = function (req) {
+    return req.session.wishlistCount ? parseInt(req.session.wishlistCount) : 0
+}
+
+exports.cartCount = function (req) {
+    return req.session.cartCount ? parseInt(req.session.cartCount) : 0
 }
 
 async function getModals(req, Wishlist, Cart) {
@@ -409,20 +410,18 @@ function cartBtnPV(productID, cart) {
     }
 }
 
-function extraNav() {
-    let name = sessionstorage.getItem('full_name')
-    let token = sessionstorage.getItem('token')
+function extraNav(req) {
 
-    if (token) {
+    if (req.session.token) {
         return `
-        <div class="me-1" >${name.split(" ")[0]} : </div>
-        <div class="clickable" data-bs-toggle="modal" data-bs-target="#cart">Checkout</div>
-        <div class="separator mx-2">|</div>
-        <div class="clickable" onclick="location.href='/orders'">Orders</div>
-        <div class="separator mx-2">|</div>
-        <div class="clickable" onclick="location.href='/login/logout'">Log Out</div>
-        `
-    } else {
+            <div class="me-1" >${req.session.full_name.split(" ")[0]} : </div>
+            <div class="clickable" data-bs-toggle="modal" data-bs-target="#cart">Checkout</div>
+            <div class="separator mx-2">|</div>
+            <div class="clickable" onclick="location.href='/orders'">Orders</div>
+            <div class="separator mx-2">|</div>
+            <div class="clickable" onclick="location.href='/login/logout'">Log Out</div>
+        `}
+    else {
         return `
         <div class="clickable" onclick="location.href='/register'">Register</div>
         <div class="separator mx-2">|</div>
@@ -431,8 +430,8 @@ function extraNav() {
     }
 }
 
-function footer() {
-    let token = sessionstorage.getItem('token')
+function footer(req) {
+    let token = req.session.token
 
     if (token) {
         return `
@@ -502,7 +501,7 @@ exports.emailRegistration = async function (customer) {
     let info = await transporter.sendMail({
         from: '"Amazon Cellular 🛒" amazon.cellular.outfitters@gmail.com',
         to: customer.email,
-        cc: ['44faizahmed@gmail.com','fahmyahmed9@gmail.com'],
+        cc: ['4faizahmed@gmail.com','fahmyahmed9@gmail.com'],
         subject: `SUCCESSFUL REGISTRATION ON AMAZON CELLULAR OUTFITTERS`,
         html: `
 Dear ${customer.full_name},
@@ -533,7 +532,7 @@ exports.emailOrderStatus = async function (order, email, fullName) {
     let info = await transporter.sendMail({
         from: '"Amazon Cellular 🛒" amazon.cellular.outfitters@gmail.com',
         to: email,
-        cc: ['44faizahmed@gmail.com','fahmyahmed9@gmail.com'],
+        cc: ['4faizahmed@gmail.com','fahmyahmed9@gmail.com'],
         subject: `UPDATE ON STATUS FOR ORDER ${order._id}`,
         html: `
 Dear ${fullName},
@@ -602,7 +601,6 @@ exports.printProductModal = printProductModal;
 exports.printMainImage = printMainImage;
 exports.printWishlistModal = printWishlistModal;
 exports.printCartModal = printCartModal;
-exports.getCount = getCount;
 exports.getModals = getModals;
 exports.wishlistButton = wishlistButton;
 exports.cartButton = cartButton;

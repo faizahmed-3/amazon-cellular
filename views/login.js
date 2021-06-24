@@ -2,7 +2,7 @@ const layout = require('./layout');
 const title = 'Log In';
 const {getInput, getError, printWishlistModal, printCartModal}= require('../middlewares/otherFunctions');
 
-module.exports = ({wishlist, cart, input, error, incorrect}) => {
+module.exports = ({req, wishlist, cart, input, error, incorrect}) => {
     function showIncorrect(incorrect) {
         if (incorrect){
             return `
@@ -16,6 +16,7 @@ module.exports = ({wishlist, cart, input, error, incorrect}) => {
 
     return layout({
         title: title,
+        req: req,
         content: `
 <section class="register ">
     <div class="card" id="login_card">
@@ -44,8 +45,8 @@ module.exports = ({wishlist, cart, input, error, incorrect}) => {
     </div>
 </section>
 
-${printWishlistModal(wishlist)}
+${printWishlistModal(req, wishlist)}
 
-${printCartModal(cart)}
+${printCartModal(req, cart)}
         `})
 }
