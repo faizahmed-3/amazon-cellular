@@ -4,11 +4,13 @@ const error = require('../middlewares/error');
 const adminLoginMW = require('../middlewares/adminLoginMW');
 const adminLogin = require('../routes/admin/login');
 const admins = require('../routes/admin/admins');
+const adminDashboard = require('../routes/admin/dashboard');
 const adminProducts = require('../routes/admin/products');
 const adminCategories = require('../routes/admin/categories');
 const adminBrands = require('../routes/admin/brands');
 const adminSpecial= require('../routes/admin/special');
 const adminOrders= require('../routes/admin/orders');
+const adminCustomers= require('../routes/admin/customers');
 const adminSettings= require('../routes/admin/settings');
 const homepage = require('../routes/index');
 const register = require('../routes/register');
@@ -38,13 +40,15 @@ module.exports = function (app) {
     app.use('/contact', contact);
     app.use('/', homepage);
     app.use('/admin/login', adminLogin);
-    app.use(adminLoginMW)
+    // app.use(adminLoginMW)
     app.use('/admin/admins', admins);
+    app.use('/admin/dashboard', adminDashboard);
     app.use('/admin/products', adminProducts);
     app.use('/admin/categories', adminCategories);
     app.use('/admin/brands', adminBrands);
     app.use('/admin/special', adminSpecial);
     app.use('/admin/orders', adminOrders);
+    app.use('/admin/customers', adminCustomers);
     app.use('/admin/settings', adminSettings);
 
 

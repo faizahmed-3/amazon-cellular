@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const {emailOrderStatus} = require('../../middlewares/otherFunctions')
 const viewOrdersTemplate = require('../../views/admin/orders/index');
 const newOrderTemplate = require('../../views/admin/orders/new');
@@ -23,12 +24,47 @@ router.get('/edit/:id', async(req, res) => {
 })
 
 router.post('/edit/:id', async (req, res) => {
-    const order = await Order.findByIdAndUpdate(req.params.id, {
-        orderStatus: req.body.orderStatus,
-        new: false
-    }, {new: true}).populate('customerID', 'email phone full_name');
+    let order = await Order.findById(req.params.id)
 
-    emailOrderStatus(order, order.customerID.email, order.customerID.full_name).catch(console.error);
+    if (!order.processed){
+        let products = []
+
+        switch ((typeof req.body.productID).toString()) {
+            case 'string':
+                products.push({
+                    _id: mongoose.Types.ObjectId(req.body.productID),
+                    product_name: req.body.product_name,
+                    price: req.body.price,
+                    quantity: req.body.quantity,
+                })
+                break;
+
+            case 'object':
+                for (let i=0; i<req.body.productID.length; i++){
+                    products.push({
+                        _id: mongoose.Types.ObjectId(req.body.productID[i]),
+                        product_name: req.body.product_name[i],
+                        price: req.body.price[i],
+                        quantity: req.body.quantity[i],
+                    })
+                }
+                break;
+        }
+
+        order = await Order.findByIdAndUpdate(req.params.id, {
+            orderStatus: req.body.orderStatus,
+            products: products,
+            total: req.body.orderOutput,
+            new: false
+        }, {new: true}).populate('customerID', 'email phone full_name');
+
+        emailOrderStatus(order, order.customerID.email, order.customerID.full_name).catch(console.error);
+    }
+
+    if (order.orderStatus.toLowerCase() === 'delivered' || order.orderStatus.toLowerCase() === 'cancelled'){
+        order.processed = true
+        await order.save()
+    }
 
     res.redirect('/admin/orders/')
 })

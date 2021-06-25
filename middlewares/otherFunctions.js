@@ -453,7 +453,7 @@ function footer(req) {
     }
 }
 
-exports.printProducts = function (products) {
+function printProducts (products) {
     return products.map(
         product => {
             return `
@@ -463,7 +463,7 @@ exports.printProducts = function (products) {
     ).join('');
 }
 
-exports.printPaymentMethod = function (order) {
+function printPaymentMethod (order) {
     if (order.mpesa === 'true') {
         return `MPESA`
     } else if (order.mpesa === 'false') {
@@ -471,7 +471,7 @@ exports.printPaymentMethod = function (order) {
     }
 }
 
-exports.printStatusBtn = function (order) {
+function printStatusBtn (order) {
     switch (order.orderStatus) {
         case 'Order placed':
             return `<td class="text-center orderRows"><div class="btn btn-primary statusBtn">${order.orderStatus}</div></td>`
@@ -501,7 +501,7 @@ exports.emailRegistration = async function (customer) {
     let info = await transporter.sendMail({
         from: '"Amazon Cellular 🛒" amazon.cellular.outfitters@gmail.com',
         to: customer.email,
-        cc: ['4faizahmed@gmail.com','fahmyahmed9@gmail.com'],
+        cc: ['4faizahmed@gmail.com'],
         subject: `SUCCESSFUL REGISTRATION ON AMAZON CELLULAR OUTFITTERS`,
         html: `
 Dear ${customer.full_name},
@@ -532,7 +532,7 @@ exports.emailOrderStatus = async function (order, email, fullName) {
     let info = await transporter.sendMail({
         from: '"Amazon Cellular 🛒" amazon.cellular.outfitters@gmail.com',
         to: email,
-        cc: ['4faizahmed@gmail.com','fahmyahmed9@gmail.com'],
+        cc: ['4faizahmed@gmail.com'],
         subject: `UPDATE ON STATUS FOR ORDER ${order._id}`,
         html: `
 Dear ${fullName},
@@ -593,6 +593,44 @@ function emailStatusBtn(order) {
     }
 }
 
+exports.printOrders = function (orders) {
+    function printNewBadge(order) {
+        if (order.new){
+            return `
+                <span class="badge bg-danger rounded-pill">new</span>
+            `}
+        else if (order.processed){
+            return `
+                <span class="badge bg-success rounded-pill">processed</span>
+            `}
+        else return ''
+    }
+
+    return orders.map(
+        order => {
+            return `
+<tr>
+    <td class="orderRows">${displayDate(order.orderDate)}</td>
+    <td class="orderRows">${order._id}${printNewBadge(order)}</td>
+    <td class="orderRows">${order.customerID.phone}</td>
+    <td>
+        <ul class="orderItems">
+            ${printProducts(order.products)}
+        </ul>
+    </td>
+    <td class="orderRows">${order.total}</td>
+    <td class="orderRows">${printPaymentMethod(order)}</td>
+    ${printStatusBtn(order)}
+    <td>
+        <a href="/admin/orders/edit/${order._id}"><i class="far fa-edit"></i></a>
+    </td>
+</tr>
+            `}).join('')
+}
+
+
+
+
 
 exports.displayDate = displayDate;
 exports.getInput = getInput;
@@ -606,3 +644,6 @@ exports.wishlistButton = wishlistButton;
 exports.cartButton = cartButton;
 exports.extraNav = extraNav;
 exports.footer = footer;
+exports.printProducts = printProducts
+exports.printPaymentMethod = printPaymentMethod
+exports.printStatusBtn = printStatusBtn

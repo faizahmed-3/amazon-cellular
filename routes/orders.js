@@ -15,19 +15,20 @@ async function placeOrder(req, res) {
         let checkOrder = await Cart.findById(req.session.cartID);
 
         if (checkOrder.products.length > 0){
-            const updateCart = await Cart.findById(req.session.cartID).populate('products._id', ' product_name');
+            const updateCart = await Cart.findById(req.session.cartID).populate('products._id', ' product_name price');
 
             const products = updateCart.products.map(
                 product => {
                     return {
                         product_name: product._id.product_name,
+                        price: product._id.price,
                         quantity: product.quantity
                     }
                 }
             )
 
             let order = new Order({
-                total: updateCart.total,
+                total: updateCart.total + 500,
                 products: products
             });
 

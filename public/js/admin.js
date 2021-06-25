@@ -141,11 +141,12 @@ if (imgRow) {
                 row.append(card);
             }
         }
+        const path = evt.path || (evt.composedPath && evt.composedPath());
 
         if (target.matches('.fa-edit')) {
-            let input = evt.path[2].children[1];
+            let input = path[2].children[1];
             input.addEventListener('change', event => {
-                let output = evt.path[4].children[0];
+                let output = path[4].children[0];
                 output.src = URL.createObjectURL(event.target.files[0]);
                 output.onload = function () {
                     URL.revokeObjectURL(output.src) // free memory
@@ -154,12 +155,13 @@ if (imgRow) {
         }
 
         if (target.matches('.fa-trash-alt')) {
-            evt.path[3].remove()
+            path[3].remove()
             i--;
         }
 
     })
 }
+
 
 //edit image
 const editImgRow = document.querySelector('.editImgRow');
@@ -169,6 +171,7 @@ if (editImgRow) {
     (i === 0) ? i = 2 : i += 1;
 
     editImgRow.addEventListener('click', evt => {
+        const path = evt.path || (evt.composedPath && evt.composedPath());
         const target = evt.target;
         if (target.matches('.addImage')) {
             if (i<= 10){
@@ -193,9 +196,9 @@ if (editImgRow) {
         }
 
         if (target.matches('.fa-edit')) {
-            let input = evt.path[2].children[1];
+            let input = path[2].children[1];
             input.addEventListener('change', event => {
-                let output = evt.path[4].children[0];
+                let output = path[4].children[0];
                 output.src = URL.createObjectURL(event.target.files[0]);
                 output.onload = function () {
                     URL.revokeObjectURL(output.src) // free memory
@@ -205,8 +208,8 @@ if (editImgRow) {
 
         if (target.matches('.fa-trash-alt')) {
 
-            for (let j=2; j<evt.path[4].children.length; j++){
-                evt.path[4].children[j].remove()
+            for (let j=2; j<path[4].children.length; j++){
+                path[4].children[j].remove()
                 j--;
                 i--;
             }
@@ -217,17 +220,19 @@ if (editImgRow) {
     })
 }
 
+
 //category image
 const catRow = document.querySelector('.catRow');
 if (catRow) {
 
     catRow.addEventListener('click', evt => {
+        const path = evt.path || (evt.composedPath && evt.composedPath());
         const target = evt.target;
 
         if (target.matches('.fa-edit')) {
-            let input = evt.path[2].children[1];
+            let input = path[2].children[1];
             input.addEventListener('change', event => {
-                let output = evt.path[4].children[0];
+                let output = path[4].children[0];
                 output.src = URL.createObjectURL(event.target.files[0]);
                 output.onload = function () {
                     URL.revokeObjectURL(output.src) // free memory
@@ -292,14 +297,73 @@ if (subBrand) {
         subBrandDeleteBtns = document.querySelectorAll('.subBrandDelete');
         subBrandDeleteBtns.forEach(subBrandDelete => {
             subBrandDelete.addEventListener('click', evt => {
-                evt.path[1].remove()
+                const path = evt.path || (evt.composedPath && evt.composedPath());
+                path[1].remove()
             })
         })
     })
 
     subBrandDeleteBtns.forEach(subBrandDelete => {
         subBrandDelete.addEventListener('click', evt => {
-            evt.path[1].remove()
+            const path = evt.path || (evt.composedPath && evt.composedPath());
+            path[1].remove()
+        })
+    })
+}
+
+
+const productsList = document.querySelector('.orderListEdit')
+if (productsList){
+
+    const inputs = document.querySelectorAll('.orderQtyInputs')
+    let subtotals = document.querySelectorAll('.orderSubtotalEdit')
+    const price = document.querySelectorAll('.orderPriceEdit')
+    const total = document.querySelector('.editOrderTotal')
+    const totalOutput = document.querySelector('.orderOutput')
+    let sum = 0;
+
+    for (let i=0; i<subtotals.length; i++){
+        subtotals[i].value = price[i].value * inputs[i].value;
+
+        inputs[i].addEventListener('change', evt => {
+            subtotals[i].value = price[i].value * inputs[i].value
+            sum=0;
+
+            subtotals.forEach(sub => {
+                sum += parseInt(sub.value)
+            })
+            sum += 500;
+            total.innerHTML = sum;
+            totalOutput.value= sum
+        } )
+    }
+
+    subtotals.forEach(sub => {
+        sum += parseInt(sub.value)
+    })
+    sum += 500;
+    total.innerHTML = sum;
+    totalOutput.value = sum;
+
+    const orderProductDelete = document.querySelectorAll('.orderProductDelete')
+    orderProductDelete.forEach( button => {
+        button.addEventListener('click', evt => {
+            if (orderProductDelete.length > 1){
+                const path = evt.path || (evt.composedPath && evt.composedPath());
+                path[1].remove()
+
+                subtotals = document.querySelectorAll('.orderSubtotalEdit')
+                sum=0
+                subtotals.forEach(sub => {
+                    sum += parseInt(sub.value)
+                })
+                sum += 500;
+                total.innerHTML = sum;
+                totalOutput.value= sum
+            } else {
+                alert(`Can not delete all the items`)
+            }
+
         })
     })
 

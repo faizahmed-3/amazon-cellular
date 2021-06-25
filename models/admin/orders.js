@@ -11,6 +11,7 @@ const ordersSchema = new mongoose.Schema({
     },
     products: [{
         quantity: Number,
+        price: Number,
         product_name: String
     }],
     total: {
@@ -33,6 +34,10 @@ const ordersSchema = new mongoose.Schema({
     new:{
         type: Boolean,
         default: true
+    },
+    processed:{
+        type: Boolean,
+        default: false
     }
 });
 

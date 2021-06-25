@@ -3,7 +3,6 @@ const config = require('config');
 const mongoose = require('mongoose');
 const Joi =  require('joi');
 
-
 const customerSchema = new mongoose.Schema({
     full_name: {
         type: String,

@@ -5,8 +5,8 @@ const title = 'Edit Order';
 module.exports = ({order}) => {
 
     function printStatus(order) {
-        switch (order.orderStatus) {
-            case "Order placed":
+        switch (order.orderStatus.toLowerCase()) {
+            case "order placed":
                 return `
                     <option value="Order placed" selected>Order placed</option>
                     <option value="In transit" >In transit</option>
@@ -14,7 +14,7 @@ module.exports = ({order}) => {
                     <option value="Cancelled" >Cancelled</option>
                 `
 
-            case "In transit":
+            case "in transit":
                 return `
                     <option value="Order placed" >Order placed</option>
                     <option value="In transit" selected>In transit</option>
@@ -22,22 +22,45 @@ module.exports = ({order}) => {
                     <option value="Cancelled" >Cancelled</option>
                 `
 
-            case "Delivered":
+            case "delivered":
                 return `
-                    <option value="Order placed" >Order placed</option>
-                    <option value="In transit" >In transit</option>
                     <option value="Delivered" selected>Delivered</option>
-                    <option value="Cancelled" >Cancelled</option>
                 `
 
-            case "Cancelled":
+            case "cancelled":
                 return `
-                    <option value="Order placed" >Order placed</option>
-                    <option value="In transit">In transit</option>
-                    <option value="Delivered" >Delivered</option>
                     <option value="Cancelled" selected>Cancelled</option>
                 `
         }
+    }
+
+    function printProducts(order) {
+        if (order.mpesa === 'false' && order.orderStatus.toLowerCase() !== 'delivered' && order.orderStatus.toLowerCase() !== 'cancelled'){
+            const renderedProducts = order.products.map(
+                product => {
+                    return `
+                <li class="d-flex justify-content-evenly">
+                    <input type="hidden" name="productID" value="${product._id}" >
+                    <input type="text" class="form-control mb-2 orderProductEdit " name="product_name" value="${product.product_name}" readonly>
+                    <input type="number" class="form-control mb-2 orderQuantityEdit orderPriceEdit" name="price" value="${product.price}" readonly><span class="mt-2">X</span>
+                    <input type="number" class="form-control mb-2 orderQuantityEdit orderQtyInputs" min="1" name="quantity" value="${product.quantity}" required> <span class="mt-2">=</span>  
+                    <input type="number" class="form-control mb-2 orderQuantityEdit orderSubtotalEdit"  readonly>    
+                    <i class="fas fa-trash-alt orderProductDelete"></i>
+                </li>                
+        `}
+            ).join('')
+
+        return `
+            <div class="mb-2">
+                <label for="email" class="form-label" >Products</label>
+                <ul class="orderListEdit">
+                    ${renderedProducts}
+                    <li class="otEdit">Total: <span class="editOrderTotal">${order.total}</span></li>
+                    <input type="hidden" name="orderOutput" class="orderOutput">
+                </ul>
+            </div>   
+        `}
+        else return ''
     }
 
     return layout({
@@ -70,6 +93,9 @@ module.exports = ({order}) => {
                     <input type="number" class="form-control" id="phone" value="${order.customerID.phone}" disabled>
                 </div>    
             </div>
+            
+            ${printProducts(order)}
+         
             <div class="mb-5 form-group ">
                 <label for="orderStatus" class="form-label" required>Order Status</label>
                 <select class="form-select" aria-label="Select Category" id="orderStatus" name="orderStatus" required>
@@ -78,7 +104,7 @@ module.exports = ({order}) => {
             </div>
                 
             <div class="my-3 d-flex justify-content-evenly">
-                <button class="btn btn-success save" type="submit" value="submit">SAVE</button>
+                <button class="btn btn-success save" type="submit" value="submit" formaction="/admin/orders/edit/${order.id}">SAVE</button>
                 <a class="btn btn-secondary save" onclick="location.href='/admin/orders'">CANCEL</a>
             </div>
         </form>

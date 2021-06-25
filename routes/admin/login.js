@@ -21,12 +21,20 @@ router.post('/', async (req, res) => {
 
     req.session.adminToken = admin.generateLoginToken();
 
-    res.redirect('/admin/products')
+    if (req.session.originalRoute){
+        res.redirect(req.session.originalRoute)
+        req.session.originalRoute = null
+    } else{
+        res.redirect('/admin/dashboard')
+    }
+
+
 })
 
 router.get('/logout', (req, res) => {
 
     req.session.adminToken = null;
+    req.session.originalRoute = null
 
     res.redirect('/admin/login')
 })

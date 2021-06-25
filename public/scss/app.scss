@@ -1196,13 +1196,52 @@ body {
         font-size: 1.2rem;
       }
 
-      td {
-        font-size: 0.9rem;
+      td{
+        text-align: center;
       }
 
-      .btn {
-        width: 8rem;
+      .far{
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+
+      .orderItems{
+        text-transform: capitalize;
+        text-align: start;
         font-size: 0.8rem;
+      }
+
+      .orderRows{
+        font-size: 0.85rem;
+      }
+
+      .statusBtn {
+        width: 6.5rem;
+        font-size: 0.7rem;
+        text-transform: capitalize;
+        @include pointerRemove()
+      }
+
+      .orderItemSpan{
+        text-transform: lowercase;
+        margin-left: 0.5rem;
+        font-size: 0.85rem;
+      }
+
+      .ordersHeadingBig{
+        width: 40%  ;
+        text-align: center;
+        text-transform: capitalize;
+      }
+
+      .ordersHeading{
+        width: 8.1%;
+        text-align: center;
+      }
+
+      .ordersEmail{
+        text-align: center;
+        width: 12.4%;
       }
     }
 
@@ -1385,7 +1424,7 @@ body {
     font-size: 0.8rem;
   }
 
-  .subBrandsList{
+  .subBrandsList, .orderListEdit{
     padding-left: 0;
     list-style: none;
   }
@@ -1395,7 +1434,25 @@ body {
     margin-bottom: 1rem;
   }
 
-  .subBrandDelete{
+  .orderProductEdit{
+    width: 60%;
+    margin-bottom: 1rem;
+  }
+
+  .orderQuantityEdit{
+    width: 8%;
+    margin-bottom: 1rem;
+    margin-right: 0.5rem;
+    text-align: center;
+  }
+
+  .otEdit {
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .subBrandDelete, .orderProductDelete{
     font-size: 1.5rem;
     color: $red;
     margin-top: 0.4rem;

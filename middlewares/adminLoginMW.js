@@ -7,6 +7,7 @@ module.exports =async function (req, res, next) {
     let adminToken = req.session.adminToken
 
     if (!adminToken) {
+        req.session.originalRoute = req.url
         return res.status(401).send(loginTemplate({}))
     }
 

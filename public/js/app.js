@@ -57,7 +57,8 @@ let smallImages = document.querySelectorAll('.prod-small-img');
 if (smallImages.length>0){
     smallImages.forEach(smallImage => {
         smallImage.addEventListener('click', (evt) => {
-            evt.path[4].children[0].children[0].src = smallImage.src
+            const path = evt.path || (evt.composedPath && evt.composedPath());
+            path[4].children[0].children[0].src = smallImage.src
         })
     })
 }
@@ -110,9 +111,10 @@ if (qtyInputs.length>0){
 const qtyInputsPV = document.querySelectorAll('.qtyPV');
 if (qtyInputsPV.length>0){
     qtyInputsPV.forEach(qtyInput => {
-        qtyInput.addEventListener('change', evt => {
-            let price = evt.path[2].children[0].children[1]
-            let subtotal = evt.path[1].children[1].children[1];
+        qtyInput.addEventListener('change', event => {
+            const path = event.path || (event.composedPath && event.composedPath());
+            let price = path[2].children[0].children[1]
+            let subtotal = path[1].children[1].children[1];
 
             subtotal.innerHTML = `${evt.target.value * parseInt(price.innerHTML)}`
         })

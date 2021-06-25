@@ -48,7 +48,7 @@ module.exports = ({title, content}) => {
         </div>
         <div class="sidebarItem ">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action">
+                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/dashboard/'">
                      Dashboard
                 </li>
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/orders/'">
@@ -68,7 +68,7 @@ module.exports = ({title, content}) => {
                 <li class="list-group-item list-group-item-action">
                      Reports
                 </li>
-                <li class="list-group-item list-group-item-action" >
+                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/customers/'" >
                      Customers
                 </li>
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/admins/'">
@@ -99,7 +99,7 @@ module.exports = ({title, content}) => {
                     <button class="btn btn-primary addBtn" onclick="location.href='/admin/products/new'">Add Product</button>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-danger addBtn" onclick="location.href='/admin/login/logout'">Log Out</button>
+                    <button class="btn btn-secondary addBtn" onclick="location.href='/admin/login/logout'">Log Out</button>
                 </li>
             </ul>
         </div>
