@@ -29,10 +29,9 @@ module.exports = function () {
     });
 
 
-    winston.add(new winston.transports.MongoDB({
-        db: 'mongodb+srv://faiz:faiz123@amazon-db.qmd2y.mongodb.net/amazonDB?retryWrites=true&w=majority',
-        level: 'warn',
-        options: {useUnifiedTopology: true}
-    }));
-
+    // winston.add(new winston.transports.MongoDB({
+    //     db: 'mongodb+srv://cdksd:cdsdkcsdc@amazon-db.qmd2y.mongodb.net/amazonDB?retryWrites=true&w=majority',
+    //     level: 'warn',
+    //     options: {useUnifiedTopology: true}
+    // }));
 }
