@@ -38,7 +38,7 @@ function printProductModal(product, wishlist, cart) {
                 <div class="container-fluid">
                     <div class="row pvRow1">
                         <div class="col-xl-6 col-lg-7 ">
-                            <img src="/img/products/${printMainImage(product)}" alt="" id="prod-main-img">
+                            <img loading="lazy" src="/img/products/${printMainImage(product)}" alt="" id="prod-main-img">
                         </div>
                         <div class="col-xl-6 col-lg-5 d-flex flex-column justify-content-between">
                             <div class="row small-img-row">
@@ -93,7 +93,7 @@ function printProductViewSmallImages(product) {
     return product.product_images.map(productImage => {
         return `
                 <div class="col-2 small-img-col">
-                    <img src="/img/products/${productImage.filename}" alt="" class="prod-small-img">
+                    <img loading="lazy" src="/img/products/${productImage.filename}" alt="" class="prod-small-img">
                 </div>
             `
     }).join('');

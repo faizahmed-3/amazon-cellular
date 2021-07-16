@@ -1,8 +1,8 @@
 // Pre Loader
-window.addEventListener("load", () => {
-    let loader = document.querySelector(".loader")
-    loader.classList.add("loader-finish");
-});
+// window.addEventListener("load", () => {
+//     let loader = document.querySelector(".loader")
+//     loader.classList.add("loader-finish");
+// });
 
 
 // Back to top button

@@ -15,17 +15,16 @@ module.exports = ({title, req, content}) => {
     <link rel="icon" href="/img/favicon.ico">
 
     <!--    Fonts -->
-    <link rel="preload" href="https://fonts.gstatic.com" >
+    <link rel="preconnect" href="https://fonts.gstatic.com" >
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&amp;display=swap" as="style"
     onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&amp;display=swap" >
 
     <!-- Bootstrap CSS -->
-    <link rel="preload" href="/bootstrap/dist/css/bootstrap.min.css" as="style"
-    onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" >
 
     <!--    Custom CSS -->
-    <link rel="preload" href="/css/app.css" as="style"
-    onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/app.css" >
 
     <!--        Font Awesome -->
     <link rel="preload" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
@@ -37,9 +36,7 @@ module.exports = ({title, req, content}) => {
     onload="this.onload=null;this.rel='stylesheet'">
 
     <!-- Maps   -->
-    <link rel="preload" href="https://polyfill.io/v3/polyfill.min.js?features=default" as="script"
-    onload="this.onload=null;this.rel='script'">
-<!--    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>-->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
 
     <title>${title} | Amazon Cellular</title>
@@ -47,9 +44,9 @@ module.exports = ({title, req, content}) => {
 <body>
 
 <!--Pre Loader-->
-<div class="loader">
-    <img src="/img/loader.gif" alt="Loading...">
-</div>
+<!--<div class="loader">-->
+<!--    <img src="/img/loader.gif" alt="Loading...">-->
+<!--</div>-->
 
 <!--extra navbar-->
 <div class="container-fluid" id="extraNav">

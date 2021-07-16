@@ -65,7 +65,7 @@ module.exports = ({req, categories, featured_products, new_arrivals, sale, wishl
                 return `
 <div class="col-6 col-md-4 col-lg-2">
     <div class="card">
-        <img src="/img/products/${printMainImage(product)}" class="card-img-top" alt="..." data-bs-toggle="modal"
+        <img loading="lazy" src="/img/products/${printMainImage(product)}" class="card-img-top" alt="..." data-bs-toggle="modal"
              data-bs-target="#_${product._id}">
         <div class="card-body">
             <h6 class="card-title" data-bs-toggle="modal" data-bs-target="#_${product._id}">${product.product_name}</h6>
