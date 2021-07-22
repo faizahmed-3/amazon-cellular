@@ -12,17 +12,17 @@ module.exports = ({title, content}) => {
     <link rel="icon" href="/img/favicon.ico">
 
     <!--    Fonts -->
-    <link rel="preload" href="https://fonts.gstatic.com">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet" as="style"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&amp;display=swap" as="style"
     onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&amp;display=swap" >
 
     <!-- Bootstrap CSS -->
-    <link rel="preload" href="/bootstrap/dist/css/bootstrap.min.css" as="style"
-    onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" >
 
     <!--    Custom CSS -->
-    <link rel="preload" href="/css/app.css" as="style"
-    onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/app.css">
 
     <!--    Font Awesome -->
     <link rel="preload" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
