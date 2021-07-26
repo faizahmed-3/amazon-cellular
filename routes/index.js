@@ -68,8 +68,8 @@ async function brandsFilter(req, res, filter) {
 }
 
 const client = redis.createClient({
-    // host: '198.74.57.132',
-    // port: 6379
+    host: '198.74.57.132',
+    port: 6379
 })
 
 const GET_ASYNC = promisify(client.get).bind(client);
@@ -95,15 +95,15 @@ router.get('/', async (req, res) => {
         let [featured_products, new_arrivals, sale] = await shuffleSpecial();
 
         savedFeatured = await SET_ASYNC(
-            'savedFeatured', JSON.stringify(featured_products), 'EX', 86400
+            'savedFeatured', JSON.stringify(featured_products), 'EX', 5
         )
 
         let savedNew = await SET_ASYNC(
-            'savedNew', JSON.stringify(new_arrivals), 'EX', 86400
+            'savedNew', JSON.stringify(new_arrivals), 'EX', 5
         )
 
         let savedSale = await SET_ASYNC(
-            'savedSale', JSON.stringify(sale), 'EX', 86400
+            'savedSale', JSON.stringify(sale), 'EX', 5
         )
 
         const categories = await Category.find().sort('dateCreated')
