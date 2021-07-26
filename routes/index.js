@@ -1,3 +1,5 @@
+const {promisify} = require('util')
+const redis = require('redis')
 const sessionstorage = require('sessionstorage');
 const {getModals} = require('../middlewares/otherFunctions');
 const mongoose = require('mongoose')
@@ -8,7 +10,7 @@ const {Cart} = require('../models/cart');
 const seeAllTemplate = require('../views/see-all');
 const categoriesTemplate = require('../views/view-categories');
 const {Product} = require('../models/admin/products');
-const homepageTemplate =  require('../views/index');
+const homepageTemplate = require('../views/index');
 const express = require('express');
 const router = express.Router();
 
@@ -33,15 +35,15 @@ async function shuffleSpecial() {
 
 async function priceFilter(req, res, filter) {
     let products;
-    if (Object.keys(filter).length>0){
-        products = await Product.find( filter).and([{categoryID: req.params.id}]).collation({locale: "en" }).sort('product_name')
+    if (Object.keys(filter).length > 0) {
+        products = await Product.find(filter).and([{categoryID: req.params.id}]).collation({locale: "en"}).sort('product_name')
     } else {
-        products = await Product.find({categoryID: req.params.id}).collation({locale: "en" }).sort('product_name')
+        products = await Product.find({categoryID: req.params.id}).collation({locale: "en"}).sort('product_name')
     }
 
     const category = await Category.findById(req.params.id).select('category_name');
 
-    const brands = await Brand.find().collation({locale: "en" }).sort('brand_name');
+    const brands = await Brand.find().collation({locale: "en"}).sort('brand_name');
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
@@ -50,48 +52,79 @@ async function priceFilter(req, res, filter) {
 
 async function brandsFilter(req, res, filter) {
     let products;
-    if (filter.length>0){
-        products = await Product.find().or(filter).collation({locale: "en" }).sort('product_name')
+    if (filter.length > 0) {
+        products = await Product.find().or(filter).collation({locale: "en"}).sort('product_name')
     } else {
-        products = await Product.find({categoryID: req.params.id}).collation({locale: "en" }).sort('product_name')
+        products = await Product.find({categoryID: req.params.id}).collation({locale: "en"}).sort('product_name')
     }
 
     const category = await Category.findById(req.params.id).select('category_name');
 
-    const brands = await Brand.find().collation({locale: "en" }).sort('brand_name');
+    const brands = await Brand.find().collation({locale: "en"}).sort('brand_name');
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
     res.send(seeAllTemplate({req, category, products, brands, wishlist, cart}))
 }
 
-router.get('/', async(req, res) => {
-    if (!req.session.existingSession){
-        let [featured_products, new_arrivals, sale] = await shuffleSpecial();
-        sessionstorage.setItem('featured_products', featured_products)
-        sessionstorage.setItem('new_arrivals', new_arrivals)
-        sessionstorage.setItem('sale', sale)
-    }
+const client = redis.createClient({
+    host: '198.74.57.132',
+    port: 6379
+})
 
-    req.session.existingSession = true;
+const GET_ASYNC = promisify(client.get).bind(client);
+const SET_ASYNC = promisify(client.set).bind(client);
 
-    let featured_products = sessionstorage.getItem('featured_products')
-    let new_arrivals = sessionstorage.getItem('new_arrivals')
-    let sale = sessionstorage.getItem('sale')
-
-    const categories = await Category.find().sort('dateCreated')
-
-    let [wishlist, cart] = await getModals(req, Wishlist, Cart)
-
+router.get('/', async (req, res) => {
     try{
-        res.send(homepageTemplate({req, categories, featured_products, new_arrivals, sale, wishlist, cart}));
+        let savedFeatured = await GET_ASYNC('savedFeatured')
+        if (savedFeatured){
+            console.log('using cached data')
+            let savedNew = await GET_ASYNC('savedNew')
+            let savedSale = await GET_ASYNC('savedSale')
+
+            const categories = await Category.find().sort('dateCreated')
+
+            let [wishlist, cart] = await getModals(req, Wishlist, Cart)
+
+            res.send(homepageTemplate({req, categories, featured_products: JSON.parse(savedFeatured), new_arrivals: JSON.parse(savedNew), sale: JSON.parse(savedSale), wishlist, cart}));
+
+            return
+        }
+
+        let [featured_products, new_arrivals, sale] = await shuffleSpecial();
+
+        savedFeatured = await SET_ASYNC(
+            'savedFeatured', JSON.stringify(featured_products), 'EX', 86400
+        )
+
+        let savedNew = await SET_ASYNC(
+            'savedNew', JSON.stringify(new_arrivals), 'EX', 86400
+        )
+
+        let savedSale = await SET_ASYNC(
+            'savedSale', JSON.stringify(sale), 'EX', 86400
+        )
+
+        const categories = await Category.find().sort('dateCreated')
+
+        let [wishlist, cart] = await getModals(req, Wishlist, Cart)
+
+        console.log('using fresh data')
+
+        res.send(homepageTemplate({req, categories, featured_products: JSON.parse(savedFeatured), new_arrivals: JSON.parse(savedNew), sale: JSON.parse(savedSale), wishlist, cart}));
     }
+
     catch (e) {
         const featured_products = await Product.find({specialID: '6088050e65de8726600704b6'}).sort('-dateCreated').limit(6);
 
         const new_arrivals = await Product.find({specialID: '6088051765de8726600704b7'}).sort('-dateCreated').limit(6);
 
         const sale = await Product.find({specialID: '60891d6820824d1308bc6946'}).sort('-dateCreated').limit(6);
+
+        const categories = await Category.find().sort('dateCreated')
+
+        console.log('using default data')
 
         res.send(homepageTemplate({req, categories, featured_products, new_arrivals, sale, wishlist, cart}));
     }
@@ -103,7 +136,7 @@ router.get('/categories', async (req, res) => {
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    res.send(categoriesTemplate({req, categories,  wishlist, cart}));
+    res.send(categoriesTemplate({req, categories, wishlist, cart}));
 })
 
 router.get('/:id', async (req, res) => {
@@ -111,14 +144,14 @@ router.get('/:id', async (req, res) => {
 
     const category = await Category.findById(req.params.id).select('category_name');
 
-    const brands = await Brand.find().collation({locale: "en" }).sort('brand_name');
+    const brands = await Brand.find().collation({locale: "en"}).sort('brand_name');
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
     res.send(seeAllTemplate({req, category, products, brands, wishlist, cart}))
 })
 
-router.get('/price-filter/:id', async(req, res) => {
+router.get('/price-filter/:id', async (req, res) => {
     let filter = req.session.filter;
 
     await priceFilter(req, res, filter)
@@ -126,15 +159,15 @@ router.get('/price-filter/:id', async(req, res) => {
     req.session.filter = null;
 })
 
-router.post('/price-filter/:id', async(req, res) => {
+router.post('/price-filter/:id', async (req, res) => {
     let min = {}
     let max = {}
 
     for (let prop in req.body) {
-        if (parseInt(req.body[prop]) > 0){
-            if (prop === 'min'){
+        if (parseInt(req.body[prop]) > 0) {
+            if (prop === 'min') {
                 min = {"$gte": parseInt(req.body[prop])}
-            } else if (prop === 'max'){
+            } else if (prop === 'max') {
                 max = {"$lte": parseInt(req.body[prop])}
             }
         }
@@ -142,7 +175,7 @@ router.post('/price-filter/:id', async(req, res) => {
 
     let filter = {};
 
-    if (Object.keys(min).length > 0 || Object.keys(max).length > 0 ){
+    if (Object.keys(min).length > 0 || Object.keys(max).length > 0) {
         filter = {
             price: {...min, ...max}
         }
@@ -150,7 +183,7 @@ router.post('/price-filter/:id', async(req, res) => {
 
     req.session.filter = filter;
 
-    await priceFilter(req,res,filter)
+    await priceFilter(req, res, filter)
 })
 
 router.get('/brands-filter/:id', async (req, res) => {
@@ -161,16 +194,16 @@ router.get('/brands-filter/:id', async (req, res) => {
 
     req.session.filter = null;
 
-} )
+})
 
-router.post('/brands-filter/:id', async(req, res) => {
+router.post('/brands-filter/:id', async (req, res) => {
     let filter = []
 
     for (let prop in req.body) {
         if (mongoose.isValidObjectId(prop)) {
 
-        // no sub brand
-            if (prop.toString() === req.body[prop].toString()){
+            // no sub brand
+            if (prop.toString() === req.body[prop].toString()) {
                 filter.push({brandID: prop})
             } else {
                 filter.push({subBrandID: req.body[prop]})

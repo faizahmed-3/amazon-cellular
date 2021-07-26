@@ -1,8 +1,10 @@
+const responseTime = require('response-time')
 const winston = require('winston');
 const express = require('express');
 const compression = require('compression')
 const app = express();
 
+app.use(responseTime())
 app.use(compression())
 app.use(express.static('public'));
 
