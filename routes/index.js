@@ -68,8 +68,8 @@ async function brandsFilter(req, res, filter) {
 }
 
 const client = redis.createClient({
-    host: '198.74.57.132',
-    port: 6379
+    // host: '198.74.57.132',
+    // port: 6379
 })
 
 const GET_ASYNC = promisify(client.get).bind(client);
