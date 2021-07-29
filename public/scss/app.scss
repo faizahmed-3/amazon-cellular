@@ -1242,6 +1242,29 @@ body {
         text-align: center;
         width: 12.4%;
       }
+
+      .performer{
+        .performerName{
+          width: 39%;
+          text-align: center;
+        }
+
+        .performerID{
+          width: 10%;
+          text-align: center;
+        }
+
+        .performerHeading{
+          width: 8.5%;
+          text-align: center;
+        }
+
+        .performerProduct{
+          font-size: 0.83rem;
+          text-align: left;
+          text-transform: capitalize;
+        }
+      }
     }
 
     #chartsRow{
@@ -1270,7 +1293,7 @@ body {
 
       .firstRow{
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
       }
 
       .statNum{

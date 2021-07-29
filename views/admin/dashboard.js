@@ -1,8 +1,26 @@
-const { printOrdersNew } = require('../../middlewares/otherFunctions')
+const { printOrdersNew, displayDate } = require('../../middlewares/otherFunctions')
 const layout = require('./layout');
 const title = 'Dashboard';
 
-module.exports = ({orders}) => {
+module.exports = ({orders, income, unitsSold, totalProducts, customers, best, worst}) => {
+
+    function printPerformer(products) {
+        return products.map(
+            product => {
+                return `
+                    <tr>
+                        <td class="performerProduct">${product._id}</td>
+                        <td class="performerProduct">${product.product_name}</td>
+                        <td>${displayDate(product.dateCreated)}</td>
+                        <td>${product.shop_price}</td>
+                        <td>${product.price}</td>
+                        <td>${product.income}</td>
+                        <td>${product.unitsSold}</td>
+                        <td>${product.quantity}</td>
+                    </tr>                
+                `}
+        ).join('')
+    }
 
     return layout({
         title: title,
@@ -44,10 +62,10 @@ module.exports = ({orders}) => {
                         <h5 class="card-title">Income</h5>
                         <div class="card-text">
                             <div class="firstRow">
-                                <div class="statNum"><span>ksh.</span>28500</div>
-                                <i class="fas fa-arrow-up profit"></i>
+                                <div class="statNum"><span>ksh.</span>${income}</div>
+<!--                                <i class="fas fa-arrow-up profit"></i>-->
                             </div>
-                            <p class="percentage profit">+8.3% <span>(last 7 days)</span></p>
+<!--                            <p class="percentage profit">+8.3% <span>(last 7 days)</span></p>-->
                         </div>
                     </div>
                 </div>
@@ -56,22 +74,10 @@ module.exports = ({orders}) => {
                         <h5 class="card-title">Units Sold</h5>
                         <div class="card-text">
                             <div class="firstRow">
-                                <div class="statNum">5000</div>
-                                <i class="fas fa-arrow-up profit"></i>
+                                <div class="statNum">${unitsSold}</div>
+<!--                                <i class="fas fa-arrow-up profit"></i>-->
                             </div>
-                            <p class="percentage profit">+15% <span>(last 7 days)</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card col">
-                    <div class="card-body">
-                        <h5 class="card-title">Page Visitors</h5>
-                        <div class="card-text">
-                            <div class="firstRow">
-                                <div class="statNum">300</div>
-                                <i class="fas fa-arrow-up profit"></i>
-                            </div>
-                            <p class="percentage profit">+2.5% <span>(last 7 days)</span></p>
+<!--                            <p class="percentage profit">+15% <span>(last 7 days)</span></p>-->
                         </div>
                     </div>
                 </div>
@@ -80,10 +86,10 @@ module.exports = ({orders}) => {
                         <h5 class="card-title">Customers</h5>
                         <div class="card-text">
                             <div class="firstRow">
-                                <div class="statNum">650</div>
-                                <i class="fas fa-arrow-down loss"></i>
+                                <div class="statNum">${customers}</div>
+<!--                                <i class="fas fa-arrow-down loss"></i>-->
                             </div>
-                            <p class="percentage loss">-0.5% <span>(last 7 days)</span></p>
+<!--                            <p class="percentage loss">-0.5% <span>(last 7 days)</span></p>-->
                         </div>
                     </div>
                 </div>
@@ -92,14 +98,13 @@ module.exports = ({orders}) => {
                         <h5 class="card-title">Products</h5>
                         <div class="card-text">
                             <div class="firstRow">
-                                <div class="statNum">400</div>
-                                <i class="fas fa-minus"></i>
+                                <div class="statNum">${totalProducts}</div>
+<!--                                <i class="fas fa-minus"></i>-->
                             </div>
-                            <p class="percentage">0% <span>(last 7 days)</span></p>
+<!--                            <p class="percentage">0% <span>(last 7 days)</span></p>-->
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
@@ -110,66 +115,26 @@ module.exports = ({orders}) => {
                 Best Performers
             </div>
             <div class="card-body table-responsive-md">
-                <table class="table table-hover table-bordered border-dark">
+                <table class="table table-hover table-bordered border-dark performer">
                     <thead>
                     <tr class="table-dark">
-                        <th scope="col">Product ID</th>
-                        <th scope="col" class="itemsTh">Name</th>
-                        <th scope="col">Created on</th>
-                        <th scope="col">Price (ksh.)</th>
-                        <th scope="col">Units Sold</th>
-                        <th scope="col">Sales Made</th>
-                        <th scope="col">Units Left</th>
+                        <th scope="col" class="performerHeading">Product ID</th>
+                        <th scope="col" class="performerName">Name</th>
+                        <th scope="col" class="performerHeading">Created on</th>
+                        <th scope="col" class="performerHeading">Shop Price</th>
+                        <th scope="col" class="performerHeading">Price</th>
+                        <th scope="col" class="performerHeading">Income</th>
+                        <th scope="col" class="performerHeading">Units Sold</th>
+                        <th scope="col" class="performerHeading">Units Left</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Nillkin Textured nylon fiber case for Apple iPhone 12 Mini</td>
-                        <td>09.15am <span class="d-block"> 11/02/21</span></td>
-                        <td>2500</td>
-                        <td>400</td>
-                        <td>212</td>
-                        <td>60</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Nillkin Amazing 2-in-1 HD full screen tempered glass</td>
-                        <td>09.15am <span class="d-block"> 11/02/21</span></td>
-                        <td>1000</td>
-                        <td>390</td>
-                        <td>345</td>
-                        <td>125</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Nillkin CamShield Pro cover case for Apple iPhone 12</td>
-                        <td>09.15am <span class="d-block"> 11/02/21</span></td>
-                        <td>850</td>
-                        <td>323</td>
-                        <td>192</td>
-                        <td>35</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Nillkin Textured nylon fiber case for Apple iPhone 12 Mini</td>
-                        <td>09.15am <span class="d-block"> 11/02/21</span></td>
-                        <td>5000</td>
-                        <td>287</td>
-                        <td>87</td>
-                        <td>50</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td>Nillkin Amazing 2-in-1 HD full screen tempered glass</td>
-                        <td>09.15am <span class="d-block"> 11/02/21</span></td>
-                        <td>3125</td>
-                        <td>249</td>
-                        <td>3</td>
-                        <td>65</td>
-                    </tr>
+                        ${printPerformer(best)}
                     </tbody>
                 </table>
+                    <div class="d-flex justify-content-center">
+                    <a href="/admin/reports/" class="mb-2" style="text-decoration: none">view all </a>
+                </div>                
             </div>
         </div>
 
@@ -179,66 +144,26 @@ module.exports = ({orders}) => {
                 Worst Performers
             </div>
             <div class="card-body table-responsive-md">
-                <table class="table table-hover table-bordered border-dark">
+                <table class="table table-hover table-bordered border-dark performer">
                     <thead>
                     <tr class="table-dark">
-                        <th scope="col">Product ID</th>
-                        <th scope="col" class="itemsTh">Name</th>
-                        <th scope="col">Created on</th>
-                        <th scope="col">Price (ksh.)</th>
-                        <th scope="col">Units Sold</th>
-                        <th scope="col">Sales Made</th>
-                        <th scope="col">Units Left</th>
+                        <th scope="col" class="performerID">Product ID</th>
+                        <th scope="col" class="performerName">Name</th>
+                        <th scope="col" class="performerHeading">Created on</th>
+                        <th scope="col" class="performerHeading">Shop Price</th>
+                        <th scope="col" class="performerHeading">Price</th>
+                        <th scope="col" class="performerHeading">Income</th>
+                        <th scope="col" class="performerHeading">Units Sold</th>
+                        <th scope="col" class="performerHeading">Units Left</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Nillkin Textured nylon fiber case for Apple iPhone 12 Mini</td>
-                        <td>09.15am <span class="d-block"> 11/02/21</span></td>
-                        <td>2500</td>
-                        <td>400</td>
-                        <td>212</td>
-                        <td>60</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Nillkin Amazing 2-in-1 HD full screen tempered glass</td>
-                        <td>09.15am <span class="d-block"> 11/02/21</span></td>
-                        <td>1000</td>
-                        <td>390</td>
-                        <td>345</td>
-                        <td>125</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Nillkin CamShield Pro cover case for Apple iPhone 12</td>
-                        <td>09.15am <span class="d-block"> 11/02/21</span></td>
-                        <td>850</td>
-                        <td>323</td>
-                        <td>192</td>
-                        <td>35</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Nillkin Textured nylon fiber case for Apple iPhone 12 Mini</td>
-                        <td>09.15am <span class="d-block"> 11/02/21</span></td>
-                        <td>5000</td>
-                        <td>287</td>
-                        <td>87</td>
-                        <td>50</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td>Nillkin Amazing 2-in-1 HD full screen tempered glass</td>
-                        <td>09.15am <span class="d-block"> 11/02/21</span></td>
-                        <td>3125</td>
-                        <td>249</td>
-                        <td>3</td>
-                        <td>65</td>
-                    </tr>
+                        ${printPerformer(worst)}
                     </tbody>
                 </table>
+                    <div class="d-flex justify-content-center">
+                    <a href="/admin/reports/" class="mb-2" style="text-decoration: none">view all </a>
+                </div>                
             </div>
         </div>
         `})

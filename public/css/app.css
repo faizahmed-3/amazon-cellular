@@ -1136,6 +1136,23 @@ body .actionSelected {
   text-align: center;
   width: 12.4%;
 }
+#admin .mainPanel .order .performer .performerName {
+  width: 39%;
+  text-align: center;
+}
+#admin .mainPanel .order .performer .performerID {
+  width: 10%;
+  text-align: center;
+}
+#admin .mainPanel .order .performer .performerHeading {
+  width: 8.5%;
+  text-align: center;
+}
+#admin .mainPanel .order .performer .performerProduct {
+  font-size: 0.83rem;
+  text-align: left;
+  text-transform: capitalize;
+}
 #admin .mainPanel #chartsRow {
   margin: 2rem 1rem;
 }
@@ -1158,7 +1175,7 @@ body .actionSelected {
 }
 #admin .mainPanel #stats .firstRow {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 #admin .mainPanel #stats .statNum {
   font-size: 2rem;
