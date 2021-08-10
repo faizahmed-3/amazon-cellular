@@ -24,13 +24,13 @@ router.get('/', async(req, res) => {
 
     const unitsSold = returnTotal(products, 'unitsSold')
 
-    const totalProducts = await Product.find().countDocuments()
+    const totalProducts = await Product.find({status: true}).countDocuments()
 
     const customers = await Customer.find().countDocuments()
 
-    const best = await Product.find().sort('-income').limit(10)
+    const best = await Product.find().sort('-income').limit(20)
 
-    const worst = await Product.find().sort('income').limit(10)
+    const worst = await Product.find().sort('income').limit(20)
 
     res.send(dashboardTemplate({orders, income, unitsSold, totalProducts, customers ,best, worst}));
 })

@@ -12,6 +12,7 @@ const adminSpecial= require('../routes/admin/special');
 const adminOrders= require('../routes/admin/orders');
 const adminCustomers= require('../routes/admin/customers');
 const adminSettings= require('../routes/admin/settings');
+const adminReports= require('../routes/admin/reports');
 const homepage = require('../routes/index');
 const register = require('../routes/register');
 const login = require('../routes/login');
@@ -49,6 +50,7 @@ module.exports = function (app) {
     app.use('/admin/special', adminSpecial);
     app.use('/admin/orders', adminOrders);
     app.use('/admin/customers', adminCustomers);
+    app.use('/admin/reports', adminReports);
     app.use('/admin/settings', adminSettings);
 
 

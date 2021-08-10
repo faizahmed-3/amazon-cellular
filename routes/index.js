@@ -17,16 +17,19 @@ const router = express.Router();
 async function shuffleSpecial() {
     const featured_products = await Product.aggregate([
         {$match: {specialID: mongoose.Types.ObjectId('6088050e65de8726600704b6')}},
+        {$match: {status: true}},
         {$sample: {size: 6}}
     ]);
 
     const new_arrivals = await Product.aggregate([
         {$match: {specialID: mongoose.Types.ObjectId('6088051765de8726600704b7')}},
+        {$match: {status: true}},
         {$sample: {size: 6}}
     ]);
 
     const sale = await Product.aggregate([
         {$match: {specialID: mongoose.Types.ObjectId('60891d6820824d1308bc6946')}},
+        {$match: {status: true}},
         {$sample: {size: 6}}
     ]);
 
@@ -36,9 +39,9 @@ async function shuffleSpecial() {
 async function priceFilter(req, res, filter) {
     let products;
     if (Object.keys(filter).length > 0) {
-        products = await Product.find(filter).and([{categoryID: req.params.id}]).collation({locale: "en"}).sort('product_name')
+        products = await Product.find(filter).and([{categoryID: req.params.id},{status: true}]).collation({locale: "en"}).sort('product_name')
     } else {
-        products = await Product.find({categoryID: req.params.id}).collation({locale: "en"}).sort('product_name')
+        products = await Product.find({categoryID: req.params.id},{status: true}).collation({locale: "en"}).sort('product_name')
     }
 
     const category = await Category.findById(req.params.id).select('category_name');
@@ -53,9 +56,9 @@ async function priceFilter(req, res, filter) {
 async function brandsFilter(req, res, filter) {
     let products;
     if (filter.length > 0) {
-        products = await Product.find().or(filter).collation({locale: "en"}).sort('product_name')
+        products = await Product.find({status: true}).or(filter).collation({locale: "en"}).sort('product_name')
     } else {
-        products = await Product.find({categoryID: req.params.id}).collation({locale: "en"}).sort('product_name')
+        products = await Product.find({categoryID: req.params.id, status: true}).collation({locale: "en"}).sort('product_name')
     }
 
     const category = await Category.findById(req.params.id).select('category_name');
@@ -128,11 +131,11 @@ router.get('/', async (req, res) => {
         }));
 
     } catch (e) {
-        const featured_products = await Product.find({specialID: '6088050e65de8726600704b6'}).sort('-dateCreated').limit(6);
+        const featured_products = await Product.find({specialID: '6088050e65de8726600704b6', status: true}).sort('-dateCreated').limit(6);
 
-        const new_arrivals = await Product.find({specialID: '6088051765de8726600704b7'}).sort('-dateCreated').limit(6);
+        const new_arrivals = await Product.find({specialID: '6088051765de8726600704b7', status: true}).sort('-dateCreated').limit(6);
 
-        const sale = await Product.find({specialID: '60891d6820824d1308bc6946'}).sort('-dateCreated').limit(6);
+        const sale = await Product.find({specialID: '60891d6820824d1308bc6946', status: true}).sort('-dateCreated').limit(6);
 
         const categories = await Category.find().sort('dateCreated')
 
@@ -151,7 +154,7 @@ router.get('/categories', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-    const products = await Product.find({categoryID: req.params.id}).sort('dateCreated');
+    const products = await Product.find({categoryID: req.params.id, status: true}).sort('dateCreated');
 
     const category = await Category.findById(req.params.id).select('category_name');
 

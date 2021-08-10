@@ -65,7 +65,7 @@ module.exports = ({title, products}) => {
         content: `
 <div id="viewProducts" class="card ">
     <div class="card-body table-responsive-md ">
-        <table class="table table-hover table-bordered border-dark mt-2">
+        <table class="table table-hover table-bordered mt-2">
             <thead>
             <tr class="table-dark">
                 <th scope="col" class="product-name-heading">Product Name</th>

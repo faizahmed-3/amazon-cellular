@@ -44,7 +44,7 @@ module.exports = ({specials}) => {
     <button type="button" class="btn btn-primary mt-4 me-3" style="font-size: 0.8rem" onclick="location.href='/admin/special/new'">Add New Special Category</button>
     </div> 
     <div class="card-body table-responsive-md">
-        <table class="table table-hover table-bordered border-dark">
+        <table class="table table-hover table-bordered">
             <thead>
             <tr class="table-dark">
                 <th scope="col" class="tableHeaderBig">Special Category Name</th>

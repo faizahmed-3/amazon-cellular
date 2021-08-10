@@ -20,7 +20,7 @@ module.exports = ({customers}) => {
         content: `
         <div id="viewProducts" class="card ">
     <div class="card-body table-responsive-md">
-        <table class="table table-hover table-bordered border-dark">
+        <table class="table table-hover table-bordered">
             <thead>
             <tr class="table-dark">
                 <th scope="col" class="tableHeader">Date Created</th>

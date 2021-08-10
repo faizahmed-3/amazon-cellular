@@ -31,7 +31,7 @@ module.exports = ({orders, income, unitsSold, totalProducts, customers, best, wo
                 New Orders
             </div>
             <div class="card-body table-responsive-md">
-                <table class="table table-hover table-bordered border-dark ">
+                <table class="table table-hover table-bordered ">
                     <thead>
                     <tr class="table-dark">
                         <th scope="col" class="ordersHeading">Date</th>
@@ -115,7 +115,7 @@ module.exports = ({orders, income, unitsSold, totalProducts, customers, best, wo
                 Best Performers
             </div>
             <div class="card-body table-responsive-md">
-                <table class="table table-hover table-bordered border-dark performer">
+                <table class="table table-hover table-bordered performer" id="bestp">
                     <thead>
                     <tr class="table-dark">
                         <th scope="col" class="performerHeading">Product ID</th>
@@ -131,10 +131,7 @@ module.exports = ({orders, income, unitsSold, totalProducts, customers, best, wo
                     <tbody>
                         ${printPerformer(best)}
                     </tbody>
-                </table>
-                    <div class="d-flex justify-content-center">
-                    <a href="/admin/reports/" class="mb-2" style="text-decoration: none">view all </a>
-                </div>                
+                </table>               
             </div>
         </div>
 
@@ -144,7 +141,7 @@ module.exports = ({orders, income, unitsSold, totalProducts, customers, best, wo
                 Worst Performers
             </div>
             <div class="card-body table-responsive-md">
-                <table class="table table-hover table-bordered border-dark performer">
+                <table class="table table-hover table-bordered performer" id="worstp">
                     <thead>
                     <tr class="table-dark">
                         <th scope="col" class="performerID">Product ID</th>
@@ -160,10 +157,7 @@ module.exports = ({orders, income, unitsSold, totalProducts, customers, best, wo
                     <tbody>
                         ${printPerformer(worst)}
                     </tbody>
-                </table>
-                    <div class="d-flex justify-content-center">
-                    <a href="/admin/reports/" class="mb-2" style="text-decoration: none">view all </a>
-                </div>                
+                </table>               
             </div>
         </div>
         `})

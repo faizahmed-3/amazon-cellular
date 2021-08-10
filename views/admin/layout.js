@@ -19,7 +19,7 @@ module.exports = ({title, content}) => {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&amp;display=swap" >
 
     <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" >
 
     <!--    Custom CSS -->
     <link rel="stylesheet" href="/css/app.css">
@@ -33,8 +33,8 @@ module.exports = ({title, content}) => {
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" as="style"
     onload="this.onload=null;this.rel='stylesheet'">
 
-    <!--    Chart JS-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>-->
+    <!--    Tables-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">    
 
     <title>${title} | Amazon Cellular</title>
 </head>
@@ -137,6 +137,39 @@ module.exports = ({title, content}) => {
 
 <!--Custom JS -->
 <script src="/js/admin.js"></script>
+
+
+
+
+<!--JQuery-->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<!--Tables-->
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+<script >
+    $(document).ready(function() {
+    $('#bestp').DataTable( {
+        "order": [[ 5, "desc" ]],
+        retrieve: true,
+    } );
+} );
+    
+    $(document).ready(function() {
+    $('#worstp').DataTable( {
+        "order": [[ 5, "asc" ]],
+        retrieve: true,
+    } );
+} );
+    
+    $(document).ready(function() {
+    $('.table').DataTable({
+         retrieve: true,
+    });
+} );
+    
+
+</script>
 
 </body>
 </html>

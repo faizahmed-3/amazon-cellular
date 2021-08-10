@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/', async(req, res) => {
 
-    const products = await Product.find({product_name: new RegExp('.*' + req.query.query + '.*', 'i')}).sort('dateCreated');
+    const products = await Product.find({product_name: new RegExp('.*' + req.query.query + '.*', 'i'), status: true}).sort('dateCreated');
 
     const brands = await Brand.find().collation({locale: "en" }).sort('brand_name');
 

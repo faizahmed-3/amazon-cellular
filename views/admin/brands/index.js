@@ -27,7 +27,7 @@ module.exports = ({brands, categories}) => {
             brand.subBrands.sort((a,b) => a.subBrandName.localeCompare(b.subBrandName))
             renderedSubBrands = brand.subBrands.map(subBrand => {
                 return `
-                        <tr  class="collapse table-secondary table-bordered border-dark" id="_${brand._id}">
+                        <tr  class="collapse table-secondary table-bordered" id="_${brand._id}">
                             <td class="subBrandsCollapse text-muted">${subBrand.subBrandName}</td>
                             <td class="subBrandCategory text-muted">${categoryName(subBrand.subBrandCategoryID, categories)}</td>
                             <td>${subBrand.unitsSold}</td>
