@@ -1571,6 +1571,16 @@ body .actionSelected {
   width: 70%;
 }
 
+#errorPage {
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#errorPage h2 {
+  text-transform: uppercase;
+}
+
 @media (max-width: 1199.98px) {
   .navbar #logo {
     width: 130px;
