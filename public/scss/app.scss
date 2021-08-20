@@ -1083,27 +1083,44 @@ body {
 
 
 #faq {
-  display: grid;
-  place-items: center;
+  min-width: 90vw;
 
-  .segment {
-    margin: 1rem 0;
-    width: 70%;
+  .accordion{
+    background: white;
   }
 
-  .faqHeading {
+  .accordion-button{
     text-transform: uppercase;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  .subHeading{
+    font-size: 1.2rem;
     font-weight: 500;
   }
 
-  p {
+  p, li {
     text-align: justify;
   }
+
+  .faqMobileImage{
+    display: block;
+    margin: 1rem 0;
+    @include resizeImage;
+    width: 20%;
+    height: 20%;
+  }
+
+  .faqLgImage{
+    display: block;
+    margin: 1rem 0;
+    @include resizeImage;
+    width: 100%;
+    height: 11rem;
+  }
+
+  ul{
+    li{
+      list-style-type: disc;
+    }
+  }
+
 }
 
 

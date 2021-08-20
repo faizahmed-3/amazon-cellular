@@ -12,7 +12,10 @@ const {Customer} = require('../models/customers');
 router.get('/', async (req, res) => {
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    req.session.signUpIn = req.headers.referer.split(req.headers.host).pop()
+    if (req.headers.referer){
+        req.session.signUpIn = req.headers.referer.split(req.headers.host).pop()
+
+    }
 
     res.send(loginTemplate({req, wishlist, cart}))
 })

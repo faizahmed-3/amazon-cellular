@@ -109,7 +109,7 @@ module.exports = ({title, req, content}) => {
                     </ul>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link pb-0" href="/contact">FAQs</a>
+                    <a class="nav-link pb-0" href="/faqs">FAQs</a>
                 </li>
             </ul>
 
@@ -129,15 +129,15 @@ ${content}
         <div class="row">
             <div class="col-md-3 col-lg-2 offset-xl-2 offset-md-1">
                 <div class="info-heading mb-md-2">
-                    Help
+                    FAQS
                 </div>
                 <ul class="info-list">
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">How to order</a></li>
-                    <li><a href="#">Payment</a></li>
-                    <li><a href="#">Delivery</a></li>
-                    <li><a href="#">Return policy</a></li>
-                    <li><a href="#">Customer care</a></li>
+                    <li><a href="/faqs/reg">Register/ Login</a></li>
+                    <li><a href="/faqs/search">Find Products</a></li>
+                    <li><a href="/faqs/add">Wishlist and Cart</a></li>
+                    <li><a href="/faqs/checkout">Checkout</a></li>
+                    <li><a href="/faqs/deliveries">Deliveries and Payment</a></li>
+                    <li><a href="/faqs/return">Return Policy</a></li>
                 </ul>
             </div>
             <div class="col-md-5 col-lg-4 offset-lg-1 offset-xl-0">

@@ -21,7 +21,7 @@ window.addEventListener('scroll', function() {
     localStorage.setItem('scrollPosition', window.scrollY);
 }, false);
 window.addEventListener('load', function() {
-    if ( document.referrer === window.location.href && window.location.pathname !== '/register' && window.location.pathname !== '/login' && window.location.pathname !== '/register/edit' && window.location.pathname !== '/checkout' && window.location.pathname !== '/orders'){
+    if ( document.referrer === window.location.href && window.location.pathname !== '/register' && window.location.pathname !== '/login' && window.location.pathname !== '/register/edit' && window.location.pathname !== '/checkout' && window.location.pathname !== '/orders' && window.location.pathname !== '/faqs'){
         if(localStorage.getItem('scrollPosition') !== null){
             window.scrollTo(0, localStorage.getItem('scrollPosition'));
         }

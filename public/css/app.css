@@ -1005,23 +1005,37 @@ body .actionSelected {
 }
 
 #faq {
-  display: grid;
-  place-items: center;
+  min-width: 90vw;
 }
-#faq .segment {
-  margin: 1rem 0;
-  width: 70%;
+#faq .accordion {
+  background: white;
 }
-#faq .faqHeading {
+#faq .accordion-button {
   text-transform: uppercase;
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-#faq .subHeading {
+  font-size: 1.2rem;
   font-weight: 500;
 }
-#faq p {
+#faq p, #faq li {
   text-align: justify;
+}
+#faq .faqMobileImage {
+  display: block;
+  margin: 1rem 0;
+  object-fit: cover;
+  object-position: center center;
+  width: 20%;
+  height: 20%;
+}
+#faq .faqLgImage {
+  display: block;
+  margin: 1rem 0;
+  object-fit: cover;
+  object-position: center center;
+  width: 100%;
+  height: 11rem;
+}
+#faq ul li {
+  list-style-type: disc;
 }
 
 #admin {
@@ -2793,6 +2807,27 @@ body .actionSelected {
   #admin .mainPanel #stats .card {
     margin-right: 0;
     flex-basis: 13rem;
+  }
+
+  #faq {
+    font-size: 0.9rem;
+  }
+  #faq .accordion-button {
+    font-size: 1rem;
+  }
+  #faq .accordion-body {
+    padding: 0.7rem;
+  }
+  #faq ol, #faq ul, #faq li {
+    padding: 0;
+    margin: 0 0.3rem;
+  }
+  #faq .faqMobileImage {
+    height: 50%;
+    width: 50%;
+  }
+  #faq .faqLgImage {
+    height: 100%;
   }
 }
 

@@ -21,7 +21,7 @@ const cart = require('../routes/cart');
 const checkout = require('../routes/checkout');
 const orders = require('../routes/orders');
 const search = require('../routes/search');
-const contact = require('../routes/contact');
+const faqs = require('../routes/faqs');
 
 
 module.exports = function (app) {
@@ -38,7 +38,7 @@ module.exports = function (app) {
     app.use('/checkout', checkout);
     app.use('/orders', orders);
     app.use('/search', search);
-    app.use('/contact', contact);
+    app.use('/faqs', faqs);
     app.use('/', homepage);
     app.use('/admin/login', adminLogin);
     // app.use(adminLoginMW)

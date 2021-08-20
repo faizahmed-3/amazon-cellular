@@ -253,7 +253,7 @@ module.exports = ({req, query, products, wishlist, cart, page, iterator, endingL
     <div class="container-fluid" id="category-display">
         <div class="card">
             <div class="card-header d-flex justify-content-between mt-1">
-                <div class="queryDisplay">Search results for: ${req.session.query}</div>
+                <div class="queryDisplay">Search: ${req.session.query}</div>
                 <div class="sortBy mt-1">
                     Sort:  
                      ${printSort(sort)}
