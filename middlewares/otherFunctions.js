@@ -64,9 +64,10 @@ function printProductModal(product, wishlist, cart) {
                             <div id="share" class="text-center">
                                 <i class="bi bi-share-fill px-2"></i>
                                 <a href="https://www.facebook.com/sharer/sharer.php?u=https://amazon-cellular.com/search/ext/${product._id}" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href="whatsapp://send?text=http://192.168.1.104:3000/#_${product._id}"><i class="fab fa-whatsapp"></i></a>
+<!--                                <a href=""><i class="fab fa-instagram"></i></a>-->
+<!--                                <a href=""><i class="fab fa-twitter"></i></a>-->
+                                <a href="whatsapp://send?text=https://amazon-cellular.com/search/ext/${product._id}"><i class="fab fa-whatsapp"></i></a>
+                                <a href=""><i class="far fa-clipboard"></i>Copy to clipboard</a>
                             </div>
                         </div>
                         <div>

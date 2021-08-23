@@ -10,8 +10,8 @@ module.exports = ({title, req, content}) => {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
-    <meta name="description" content="An online as well as physical store based in Nairobi Kenya. We sell accessories for phones, tablets, smart watches, cameras, cars and computers.">
-    <meta property="og:image" content="/img/logo.jpg">
+    <meta name="description" content="We sell quality accessories for phones, tablets, smart watches, cameras, cars and computers.">
+<!--    <meta property="og:image" content="/img/favicon.ico">-->
 
     <!--    Favicon -->
     <link rel="icon" href="/img/favicon.ico">
@@ -148,7 +148,7 @@ ${content}
                     <p>
                         <button class="btn btn-primary phone"><a href="tel:+254705063256"><i
                                 class="bi bi-telephone-fill"></i> Call </a></button>
-                        <button class="btn btn-primary phone"><a href="mailto:amazoncelullar@gmail.com"><i
+                        <button class="btn btn-primary phone"><a href="mailto:amazon.cellular.outfitters@gmail.com"><i
                                 class="bi bi-envelope-fill"></i> Mail</a></button>
                         <button class="btn btn-primary phone"><a href="sms:+254705063256"><i
                                 class="bi bi-chat-dots-fill"></i> SMS</a></button>
