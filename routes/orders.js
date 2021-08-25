@@ -74,6 +74,8 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
 
+    req.session.paymentError = null;
+
     req.session.mpesa = req.body.mpesa.toString();
 
     req.session.newOrder = true;

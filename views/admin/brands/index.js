@@ -93,7 +93,7 @@ module.exports = ({brands, categories}) => {
         <button type="button" class="btn btn-primary mt-4 me-3" style="font-size: 0.8rem" onclick="location.href='/admin/brands/new'">Add New Brand</button>
     </div>  
     <div class="card-body table-responsive-md">
-        <table class="table table-bordered border-dark" id="brandsT">
+        <table class="table table-bordered" id="brandsT">
             <thead>
             <tr class="table-dark">
                 <th scope="col" class="tableHeaderBig">Brand Name</th>

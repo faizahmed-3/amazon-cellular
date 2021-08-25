@@ -2,6 +2,7 @@ const ngrok = require('ngrok');
 const config = require('config');
 const datetime = require('node-datetime');
 const axios = require('axios');
+const {Customer} = require("../models/customers");
 
 const shortcode = config.get('SHORTCODE');
 const passkey = config.get('PASSKEY');
@@ -49,9 +50,11 @@ exports.stkPush = async (req, res) => {
 
     const {timestamp, password} = newPassword();
 
-    const phone = "254705063256"
+    const customer = await Customer.find({email: req.session.email})
 
-    const ngrokUrl = await ngrokStart()
+    const phone = `254${customer[0].phone}`
+
+    // const ngrokUrl = await ngrokStart()Z
 
     const data = {
         "BusinessShortCode": shortcode,
@@ -62,14 +65,15 @@ exports.stkPush = async (req, res) => {
         "PartyA": phone,
         "PartyB": shortcode,
         "PhoneNumber": phone,
-        "CallBackURL": `${ngrokUrl}/orders/paying`,
+        "CallBackURL": `https://amazon-cellular.com/orders/paying`,
         "AccountReference": "Amazon Cellular Test",
         "TransactionDesc": "Lipa na M-PESA"
     }
 
     axios.post(stkUrl, data, {headers})
         .catch( () => {
-            req.session.paymentError = 'Error in establishing connection to M-PESA';
+            console.log('at catch!')
+            req.session.paymentError = `Error in establishing connection to M-PESA, make sure you're using a safaricom number in the format 0712345678/ 0123456789. The initial 0 in the number isn't necessary.`;
             res.redirect('/checkout');
         })
 }

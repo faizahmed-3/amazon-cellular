@@ -88,6 +88,11 @@ body {
   .actionSelected{
     color: $red;
   }
+
+  #paymentError{
+    color: $red;
+    margin: 1rem 0 0 0;
+  }
 }
 
 
@@ -729,11 +734,6 @@ body {
       font-size: 0.75rem;
     }
 
-  }
-
-  #paymentError{
-    color: $red;
-    text-align: center;
   }
 }
 

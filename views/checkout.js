@@ -72,8 +72,9 @@ module.exports = function ({req, customer, wishlist, cart, paymentError}) {
 
     function printPaymentError(paymentError) {
         if (paymentError){
+            req.session.paymentError = null
             return `
-                <p id="paymentError">${paymentError}</p>
+                <div class="d-flex justify-content-center m-1"><p id="paymentError">${paymentError}</p></div>
             `}
         else return ``
     }
@@ -82,6 +83,7 @@ module.exports = function ({req, customer, wishlist, cart, paymentError}) {
         title: title,
         req: req,
         content: `
+${printPaymentError(paymentError)}
 <div id="checkout-body" class="container-fluid">
     <!--    Main Content-->
     <div id="checkout-main" class="container-fluid">
