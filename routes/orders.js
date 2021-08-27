@@ -1,3 +1,4 @@
+const sessionstorage = require('sessionstorage');
 const {emailOrderStatus} = require('../middlewares/otherFunctions')
 const _ = require('lodash');
 const {accessToken, stkPush} = require('../middlewares/mpesa')
@@ -7,8 +8,11 @@ const {Cart} = require('../models/cart')
 const {Order} = require('../models/admin/orders')
 const {Customer} = require('../models/customers')
 const ordersTemplate = require('../views/orders');
+const confirmTemplate = require('../views/confirm');
 const express = require('express');
 const router = express.Router();
+
+sessionstorage.setItem('paymentResults', null)
 
 async function placeOrder(req, res) {
     if (req.session.newOrder){
@@ -44,7 +48,13 @@ async function placeOrder(req, res) {
 
             order.orderStatus = 'Order placed';
 
-            order.mpesa = req.session.mpesa;
+            console.log(`adding order ${sessionstorage.getItem('mpesaDetails')}`)
+            if (sessionstorage.getItem('mpesaDetails')){
+                order.mpesaDetails = sessionstorage.getItem('mpesaDetails');
+                order.mpesa = req.session.mpesa;
+            } else {
+                order.mpesa = req.session.mpesa;
+            }
 
             order = await order.save()
 
@@ -65,7 +75,16 @@ async function placeOrder(req, res) {
 }
 
 router.get('/', async (req, res) => {
+
     const orders = await placeOrder(req, res)
+
+    req.session.newOrder = false;
+
+    req.session.mpesa = 'false';
+
+    sessionstorage.setItem('paymentResults', null)
+
+    sessionstorage.setItem('mpesaDetails', null)
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
@@ -73,12 +92,17 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+    console.log('at post')
 
     req.session.paymentError = null;
 
     req.session.mpesa = req.body.mpesa.toString();
 
     req.session.newOrder = true;
+
+    sessionstorage.setItem('paymentResults', null)
+
+    sessionstorage.setItem('mpesaDetails', null)
 
     if (req.session.mpesa === 'false') {
         const orders = await placeOrder(req, res);
@@ -89,31 +113,72 @@ router.post('/', async (req, res) => {
 
         res.send(ordersTemplate({req, orders, wishlist, cart}))
     } else if (req.session.mpesa === 'true') {
-        req.session.newOrder = false;
-
+        console.log('going to mpesa')
         res.redirect('/orders/mpesa')
     }
 })
 
-router.get('/mpesa', accessToken, stkPush)
+router.get('/mpesa', accessToken, async(req, res) => {
+    await stkPush(req, res)
+})
 
 router.post('/paying', async (req, res) => {
-    const paymentResults = req.body.Body.stkCallback;
+    sessionstorage.setItem('paymentResults', req.body.Body.stkCallback)
 
     console.log('Paying...')
-    console.log(paymentResults);
+    console.log(sessionstorage.getItem('paymentResults'));
 
-    if (paymentResults.ResultCode === 0) {
+    if (sessionstorage.getItem('paymentResults').ResultCode === 0) {
+        sessionstorage.setItem('mpesaDetails', {
+            amount: sessionstorage.getItem('paymentResults').CallbackMetadata.Item[0].Value,
+            mpesaCode: sessionstorage.getItem('paymentResults').CallbackMetadata.Item[1].Value,
+            transactionDate: sessionstorage.getItem('paymentResults').CallbackMetadata.Item[2].Value,
+            phone: sessionstorage.getItem('paymentResults').CallbackMetadata.Item[3].Value,
+        })
+        console.log(sessionstorage.getItem('mpesaDetails'));
         console.log('payment successful')
-        console.log(paymentResults.CallbackMetadata)
-        res.redirect('/orders')
 
     } else {
         console.log('payment failed')
-        req.session.paymentError = paymentResults.ResultDesc;
-        res.redirect('/checkout');
     }
 
 })
+
+router.get('/confirm', (req, res) => {
+    if (sessionstorage.getItem('paymentResults')){
+        if (sessionstorage.getItem('paymentResults').ResultCode === 0) {
+            console.log('confirmation successful')
+            console.log(sessionstorage.getItem('mpesaDetails'))
+            res.redirect('/orders')
+        } else {
+            console.log('confirmation failed')
+            res.send(confirmTemplate({confirmationError: true}))
+        }
+    } else {
+        console.log('confirmation failed at else else')
+        res.send(confirmTemplate({confirmationError: true}))
+    }
+
+})
+
+router.get('/cancel', (req, res) => {
+
+    if (sessionstorage.getItem('paymentResults')) {
+        if (sessionstorage.getItem('paymentResults').ResultCode === 0) {
+            console.log('confirmation successful')
+            res.redirect('/orders')
+        } else {
+            console.log('cancel confirmation failed in if')
+            req.session.paymentError = sessionstorage.getItem('paymentResults').ResultDesc
+            res.redirect('/checkout')
+        }
+    } else {
+        console.log('cancel confirmation failed outside if')
+        req.session.paymentError = 'An error occured with the payment'
+        res.redirect('/checkout')
+    }
+
+})
+
 
 module.exports = router;

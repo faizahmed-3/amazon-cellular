@@ -29,7 +29,8 @@ const ordersSchema = new mongoose.Schema({
     mpesaDetails: {
         amount: Number,
         mpesaCode: String,
-        transactionDate: Date
+        transactionDate: String,
+        phone: Number
     },
     orderType: {
         type: String,

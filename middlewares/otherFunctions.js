@@ -316,7 +316,7 @@ function wishlistButton(productID, wishlist) {
         if (product) {
             return `
                 <form method="post" action="/wishlist/${productID}" >
-                    <button type="submit" class="formBtn"><i class="bi bi-heart-fill actionSelected" style="color: black"></i></button>
+                    <button type="submit" class="formBtn"><i class="bi bi-heart-fill actionSelected" ></i></button>
                 </form>
             `
         } else {
@@ -341,7 +341,7 @@ function cartButton(productID, cart) {
         if (product) {
             return `
                 <form method="post" action="/cart/${productID}" >
-                    <button type="submit" class="formBtn"><i class="bi bi-cart-fill actionSelected" style="color: black"></i></button>
+                    <button type="submit" class="formBtn"><i class="bi bi-cart-fill actionSelected" ></i></button>
                 </form>
             `
         } else {
@@ -471,7 +471,7 @@ function printProducts(products) {
 
 function printPaymentMethod(order) {
     if (order.mpesa === 'true') {
-        return `MPESA`
+        return `${order.mpesaDetails.mpesaCode}`
     } else if (order.mpesa === 'false') {
         return 'On delivery'
     }

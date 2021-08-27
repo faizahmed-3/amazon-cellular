@@ -1,4 +1,4 @@
-const ngrok = require('ngrok');
+const confirmTemplate = require('../views/confirm')
 const config = require('config');
 const datetime = require('node-datetime');
 const axios = require('axios');
@@ -8,10 +8,6 @@ const shortcode = config.get('SHORTCODE');
 const passkey = config.get('PASSKEY');
 const consumerKey = config.get('CONSUMER_KEY');
 const consumerSecret = config.get('CONSUMER_SECRET');
-
-async function ngrokStart() {
-   return  await ngrok.connect({authtoken: '1tLVNy7Vggkaew4A7FbAB3YJYK9_5mCPZe649VBS8UQ9wRue3', addr: 3000});
-}
 
 const newPassword = () => {
     const dt = datetime.create();
@@ -54,8 +50,6 @@ exports.stkPush = async (req, res) => {
 
     const phone = `254${customer[0].phone}`
 
-    // const ngrokUrl = await ngrokStart()Z
-
     const data = {
         "BusinessShortCode": shortcode,
         "Password": password,
@@ -71,9 +65,14 @@ exports.stkPush = async (req, res) => {
     }
 
     axios.post(stkUrl, data, {headers})
+        .then((response) => {
+            setTimeout( () => {
+                res.send(confirmTemplate({confirmationError: false}))
+            }, 2500)
+        })
         .catch( () => {
             console.log('at catch!')
-            req.session.paymentError = `Error in establishing connection to M-PESA, make sure you're using a safaricom number in the format 0712345678/ 0123456789. The initial 0 in the number isn't necessary.`;
+            req.session.paymentError = `Error in establishing connection to M-PESA, make sure you're using a safaricom number in the format 0712345678/ 0123456789`;
             res.redirect('/checkout');
         })
 }

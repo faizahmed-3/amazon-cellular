@@ -25,6 +25,8 @@ async function goToCheckout(req, res) {
 
 router.get('/', logged, async (req, res) => {
 
+    console.log('at checkout')
+
     let cartUpdate = await Cart.findById(req.session.cartID)
 
     if (Object.keys(req.session.notLoggedCart).length>0){
