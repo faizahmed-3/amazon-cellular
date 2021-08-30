@@ -5,21 +5,6 @@ const title = 'Checkout'
 
 module.exports = function ({req, customer, wishlist, cart, paymentError}) {
 
-    async function getAddress(customer) {
-        try {
-            const latitude =  customer.latitude;
-            const longitude =  customer.longitude;
-            const key = 'AIzaSyDP7SB8pRSs-0zGJ0ySIuhW32CUMjkvC0s';
-
-            const address = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${key}`)
-                .then(value => {
-                    return value;
-                })
-            return address;
-        } catch (e) {
-            console.log(e)
-        }
-    }
 
     function renderCustomer(customer) {
         return `
@@ -35,12 +20,13 @@ module.exports = function ({req, customer, wishlist, cart, paymentError}) {
                     </div>
                     <div class="mb-2 col-lg-6 form-group">
                         <label for="phone" class="form-label" required>Phone Number</label>
-                        <input name="phone" type="number" class="form-control" id="phone" aria-describedby="phone number" value="${customer.phone}" disabled>
+                        <input name="phone" type="number" class="form-control" id="phone" aria-describedby="phone number" value="0${customer.phone}" disabled>
+                        <div class="form-text">For M-Pesa payments, please enter a safaricom number in the format 0712345678/ 0123456789.</div>
                     </div>    
                 </div>
                 <div class="mb-2 form-group">
                     <label for="address" class="form-label" required>Shipping Address</label>
-                    <input name="address" type="text" class="form-control" id="address" aria-describedby="phone number" value="" disabled>
+                    <input name="address" type="text" class="form-control" id="address" aria-describedby="phone number" value="${customer.address}" disabled>
                 </div>
                 <div class="mt-3 d-flex justify-content-center">
                     <button class="btn btn-sm btn-danger" onclick="location.href='/register/edit'"> Modify Information </button>
@@ -79,6 +65,38 @@ module.exports = function ({req, customer, wishlist, cart, paymentError}) {
         else return ``
     }
 
+    function printPaymentMethod(customer) {
+        if (customer.distance <= 20){
+            return `
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="mpesa" value="false" id="cash" checked>
+                        <label class="form-check-label" for="cash">
+                            Payment on delivery <span class="paymentSpan text-muted">(only available for Nairobi and its environs)</span>
+                        </label>
+                    </div>
+                    <div class="form-check mb-5">
+                        <input class="form-check-input" type="radio" name="mpesa" value="true" id="mpesaBtn">
+                        <label class="form-check-label" for="mpesaBtn">
+                            Lipa na M-PESA <span class="paymentSpan text-muted">(you need a safaricom number for this option. Also make sure you have the phone with that number close to you as after clicking the place order button a pop up will show up on your phone to confirm the payment)</span>
+                        </label>
+                    </div>
+            `} else {
+            return `
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="mpesa" value="false" id="cash" disabled>
+                        <label class="form-check-label" for="cash">
+                            Payment on delivery <span class="paymentSpan text-muted">(only available for Nairobi and its environs)</span>
+                        </label>
+                    </div>
+                    <div class="form-check mb-5">
+                        <input class="form-check-input" type="radio" name="mpesa" value="true" id="mpesaBtn" checked>
+                        <label class="form-check-label" for="mpesaBtn">
+                            Lipa na M-PESA <span class="paymentSpan text-muted">(you need a safaricom number for this option. Also make sure you have the phone with that number close to you as after clicking the place order button a pop up will show up on your phone to confirm the payment)</span>
+                        </label>
+                    </div>
+            `}
+    }
+
     return layout({
         title: title,
         req: req,
@@ -104,25 +122,14 @@ ${printPaymentError(paymentError)}
             </div>
             <div class="card-body">
                 <form method="post">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="mpesa" value="false" id="cash" checked>
-                        <label class="form-check-label" for="cash">
-                            Payment on delivery <span class="paymentSpan text-muted">(only available for Nairobi and its environs)</span>
-                        </label>
-                    </div>
-                    <div class="form-check mb-5">
-                        <input class="form-check-input" type="radio" name="mpesa" value="true" id="mpesaBtn">
-                        <label class="form-check-label" for="mpesaBtn">
-                            Lipa na M-PESA <span class="paymentSpan text-muted">(you need a safaricom number for this option. Also make sure you have the phone with that number close to you as after clicking the place order button a pop up will show up on your phone to confirm the payment)</span>
-                        </label>
-                    </div>
+                    ${printPaymentMethod(customer)}
                     <div class=" d-flex justify-content-between">
                         <div class="final-text">Subtotal <span>(ksh.)</span></div>
                         <div class="final-price" id="cartTotal">${cart.total}</div>
                     </div>
                     <div class=" d-flex justify-content-between">
                         <div class="final-text">Delivery Fee<span>(ksh.)</span></div>
-                        <div class="final-price" id="deliveryFee">500</div>
+                        <div class="final-price" id="deliveryFee">${customer.delivery_fee}</div>
                     </div>
                     <div class=" d-flex justify-content-between">
                         <div class="final-text">Total <span>(ksh.)</span></div>

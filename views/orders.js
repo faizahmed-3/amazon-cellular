@@ -5,6 +5,7 @@ const title = 'Orders'
 module.exports = function ({req, orders, wishlist, cart}) {
     const renderedOrders = orders.map(
         order => {
+
             return `
                <tr>
                     <td>${displayDate(order.orderDate)}</td>
@@ -14,7 +15,7 @@ module.exports = function ({req, orders, wishlist, cart}) {
                             ${printProducts(order.products)}
                         </ul>
                     </td>
-                    <td>${order.total}</td>
+                    <td>${order.total + order.delivery_fee}</td>
                     <td>${printPaymentMethod(order)}</td>
                     ${printStatusBtn(order)}
                 </tr>

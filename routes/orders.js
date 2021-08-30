@@ -33,7 +33,6 @@ async function placeOrder(req, res) {
             )
 
             let order = new Order({
-                total: updateCart.total + 500,
                 products: products
             });
 
@@ -48,7 +47,14 @@ async function placeOrder(req, res) {
 
             order.orderStatus = 'Order placed';
 
-            console.log(`adding order ${sessionstorage.getItem('mpesaDetails')}`)
+            order.total = updateCart.total
+
+            order.delivery_fee = customer[0].delivery_fee
+
+            order.address = {latitude: customer[0].latitude, longitude: customer[0].longitude}
+
+            console.log(order.address);
+
             if (sessionstorage.getItem('mpesaDetails')){
                 order.mpesaDetails = sessionstorage.getItem('mpesaDetails');
                 order.mpesa = req.session.mpesa;
@@ -92,7 +98,6 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    console.log('at post')
 
     req.session.paymentError = null;
 

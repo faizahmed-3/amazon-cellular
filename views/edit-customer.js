@@ -30,8 +30,8 @@ module.exports = ({req, customer, wishlist, cart, input, error}) =>{
                 </div>
                 <div class="mb-2 form-group">
                         <label for="phone" class="form-label" required>Phone Number</label>
-                        <input name="phone" type="number" class="form-control" id="phone" aria-describedby="phone number" value="${getValue(customer, input, 'phone')}" required>
-                        <div class="form-text">For M-Pesa payments, please enter a safaricom number in the format 0712345678/ 0123456789. The initial 0 in the number isn't necessary.</div>
+                        <input name="phone" type="number" class="form-control" id="phone" aria-describedby="phone number" value="0${getValue(customer, input, 'phone')}" required>
+                        <div class="form-text">For M-Pesa payments, please enter a safaricom number in the format 0712345678/ 0123456789.</div>
                         <div class="inputError">${getError(error, 'phone')}</div>
                     </div> 
                 <div class="mb-2 form-group">
@@ -41,6 +41,12 @@ module.exports = ({req, customer, wishlist, cart, input, error}) =>{
                 <div id="map" class="form-control"></div>
                 <input type="hidden" name="latitude" value="${customer.latitude}" id="latitude">
                 <input type="hidden" name="longitude" value="${customer.longitude}" id="longitude">
+                <div class="m-2 form-group">
+                    <label for="delivery_fee" class="form-label" >Delivery Fee (ksh)</label>
+                    <input name="delivery_fee" type="number" class="form-control" id="delivery_fee" aria-describedby="name" value="${getInput(input, 'delivery_fee')}" readonly>
+                    <div class="inputError">${getError(error, 'delivery_fee')}</div>
+                    <input type="hidden" id="distance" name="distance">
+                </div>
                 
                 <div class="d-flex justify-content-evenly mt-4">
                     <button type="submit" class="btn btn-secondary" onclick="location.href='/checkout'">CANCEL</button>
@@ -51,7 +57,7 @@ module.exports = ({req, customer, wishlist, cart, input, error}) =>{
     </div>
 </section>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP7SB8pRSs-0zGJ0ySIuhW32CUMjkvC0s&callback=initMap&libraries=places&v=weekly" async >
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl0Uzc3vtr4IMDZOEj-1mB-kSHN6BsYx4&callback=initMap&libraries=places&v=weekly" async >
 </script>
 
 ${printWishlistModal(req, wishlist)}

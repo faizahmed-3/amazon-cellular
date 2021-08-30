@@ -12,12 +12,12 @@ module.exports = ({orders}) => {
     <button type="button" class="btn btn-primary mt-4 me-3" style="font-size: 0.8rem" onclick="location.href='/admin/orders/new'">Add New Order</button>
     </div> 
     <div class="card-body table-responsive-md">
-        <table class="table table-hover table-bordered">
+        <table class="table table-hover table-bordered" id="orderViewT">
             <thead>
             <tr class="table-dark">
                 <th scope="col" class="ordersHeading">Date</th>
                 <th scope="col" class="ordersEmail">ID</th>
-                <th scope="col" class="ordersHeading">Phone</th>
+                <th scope="col" class="ordersHeading">Contacts</th>
                 <th scope="col" class="ordersHeadingBig">Products</th>
                 <th scope="col" class="ordersHeading">Amount</th>
                 <th scope="col" class="ordersHeading">Payment</th>

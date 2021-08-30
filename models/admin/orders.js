@@ -21,6 +21,11 @@ const ordersSchema = new mongoose.Schema({
     total: {
         type: Number
     },
+    delivery_fee: Number,
+    address: {
+        latitude: Number,
+        longitude: Number
+    },
     orderStatus: String,
     shippingDate: {
         type: Date,

@@ -651,13 +651,13 @@ exports.printOrdersRecent = function (orders) {
 <tr>
     <td class="orderRows">${displayDate(order.orderDate)}</td>
     <td class="orderRows">${order._id}${printBadge(order)}</td>
-    <td class="orderRows">${order.customerID.phone}</td>
+    <td class="orderRows"><a href="tel:${order.customerID.phone}">0${order.customerID.phone}</a><br><br><a href="https://www.google.com/maps/dir/?api=1&origin=-1.283733332480186%2C36.827665514486654&destination=${order.address.latitude}%2C${order.address.longitude}&travelmode=driving" target="_blank">Address</a></td>
     <td>
         <ul class="orderItems">
             ${printProducts(order.products)}
         </ul>
     </td>
-    <td class="orderRows">${order.total}</td>
+    <td class="orderRows">${order.total}<br>+${order.delivery_fee}<br>=${order.total + order.delivery_fee}</td>
     <td class="orderRows">${printPaymentMethod(order)}</td>
     ${printStatusBtn(order)}
     <td>
@@ -668,7 +668,6 @@ exports.printOrdersRecent = function (orders) {
         }).join('')
 }
 
-
 exports.printOrdersNew = function (orders) {
 
     const newOrders = orders.map(
@@ -677,13 +676,13 @@ exports.printOrdersNew = function (orders) {
 <tr>
     <td class="orderRows">${displayDate(order.orderDate)}</td>
     <td class="orderRows">${order._id}${printBadge(order)}</td>
-    <td class="orderRows">${order.customerID.phone}</td>
+    <td class="orderRows"><a href="tel:${order.customerID.phone}">0${order.customerID.phone}</a><br><br><a href="https://www.google.com/maps/dir/?api=1&origin=-1.283733332480186%2C36.827665514486654&destination=${order.address.latitude}%2C${order.address.longitude}&travelmode=driving" target="_blank">Address</a></td>
     <td>
         <ul class="orderItems">
             ${printProducts(order.products)}
         </ul>
     </td>
-    <td class="orderRows">${order.total}</td>
+    <td class="orderRows">${order.total}<br>+${order.delivery_fee}<br>=${order.total + order.delivery_fee}</td>
     <td class="orderRows">${printPaymentMethod(order)}</td>
     ${printStatusBtn(order)}
     <td>

@@ -163,6 +163,13 @@ module.exports = ({title, content}) => {
 } );
     
     $(document).ready(function() {
+    $('#orderViewT').DataTable( {
+        "order": [[ 0, "desc" ]],
+        retrieve: true,
+    } );
+} );
+    
+    $(document).ready(function() {
     $('.table:not(#dashorders,#brandsT,#adminT,#addProductT)').DataTable({
          retrieve: true,
     });

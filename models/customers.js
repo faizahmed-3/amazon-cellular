@@ -21,7 +21,16 @@ const customerSchema = new mongoose.Schema({
         type: Number,
         min: 0,
         trim: true,
-        // unique: true
+    },
+    delivery_fee: {
+        type: Number,
+        min: 0,
+        trim: true,
+    },
+    distance: {
+        type: Number,
+        min: 0,
+        trim: true,
     },
     password: {
         type: String,
@@ -30,6 +39,7 @@ const customerSchema = new mongoose.Schema({
     },
     latitude: Number,
     longitude: Number,
+    address: String,
     orderNotes: {
         type: String,
         minlength: 3,
@@ -64,6 +74,8 @@ function validate(customer) {
         password_confirmation: Joi.any().equal(Joi.ref('password')).options({ messages: { 'any.only': 'Passwords do not match'} }),
         latitude: Joi.number(),
         longitude: Joi.number(),
+        delivery_fee: Joi.number().required(),
+        distance: Joi.number().required(),
     })
 
     const options = {

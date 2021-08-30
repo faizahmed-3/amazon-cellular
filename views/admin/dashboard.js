@@ -36,7 +36,7 @@ module.exports = ({orders, income, unitsSold, totalProducts, customers, best, wo
                     <tr class="table-dark">
                         <th scope="col" class="ordersHeading">Date</th>
                         <th scope="col" class="ordersEmail">ID</th>
-                        <th scope="col" class="ordersHeading">Phone</th>
+                        <th scope="col" class="ordersHeading">Contacts</th>
                         <th scope="col" class="ordersHeadingBig">Products</th>
                         <th scope="col" class="ordersHeading">Amount</th>
                         <th scope="col" class="ordersHeading">Payment</th>

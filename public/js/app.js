@@ -17,12 +17,12 @@ window.addEventListener("scroll", () => {
 
 
 //load same scroll position
-window.addEventListener('scroll', function() {
+window.addEventListener('scroll', function () {
     localStorage.setItem('scrollPosition', window.scrollY);
 }, false);
-window.addEventListener('load', function() {
-    if ( document.referrer === window.location.href && window.location.pathname !== '/register' && window.location.pathname !== '/login' && window.location.pathname !== '/register/edit' && window.location.pathname !== '/checkout' && window.location.pathname !== '/orders' && window.location.pathname !== '/faqs'){
-        if(localStorage.getItem('scrollPosition') !== null){
+window.addEventListener('load', function () {
+    if (document.referrer === window.location.href && window.location.pathname !== '/register' && window.location.pathname !== '/login' && window.location.pathname !== '/register/edit' && window.location.pathname !== '/checkout' && window.location.pathname !== '/orders' && window.location.pathname !== '/faqs') {
+        if (localStorage.getItem('scrollPosition') !== null) {
             window.scrollTo(0, localStorage.getItem('scrollPosition'));
         }
     }
@@ -38,12 +38,12 @@ document.querySelector('#copyright').innerHTML = year;
 window.addEventListener('load', () => {
     let url = window.location.href;
 
-    if (url.includes('#wishlist')){
+    if (url.includes('#wishlist')) {
         let myModal = new bootstrap.Modal(document.querySelector('#wishlist'), {})
         myModal.show()
     }
 
-    if (url.includes('#cart')){
+    if (url.includes('#cart')) {
         let myModal = new bootstrap.Modal(document.querySelector('#cart'), {})
         myModal.show()
     }
@@ -54,7 +54,7 @@ window.addEventListener('load', () => {
 
 // Product view image
 let smallImages = document.querySelectorAll('.prod-small-img');
-if (smallImages.length>0){
+if (smallImages.length > 0) {
     smallImages.forEach(smallImage => {
         smallImage.addEventListener('click', (evt) => {
             const path = evt.path || (evt.composedPath && evt.composedPath());
@@ -78,24 +78,24 @@ if (smallImages.length>0){
 
 //calculate price on cart
 const qtyInputs = document.querySelectorAll('.qty');
-if (qtyInputs.length>0){
+if (qtyInputs.length > 0) {
     const priceInputs = document.querySelectorAll('.itemPrice');
     const subtotalInputs = document.querySelectorAll('.subtotal');
     const total = document.querySelector('.total');
     const totalOutput = document.querySelector('.totalOutput')
-    let sum =0;
+    let sum = 0;
 
-    for (let i=0; i<qtyInputs.length; i++){
+    for (let i = 0; i < qtyInputs.length; i++) {
         subtotalInputs[i].innerHTML = `${qtyInputs[i].value * parseInt(priceInputs[i].innerHTML)}`
         qtyInputs[i].addEventListener('change', evt => {
             subtotalInputs[i].innerHTML = `${evt.target.value * parseInt(priceInputs[i].innerHTML)}`
-            sum=0;
+            sum = 0;
 
             subtotalInputs.forEach(sub => {
                 sum += parseInt(sub.innerHTML);
             })
             total.innerHTML = sum;
-            totalOutput.value= sum
+            totalOutput.value = sum
         })
     }
 
@@ -109,7 +109,7 @@ if (qtyInputs.length>0){
 
 //calculate price on product view
 const qtyInputsPV = document.querySelectorAll('.qtyPV');
-if (qtyInputsPV.length>0){
+if (qtyInputsPV.length > 0) {
     qtyInputsPV.forEach(qtyInput => {
         qtyInput.addEventListener('change', event => {
             const path = event.path || (event.composedPath && event.composedPath());
@@ -124,61 +124,70 @@ if (qtyInputsPV.length>0){
 
 //wishlist and cart buttons
 const wishlistBtns = document.querySelectorAll('.wishlistBtn');
-if (wishlistBtns.length>0){
-    for (let i =0; i<wishlistBtns.length; i++){
+if (wishlistBtns.length > 0) {
+    for (let i = 0; i < wishlistBtns.length; i++) {
         console.log(wishlistBtns[i]);
     }
 }
 
 
-
 //maps
 let latitude = document.querySelector('#latitude')
-if (latitude){
+if (latitude) {
     let map;
     let marker;
-
     let longitude = document.querySelector('#longitude')
 
     function initMap() {
-        let shopLocation = { lat: -1.2843393595008854, lng: 36.82790154887997 };
+        let shopLocation = {lat: -1.283733332480186, lng: 36.827665514486654};
         let userLocation = {lat: parseFloat(latitude.value), lng: parseFloat(longitude.value)}
 
+        let strictBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(-4.6, 33.9),
+            new google.maps.LatLng(2.3, 41.3)
+        );
+
         function getLatLng() {
-            if (latitude.value){
+            if (latitude.value) {
                 return userLocation
             } else return shopLocation;
         }
 
         map = new google.maps.Map(document.getElementById("map"), {
             center: getLatLng(),
+            restriction: {
+                latLngBounds: strictBounds,
+                strictBounds: true,
+            },
             zoom: 15,
             mapTypeId: "roadmap",
-            mapTypeControl: false
+            mapTypeControl: false,
+            streetViewControl: false,
         });
 
         // Create the search box and link it to the UI element.
         const input = document.getElementById("pac-input");
-        const searchBox = new google.maps.places.SearchBox(input);
+        const options = {
+            bounds: strictBounds,
+            strictBounds: true,
+            componentRestrictions: { country: "ke" },
+        };
+        const searchBox = new google.maps.places.SearchBox(input, options);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
         // Bias the SearchBox results towards current map's viewport.
         map.addListener("bounds_changed", () => {
             searchBox.setBounds(map.getBounds());
         });
-        let markers = [];
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
+
+        // Listen for the event fired when the user selects a prediction and retrieve more details for that place.
         searchBox.addListener("places_changed", () => {
             const places = searchBox.getPlaces();
 
             if (places.length == 0) {
                 return;
             }
-            // Clear out the old markers.
-            markers.forEach((marker) => {
-                marker.setMap(null);
-            });
-            markers = [];
+
             // For each place, get the icon, name and location.
             const bounds = new google.maps.LatLngBounds();
             places.forEach((place) => {
@@ -186,22 +195,27 @@ if (latitude){
                     console.log("Returned place contains no geometry");
                     return;
                 }
-                const icon = {
-                    url: place.icon,
-                    size: new google.maps.Size(71, 71),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(25, 25),
-                };
-                // Create a marker for each place.
-                markers.push(
-                    new google.maps.Marker({
-                        map,
-                        icon,
-                        title: place.name,
-                        position: place.geometry.location,
-                    })
-                );
+
+                marker.setMap(null);
+
+                marker = new google.maps.Marker({
+                    map,
+                    draggable: true,
+                    animation: google.maps.Animation.BOUNCE,
+                    position: place.geometry.location,
+                    title: "Delivery Address"
+                });
+
+                latitude.value =  marker.position.lat()
+                longitude.value = marker.position.lng()
+
+                calcRoute()
+
+                google.maps.event.addListener(marker, 'dragend', function (evt) {
+                    latitude.value = evt.latLng.lat();
+                    longitude.value = evt.latLng.lng();
+                    calcRoute()
+                });
 
                 if (place.geometry.viewport) {
                     // Only geocodes have viewport.
@@ -221,24 +235,65 @@ if (latitude){
             title: "Delivery Address"
         });
 
-        if (!latitude.value){
+
+        if (!latitude.value) {
             latitude.value = shopLocation.lat;
             longitude.value = shopLocation.lng;
         }
 
-        google.maps.event.addListener(marker, 'dragend', function(evt){
+        google.maps.event.addListener(marker, 'dragend', function (evt) {
             latitude.value = evt.latLng.lat();
             longitude.value = evt.latLng.lng();
+            calcRoute()
         });
 
+        function calcRoute() {
+            let directionsService = new google.maps.DirectionsService();
+            let delivery_fee = document.querySelector('#delivery_fee');
+            let distance = document.querySelector('#distance');
 
+            let request = {
+                origin: shopLocation,
+                destination: marker.position,
+                travelMode: google.maps.TravelMode.WALKING,
+                unitSystem: google.maps.UnitSystem.METRIC
+            }
+
+            directionsService.route(request, function (result, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    const dist = parseFloat(result.routes[0].legs[0].distance.text)
+                    let df;
+                    distance.value = dist
+                    if (dist<=1){
+                        delivery_fee.value = 0
+                    } else if (dist <= 20){
+                        df = Math.round((dist * 62.5)/50)*50
+                        if (df < 200){
+                            delivery_fee.value = 200
+                        } else {
+                            delivery_fee.value = df
+                        }
+                    } else {
+                        delivery_fee.value = 350
+                    }
+
+                } else {
+
+                    map.setCenter(shopLocation);
+
+                    delivery_fee.value = "Unable to calculate delivery fee";
+                }
+            });
+
+        }
+        calcRoute()
     }
 }
 
 
 //checkout total
 let checkoutTotal = document.querySelector('#checkoutTotal');
-if (checkoutTotal){
+if (checkoutTotal) {
     let cartTotal = document.querySelector('#cartTotal')
     let deliveryFee = document.querySelector('#deliveryFee')
 
@@ -249,16 +304,16 @@ if (checkoutTotal){
 //search panel mobile
 let search = document.querySelector('#bpSearch');
 let searchPanel = document.querySelector('#myOverlay')
-if (search){
-    search.addEventListener('click', ()=> {
+if (search) {
+    search.addEventListener('click', () => {
         searchPanel.style.display = 'block'
         console.log(searchPanel.style.display);
     })
 }
 
 let closeSearch = document.querySelector('.closebtn');
-if (closeSearch){
-    closeSearch.addEventListener('click', ()=> {
+if (closeSearch) {
+    closeSearch.addEventListener('click', () => {
         console.log('got here')
         searchPanel.style.display = 'none'
         console.log(searchPanel.style.display);
@@ -268,7 +323,7 @@ if (closeSearch){
 
 // side filter toggle
 const filterButton = document.querySelector('#filterButton');
-if (filterButton){
+if (filterButton) {
     filterButton.addEventListener('click', (e) => {
         let categoryPage = document.querySelector('.category-main');
         e.preventDefault();
@@ -279,7 +334,7 @@ if (filterButton){
 
 // copy to clipboard
 const c2c = document.querySelectorAll('.c2cLink');
-if (c2c.length>0){
+if (c2c.length > 0) {
     c2c.forEach(link => {
         link.addEventListener('click', evt => {
             const path = evt.path || (evt.composedPath && evt.composedPath());

@@ -72,7 +72,7 @@ exports.stkPush = async (req, res) => {
         })
         .catch( () => {
             console.log('at catch!')
-            req.session.paymentError = `Error in establishing connection to M-PESA, make sure you're using a safaricom number in the format 0712345678/ 0123456789`;
+            req.session.paymentError = `Error in establishing connection to M-PESA <br> make sure you're using a safaricom number in the format 0712345678/ 0123456789.`;
             res.redirect('/checkout');
         })
 }
