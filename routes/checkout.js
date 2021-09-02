@@ -25,8 +25,6 @@ async function goToCheckout(req, res) {
 
 router.get('/', logged, async (req, res) => {
 
-    console.log('at checkout')
-
     let cartUpdate = await Cart.findById(req.session.cartID)
 
     if (Object.keys(req.session.notLoggedCart).length>0){
@@ -38,8 +36,8 @@ router.get('/', logged, async (req, res) => {
         }
 
         cartUpdate.total = req.session.notLoggedCart.total;
+        cartUpdate.shopTotal = req.session.notLoggedCart.shopTotal;
     }
-
 
     await cartUpdate.save();
 
@@ -61,6 +59,7 @@ router.post('/', logged, async (req, res) => {
         }
 
         cartUpdate.total = req.session.loggedInCart.total;
+        cartUpdate.shopTotal = req.session.loggedInCart.shopTotal;
     }
 
     await cartUpdate.save();

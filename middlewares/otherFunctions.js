@@ -10,6 +10,13 @@ function displayDate(date) {
     return `${day}/${month + 1}/${year}`
 }
 
+function displayMonth(date) {
+    let month = date.getMonth();
+    let year = date.getFullYear();
+
+    return `${month + 1}/${year}`
+}
+
 function getInput(input, key) {
     if (input) {
         if (input[key]) {
@@ -201,6 +208,7 @@ function printCartModal(req, cart) {
                             <div> 
                                 <span>  ksh.</span> 
                                 <div class="itemPrice"> ${cartItem._id.price}</div>
+                                <div class="d-none itemShopPrice">${cartItem._id.shop_price}</div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mt-3 mt-lg-4">
@@ -209,6 +217,7 @@ function printCartModal(req, cart) {
                             <div>
                             <span>subtotal (ksh):</span>
                             <div class="subtotal"></div>
+                            <div class="d-none shopSubtotal"></div>
                             </div>
                         </div>
                     </div>
@@ -229,6 +238,7 @@ function printCartModal(req, cart) {
                    <div class="modal-footer d-flex justify-content-between">
                 <div>Total (ksh): <span class="total">0</span></div>
                 <input type="hidden" name="total" class="totalOutput">
+                <input type="hidden" name="shopTotal" class="shopTotalOutput">
                 <button type="submit" class="btn btn-success" id="checkout" formaction="/checkout">
                    Checkout
                 </button>
@@ -304,7 +314,7 @@ async function getModals(req, Wishlist, Cart) {
 
     let cart;
     if (req.session.cartID) {
-        cart = await Cart.findById(req.session.cartID).populate('products._id', '_id product_name price product_images');
+        cart = await Cart.findById(req.session.cartID).populate('products._id', '_id product_name price shop_price product_images');
     } else cart = [];
 
     return [wishlist, cart]
@@ -651,7 +661,7 @@ exports.printOrdersRecent = function (orders) {
 <tr>
     <td class="orderRows">${displayDate(order.orderDate)}</td>
     <td class="orderRows">${order._id}${printBadge(order)}</td>
-    <td class="orderRows"><a href="tel:${order.customerID.phone}">0${order.customerID.phone}</a><br><br><a href="https://www.google.com/maps/dir/?api=1&origin=-1.283733332480186%2C36.827665514486654&destination=${order.address.latitude}%2C${order.address.longitude}&travelmode=driving" target="_blank">Address</a></td>
+    <td class="orderRows"><a href="tel:0${order.customerID.phone}">0${order.customerID.phone}</a><br><br><a href="https://www.google.com/maps/dir/?api=1&origin=-1.283733332480186%2C36.827665514486654&destination=${order.address.latitude}%2C${order.address.longitude}&travelmode=driving" target="_blank">Address</a></td>
     <td>
         <ul class="orderItems">
             ${printProducts(order.products)}
@@ -676,7 +686,7 @@ exports.printOrdersNew = function (orders) {
 <tr>
     <td class="orderRows">${displayDate(order.orderDate)}</td>
     <td class="orderRows">${order._id}${printBadge(order)}</td>
-    <td class="orderRows"><a href="tel:${order.customerID.phone}">0${order.customerID.phone}</a><br><br><a href="https://www.google.com/maps/dir/?api=1&origin=-1.283733332480186%2C36.827665514486654&destination=${order.address.latitude}%2C${order.address.longitude}&travelmode=driving" target="_blank">Address</a></td>
+    <td class="orderRows"><a href="tel:0${order.customerID.phone}">0${order.customerID.phone}</a><br><br><a href="https://www.google.com/maps/dir/?api=1&origin=-1.283733332480186%2C36.827665514486654&destination=${order.address.latitude}%2C${order.address.longitude}&travelmode=driving" target="_blank">Address</a></td>
     <td>
         <ul class="orderItems">
             ${printProducts(order.products)}
@@ -699,6 +709,7 @@ exports.printOrdersNew = function (orders) {
 
 
 exports.displayDate = displayDate;
+exports.displayMonth = displayMonth;
 exports.getInput = getInput;
 exports.getError = getError;
 exports.printProductModal = printProductModal;

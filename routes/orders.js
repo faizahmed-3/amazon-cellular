@@ -33,7 +33,9 @@ async function placeOrder(req, res) {
             )
 
             let order = new Order({
-                products: products
+                products: products,
+                total: updateCart.total,
+                shopTotal: updateCart.shopTotal,
             });
 
             await Cart.findByIdAndUpdate(req.session.cartID, {
@@ -47,13 +49,9 @@ async function placeOrder(req, res) {
 
             order.orderStatus = 'Order placed';
 
-            order.total = updateCart.total
-
             order.delivery_fee = customer[0].delivery_fee
 
             order.address = {latitude: customer[0].latitude, longitude: customer[0].longitude}
-
-            console.log(order.address);
 
             if (sessionstorage.getItem('mpesaDetails')){
                 order.mpesaDetails = sessionstorage.getItem('mpesaDetails');

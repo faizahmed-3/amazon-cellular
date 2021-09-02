@@ -1169,6 +1169,11 @@ body {
       font-weight: normal;
     }
 
+    .reportsLinks{
+      text-decoration: none;
+      color: black;
+    }
+
   }
 
   .mainPanel {
@@ -1292,19 +1297,6 @@ body {
       }
     }
 
-    #chartsRow{
-      margin: 2rem 1rem;
-      .chart-container {
-        background: white;
-        position: relative;
-        margin: auto;
-        padding: 1rem;
-        height: 200px;
-        width: 390px;
-      }
-
-    }
-
     #stats{
       margin: 2rem;
 
@@ -1318,7 +1310,7 @@ body {
 
       .firstRow{
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
       }
 
       .statNum{
@@ -1330,11 +1322,15 @@ body {
       }
 
       .percentage{
+        display: flex;
+        justify-content: flex-end;
         font-size: 1.2rem;
         font-weight: 500;
       }
 
       span{
+        margin-top: 0.5rem;
+        margin-left: 0.2rem;
         font-size: 0.7rem;
         color: black;
         font-weight: normal;
@@ -1677,11 +1673,35 @@ body {
 
 }
 
+
 #errorPage{
   height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+.report-section{
+    .rheading{
+      text-transform: uppercase;
+      font-weight: 500;
+      margin: 1rem;
+      font-size: 1.4rem;
+    }
+
+  .chartsRow {
+    margin: 0 0.5rem 1rem 0.5rem;
+
+    .chart-container {
+      background: white;
+      position: relative;
+      margin: auto;
+      height: 320px;
+      width: 600px;
+    }
+
+  }
 }
 
 

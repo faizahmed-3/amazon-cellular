@@ -6,6 +6,16 @@ module.exports = ({title, req, content}) => {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W552T52XSW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W552T52XSW');
+</script>
+
     <!-- Required meta tags -->
     <title>${title} | Amazon Cellular Outfitters</title>
     <meta charset="utf-8">
@@ -15,6 +25,8 @@ module.exports = ({title, req, content}) => {
     <meta name="keywords" content="kenya, e-commerce, online, cases, screen protectors, audio, earphones, earbuds, apple, iphone, power bank, smart watch, camera, accessories, car, computer, premium, quality">
     <meta property="og:image" content="/img/logosq.webp">
     <meta name="author" content="Faiz Ahmed">
+    
+   
 
     <!--    Favicon -->
     <link rel="icon" href="/img/favicon.ico">

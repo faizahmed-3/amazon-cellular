@@ -2,7 +2,7 @@ const { printOrdersNew, displayDate } = require('../../middlewares/otherFunction
 const layout = require('./layout');
 const title = 'Dashboard';
 
-module.exports = ({orders, income, unitsSold, totalProducts, customers, best, worst}) => {
+module.exports = ({orders, income, unitsSold, totalProducts, totalCustomers, best, worst, allOrders, totalOrders, customers}) => {
 
     function printPerformer(products) {
         return products.map(
@@ -20,6 +20,245 @@ module.exports = ({orders, income, unitsSold, totalProducts, customers, best, wo
                     </tr>                
                 `}
         ).join('')
+    }
+
+    function incomePercentage(orders) {
+        if (orders.length>0){
+            let today = new Date();
+            let sum =0;
+            let sum2 =0;
+            let lw;
+            let lwb1;
+
+            let special = today.setHours(0,0,0)
+            let special2 = new Date(special)
+            let special3 = displayDate(special2)
+            if (displayDate(orders[0].orderDate) === special3){
+                sum += (orders[0].total - orders[0].shopTotal)
+            }
+
+            for (let i=0; i<=6; i++){
+                let dayReformat =  today.setDate(today.getDate()-1);
+                let dayReformat2 = new Date(dayReformat)
+                let dayReformat3 = dayReformat2.setHours(0,0,0)
+                let dayReformat4 = new Date(dayReformat3)
+                let dayReformat5 = displayDate(dayReformat4)
+
+
+                orders.forEach(order => {
+                    let reformat = displayDate(order.orderDate)
+                    if (reformat === dayReformat5){
+                        sum += (order.total - order.shopTotal)
+                    }
+                })
+            }
+
+            lw = sum
+
+            for (let i=0; i<=6; i++){
+                let dayReformat =  today.setDate(today.getDate()-1);
+                let dayReformat2 = new Date(dayReformat)
+                let dayReformat3 = dayReformat2.setHours(0,0,0)
+                let dayReformat4 = new Date(dayReformat3)
+                let dayReformat5 = displayDate(dayReformat4)
+
+
+                orders.forEach(order => {
+                    let reformat = displayDate(order.orderDate)
+
+                    if (reformat === dayReformat5){
+                        sum2 += (order.total - order.shopTotal)
+                    }
+                })
+            }
+
+            lwb1 = sum2
+
+
+            if (lw+lwb1 === 0){
+                return 0
+            } else {
+                let total = ((lw - lwb1)*100)/(lw+lwb1)
+                return Math.round(total)
+            }
+
+        } else {
+            return 0
+        }
+    }
+
+    function ordersPercentage(orders) {
+        if (orders.length>0){
+            let today = new Date();
+            let count =0;
+            let count2 =0;
+            let lw;
+            let lwb1;
+
+            let special = today.setHours(0,0,0)
+            let special2 = new Date(special)
+            let special3 = displayDate(special2)
+            if (displayDate(orders[0].orderDate) === special3){
+                count++
+            }
+
+            for (let i=0; i<=6; i++){
+
+                let dayReformat =  today.setDate(today.getDate()-1);
+                let dayReformat2 = new Date(dayReformat)
+                let dayReformat3 = dayReformat2.setHours(0,0,0)
+                let dayReformat4 = new Date(dayReformat3)
+                let dayReformat5 = displayDate(dayReformat4)
+
+
+                orders.forEach(order => {
+                    let reformat = displayDate(order.orderDate)
+
+                    if (reformat === dayReformat5){
+                        count++
+                    }
+                })
+
+
+            }
+            lw = count
+
+            for (let i=0; i<=6; i++){
+                let dayReformat =  today.setDate(today.getDate()-1);
+                let dayReformat2 = new Date(dayReformat)
+                let dayReformat3 = dayReformat2.setHours(0,0,0)
+                let dayReformat4 = new Date(dayReformat3)
+                let dayReformat5 = displayDate(dayReformat4)
+
+
+
+                orders.forEach(order => {
+                    let reformat = displayDate(order.orderDate)
+
+                    if (reformat === dayReformat5){
+                        count2++
+                    }
+                })
+            }
+
+            lwb1 = count2
+
+            if (lw+lwb1 === 0){
+                return 0
+            } else {
+                let total = ((lw - lwb1)*100)/(lw+lwb1)
+                return Math.round(total)
+            }
+
+        } else {
+            return 0
+        }
+    }
+
+    function customersPercentage(customers) {
+        if (customers.length>0){
+            let today = new Date();
+            let count =0;
+            let count2 =0;
+            let lw;
+            let lwb1;
+
+            let special = today.setHours(0,0,0)
+            let special2 = new Date(special)
+            let special3 = displayDate(special2)
+            if (displayDate(customers[0].dateCreated) === special3){
+                count++
+            }
+
+            for (let i=0; i<=6; i++){
+
+                let dayReformat =  today.setDate(today.getDate()-1);
+                let dayReformat2 = new Date(dayReformat)
+                let dayReformat3 = dayReformat2.setHours(0,0,0)
+                let dayReformat4 = new Date(dayReformat3)
+                let dayReformat5 = displayDate(dayReformat4)
+
+
+                customers.forEach(customer => {
+                    let reformat = displayDate(customer.dateCreated)
+
+                    if (reformat === dayReformat5){
+                        count++
+                    }
+                })
+
+
+            }
+            lw = count
+
+            for (let i=0; i<=6; i++){
+                let dayReformat =  today.setDate(today.getDate()-1);
+                let dayReformat2 = new Date(dayReformat)
+                let dayReformat3 = dayReformat2.setHours(0,0,0)
+                let dayReformat4 = new Date(dayReformat3)
+                let dayReformat5 = displayDate(dayReformat4)
+
+
+
+                customers.forEach(customer => {
+                    let reformat = displayDate(customer.dateCreated)
+
+                    if (reformat === dayReformat5){
+                        count2++
+                    }
+                })
+            }
+
+            lwb1 = count2
+
+            if (lw+lwb1 === 0){
+                return 0
+            } else {
+                let total = ((lw - lwb1)*100)/(lw+lwb1)
+                return Math.round(total)
+            }
+
+        } else {
+            return 0
+        }
+
+    }
+
+    function printStatCard(total, percentage) {
+        if (percentage>0){
+            return `
+                <div class="firstRow">
+                    <div class="statNum">${total}</div>
+                    <i class="fas fa-arrow-up profit"></i>
+                </div>
+                <p class="percentage profit">+${percentage}% <span>(last 7 days)</span></p>
+            `
+        } else if (percentage === 0){
+            return `
+                <div class="firstRow">
+                    <div class="statNum">${total}</div>
+                    <i class="fas fa-minus"></i>
+                </div>
+                <p class="percentage">${percentage}% <span>(last 7 days)</span></p>           
+            `
+        } else if (percentage<0){
+            return `
+                <div class="firstRow">
+                     <div class="statNum">${total}</div>
+                          <i class="fas fa-arrow-down loss"></i>
+                     </div>
+                <p class="percentage loss">-${percentage}% <span>(last 7 days)</span></p>
+            `
+        }
+        else {
+            return `
+                <div class="firstRow">
+                    <div class="statNum">${total}</div>
+<!--                    <i class="fas fa-minus"></i>-->
+                </div>
+                <p class="percentage">Error</p>           
+            `
+        }
     }
 
     return layout({
@@ -61,23 +300,15 @@ module.exports = ({orders, income, unitsSold, totalProducts, customers, best, wo
                     <div class="card-body">
                         <h5 class="card-title">Income</h5>
                         <div class="card-text">
-                            <div class="firstRow">
-                                <div class="statNum"><span>ksh.</span>${income}</div>
-<!--                                <i class="fas fa-arrow-up profit"></i>-->
-                            </div>
-<!--                            <p class="percentage profit">+8.3% <span>(last 7 days)</span></p>-->
+                            ${printStatCard(income, incomePercentage(allOrders))}
                         </div>
                     </div>
                 </div>
                 <div class="card col">
                     <div class="card-body">
-                        <h5 class="card-title">Units Sold</h5>
+                        <h5 class="card-title">Orders</h5>
                         <div class="card-text">
-                            <div class="firstRow">
-                                <div class="statNum">${unitsSold}</div>
-<!--                                <i class="fas fa-arrow-up profit"></i>-->
-                            </div>
-<!--                            <p class="percentage profit">+15% <span>(last 7 days)</span></p>-->
+                            ${printStatCard(totalOrders, ordersPercentage(allOrders))}
                         </div>
                     </div>
                 </div>
@@ -85,11 +316,17 @@ module.exports = ({orders, income, unitsSold, totalProducts, customers, best, wo
                     <div class="card-body">
                         <h5 class="card-title">Customers</h5>
                         <div class="card-text">
-                            <div class="firstRow">
-                                <div class="statNum">${customers}</div>
-<!--                                <i class="fas fa-arrow-down loss"></i>-->
+                            ${printStatCard(totalCustomers, customersPercentage(customers))}
+                        </div>
+                    </div>
+                </div>
+                <div class="card col">
+                    <div class="card-body">
+                        <h5 class="card-title">Units Sold</h5>
+                        <div class="card-text">
+                            <div class="d-flex justify-content-end">
+                                <div class="statNum">${unitsSold}</div>
                             </div>
-<!--                            <p class="percentage loss">-0.5% <span>(last 7 days)</span></p>-->
                         </div>
                     </div>
                 </div>
@@ -97,11 +334,9 @@ module.exports = ({orders, income, unitsSold, totalProducts, customers, best, wo
                     <div class="card-body">
                         <h5 class="card-title">Products</h5>
                         <div class="card-text">
-                            <div class="firstRow">
+                            <div class="d-flex justify-content-end">
                                 <div class="statNum">${totalProducts}</div>
-<!--                                <i class="fas fa-minus"></i>-->
                             </div>
-<!--                            <p class="percentage">0% <span>(last 7 days)</span></p>-->
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     <p>
-                        Amazon Cellular Outfitters is an online as well as physical store based in Nairobi Kenya. We
+                        Amazon Cellular Outfitters is an online as well as physical shop based in Nairobi Kenya. We
                         focus on
                         selling accessories for phones, tablets, smart watches, cameras, car, computer and TVs. Phone
                         accessories
@@ -34,6 +34,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                         step with payment options that are most convenient to our customers. We make deliveries to all
                         counties in Kenya.
                     </p>
+                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=-1.283733332480186%2C36.827665514486654&travelmode=driving" target="_blank">Get directions to our physical shop</a></p>
                 </div>
             </div>
         </div>
@@ -389,7 +390,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     <p>
-                        Amazon Cellular Outfitters is an online as well as physical store based in Nairobi Kenya. We
+                        Amazon Cellular Outfitters is an online as well as physical shop based in Nairobi Kenya. We
                         focus on
                         selling accessories for phones, tablets, smart watches, cameras, car, computer and TVs. Phone
                         accessories
@@ -403,6 +404,8 @@ module.exports = ({req, wishlist, cart, header}) => {
                         step with payment options that are most convenient to our customers. We make deliveries to all
                         counties in Kenya.
                     </p>
+                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=-1.283733332480186%2C36.827665514486654&travelmode=driving" target="_blank">Get directions to our physical shop</a></p>
+
                 </div>
             </div>
         </div>
@@ -758,7 +761,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     <p>
-                        Amazon Cellular Outfitters is an online as well as physical store based in Nairobi Kenya. We
+                        Amazon Cellular Outfitters is an online as well as physical shop based in Nairobi Kenya. We
                         focus on
                         selling accessories for phones, tablets, smart watches, cameras, car, computer and TVs. Phone
                         accessories
@@ -772,6 +775,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                         step with payment options that are most convenient to our customers. We make deliveries to all
                         counties in Kenya.
                     </p>
+                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=-1.283733332480186%2C36.827665514486654&travelmode=driving" target="_blank">Get directions to our physical shop</a></p>
                 </div>
             </div>
         </div>
@@ -1127,7 +1131,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     <p>
-                        Amazon Cellular Outfitters is an online as well as physical store based in Nairobi Kenya. We
+                        Amazon Cellular Outfitters is an online as well as physical shop based in Nairobi Kenya. We
                         focus on
                         selling accessories for phones, tablets, smart watches, cameras, car, computer and TVs. Phone
                         accessories
@@ -1141,6 +1145,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                         step with payment options that are most convenient to our customers. We make deliveries to all
                         counties in Kenya.
                     </p>
+                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=-1.283733332480186%2C36.827665514486654&travelmode=driving" target="_blank">Get directions to our physical shop</a></p>
                 </div>
             </div>
         </div>
@@ -1496,7 +1501,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     <p>
-                        Amazon Cellular Outfitters is an online as well as physical store based in Nairobi Kenya. We
+                        Amazon Cellular Outfitters is an online as well as physical shop based in Nairobi Kenya. We
                         focus on
                         selling accessories for phones, tablets, smart watches, cameras, car, computer and TVs. Phone
                         accessories
@@ -1510,6 +1515,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                         step with payment options that are most convenient to our customers. We make deliveries to all
                         counties in Kenya.
                     </p>
+                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=-1.283733332480186%2C36.827665514486654&travelmode=driving" target="_blank">Get directions to our physical shop</a></p>
                 </div>
             </div>
         </div>
@@ -1865,7 +1871,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     <p>
-                        Amazon Cellular Outfitters is an online as well as physical store based in Nairobi Kenya. We
+                        Amazon Cellular Outfitters is an online as well as physical shop based in Nairobi Kenya. We
                         focus on
                         selling accessories for phones, tablets, smart watches, cameras, car, computer and TVs. Phone
                         accessories
@@ -1879,6 +1885,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                         step with payment options that are most convenient to our customers. We make deliveries to all
                         counties in Kenya.
                     </p>
+                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=-1.283733332480186%2C36.827665514486654&travelmode=driving" target="_blank">Get directions to our physical shop</a></p>
                 </div>
             </div>
         </div>
@@ -2234,7 +2241,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     <p>
-                        Amazon Cellular Outfitters is an online as well as physical store based in Nairobi Kenya. We
+                        Amazon Cellular Outfitters is an online as well as physical shop based in Nairobi Kenya. We
                         focus on
                         selling accessories for phones, tablets, smart watches, cameras, car, computer and TVs. Phone
                         accessories
@@ -2248,6 +2255,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                         step with payment options that are most convenient to our customers. We make deliveries to all
                         counties in Kenya.
                     </p>
+                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=-1.283733332480186%2C36.827665514486654&travelmode=driving" target="_blank">Get directions to our physical shop</a></p>
                 </div>
             </div>
         </div>
@@ -2602,7 +2610,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     <p>
-                        Amazon Cellular Outfitters is an online as well as physical store based in Nairobi Kenya. We
+                        Amazon Cellular Outfitters is an online as well as physical shop based in Nairobi Kenya. We
                         focus on
                         selling accessories for phones, tablets, smart watches, cameras, car, computer and TVs. Phone
                         accessories
@@ -2616,6 +2624,7 @@ module.exports = ({req, wishlist, cart, header}) => {
                         step with payment options that are most convenient to our customers. We make deliveries to all
                         counties in Kenya.
                     </p>
+                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=-1.283733332480186%2C36.827665514486654&travelmode=driving" target="_blank">Get directions to our physical shop</a></p>
                 </div>
             </div>
         </div>

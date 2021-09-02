@@ -80,30 +80,51 @@ if (smallImages.length > 0) {
 const qtyInputs = document.querySelectorAll('.qty');
 if (qtyInputs.length > 0) {
     const priceInputs = document.querySelectorAll('.itemPrice');
+    const shopPriceInputs = document.querySelectorAll('.itemShopPrice');
     const subtotalInputs = document.querySelectorAll('.subtotal');
+    const shopSubtotalInputs = document.querySelectorAll('.shopSubtotal');
     const total = document.querySelector('.total');
     const totalOutput = document.querySelector('.totalOutput')
+    const shopTotalOutput = document.querySelector('.shopTotalOutput')
     let sum = 0;
+    let shopSum = 0;
+
+    console.log(priceInputs);
+    console.log(shopPriceInputs);
 
     for (let i = 0; i < qtyInputs.length; i++) {
         subtotalInputs[i].innerHTML = `${qtyInputs[i].value * parseInt(priceInputs[i].innerHTML)}`
+        shopSubtotalInputs[i].innerHTML = `${qtyInputs[i].value * parseInt(shopPriceInputs[i].innerHTML)}`
+        console.log(`${parseInt(priceInputs[i].innerHTML) }`)
+        console.log(`${ parseInt(shopPriceInputs[i].innerHTML)}`)
         qtyInputs[i].addEventListener('change', evt => {
             subtotalInputs[i].innerHTML = `${evt.target.value * parseInt(priceInputs[i].innerHTML)}`
+            shopSubtotalInputs[i].innerHTML = `${evt.target.value * parseInt(shopPriceInputs[i].innerHTML)}`
             sum = 0;
+            shopSum = 0;
 
             subtotalInputs.forEach(sub => {
                 sum += parseInt(sub.innerHTML);
             })
+            shopSubtotalInputs.forEach(sub => {
+                shopSum += parseInt(sub.innerHTML);
+            })
+
             total.innerHTML = sum;
             totalOutput.value = sum
+            shopTotalOutput.value = shopSum
         })
     }
 
     subtotalInputs.forEach(sub => {
         sum += parseInt(sub.innerHTML);
     })
+    shopSubtotalInputs.forEach(sub => {
+        shopSum += parseInt(sub.innerHTML);
+    })
     total.innerHTML = sum;
     totalOutput.value = sum;
+    shopTotalOutput.value = shopSum
 }
 
 
@@ -170,7 +191,7 @@ if (latitude) {
         const options = {
             bounds: strictBounds,
             strictBounds: true,
-            componentRestrictions: { country: "ke" },
+            componentRestrictions: {country: "ke"},
         };
         const searchBox = new google.maps.places.SearchBox(input, options);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -206,7 +227,7 @@ if (latitude) {
                     title: "Delivery Address"
                 });
 
-                latitude.value =  marker.position.lat()
+                latitude.value = marker.position.lat()
                 longitude.value = marker.position.lng()
 
                 calcRoute()
@@ -264,11 +285,11 @@ if (latitude) {
                     const dist = parseFloat(result.routes[0].legs[0].distance.text)
                     let df;
                     distance.value = dist
-                    if (dist<=1){
+                    if (dist <= 1) {
                         delivery_fee.value = 0
-                    } else if (dist <= 20){
-                        df = Math.round((dist * 62.5)/50)*50
-                        if (df < 200){
+                    } else if (dist <= 20) {
+                        df = Math.round((dist * 62.5) / 50) * 50
+                        if (df < 200) {
                             delivery_fee.value = 200
                         } else {
                             delivery_fee.value = df
@@ -286,6 +307,7 @@ if (latitude) {
             });
 
         }
+
         calcRoute()
     }
 }

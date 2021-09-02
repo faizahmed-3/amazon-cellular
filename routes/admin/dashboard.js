@@ -18,6 +18,8 @@ function returnTotal(query, totalFor) {
 router.get('/', async(req, res) => {
     const orders = await Order.find().sort('-orderDate').populate('customerID', 'email phone')
 
+    const allOrders = await Order.find({orderStatus : 'Delivered'}).sort('-orderDate')
+
     const products = await Product.find().select('income unitsSold')
 
     const income = returnTotal(products, 'income')
@@ -26,13 +28,17 @@ router.get('/', async(req, res) => {
 
     const totalProducts = await Product.find({status: true}).countDocuments()
 
-    const customers = await Customer.find().countDocuments()
+    const totalOrders = await Order.find({orderStatus : 'Delivered'}).countDocuments()
 
-    const best = await Product.find().sort('-income').limit(20)
+    const customers = await Customer.find().sort('-dateCreated')
 
-    const worst = await Product.find().sort('income').limit(20)
+    const totalCustomers = await Customer.find().countDocuments()
 
-    res.send(dashboardTemplate({orders, income, unitsSold, totalProducts, customers ,best, worst}));
+    const best = await Product.find().sort('-income').limit(10)
+
+    const worst = await Product.find().sort('income').limit(10)
+
+    res.send(dashboardTemplate({orders, income, unitsSold, totalProducts, totalCustomers ,best, worst, allOrders, totalOrders, customers}));
 })
 
 

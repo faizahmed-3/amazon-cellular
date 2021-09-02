@@ -1077,6 +1077,10 @@ body #paymentError {
   font-size: 0.8rem;
   font-weight: normal;
 }
+#admin .sidebar .reportsLinks {
+  text-decoration: none;
+  color: black;
+}
 #admin .mainPanel {
   min-width: 100vw;
 }
@@ -1173,17 +1177,6 @@ body #paymentError {
   text-align: left;
   text-transform: capitalize;
 }
-#admin .mainPanel #chartsRow {
-  margin: 2rem 1rem;
-}
-#admin .mainPanel #chartsRow .chart-container {
-  background: white;
-  position: relative;
-  margin: auto;
-  padding: 1rem;
-  height: 200px;
-  width: 390px;
-}
 #admin .mainPanel #stats {
   margin: 2rem;
 }
@@ -1195,7 +1188,7 @@ body #paymentError {
 }
 #admin .mainPanel #stats .firstRow {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 #admin .mainPanel #stats .statNum {
   font-size: 2rem;
@@ -1204,10 +1197,14 @@ body #paymentError {
   font-size: 2.5rem;
 }
 #admin .mainPanel #stats .percentage {
+  display: flex;
+  justify-content: flex-end;
   font-size: 1.2rem;
   font-weight: 500;
 }
 #admin .mainPanel #stats span {
+  margin-top: 0.5rem;
+  margin-left: 0.2rem;
   font-size: 0.7rem;
   color: black;
   font-weight: normal;
@@ -1596,6 +1593,23 @@ body #paymentError {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.report-section .rheading {
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 1rem;
+  font-size: 1.4rem;
+}
+.report-section .chartsRow {
+  margin: 0 0.5rem 1rem 0.5rem;
+}
+.report-section .chartsRow .chart-container {
+  background: white;
+  position: relative;
+  margin: auto;
+  height: 320px;
+  width: 600px;
 }
 
 @media (max-width: 1199.98px) {

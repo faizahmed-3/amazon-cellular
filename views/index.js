@@ -120,7 +120,7 @@ ${printProductModal(product, wishlist, cart)}
                 <h5>Quick Deliveries </h5>
                 <i class="fas fa-shipping-fast"></i>
             </div>
-            <p>Same day deliveries for orders before 12.30pm and within 24 hours for orders after. <span>*Applies for orders within Nairobi metropolitan</span></p>
+            <p>Get your delivery within 24 hours after placing your order. <span>*Applies for orders within Nairobi metropolitan</span></p>
         </div>
         <div class="col-md-6 col-lg-3 mt-2">
             <div class="why-subtitle">

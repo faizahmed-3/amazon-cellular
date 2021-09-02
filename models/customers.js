@@ -32,6 +32,14 @@ const customerSchema = new mongoose.Schema({
         min: 0,
         trim: true,
     },
+    order_count: {
+        type: Number,
+        default: 0
+    },
+    income_gen: {
+        type: Number,
+        default: 0
+    },
     password: {
         type: String,
         minlength: 8,

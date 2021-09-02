@@ -34,7 +34,10 @@ module.exports = ({title, content}) => {
     onload="this.onload=null;this.rel='stylesheet'">
 
     <!--    Tables-->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">   
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ 
 
     <title>${title} | Amazon Cellular</title>
 </head>
@@ -61,27 +64,51 @@ module.exports = ({title, content}) => {
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/'">
                      Products
                 </li>
-                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/categories/'">
-                     Categories
-                </li>
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/brands/'">
                      Brands
+                </li>
+                <li class="list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#reportsMenu">
+                     Reports <i class="fas fa-caret-down ms-1"></i>
+                </li>
+                <div class="collapse collapseMenu" id="reportsMenu">
+                    <div class="card card-body">
+                        <ul class="mt-0 px-0">
+                            <li class="list-group-item list-group-item-action"><a href="https://docs.google.com/spreadsheets/d/19u1WY7CfLrvTKM_drv6T1FhMQX0DzAvi/edit#gid=582228138" target="_blank" class="reportsLinks">Expense Sheet</a></li>                        
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/reports/'">Internal Analytics</li>
+                            <li class="list-group-item list-group-item-action"><a href="https://analytics.google.com/analytics/web/?authuser=1#/p285064233/reports/reportinghub" target="_blank" class="reportsLinks">Google Analytics</a></li>
+                            <li class="list-group-item list-group-item-action">Ad Manager</li>
+                            <li class="list-group-item list-group-item-action"><a href="https://cloud.linode.com/linodes/28161313" target="_blank" class="reportsLinks">Site Server</a></li>
+                            <li class="list-group-item list-group-item-action"><a href="https://console.cloud.google.com/billing/018DEF-BF8131-B63F53?project=my-project-1495784628507" target="_blank" class="reportsLinks">Google Maps</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/customers/'" >
+                     Customers
+                </li>
+                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/categories/'">
+                     Categories
                 </li>
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/special/'">
                      Special Categories
                 </li>
-                <li class="list-group-item list-group-item-action">
-                     Reports
-                </li>
-                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/customers/'" >
-                     Customers
-                </li>
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/admins/'">
                      Admins
                 </li>
-                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/settings/'">
-                    <i class="fas fa-cog"></i> Settings
+                <li class="list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#socialsMenu">
+                     Socials<i class="fas fa-caret-down ms-1"></i>
                 </li>
+                <div class="collapse collapseMenu" id="socialsMenu">
+                    <div class="card card-body">
+                        <ul class="mt-0 px-0">
+                            <li class="list-group-item list-group-item-action"><a href="https://www.facebook.com/Amazon-Cellular-Outfitters-100448395706615" target="_blank" class="reportsLinks">Facebook</a></li>                        
+                            <li class="list-group-item list-group-item-action"><a href="https://www.instagram.com/amazon_cellular_outfitters/" target="_blank" class="reportsLinks">Instagram</a></li>
+                            <li class="list-group-item list-group-item-action"><a href="https://jiji.co.ke/sellerpage-2269531" target="_blank" class="reportsLinks">Jiji</a></li>
+                        </ul>
+                    </div>
+                </div>
+<!--                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/settings/'">-->
+<!--                    <i class="fas fa-cog"></i> Settings-->
+<!--                </li>-->
             </ul>
         </div>
     </div>
@@ -148,19 +175,6 @@ module.exports = ({title, content}) => {
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
 <script >
-    $(document).ready(function() {
-    $('#bestp').DataTable( {
-        "order": [[ 5, "desc" ]],
-        retrieve: true,
-    } );
-} );
-    
-    $(document).ready(function() {
-    $('#worstp').DataTable( {
-        "order": [[ 5, "asc" ]],
-        retrieve: true,
-    } );
-} );
     
     $(document).ready(function() {
     $('#orderViewT').DataTable( {
@@ -170,7 +184,14 @@ module.exports = ({title, content}) => {
 } );
     
     $(document).ready(function() {
-    $('.table:not(#dashorders,#brandsT,#adminT,#addProductT)').DataTable({
+    $('#customersT').DataTable( {
+        "order": [[ 5, "desc" ]],
+        retrieve: true,
+    } );
+} );
+    
+    $(document).ready(function() {
+    $('.table:not(#dashorders,#brandsT,#adminT,#addProductT, #bestp, #worstp)').DataTable({
          retrieve: true,
     });
 } );

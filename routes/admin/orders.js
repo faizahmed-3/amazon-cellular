@@ -3,6 +3,7 @@ const {emailOrderStatus} = require('../../middlewares/otherFunctions')
 const viewOrdersTemplate = require('../../views/admin/orders/index');
 const newOrderTemplate = require('../../views/admin/orders/new');
 const editOrderTemplate = require('../../views/admin/orders/edit');
+const {Customer} = require('../../models/customers');
 const {Order} = require('../../models/admin/orders');
 const {Product} = require('../../models/admin/products');
 const {Category} = require('../../models/admin/categories');
@@ -98,6 +99,10 @@ router.post('/edit/:id', async (req, res) => {
         }
         order.processed = true
         await order.save()
+
+        await Customer.findByIdAndUpdate(order.customerID, {
+            $inc: {order_count: 1, income_gen: (order.total-order.shopTotal)}
+        }, {new: true})
     }
 
     if (order.orderStatus.toLowerCase() === 'cancelled') {

@@ -332,7 +332,6 @@ if (productsList){
             subtotals.forEach(sub => {
                 sum += parseInt(sub.value)
             })
-            sum += 500;
             total.innerHTML = sum;
             totalOutput.value= sum
         } )
@@ -341,7 +340,6 @@ if (productsList){
     subtotals.forEach(sub => {
         sum += parseInt(sub.value)
     })
-    sum += 500;
     total.innerHTML = sum;
     totalOutput.value = sum;
 
@@ -357,7 +355,6 @@ if (productsList){
                 subtotals.forEach(sub => {
                     sum += parseInt(sub.value)
                 })
-                sum += 500;
                 total.innerHTML = sum;
                 totalOutput.value= sum
             } else {
