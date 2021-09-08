@@ -461,6 +461,10 @@ body #paymentError {
   font-weight: 600;
   margin-left: 1rem;
 }
+.product-view .iPV * {
+  font-family: "Montserrat", sans-serif !important;
+  font-size: 1rem;
+}
 
 #footer .footer1 {
   background: #3e3e3e;
@@ -877,7 +881,6 @@ body #paymentError {
 .register a {
   font-weight: 600;
   text-decoration: none;
-  color: black;
 }
 .register .controls {
   width: 90%;

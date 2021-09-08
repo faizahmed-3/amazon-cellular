@@ -1,7 +1,6 @@
 const nodemailer = require("nodemailer");
 const {google} = require('googleapis')
 const config = require('config');
-const {SMTPClient} = require('emailjs')
 
 function displayDate(date) {
     let day = date.getDate();
@@ -80,9 +79,9 @@ function printProductModal(product, wishlist, cart) {
                         </div>
                         <div>
                             <div class="description mt-3"> Description</div>
-                            ${product.description}
+                            <div class="iPV">${product.description}</div>
                             <div class="description">What's in the box</div>
-                            ${product.inBox}
+                            <div class="iPV">${product.inBox}</div>
                         </div>
                     </div>
                 </div>

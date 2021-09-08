@@ -52,13 +52,11 @@ if (document.querySelectorAll('.descriptionBtn').length>0) {
     const descriptionBtns = document.querySelectorAll('.descriptionBtn');
     window.addEventListener("load", () => {
         descriptionFrame.document.head.innerHTML += `<link rel="preconnect" href="https://fonts.gstatic.com">
-            <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">`;
-        descriptionFrame.document.body.style.fontFamily = 'Montserrat';
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> <link rel="stylesheet" href="/css/iframe.css" >`;
         descriptionFrame.document.designMode = 'On'
 
         inBoxFrame.document.head.innerHTML += `<link rel="preconnect" href="https://fonts.gstatic.com">
-            <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">`;
-        inBoxFrame.document.body.style.fontFamily = 'Montserrat';
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> <link rel="stylesheet" href="/css/iframe.css" >`;
         inBoxFrame.document.designMode = 'On'
     });
 
@@ -75,15 +73,10 @@ if (document.querySelectorAll('.descriptionBtn').length>0) {
         descriptionInput.value = descriptionFrame.document.body.innerHTML;
     })
 
-    descriptionFrame.document.addEventListener('paste', (event) => {
-        event.preventDefault()
-        let paste = (event.clipboardData || window.clipboardData).getData('text');
-        descriptionFrame.document.body.innerHTML += paste;
-    })
-
     const descriptionCopy = document.querySelector('.descriptionCopy');
     if (descriptionCopy.innerHTML !== 'null' ){
         descriptionFrame.document.body.innerHTML = descriptionCopy.innerHTML;
+        descriptionInput.value = descriptionCopy.innerHTML;
     }
 
 
@@ -101,15 +94,10 @@ if (document.querySelectorAll('.descriptionBtn').length>0) {
         inBoxInput.value = inBoxFrame.document.body.innerHTML;
     })
 
-    inBoxFrame.document.addEventListener('paste', (event) => {
-        event.preventDefault()
-        let paste = (event.clipboardData || window.clipboardData).getData('text');
-        inBoxFrame.document.body.innerHTML += paste;
-    })
-
     const inBoxCopy = document.querySelector('.inBoxCopy');
     if (inBoxCopy.innerHTML !== 'null'){
         inBoxFrame.document.body.innerHTML = inBoxCopy.innerHTML;
+        inBoxInput.value = inBoxCopy.innerHTML;
     }
 }
 
