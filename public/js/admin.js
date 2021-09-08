@@ -300,6 +300,7 @@ if (subBrand) {
 }
 
 
+// add shop price to order
 const productsList = document.querySelector('.orderListEdit')
 if (productsList){
 
@@ -353,6 +354,34 @@ if (productsList){
     })
 
 
+}
+
+
+// copy to clipboard
+const c2c = document.querySelectorAll('.orderClip');
+if (c2c.length > 0) {
+    c2c.forEach(link => {
+        link.addEventListener('click', evt => {
+
+            for (let i=0; i<=c2c.length-1; i++){
+                c2c[i].innerHTML = `<i class="far fa-clipboard"></i>`
+            }
+
+            const path = evt.path || (evt.composedPath && evt.composedPath());
+
+            console.log(path);
+
+            const phone = path[4].children[2].children[0].innerText
+            const address = path[4].children[2].children[3].href
+            const products = path[4].children[3].innerText
+            const payment = path[4].children[5].innerText
+            const totalAmount = path[4].children[4].innerText
+            const amount = totalAmount.split('=')
+
+            navigator.clipboard.writeText(`Phone number - ${phone}\n\nAddress - ${address}\n\nPayment - ${payment}\n\nAmount - ${amount[1]}\n\n${products}`);
+            path[1].innerHTML = ` <i class="fas fa-clipboard"></i>`
+        })
+    })
 }
 
 

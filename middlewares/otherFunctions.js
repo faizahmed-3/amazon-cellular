@@ -95,7 +95,7 @@ function printProductModal(product, wishlist, cart) {
 function printMainImage(product) {
     let mainImage;
     product.product_images.forEach(productImage => {
-        if (productImage.filename.includes('image1')) {
+        if (productImage.filename.includes('image1') && !productImage.filename.includes('image10')) {
             mainImage = productImage.filename
         }
     })
@@ -735,6 +735,8 @@ exports.printOrdersRecent = function (orders) {
     ${printStatusBtn(order)}
     <td>
         <a href="/admin/orders/edit/${order._id}"><i class="far fa-edit"></i></a>
+        <div class="ms-3 d-inline"><button class="orderClip formBtn"> <i class="far fa-clipboard"></i></button></div>
+
     </td>
 </tr>
             `
@@ -760,6 +762,7 @@ exports.printOrdersNew = function (orders) {
     ${printStatusBtn(order)}
     <td>
         <a href="/admin/orders/edit/${order._id}"><i class="far fa-edit"></i></a>
+        <div class="ms-3 d-inline"><button class="orderClip formBtn"> <i class="far fa-clipboard"></i></button></div>
     </td>
 </tr>
             `

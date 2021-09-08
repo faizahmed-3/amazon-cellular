@@ -5,7 +5,6 @@ const title = 'Checkout'
 
 module.exports = function ({req, customer, wishlist, cart, paymentError}) {
 
-
     function renderCustomer(customer) {
         return `
                 <div class="mb-2 form-group">
@@ -66,7 +65,7 @@ module.exports = function ({req, customer, wishlist, cart, paymentError}) {
     }
 
     function printPaymentMethod(customer) {
-        if (customer.distance <= 20){
+        if (customer.distance <= 6.5){
             return `
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="mpesa" value="false" id="cash" checked>

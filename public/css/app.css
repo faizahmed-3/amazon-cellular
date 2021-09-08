@@ -1129,6 +1129,9 @@ body #paymentError {
   font-size: 1.5rem;
   font-weight: 500;
 }
+#admin .mainPanel .order .fa-clipboard {
+  font-size: 1.5rem;
+}
 #admin .mainPanel .order .orderItems {
   text-transform: capitalize;
   text-align: start;
@@ -1513,6 +1516,9 @@ body #paymentError {
 #viewProducts .far {
   font-size: 1.5rem;
   font-weight: 500;
+}
+#viewProducts .fa-clipboard {
+  font-size: 1.5rem;
 }
 #viewProducts .fa-trash-alt {
   color: #DC3545;

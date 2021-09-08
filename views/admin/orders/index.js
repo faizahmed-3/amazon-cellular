@@ -22,7 +22,7 @@ module.exports = ({orders}) => {
                 <th scope="col" class="ordersHeading">Amount</th>
                 <th scope="col" class="ordersHeading">Payment</th>
                 <th scope="col" class="ordersHeading">Status</th>
-                <th scope="col" class="ordersHeading">Edit</th>
+                <th scope="col" class="ordersHeading">Actions</th>
             </tr>
             </thead>
             <tbody>
