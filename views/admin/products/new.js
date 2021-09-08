@@ -53,7 +53,7 @@ module.exports = ({categories, brands, specials, input, error}) => {
 
     return layout({
         title: title,
-        content: `
+        content: ` 
 <div id="add-product" class="container card mt-3 mb-5">
     <div class="card-header">
         Product Information
@@ -77,7 +77,7 @@ module.exports = ({categories, brands, specials, input, error}) => {
                         <option value="">-Select a category-</option>
                         ${renderedCategories}
                     </select>
-                    <div class="form-text">press the first letter repeatedly to scroll</div>
+                    <div class="form-text">quickly type the name to select</div>
                 </div>
                 <div class="mb-3 col-md-4 form-group ">
                     <label for="brand" class="form-label" required>Brand</label>
@@ -85,7 +85,7 @@ module.exports = ({categories, brands, specials, input, error}) => {
                         <option value="">-Select a brand or a sub brand-</option>
                         ${renderedBrands}
                     </select>
-                    <div class="form-text">press the first letter repeatedly to scroll</div>
+                    <div class="form-text">quickly type the name to select</div>
                 </div>
                 <div class="mb-3 col-md-4 form-group ">
                     <label for="special" class="form-label" required>Special Category</label>
@@ -203,7 +203,7 @@ module.exports = ({categories, brands, specials, input, error}) => {
                         <td>
                             <input type="number" name="price" min="1" value="${getInput(input, 'price')}" required>
                             <div class="inputError">${getError(error, 'price')}</div>
-                        </td>
+                        </td>   
                     </tr>
                     </tbody>
                 </table>

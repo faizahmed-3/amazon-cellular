@@ -85,7 +85,7 @@ function validate(product) {
         inBox: Joi.string().optional().allow(''),
         quantity: Joi.number().required(),
         shop_price: Joi.number().required(),
-        price: Joi.number().required(),
+        price: Joi.number().greater(Joi.ref('shop_price')).required(),
         status: Joi.boolean()
 
     }).unknown(true);;

@@ -89,14 +89,9 @@ if (qtyInputs.length > 0) {
     let sum = 0;
     let shopSum = 0;
 
-    console.log(priceInputs);
-    console.log(shopPriceInputs);
-
     for (let i = 0; i < qtyInputs.length; i++) {
         subtotalInputs[i].innerHTML = `${qtyInputs[i].value * parseInt(priceInputs[i].innerHTML)}`
         shopSubtotalInputs[i].innerHTML = `${qtyInputs[i].value * parseInt(shopPriceInputs[i].innerHTML)}`
-        console.log(`${parseInt(priceInputs[i].innerHTML) }`)
-        console.log(`${ parseInt(shopPriceInputs[i].innerHTML)}`)
         qtyInputs[i].addEventListener('change', evt => {
             subtotalInputs[i].innerHTML = `${evt.target.value * parseInt(priceInputs[i].innerHTML)}`
             shopSubtotalInputs[i].innerHTML = `${evt.target.value * parseInt(shopPriceInputs[i].innerHTML)}`
@@ -159,7 +154,7 @@ if (latitude) {
     let marker;
     let longitude = document.querySelector('#longitude')
 
-    function initMap() {
+    window.initMap = function initMap() {
         let shopLocation = {lat: -1.283733332480186, lng: 36.827665514486654};
         let userLocation = {lat: parseFloat(latitude.value), lng: parseFloat(longitude.value)}
 
@@ -272,6 +267,7 @@ if (latitude) {
             let directionsService = new google.maps.DirectionsService();
             let delivery_fee = document.querySelector('#delivery_fee');
             let distance = document.querySelector('#distance');
+            let deliveryExplaination = document.querySelector('.deliveryExplaination');
 
             let request = {
                 origin: shopLocation,
@@ -287,15 +283,21 @@ if (latitude) {
                     distance.value = dist
                     if (dist <= 1) {
                         delivery_fee.value = 0
-                    } else if (dist <= 20) {
-                        df = Math.round((dist * 62.5) / 50) * 50
+                        deliveryExplaination.innerHTML = `Delivery within 24 hours with an option of payment on delivery.`
+                    } else if (dist <= 6) {
+                        df = Math.round((dist * 55) / 50) * 50
+                        deliveryExplaination.innerHTML = `Delivery within 24 hours with an option of payment on delivery.`
                         if (df < 200) {
                             delivery_fee.value = 200
                         } else {
                             delivery_fee.value = df
                         }
-                    } else {
+                    } else if (dist<=50){
+                        delivery_fee.value = 300
+                        deliveryExplaination.innerHTML = `Lipa na MPESA only, no payment on delivery option.`
+                    } else{
                         delivery_fee.value = 350
+                        deliveryExplaination.innerHTML = `Lipa na MPESA only, no payment on delivery option. Delivery may take more that 24 hours`
                     }
 
                 } else {
@@ -329,16 +331,13 @@ let searchPanel = document.querySelector('#myOverlay')
 if (search) {
     search.addEventListener('click', () => {
         searchPanel.style.display = 'block'
-        console.log(searchPanel.style.display);
     })
 }
 
 let closeSearch = document.querySelector('.closebtn');
 if (closeSearch) {
     closeSearch.addEventListener('click', () => {
-        console.log('got here')
         searchPanel.style.display = 'none'
-        console.log(searchPanel.style.display);
     })
 }
 

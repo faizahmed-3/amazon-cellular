@@ -8,6 +8,8 @@ const express = require('express');
 const router = express.Router();
 
 async function post(req, res) {
+
+
     const {error} = validate(req.body);
     if (error) return res.status(400).send(addBrandTemplate({input: req.body, error: error.details[0]}));
 

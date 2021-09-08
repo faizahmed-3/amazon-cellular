@@ -26,6 +26,8 @@ module.exports = ({title, req, content}) => {
     <meta property="og:image" content="/img/logosq.webp">
     <meta name="author" content="Faiz Ahmed">
     
+    <!-- Maps   -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
    
 
     <!--    Favicon -->
@@ -53,8 +55,6 @@ module.exports = ({title, req, content}) => {
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" as="style"
     onload="this.onload=null;this.rel='stylesheet'">
 
-    <!-- Maps   -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 <body>
 

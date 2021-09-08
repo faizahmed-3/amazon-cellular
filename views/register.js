@@ -67,6 +67,7 @@ module.exports = ({req, wishlist, cart, input, error, exists}) =>{
                 <div class="m-2 form-group">
                     <label for="delivery_fee" class="form-label" >Delivery Fee (ksh)</label>
                     <input name="delivery_fee" type="number" class="form-control" id="delivery_fee" aria-describedby="name" value="${getInput(input, 'delivery_fee')}" readonly>
+                    <div class="form-text deliveryExplaination"></div>
                     <div class="inputError">${getError(error, 'delivery_fee')}</div>
                     <input type="hidden" id="distance" name="distance">
                 </div>
@@ -80,12 +81,12 @@ module.exports = ({req, wishlist, cart, input, error, exists}) =>{
     </div>
 </section>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl0Uzc3vtr4IMDZOEj-1mB-kSHN6BsYx4&callback=initMap&libraries=places&v=weekly" async >
-</script>
-
 ${printWishlistModal(req, wishlist)}
 
 ${printCartModal(req, cart)}
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl0Uzc3vtr4IMDZOEj-1mB-kSHN6BsYx4&callback=initMap&libraries=places&v=weekly" async defer>
+</script>
 
         `})
 }

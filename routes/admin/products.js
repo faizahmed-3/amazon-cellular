@@ -13,14 +13,13 @@ const express = require('express');
 const router = express.Router();
 
 async function post(req, res) {
+
     const {error} = validate(req.body);
-    if (error) return res.send(addProductTemplate({
-        input: req.body,
-        error: error.details[0],
-        categories,
-        brands,
-        specials
-    }))
+    if (error) {
+        req.session.input = req.body
+        req.session.error = error.details[0]
+        return res.status(400).redirect(`/admin/products/error`)
+    }
 
     const product_images = []
     const reqFiles = []
@@ -74,6 +73,8 @@ router.get('/new', async (req, res) => {
     const brands = await Brand.find().select('_id brand_name subBrands').collation({locale: "en" }).sort('brand_name');
     const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
 
+    req.session.errorUrl = req.originalUrl
+
     res.send(addProductTemplate({categories, brands, specials}));
 });
 
@@ -113,6 +114,8 @@ router.get('/edit/:id', async (req, res) => {
     const brands = await Brand.find().select('_id brand_name brandCategoryID subBrands').collation({locale: "en" }).sort('brand_name');
     const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
 
+    req.session.errorUrl = req.originalUrl
+    req.session.errorProductEdit = product
 
     res.send(editProductTemplate({product, categories, brands, specials}));
 });
@@ -205,6 +208,27 @@ router.post('/edit/:id', productImagesUpload, async (req, res) => {
 
     res.redirect('/admin/products');
 });
+
+router.get('/error', async (req, res) => {
+    const categories = await Category.find().select('_id category_name').collation({locale: "en" }).sort('category_name');
+    const brands = await Brand.find().select('_id brand_name subBrands').collation({locale: "en" }).sort('brand_name');
+    const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
+    
+    if (req.session.errorUrl.toString() === '/admin/products/edit'){
+        const product = req.session.errorProductEdit
+        req.session.errorUrl = null
+        req.session.errorProductEdit = null
+
+        res.send(editProductTemplate({ product, categories, brands, specials}));
+    } else if (req.session.errorUrl.toString() === '/admin/products/new'){
+        req.session.errorUrl = null
+
+        res.send(addProductTemplate({categories, brands, specials, input: req.session.input, error: req.session.error}));
+    } else {
+        throw new Error('Fatal error')
+    }
+
+})
 
 router.post('/delete/:id', async (req, res) => {
     const valid = mongoose.isValidObjectId(req.params.id);

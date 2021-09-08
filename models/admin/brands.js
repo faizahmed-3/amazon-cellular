@@ -59,7 +59,7 @@ const Brand = mongoose.model('Brand', brandsSchema);
 
 function validate(brand) {
     const schema = Joi.object({
-        brand_name: Joi.string().required().min(3).max(255),
+        brand_name: Joi.string().required().max(255),
     }).unknown(true);
 
     const options = {

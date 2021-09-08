@@ -247,7 +247,7 @@ module.exports = ({orders, income, unitsSold, totalProducts, totalCustomers, bes
                      <div class="statNum">${total}</div>
                           <i class="fas fa-arrow-down loss"></i>
                      </div>
-                <p class="percentage loss">-${percentage}% <span>(last 7 days)</span></p>
+                <p class="percentage loss">${percentage}% <span>(last 7 days)</span></p>
             `
         }
         else {

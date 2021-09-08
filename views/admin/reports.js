@@ -20,14 +20,10 @@ module.exports = ({orders, customers, categories, brands}) => {
         let special4 = special2.getDate()
         orders.forEach(order => {
             if (displayDate(order.orderDate) === special3){
-                console.log(`order exists ${order.total} - ${order.shopTotal}`)
-                console.log(order)
                 specialSum += (order.total - order.shopTotal)
                 specialCount++
             }
         })
-
-        console.log(`${special4} - ${specialSum}`)
 
         data.date.push(special4)
         data.income.push(specialSum)
@@ -58,8 +54,6 @@ module.exports = ({orders, customers, categories, brands}) => {
             data.income.push(sum)
             data.ordersCount.push(count)
         }
-
-        console.log(`FINISHED LOOP...............................`)
 
         return data
     }

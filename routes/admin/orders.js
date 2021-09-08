@@ -63,7 +63,7 @@ router.post('/edit/:id', async (req, res) => {
             new: false
         }, {new: true}).populate('customerID', 'email phone full_name');
 
-        // emailOrderStatus(order, order.customerID.email, order.customerID.full_name).catch(console.error);
+        await emailOrderStatus(order, order.customerID.email, order.customerID.full_name).catch(console.error);
     }
 
     if (order.orderStatus.toLowerCase() === 'delivered') {

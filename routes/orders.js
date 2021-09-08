@@ -62,7 +62,7 @@ async function placeOrder(req, res) {
 
             order = await order.save()
 
-            // emailOrderStatus(order, customer[0].email, customer[0].full_name).catch(console.error);
+            await emailOrderStatus(order, customer[0].email, customer[0].full_name).catch(console.error);
 
             return Order.find({customerID: order.customerID}).sort('-orderDate')
         }
@@ -116,7 +116,6 @@ router.post('/', async (req, res) => {
 
         res.send(ordersTemplate({req, orders, wishlist, cart}))
     } else if (req.session.mpesa === 'true') {
-        console.log('going to mpesa')
         res.redirect('/orders/mpesa')
     }
 })
@@ -128,9 +127,6 @@ router.get('/mpesa', accessToken, async(req, res) => {
 router.post('/paying', async (req, res) => {
     sessionstorage.setItem('paymentResults', req.body.Body.stkCallback)
 
-    console.log('Paying...')
-    console.log(sessionstorage.getItem('paymentResults'));
-
     if (sessionstorage.getItem('paymentResults').ResultCode === 0) {
         sessionstorage.setItem('mpesaDetails', {
             amount: sessionstorage.getItem('paymentResults').CallbackMetadata.Item[0].Value,
@@ -138,11 +134,6 @@ router.post('/paying', async (req, res) => {
             transactionDate: sessionstorage.getItem('paymentResults').CallbackMetadata.Item[2].Value,
             phone: sessionstorage.getItem('paymentResults').CallbackMetadata.Item[3].Value,
         })
-        console.log(sessionstorage.getItem('mpesaDetails'));
-        console.log('payment successful')
-
-    } else {
-        console.log('payment failed')
     }
 
 })
@@ -150,15 +141,11 @@ router.post('/paying', async (req, res) => {
 router.get('/confirm', (req, res) => {
     if (sessionstorage.getItem('paymentResults')){
         if (sessionstorage.getItem('paymentResults').ResultCode === 0) {
-            console.log('confirmation successful')
-            console.log(sessionstorage.getItem('mpesaDetails'))
             res.redirect('/orders')
         } else {
-            console.log('confirmation failed')
             res.send(confirmTemplate({confirmationError: true}))
         }
     } else {
-        console.log('confirmation failed at else else')
         res.send(confirmTemplate({confirmationError: true}))
     }
 
@@ -168,15 +155,12 @@ router.get('/cancel', (req, res) => {
 
     if (sessionstorage.getItem('paymentResults')) {
         if (sessionstorage.getItem('paymentResults').ResultCode === 0) {
-            console.log('confirmation successful')
             res.redirect('/orders')
         } else {
-            console.log('cancel confirmation failed in if')
             req.session.paymentError = sessionstorage.getItem('paymentResults').ResultDesc
             res.redirect('/checkout')
         }
     } else {
-        console.log('cancel confirmation failed outside if')
         req.session.paymentError = 'An error occured with the payment'
         res.redirect('/checkout')
     }

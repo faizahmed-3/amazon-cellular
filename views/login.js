@@ -38,7 +38,8 @@ module.exports = ({req, wishlist, cart, input, error, incorrect}) => {
                 </div>
                 <div class="text-center">
                     <button type="submit" class="mt-1 btn btn-success">SUBMIT</button>
-                    <p class="mt-1">Don't have an account yet? <a href="/register">Create an account</a></p>
+                    <p class="my-2"><a href="/login/forgot">Forgot Password?</a></p>
+                    <p class="my-2">Don't have an account yet? <a href="/register">Create an account</a></p>
                 </div>
             </form>
         </div>
