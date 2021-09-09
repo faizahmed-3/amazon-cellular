@@ -2274,13 +2274,13 @@ body #paymentError {
   }
   #admin .mainPanel .order {
     width: 98%;
-    margin: 1rem 0.5rem 1rem 0.3rem;
+    margin: 1rem 0.5rem 0.5rem 0.3rem;
   }
   #admin .mainPanel .order .card-body {
     margin-right: 0.7rem;
   }
   #admin .mainPanel .order th {
-    min-width: 5rem;
+    min-width: 6rem;
   }
   #admin .mainPanel .order .itemsTh {
     min-width: 20rem;
