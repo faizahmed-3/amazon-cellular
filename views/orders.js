@@ -33,7 +33,7 @@ module.exports = function ({req, orders, wishlist, cart}) {
         <div class="card-header">
             Orders
         </div>
-        <div class="card-body table-responsive-md">
+        <div class="card-body table-responsive-lg">
             <table class="table table-striped table-bordered">
                 <thead >
                 <tr>

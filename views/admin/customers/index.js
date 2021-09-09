@@ -21,7 +21,7 @@ module.exports = ({customers}) => {
         title: title,
         content: `
         <div id="viewProducts" class="card ">
-    <div class="card-body table-responsive-md">
+    <div class="card-body table-responsive-lg">
         <table class="table table-hover table-bordered" id="customersT">
             <thead>
             <tr class="table-dark">

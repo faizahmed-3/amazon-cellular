@@ -46,7 +46,7 @@ module.exports = ({categories}) => {
 <!--    <div class="d-flex justify-content-end">-->
 <!--    <button type="button" class="btn btn-primary mt-4 me-3" style="font-size: 0.8rem" onclick="location.href='/admin/categories/new'">Add New Category</button>-->
 <!--    </div>    -->
-    <div class="card-body table-responsive-md ">
+    <div class="card-body table-responsive-lg ">
         <table class="table table-hover table-bordered">
             <thead>
             <tr class="table-dark">

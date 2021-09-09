@@ -19,12 +19,10 @@ const ordersSchema = new mongoose.Schema({
         product_name: String
     }],
     total: {
-        type: Number,
-        default: 0
+        type: Number
     },
     shopTotal: {
-        type: Number,
-        default: 0
+        type: Number
     },
     delivery_fee: Number,
     address: {

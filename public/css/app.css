@@ -2273,20 +2273,54 @@ body #paymentError {
     color: #DC3545;
   }
   #admin .mainPanel .order {
-    width: 95%;
+    width: 98%;
+    margin: 1rem 0.5rem 1rem 0.3rem;
   }
   #admin .mainPanel .order .card-body {
     margin-right: 0.7rem;
   }
+  #admin .mainPanel .order th {
+    min-width: 5rem;
+  }
+  #admin .mainPanel .order .itemsTh {
+    min-width: 20rem;
+  }
   #admin .mainPanel .order .status {
-    min-width: 8rem;
+    min-width: 10rem;
   }
   #admin .mainPanel .order td {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
   #admin .mainPanel .order .btn {
     width: 7rem;
     font-size: 0.7rem;
+  }
+  #admin .mainPanel .order .ordersHeadingBig {
+    min-width: 25rem;
+  }
+  #admin .mainPanel .order .performer .performerName {
+    min-width: 25rem;
+  }
+
+  #viewProducts {
+    margin: 1rem 0.5rem 1rem 0.3rem;
+  }
+  #viewProducts .ordersHeadingBig {
+    min-width: 25rem;
+  }
+  #viewProducts .product-name-heading {
+    min-width: 18rem;
+    font-size: 0.9rem;
+  }
+  #viewProducts .product-others, #viewProducts .tableHeader {
+    font-size: 0.9rem;
+  }
+  #viewProducts .tableHeaderBig {
+    font-size: 0.9rem;
+    min-width: 18rem;
+  }
+  #viewProducts tr {
+    font-size: 0.87rem;
   }
 
   #add-product li {
@@ -2815,35 +2849,6 @@ body #paymentError {
   #admin .mainPanel .navbar .navbar-brand {
     font-size: 1.3rem;
   }
-  #admin .mainPanel .order {
-    width: 95%;
-    margin: 1rem 0.5rem 1rem 0.3rem;
-  }
-  #admin .mainPanel .order .card-body {
-    margin-right: 0.7rem;
-  }
-  #admin .mainPanel .order th {
-    min-width: 5rem;
-  }
-  #admin .mainPanel .order .itemsTh {
-    min-width: 20rem;
-  }
-  #admin .mainPanel .order .status {
-    min-width: 10rem;
-  }
-  #admin .mainPanel .order td {
-    font-size: 0.9rem;
-  }
-  #admin .mainPanel .order .btn {
-    width: 7rem;
-    font-size: 0.7rem;
-  }
-  #admin .mainPanel .order .ordersHeadingBig {
-    min-width: 25rem;
-  }
-  #admin .mainPanel .order .performer .performerName {
-    min-width: 25rem;
-  }
   #admin .mainPanel #chartsRow .chart-container {
     padding: 0;
     height: 178px;
@@ -2852,6 +2857,9 @@ body #paymentError {
   #admin .mainPanel #stats .card {
     margin-right: 0;
     flex-basis: 13rem;
+  }
+  #admin .mainPanel .order {
+    width: 95%;
   }
 
   #faq {
@@ -2873,27 +2881,6 @@ body #paymentError {
   }
   #faq .faqLgImage {
     height: 100%;
-  }
-
-  #viewProducts {
-    margin: 1rem 0.5rem 1rem 0.3rem;
-  }
-  #viewProducts .ordersHeadingBig {
-    min-width: 25rem;
-  }
-  #viewProducts .product-name-heading {
-    min-width: 18rem;
-    font-size: 0.9rem;
-  }
-  #viewProducts .product-others, #viewProducts .tableHeader {
-    font-size: 0.9rem;
-  }
-  #viewProducts .tableHeaderBig {
-    font-size: 0.9rem;
-    min-width: 18rem;
-  }
-  #viewProducts tr {
-    font-size: 0.87rem;
   }
 
   #add-product .card-header {

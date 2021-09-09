@@ -269,7 +269,7 @@ module.exports = ({orders, income, unitsSold, totalProducts, totalCustomers, bes
             <div class="card-header text-center">
                 New Orders
             </div>
-            <div class="card-body table-responsive-md">
+            <div class="card-body table-responsive-lg">
                 <table class="table table-hover table-bordered " id="dashorders">
                     <thead>
                     <tr class="table-dark">
@@ -349,7 +349,7 @@ module.exports = ({orders, income, unitsSold, totalProducts, totalCustomers, bes
             <div class="card-header text-center">
                 Best Performers
             </div>
-            <div class="card-body table-responsive-md">
+            <div class="card-body table-responsive-lg">
                 <table class="table table-hover table-bordered performer" id="bestp">
                     <thead>
                     <tr class="table-dark">
@@ -375,7 +375,7 @@ module.exports = ({orders, income, unitsSold, totalProducts, totalCustomers, bes
             <div class="card-header text-center">
                 Worst Performers
             </div>
-            <div class="card-body table-responsive-md">
+            <div class="card-body table-responsive-lg">
                 <table class="table table-hover table-bordered performer" id="worstp">
                     <thead>
                     <tr class="table-dark">

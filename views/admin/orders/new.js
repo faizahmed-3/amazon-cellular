@@ -11,10 +11,22 @@ module.exports = ({input, error}) => {
     </div>
     <div class="card-body">
         <form method="get" >
-            <div class="mb-3 form-group">
-                <label for="special_name" class="form-label" required>Email</label>
-                <input name="special_name" type="text" class="form-control" id="special_name" aria-describedby="special_name" value="${getInput(input, 'special_name')}" required>
-                <div class="inputError">${getError(error, 'special_name')}</div>
+            <div class="row mb-4">
+                <div class="mb-3 col-md-6 form-group">
+                <label for="email" class="form-label" required>Email</label>
+                <input name="email" type="text" class="form-control" id="email" aria-describedby="email" value="${getInput(input, 'email')}" required>
+                <div class="inputError">${getError(error, 'email')}</div>
+            </div>
+                <div class="mb-3 col-md-6 form-group">
+                <label for="phone" class="form-label" required>Phone</label>
+                <input name="phone" type="text" class="form-control" id="phone" aria-describedby="phone" value="${getInput(input, 'phone')}" required>
+                <div class="inputError">${getError(error, 'phone')}</div>
+            </div>
+            </div>
+            <div class="mb-3 col-md-4 form-group">
+                <label for="email" class="form-label" required>Email</label>
+                <input name="email" type="text" class="form-control" id="email" aria-describedby="email" value="${getInput(input, 'email')}" required>
+                <div class="inputError">${getError(error, 'email')}</div>
             </div>
             <div class="my-3 d-flex justify-content-evenly">
                 <button class="btn btn-success save" type="submit" value="submit" formaction="/admin/orders">SAVE</button>

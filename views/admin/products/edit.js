@@ -282,7 +282,7 @@ module.exports = ({product, error, categories, brands, specials}) => {
                 <div class="inBoxCopy d-none">${checkinBox(product)}</div>
             </div>
 
-            <div class="mb-4 table-responsive-md">
+            <div class="mb-4 table-responsive-lg">
                 <div class="subHeading">PRICING</div>
                 <table class="table table-bordered mt-3" id="addProductT">
                     <thead>

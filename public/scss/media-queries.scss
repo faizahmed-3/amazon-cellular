@@ -957,18 +957,27 @@
       }
 
       .order {
-        width: 95%;
+        width: 98%;
+        margin: 1rem 0.5rem 1rem 0.3rem;
 
         .card-body {
           margin-right: 0.7rem;
         }
 
+        th {
+          min-width: 5rem;
+        }
+
+        .itemsTh {
+          min-width: 20rem;
+        }
+
         .status {
-          min-width: 8rem;
+          min-width: 10rem;
         }
 
         td {
-          font-size: 0.8rem;
+          font-size: 0.9rem;
         }
 
         .btn {
@@ -976,8 +985,44 @@
           font-size: 0.7rem;
         }
 
+        .ordersHeadingBig{
+          min-width: 25rem;
+        }
+
+        .performer{
+          .performerName{
+            min-width: 25rem;
+          }
+        }
+
       }
 
+    }
+  }
+
+  #viewProducts{
+    margin: 1rem 0.5rem 1rem 0.3rem;
+
+    .ordersHeadingBig{
+      min-width: 25rem;
+    }
+
+    .product-name-heading{
+      min-width: 18rem;
+      font-size: 0.9rem;
+    }
+
+    .product-others, .tableHeader{
+      font-size: 0.9rem;
+    }
+
+    .tableHeaderBig{
+      font-size: 0.9rem;
+      min-width: 18rem;
+    }
+
+    tr{
+      font-size: 0.87rem;
     }
   }
 
@@ -1607,47 +1652,6 @@
         }
       }
 
-      .order {
-        width: 95%;
-        margin: 1rem 0.5rem 1rem 0.3rem;
-
-        .card-body {
-          margin-right: 0.7rem;
-        }
-
-        th {
-          min-width: 5rem;
-        }
-
-        .itemsTh {
-          min-width: 20rem;
-        }
-
-        .status {
-          min-width: 10rem;
-        }
-
-        td {
-          font-size: 0.9rem;
-        }
-
-        .btn {
-          width: 7rem;
-          font-size: 0.7rem;
-        }
-
-        .ordersHeadingBig{
-          min-width: 25rem;
-        }
-
-        .performer{
-          .performerName{
-            min-width: 25rem;
-          }
-        }
-
-      }
-
       #chartsRow {
         .chart-container {
           padding: 0;
@@ -1662,6 +1666,10 @@
           margin-right: 0;
           flex-basis: 13rem;
         }
+      }
+
+      .order {
+        width: 95%;
       }
     }
   }
@@ -1689,32 +1697,6 @@
 
     .faqLgImage{
       height: 100%;
-    }
-  }
-
-  #viewProducts{
-    margin: 1rem 0.5rem 1rem 0.3rem;
-
-    .ordersHeadingBig{
-      min-width: 25rem;
-    }
-
-    .product-name-heading{
-      min-width: 18rem;
-      font-size: 0.9rem;
-    }
-
-    .product-others, .tableHeader{
-      font-size: 0.9rem;
-    }
-
-    .tableHeaderBig{
-      font-size: 0.9rem;
-      min-width: 18rem;
-    }
-
-    tr{
-      font-size: 0.87rem;
     }
   }
 

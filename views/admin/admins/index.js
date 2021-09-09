@@ -20,7 +20,7 @@ module.exports = ({admins}) => {
     <div class="d-flex justify-content-end">
     <button type="button" class="btn btn-primary mt-4 me-3" style="font-size: 0.8rem" onclick="location.href='/admin/admins/new'">Add New Admin</button>
     </div> 
-    <div class="card-body table-responsive-md">
+    <div class="card-body table-responsive-lg">
         <table class="table table-hover table-bordered" id="adminT">
             <thead>
             <tr class="table-dark">
