@@ -236,7 +236,7 @@ module.exports = ({product, error, categories, brands, specials}) => {
                 <iframe name="descriptionFrame" class="ulList border form-control">
                 </iframe>
 
-                <input type="text" name="description" id="description" class="d-none" value="${product.description}">
+                <input type="text" name="description" id="description" class="d-none">
 
                 <div class="descriptionCopy d-none">${checkDescription(product)}</div>
 
@@ -277,7 +277,7 @@ module.exports = ({product, error, categories, brands, specials}) => {
                 <iframe name="inBoxFrame" class="ulList border form-control">
                 </iframe>
 
-                <input type="text" name="inBox" id="inBox" class="d-none" value="${product.inBox}">
+                <input type="text" name="inBox" id="inBox" class="d-none">
 
                 <div class="inBoxCopy d-none">${checkinBox(product)}</div>
             </div>

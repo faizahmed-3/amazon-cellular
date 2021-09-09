@@ -463,7 +463,9 @@ body #paymentError {
 }
 .product-view .iPV * {
   font-family: "Montserrat", sans-serif !important;
-  font-size: 1rem;
+  font-size: 1rem !important;
+  color: black !important;
+  background-color: white !important;
 }
 
 #footer .footer1 {
