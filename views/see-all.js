@@ -1,30 +1,11 @@
-const {
-    printProductModal,
-    printMainImage,
-    printWishlistModal,
-    printCartModal,
-    wishlistButton,
-    cartButton
-} = require('../middlewares/otherFunctions');
+const {printProductModal, printMainImage, printWishlistModal, printCartModal, wishlistButton, cartButton} = require('../middlewares/otherFunctions');
 const layout = require('./layout');
 
-module.exports = ({
-                      req,
-                      category,
-                      products,
-                      brands,
-                      wishlist,
-                      cart,
-                      page,
-                      iterator,
-                      endingLink,
-                      numberOfPages,
-                      sort
-                  }) => {
+module.exports = ({req, category, products, brands, wishlist, cart, page, iterator, endingLink, numberOfPages, sort }) => {
     function renderProducts(products, wishlist, cart) {
         if (products.length > 0) {
-
             return products.map(product => {
+
                 return `
             <div class="col-6 col-md-3 col-lg-2">
                     <div class="card">
@@ -35,13 +16,13 @@ module.exports = ({
              data-bs-target="#_${product._id}">${product.product_name}</h6>
                             <p class="card-text mb-0">ksh. ${product.price}</p>
                             <div class="action">
-                                ${wishlistButton(product._id, wishlist)}      
-                                ${cartButton(product._id, cart)}  
+                                ${wishlistButton(product._id, wishlist)}
+                                ${cartButton(product._id, cart)}
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
             ${printProductModal(product, wishlist, cart)}
         `
             }).join('')

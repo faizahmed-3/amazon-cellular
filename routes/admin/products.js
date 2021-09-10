@@ -64,6 +64,11 @@ async function post(req, res) {
 
 
 router.get('/', async (req, res) => {
+    if (req.session.editProductPreviousUrl){
+        res.redirect(req.session.editProductPreviousUrl)
+        req.session.editProductPreviousUrl = null
+        return
+    }
     const products = await Product.find().collation({locale: "en" }).sort('product_name');
     res.send(viewProductsTemplate({title: 'All Products', products}));
 });
@@ -116,6 +121,8 @@ router.get('/edit/:id', async (req, res) => {
 
     req.session.errorUrl = req.originalUrl
     req.session.errorProductEdit = product
+
+    req.session.editProductPreviousUrl = req.headers.referer.split(req.headers.host).pop()
 
     res.send(editProductTemplate({product, categories, brands, specials}));
 });
@@ -206,7 +213,8 @@ router.post('/edit/:id', productImagesUpload, async (req, res) => {
 
     await product.save();
 
-    res.redirect('/admin/products');
+    res.redirect(req.session.editProductPreviousUrl);
+    req.session.editProductPreviousUrl = null
 });
 
 router.get('/error', async (req, res) => {

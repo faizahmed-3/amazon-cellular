@@ -34,6 +34,7 @@ function getError(error, key) {
 }
 
 function printProductModal(product, wishlist, cart) {
+
     return `
 <div class="modal fade product-view" id="_${product._id}" tabindex="-1" aria-labelledby="Product view" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
