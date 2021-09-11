@@ -131,21 +131,7 @@ module.exports = ({title, content}) => {
 <script >
     
     $(document).ready(function() {
-    $('#orderViewT').DataTable( {
-        "order": [[ 0, "desc" ]],
-        retrieve: true,
-    } );
-} );
-    
-    $(document).ready(function() {
-    $('#customersT').DataTable( {
-        "order": [[ 5, "desc" ]],
-        retrieve: true,
-    } );
-} );
-    
-    $(document).ready(function() {
-    $('.table:not(#dashorders,#brandsT,#adminT,#addProductT, #bestp, #worstp)').DataTable({
+    $('.table:not(#priceListT)').DataTable({
          retrieve: true,
     });
 } );

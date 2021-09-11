@@ -385,6 +385,30 @@ if (c2c.length > 0) {
 }
 
 
+// Product view image
+let smallImages = document.querySelectorAll('.prod-small-img');
+if (smallImages.length > 0) {
+    smallImages.forEach(smallImage => {
+        smallImage.addEventListener('click', (evt) => {
+            const path = evt.path || (evt.composedPath && evt.composedPath());
+            path[4].children[0].children[0].src = smallImage.src
+        })
+    })
+}
+
+// copy to clipboard product view
+const c2cp = document.querySelectorAll('.c2cLink');
+if (c2cp.length > 0) {
+    c2cp.forEach(link => {
+        link.addEventListener('click', evt => {
+            const path = evt.path || (evt.composedPath && evt.composedPath());
+            navigator.clipboard.writeText(path[2].children[3].value);
+            path[1].innerHTML = `<button class="c2cLink btn btn-secondary"> copied product link <i class="fas fa-clipboard c2c" ></i> </button>`
+        })
+    })
+}
+
+
 
 
 
