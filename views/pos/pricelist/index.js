@@ -10,7 +10,11 @@ module.exports = ({products}) => {
     <td class="product-name">${product.product_name}</td>
     <td>${product.shop_price}</td>
 </tr>
+           `;
+    }).join('');
 
+    const renderedProductModals = products.map(product => {
+        return `
 ${printPricelistModal(product)}
            `;
     }).join('');
@@ -21,11 +25,11 @@ ${printPricelistModal(product)}
         content: `
 <div id="viewProducts" class="card ">
     <div class="card-body table-responsive-lg ">
-        <table class="table table-hover table-bordered mt-2">
+        <table class="table table-hover table-bordered mt-2" id="priceListT">
             <thead>
             <tr class="table-dark">
-                <th scope="col" class="product-name-heading">Product Name</th>
-                <th scope="col" class="product-others">Wholesale Price</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Wholesale Price</th>
             </tr>
             </thead>
             <tbody>
@@ -34,6 +38,8 @@ ${printPricelistModal(product)}
         </table>
     </div>
 </div>
+
+${renderedProductModals}
 
 `});
 };
