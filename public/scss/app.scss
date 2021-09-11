@@ -1149,6 +1149,12 @@ body {
     -o-transition: margin .5s ease-out;
     transition: margin 0.5s ease-out;
 
+    h4{
+      text-align: center;
+      margin-top: 1.7rem;
+      font-weight: 600;
+    }
+
     .sidebarItem {
       width: 15rem;
     }
@@ -1169,6 +1175,12 @@ body {
 
     i {
       margin-right: 0.5rem;
+    }
+
+    .change{
+      margin-top: 3rem;
+      font-weight: 600;
+      font-size: 1.3rem;
     }
 
 
@@ -1625,6 +1637,10 @@ body {
 
   .product-row{
     height: 3.5rem;
+  }
+
+  .pricelist-row{
+    @include pointer
   }
 
   .products-view-switch{

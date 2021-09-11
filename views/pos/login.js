@@ -61,7 +61,7 @@ module.exports = ({ input, error, incorrect}) => {
             ADMIN LOG IN
         </div>
         <div class="card-body">
-            <form method="post" action="/admin/login">
+            <form method="post" action="/pos/login">
                 ${showIncorrect(incorrect)}
                 <div class="mb-2 form-group">
                     <label for="email" class="form-label" required>Email Address</label>

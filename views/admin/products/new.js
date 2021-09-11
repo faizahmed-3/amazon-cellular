@@ -65,7 +65,7 @@ module.exports = ({categories, brands, specials, input, error}) => {
                 <label for="product_name" class="form-label" required>Product Name</label>
                 <input name="product_name" type="text" class="form-control" id="product_name"
                        aria-describedby="product_name" value="${getInput(input, 'product_name')}" required>
-                <div class="form-text">use this format (colour : brand: product name : for device) e.g Black nillkin frosted shield for iPhone 12</div>
+                <div class="form-text">use this format (brand: product name : for device - colour) e.g Nillkin frosted shield for iPhone 12 - Black</div>
                 <div class="inputError">${getError(error, 'product_name')}</div>
             </div>
 

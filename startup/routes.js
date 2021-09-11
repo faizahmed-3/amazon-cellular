@@ -2,7 +2,8 @@ const express = require('express');
 const cookieSession = require('cookie-session');
 const error = require('../middlewares/error');
 const adminLoginMW = require('../middlewares/adminLoginMW');
-const adminLogin = require('../routes/admin/login');
+const posLoginMW = require('../middlewares/posLoginMW');
+const posLogin = require('../routes/pos/login');
 const admins = require('../routes/admin/admins');
 const adminDashboard = require('../routes/admin/dashboard');
 const adminProducts = require('../routes/admin/products');
@@ -22,6 +23,7 @@ const checkout = require('../routes/checkout');
 const orders = require('../routes/orders');
 const search = require('../routes/search');
 const faqs = require('../routes/faqs');
+const posPricelist= require('../routes/pos/pricelist');
 
 
 module.exports = function (app) {
@@ -40,8 +42,10 @@ module.exports = function (app) {
     app.use('/search', search);
     app.use('/faqs', faqs);
     app.use('/', homepage);
-    app.use('/admin/login', adminLogin);
-    // app.use(adminLoginMW)
+    app.use('/pos/login', posLogin);
+    app.use(posLoginMW)
+    app.use('/pos/pricelist', posPricelist);
+    app.use(adminLoginMW)
     app.use('/admin/admins', admins);
     app.use('/admin/dashboard', adminDashboard);
     app.use('/admin/products', adminProducts);

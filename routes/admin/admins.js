@@ -16,8 +16,6 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    console.log(req.body)
-
     const {error} = validate(req.body);
     if (error) return res.status(400).send(addAdminTemplate({input: req.body, error: error.details[0]}))
 
@@ -31,6 +29,14 @@ router.post('/', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
 
     admin.password = await bcrypt.hash(admin.password, salt);
+
+    if (req.body.authority === 'super'){
+        admin.authority = 'super'
+    } else if (req.body.authority === 'staff'){
+        admin.authority = 'staff'
+    } else{
+        throw new Error('Error at creating admin')
+    }
 
     await admin.save();
 

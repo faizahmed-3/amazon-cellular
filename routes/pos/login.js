@@ -1,5 +1,5 @@
 const {Admin, validateLogin} = require('../../models/admin/admins');
-const loginTemplate = require('../../views/admin/login');
+const loginTemplate = require('../../views/pos/login');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const express = require('express');
@@ -20,23 +20,26 @@ router.post('/', async (req, res) => {
     if (!validPassword) return res.status(400).send(loginTemplate({incorrect: true}));
 
     req.session.adminToken = admin.generateLoginToken();
+    req.session.adminEmail = admin.email;
 
     if (req.session.originalRoute){
         res.redirect(req.session.originalRoute)
         req.session.originalRoute = null
-    } else{
+    } else if (admin.authority === 'super'){
         res.redirect('/admin/dashboard')
+    } else if (admin.authority === 'staff'){
+        res.redirect('/pos/pricelist')
     }
-
-
 })
 
 router.get('/logout', (req, res) => {
 
     req.session.adminToken = null;
-    req.session.originalRoute = null
+    req.session.originalRoute = null;
+    req.session.adminEmail = null
+    req.session.adminAuthority = null
 
-    res.redirect('/admin/login')
+    res.redirect('/pos/login')
 })
 
 module.exports = router;

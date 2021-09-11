@@ -1,4 +1,5 @@
 const adminErrorPage = require('../views/admin/404admin')
+const posErrorPage = require('../views/pos/404pos')
 const errorPage = require('../views/404')
 const winston = require('winston');
 const {getModals} = require("../middlewares/otherFunctions");
@@ -10,8 +11,12 @@ module.exports = async function (err, req, res, next) {
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    if (req.originalUrl.includes('admin')){
+    if (req.session.adminAuthority === 'super'){
         res.status(500).send(adminErrorPage({err}));
+    } else if (req.session.adminAuthority === 'staff'){
+        res.status(500).send(posErrorPage({err}));
+    } else if (req.originalUrl.includes('admin') || req.originalUrl.includes('pos')){
+        res.status(500).send(posErrorPage({err}));
     } else {
         res.status(500).send(errorPage({req, wishlist, cart, err}));
     }

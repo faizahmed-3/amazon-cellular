@@ -1,21 +1,15 @@
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const loginTemplate = require('../views/admin/login');
+const {Admin} = require('../models/admin/admins')
 
 module.exports =async function (req, res, next) {
 
-    let adminToken = req.session.adminToken
+    const admin = await Admin.find({email: req.session.adminEmail})
+    if (!admin[0]) throw new Error(`admin doesn't exist`)
 
-    if (!adminToken) {
-        req.session.originalRoute = req.url
-        return res.status(401).send(loginTemplate({}))
-    }
+    req.session.adminAuthority = admin[0].authority
 
-    try{
-        req.adminID = jwt.verify(adminToken, config.get('JWTKEY'));
+    if (admin[0].authority === 'super'){
         next()
-    } catch (e) {
-        res.status(400).send('invalid token')
+    } else {
+        throw new Error(`Admin doesn't have the necessary permissions to access the page`)
     }
-
 }

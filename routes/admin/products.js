@@ -64,11 +64,6 @@ async function post(req, res) {
 
 
 router.get('/', async (req, res) => {
-    if (req.session.editProductPreviousUrl){
-        res.redirect(req.session.editProductPreviousUrl)
-        req.session.editProductPreviousUrl = null
-        return
-    }
     const products = await Product.find().collation({locale: "en" }).sort('product_name');
     res.send(viewProductsTemplate({title: 'All Products', products}));
 });
@@ -236,6 +231,11 @@ router.get('/error', async (req, res) => {
         throw new Error('Fatal error')
     }
 
+})
+
+router.get('/cancel', async(req, res) => {
+    res.redirect(req.session.editProductPreviousUrl)
+    req.session.editProductPreviousUrl = null
 })
 
 router.post('/delete/:id', async (req, res) => {

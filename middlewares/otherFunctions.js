@@ -93,6 +93,48 @@ function printProductModal(product, wishlist, cart) {
     `
 }
 
+function printPricelistModal(product) {
+
+    return `
+<div class="modal fade product-view" id="_${product._id}" tabindex="-1" aria-labelledby="Product view" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="product-title">${product.product_name}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-0">
+                <div class="container-fluid">
+                    <div class="row pvRow1">
+                        <div class="col-xl-6 col-lg-7 ">
+                            <img loading="lazy" src="/img/products/${printMainImage(product)}" alt="" id="prod-main-img">
+                        </div>
+                        <div class="col-xl-6 col-lg-5">
+                            <div class="row small-img-row">
+                                ${printProductViewSmallImages(product)}
+                            </div>
+                            <div id="share" class="text-center mt-5">
+                                <i class="bi bi-share-fill px-2"></i>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=https://amazon-cellular.com/search/ext/${product._id}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="whatsapp://send?text=https://amazon-cellular.com/search/ext/${product._id}"><i class="fab fa-whatsapp"></i></a>
+                                <input type="hidden" value="https://amazon-cellular.com/search/ext/${product._id}">
+                                <div class="d-inline"><button class="c2cLink btn btn-outline-secondary"> copy product link <i class="far fa-clipboard c2c" ></i></button></div>
+                                
+                            </div>
+                            <div class="description mt-3"> Description</div>
+                            <div class="iPV">${product.description}</div>
+                            <div class="description">What's in the box</div>
+                            <div class="iPV">${product.inBox}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    `
+}
+
 function printMainImage(product) {
     let mainImage;
     product.product_images.forEach(productImage => {
@@ -780,6 +822,7 @@ exports.displayMonth = displayMonth;
 exports.getInput = getInput;
 exports.getError = getError;
 exports.printProductModal = printProductModal;
+exports.printPricelistModal = printPricelistModal;
 exports.printMainImage = printMainImage;
 exports.printWishlistModal = printWishlistModal;
 exports.printCartModal = printCartModal;

@@ -7,9 +7,10 @@ module.exports = ({admins}) => {
         admin => {
             return `<tr>
     <td>${displayDate(admin.dateCreated)}</td>
-    <td>${admin.admin_name}</td>
-    <td>${admin.email}</td>
-    <td>${admin.phone}</td>
+    <td style="text-transform: capitalize;">${admin.admin_name}</td>
+    <td><a href="mailto:${admin.email}"> ${admin.email}</a></td>
+    <td><a href="tel:0${admin.phone}">0${admin.phone}</a></td>
+    <td style="text-transform: capitalize;">${admin.authority}</td>
 </tr>
             `}).join('')
 
@@ -25,9 +26,10 @@ module.exports = ({admins}) => {
             <thead>
             <tr class="table-dark">
                 <th scope="col" class="tableHeader">Date Created</th>
-                <th scope="col" class="tableHeader">Name</th>
+                <th scope="col" class="tableHeader" style="text-transform: capitalize;">Name</th>
                 <th scope="col" class="tableHeader">Email</th>
                 <th scope="col" class="tableHeader">Phone</th>
+                <th scope="col" class="tableHeader">Authority</th>
             </tr>
             </thead>
             <tbody>

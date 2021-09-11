@@ -163,9 +163,7 @@ module.exports = ({product, error, categories, brands, specials}) => {
                 <label for="product_name" class="form-label">Product Name</label>
                 <input name="product_name" value="${product.product_name}" type="text" class="form-control" id="product_name"
                        aria-describedby="product name">
-                <div class="form-text">use this format (colour :brand: product name : for device) e.g Black nillkin
-                    frosted shield for iPhone 12
-                </div>
+                <div class="form-text">use this format (brand: product name : for device - colour) e.g Nillkin frosted shield for iPhone 12 - Black</div>
                 <div class="inputError">${getError(error, 'product_name')}</div>
             </div>
 
@@ -331,7 +329,7 @@ module.exports = ({product, error, categories, brands, specials}) => {
                 </div>
                 <button class="btn btn-success save" type="submit" formaction="/admin/products/edit/${product.id}"
                 ">SAVE</button>
-                <a class="btn btn-secondary save" onclick="location.href='/admin/products'">CANCEL</a>
+                <a class="btn btn-secondary save" onclick="location.href='/admin/products/cancel'">CANCEL</a>
             </div>
         </form>
     </div>

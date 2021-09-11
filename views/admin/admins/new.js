@@ -52,6 +52,22 @@ module.exports = ({input, error, exists}) => {
                     <div class="inputError">${getError(error, 'password_confirmation')}</div>
                 </div> 
             </div>
+            <div class="mb-3 form-group">
+                <label for="authority" class="form-label" required>Authority</label>
+            <div class="form-check">
+                  <input class="form-check-input" type="radio" name="authority" id="authority1" value="super" checked>
+                  <label class="form-check-label" for="authority1">
+                    Super Admin
+                  </label>
+            </div>
+            <div class="form-check">
+                  <input class="form-check-input" type="radio" name="authority" id="authority2" value="staff">
+                  <label class="form-check-label" for="authority2">
+                    Staff
+                  </label>
+            </div>
+            </div>
+
             <div class="my-3 d-flex justify-content-evenly">
                 <button class="btn btn-success save" type="submit" value="submit" formaction="/admin/admins/">SAVE</button>
                 <a class="btn btn-secondary save" onclick="location.href='/admin/admins'">CANCEL</a>

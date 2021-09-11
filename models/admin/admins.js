@@ -32,10 +32,15 @@ const adminSchema = new mongoose.Schema({
     dateCreated: {
         type: Date,
         default: Date.now
-    }
+    },
+    authority: String
 });
 
 adminSchema.methods.generateLoginToken = function () {
+    return jwt.sign({_id: this._id, authority: this.authority}, config.get('JWTKEY'));
+}
+
+adminSchema.methods.generatePosToken = function () {
     return jwt.sign({_id: this._id}, config.get('JWTKEY'));
 }
 
@@ -48,6 +53,7 @@ function validate(admin) {
         phone: Joi.number(),
         password: Joi.string().min(8).max(50),
         password_confirmation: Joi.any().equal(Joi.ref('password')).options({ messages: { 'any.only': 'Passwords do not match'} }),
+        authority: Joi.string().min(3).max(255)
     })
 
     const options = {

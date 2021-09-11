@@ -54,60 +54,15 @@ module.exports = ({title, content}) => {
     <div class="sidebar border border-end ">
         <div class="text-center mt-2 sidebarItem"><img src="/img/logo.webp" alt="Logo" class="img-fluid">
         </div>
-        <h4>ADMIN</h4>
+        <h4>POS</h3>
         <div class="sidebarItem ">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/dashboard/'">
-                     Dashboard
+                <li class="list-group-item list-group-item-action" onclick="location.href='/pos/pricelist/'">
+                     Price List
                 </li>
-                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/orders/'">
-                    <div>Orders</div></li>
-                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/'">
-                     Products
+                <li class="list-group-item list-group-item-action change" onclick="location.href='/admin/dashboard/'">
+                     ADMIN
                 </li>
-                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/brands/'">
-                     Brands
-                </li>
-                <li class="list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#reportsMenu">
-                     Reports <i class="fas fa-caret-down ms-1"></i>
-                </li>
-                <div class="collapse collapseMenu" id="reportsMenu">
-                    <div class="card card-body">
-                        <ul class="mt-0 px-0">
-                            <li class="list-group-item list-group-item-action"><a href="https://docs.google.com/spreadsheets/d/19u1WY7CfLrvTKM_drv6T1FhMQX0DzAvi/edit#gid=582228138" target="_blank" class="reportsLinks">Expense Sheet</a></li>                        
-                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/reports/'">Internal Analytics</li>
-                            <li class="list-group-item list-group-item-action"><a href="https://analytics.google.com/analytics/web/?authuser=1#/p285064233/reports/reportinghub" target="_blank" class="reportsLinks">Google Analytics</a></li>
-                            <li class="list-group-item list-group-item-action">Ad Manager</li>
-                            <li class="list-group-item list-group-item-action"><a href="https://cloud.linode.com/linodes/28161313" target="_blank" class="reportsLinks">Site Server</a></li>
-                            <li class="list-group-item list-group-item-action"><a href="https://console.cloud.google.com/billing/018DEF-BF8131-B63F53?project=my-project-1495784628507" target="_blank" class="reportsLinks">Google Maps</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/customers/'" >
-                     Customers
-                </li>
-                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/categories/'">
-                     Categories
-                </li>
-                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/special/'">
-                     Special Categories
-                </li>
-                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/admins/'">
-                     Admins
-                </li>
-                <li class="list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#socialsMenu">
-                     Socials<i class="fas fa-caret-down ms-1"></i>
-                </li>
-                <div class="collapse collapseMenu" id="socialsMenu">
-                    <div class="card card-body">
-                        <ul class="mt-0 px-0">
-                            <li class="list-group-item list-group-item-action"><a href="https://www.facebook.com/Amazon-Cellular-Outfitters-100448395706615" target="_blank" class="reportsLinks">Facebook</a></li>                        
-                            <li class="list-group-item list-group-item-action"><a href="https://www.instagram.com/amazon_cellular_outfitters/" target="_blank" class="reportsLinks">Instagram</a></li>
-                            <li class="list-group-item list-group-item-action"><a href="https://jiji.co.ke/sellerpage-2269531" target="_blank" class="reportsLinks">Jiji</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <li class="list-group-item list-group-item-action change" onclick="location.href='/pos/pricelist/'">POS</li>
             </ul>
         </div>
     </div>
