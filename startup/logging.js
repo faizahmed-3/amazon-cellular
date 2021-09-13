@@ -21,7 +21,7 @@ module.exports = function () {
         filename: 'logfile.log',
         handleExceptions: true,
         format: customFormat,
-        level: 'warn'
+        level: 'error'
     }))
 
     process.on('unhandledRejection', error => {

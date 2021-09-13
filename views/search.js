@@ -43,6 +43,23 @@ module.exports = ({req, products, wishlist, cart, page, iterator, endingLink, nu
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="SortDropdown">
                         <li><a class="dropdown-item" href="/search/alpha">Alphabetically</a></li>
+                        <li><a class="dropdown-item" href="/search/default">Default</a></li>
+                        <li><a class="dropdown-item" href="/search/latest">Latest</a></li>
+                        <li><a class="dropdown-item" href="/search/lth/">Price - Low to High</a></li>
+                        <li><a class="dropdown-item" href="/search/htl">Price - High to Low</a></li>
+                    </ul>
+                </span>
+                `
+            case 'default':
+                return `
+                    <span class="dropdown">
+                    <a class="dropdown-toggle" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Default
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="SortDropdown">
+                        <li><a class="dropdown-item" href="/search/alpha">Alphabetically</a></li>
+                        <li><a class="dropdown-item" href="/search/default">Default</a></li>
                         <li><a class="dropdown-item" href="/search/latest">Latest</a></li>
                         <li><a class="dropdown-item" href="/search/lth/">Price - Low to High</a></li>
                         <li><a class="dropdown-item" href="/search/htl">Price - High to Low</a></li>
@@ -58,6 +75,7 @@ module.exports = ({req, products, wishlist, cart, page, iterator, endingLink, nu
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="SortDropdown">
                         <li><a class="dropdown-item" href="/search/alpha">Alphabetically</a></li>
+                        <li><a class="dropdown-item" href="/search/default">Default</a></li>
                         <li><a class="dropdown-item" href="/search/latest">Latest</a></li>
                         <li><a class="dropdown-item" href="/search/lth">Price - Low to High</a></li>
                         <li><a class="dropdown-item" href="/search/htl">Price - High to Low</a></li>
@@ -73,6 +91,7 @@ module.exports = ({req, products, wishlist, cart, page, iterator, endingLink, nu
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="SortDropdown">
                         <li><a class="dropdown-item" href="/search/alpha">Alphabetically</a></li>
+                        <li><a class="dropdown-item" href="/search/default">Default</a></li>
                         <li><a class="dropdown-item" href="/search/latest">Latest</a></li>
                         <li><a class="dropdown-item" href="/search/lth">Price - Low to High</a></li>
                         <li><a class="dropdown-item" href="/search/htl">Price - High to Low</a></li>
@@ -88,6 +107,7 @@ module.exports = ({req, products, wishlist, cart, page, iterator, endingLink, nu
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="SortDropdown">
                         <li><a class="dropdown-item" href="/search/alpha">Alphabetically</a></li>
+                        <li><a class="dropdown-item" href="/search/default">Default</a></li>
                         <li><a class="dropdown-item" href="/search/latest">Latest</a></li>
                         <li><a class="dropdown-item" href="/search/lth">Price - Low to High</a></li>
                         <li><a class="dropdown-item" href="/search/htl">Price - High to Low</a></li>
@@ -103,6 +123,7 @@ module.exports = ({req, products, wishlist, cart, page, iterator, endingLink, nu
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="SortDropdown">
                         <li><a class="dropdown-item" href="/search/alpha">Alphabetically</a></li>
+                        <li><a class="dropdown-item" href="/search/default">Default</a></li>
                         <li><a class="dropdown-item" href="/search/latest">Latest</a></li>
                         <li><a class="dropdown-item" href="/search/lth">Price - Low to High</a></li>
                         <li><a class="dropdown-item" href="/search/htl">Price - High to Low</a></li>
@@ -254,10 +275,9 @@ module.exports = ({req, products, wishlist, cart, page, iterator, endingLink, nu
         <div class="card">
             <div class="card-header d-flex justify-content-between mt-1">
                 <div class="queryDisplay">Search: ${req.session.query}</div>
-                <div class="sortBy mt-1">
-                    Sort:  
-                     ${printSort(sort)}
-                </div>
+<!--                <div class="sortBy mt-1">-->
+<!--                    Sort:  -->
+<!--                </div>-->
             </div>
             <div class="card-body  mainContent row">
                 ${renderProducts(products, wishlist, cart)}

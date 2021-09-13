@@ -548,34 +548,21 @@ function printStatusBtn(order) {
 
 exports.emailRegistration = async function (customer) {
 
-    const CLIENT_ID = config.get('CLIENT_ID');
-    const CLIENT_SECRET = config.get('CLIENT_SECRET');
-    const REDIRECT_URI = config.get('REDIRECT_URI');
-    const REFRESH_TOKEN = config.get('REFRESH_TOKEN');
-
-    const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
-    oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN})
-
     try {
-        const accessToken = await oAuth2Client.getAccessToken()
 
         const transport = nodemailer.createTransport({
             service: 'gmail',
             secure: false,
             auth: {
-                type: 'OAuth2',
                 user: 'amazon.cellular.outfitters@gmail.com',
-                clientId: CLIENT_ID,
-                clientSecret: CLIENT_SECRET,
-                refreshToken: REFRESH_TOKEN,
-                accessToken: accessToken
+                pass: config.get('EMAILPASS')
             }
         })
 
         const mailOptions = {
             from: '"Amazon Cellular 🛒" <amazon.cellular.outfitters@gmail.com>',
             to: customer.email,
-            cc: ['4faizahmed@gmail.com, fahmyahmed9@gmail.com, cellfit.bausi@gmail.com'],
+            cc: ['fahmyahmed9@gmail.com, 4faizahmed@gmail.com, cellfit.bausi@gmail.com'],
             subject: `SUCCESSFUL REGISTRATION ON AMAZON CELLULAR OUTFITTERS`,
             html: `
 Dear ${customer.full_name},
@@ -599,34 +586,22 @@ Amazon Cellular Outfitters
 }
 
 exports.emailOrderStatus = async function (order, email, fullName) {
-    const CLIENT_ID = config.get('CLIENT_ID');
-    const CLIENT_SECRET = config.get('CLIENT_SECRET');
-    const REDIRECT_URI = config.get('REDIRECT_URI');
-    const REFRESH_TOKEN = config.get('REFRESH_TOKEN');
-
-    const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
-    oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN})
 
     try {
-        const accessToken = await oAuth2Client.getAccessToken()
 
         const transport = nodemailer.createTransport({
             service: 'gmail',
             secure: false,
             auth: {
-                type: 'OAuth2',
                 user: 'amazon.cellular.outfitters@gmail.com',
-                clientId: CLIENT_ID,
-                clientSecret: CLIENT_SECRET,
-                refreshToken: REFRESH_TOKEN,
-                accessToken: accessToken
+                pass: config.get('EMAILPASS')
             }
         })
 
         const mailOptions = {
             from: '"Amazon Cellular 🛒" <amazon.cellular.outfitters@gmail.com>',
             to: email,
-            cc: ['4faizahmed@gmail.com, fahmyahmed9@gmail.com, cellfit.bausi@gmail.com'],
+            cc: ['4faizahmed@gmail.com'],
             subject: `UPDATE ON STATUS FOR ORDER ${order._id}`,
             html: `
 Dear ${fullName},
@@ -651,14 +626,6 @@ Amazon Cellular Outfitters
 }
 
 exports.emailForgotPassword = async function (email, fullName, link) {
-    const CLIENT_ID = config.get('CLIENT_ID');
-    const CLIENT_SECRET = config.get('CLIENT_SECRET');
-    const REDIRECT_URI = config.get('REDIRECT_URI');
-    const REFRESH_TOKEN = config.get('REFRESH_TOKEN');
-
-    const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
-    oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN})
-
     try {
         const accessToken = await oAuth2Client.getAccessToken()
 
@@ -666,12 +633,8 @@ exports.emailForgotPassword = async function (email, fullName, link) {
             service: 'gmail',
             secure: false,
             auth: {
-                type: 'OAuth2',
                 user: 'amazon.cellular.outfitters@gmail.com',
-                clientId: CLIENT_ID,
-                clientSecret: CLIENT_SECRET,
-                refreshToken: REFRESH_TOKEN,
-                accessToken: accessToken
+                pass: config.get('EMAILPASS')
             }
         })
 

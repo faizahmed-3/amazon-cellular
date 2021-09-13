@@ -68,7 +68,7 @@ exports.stkPush = async (req, res) => {
         .then((response) => {
             setTimeout( () => {
                 res.send(confirmTemplate({confirmationError: false}))
-            }, 2500)
+            }, 500)
         })
         .catch( () => {
             console.log('at catch!')

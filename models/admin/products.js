@@ -73,6 +73,8 @@ const productSchema = new mongoose.Schema({
     }
 });
 
+productSchema.index({product_name: "text"})
+
 const Product = mongoose.model('Product', productSchema);
 
 function validate(product) {

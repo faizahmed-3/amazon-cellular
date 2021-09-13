@@ -131,7 +131,7 @@ module.exports = ({title, content}) => {
 <script >
     
     $(document).ready(function() {
-    $('.table:not(#priceListT)').DataTable({
+    $('.table').DataTable({
          retrieve: true,
     });
 } );

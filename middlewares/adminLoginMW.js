@@ -10,6 +10,6 @@ module.exports =async function (req, res, next) {
     if (admin[0].authority === 'super'){
         next()
     } else {
-        throw new Error(`Admin doesn't have the necessary permissions to access the page`)
+        throw new Error(`You don't have the necessary permissions to access this page`)
     }
 }

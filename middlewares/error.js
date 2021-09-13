@@ -11,14 +11,16 @@ module.exports = async function (err, req, res, next) {
 
     let [wishlist, cart] = await getModals(req, Wishlist, Cart)
 
-    if (req.session.adminAuthority === 'super'){
+    if (!req.originalUrl.includes('admin') && !req.originalUrl.includes('pos')){
+        res.status(500).send(errorPage({req, wishlist, cart, err}));
+    } else if (req.session.adminAuthority === 'super'){
         res.status(500).send(adminErrorPage({err}));
     } else if (req.session.adminAuthority === 'staff'){
         res.status(500).send(posErrorPage({err}));
     } else if (req.originalUrl.includes('admin') || req.originalUrl.includes('pos')){
         res.status(500).send(posErrorPage({err}));
-    } else {
-        res.status(500).send(errorPage({req, wishlist, cart, err}));
+    }  else {
+        res.status(500).send(err.message);
     }
-    // res.status(500).send(err.message);
+
 }

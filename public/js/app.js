@@ -285,7 +285,7 @@ if (latitude) {
                         delivery_fee.value = 0
                         deliveryExplaination.innerHTML = `Delivery within 24 hours with an option of payment on delivery.`
                     } else if (dist <= 6.5) {
-                        df = Math.round((dist * 55) / 50) * 50
+                        df = Math.round((dist * 58) / 50) * 50
                         deliveryExplaination.innerHTML = `Delivery within 24 hours with an option of payment on delivery.`
                         if (df < 200) {
                             delivery_fee.value = 200

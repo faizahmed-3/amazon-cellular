@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const products = await Product.find().collation({locale: "en" }).sort('product_name').limit(2);
+    const products = await Product.find().collation({locale: "en" }).sort('product_name');
 
     res.send(viewPricelistTemplate({products}));
 });

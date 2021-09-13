@@ -43,10 +43,6 @@ async function ssPagination2(products, page, numberOfPages) {
 }
 
 router.get('/', async(req, res) => {
-    if (!req.session.sortBy){
-        req.session.sortBy = 'product_name'
-    }
-
     let query
 
     if (req.query.query){
@@ -56,12 +52,11 @@ router.get('/', async(req, res) => {
         query = req.session.query
     }
 
+   let products = await Product.find({$text: {$search: query}}, {score: {$meta: "textScore"}}).sort( {score: {$meta: "textScore"}});
 
-    let products = await Product.find({product_name: new RegExp('.*' + query + '.*', 'i'), status: true}).sort(req.session.sortBy);
+   let [page, startingLimit, numberOfPages, resultsPerPage] = await ssPagination1(req, res, products)
 
-    let [page, startingLimit, numberOfPages, resultsPerPage] = await ssPagination1(req, res, products)
-
-    products = await Product.find({product_name: new RegExp('.*' + query + '.*', 'i'), status: true}).skip(startingLimit).limit(resultsPerPage).sort(req.session.sortBy);
+    products = await Product.find({$text: {$search: query}}, {score: {$meta: "textScore"}}).skip(startingLimit).limit(resultsPerPage).sort( {score: {$meta: "textScore"}});
 
     let [iterator, endingLink] = await ssPagination2(products, page, numberOfPages)
 
@@ -90,6 +85,12 @@ router.get('/latest/', (req, res) => {
 
 router.get('/alpha/', (req, res) => {
     req.session.sortBy = 'product_name'
+
+    res.redirect('/search')
+})
+
+router.get('/default/', (req, res) => {
+    req.session.sortBy = 'default'
 
     res.redirect('/search')
 })
