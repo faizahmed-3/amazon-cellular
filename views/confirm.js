@@ -51,7 +51,7 @@ module.exports = ({confirmationError}) => {
 
 
 
-<div class="d-flex justify-content-center align-items-center" style="height: 100vh; width: 100vw">        
+<div class="adminLogin"">        
             <div class="card text-center">
           <div class="card-body">
             ${printConfirmationError(confirmationError)}

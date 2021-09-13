@@ -107,7 +107,7 @@ module.exports = ({title, content}) => {
                         </ul>
                     </div>
                 </div>
-                <li class="list-group-item list-group-item-action change" onclick="location.href='/pos/pricelist/'">POS</li>
+                <li class="list-group-item list-group-item-action change" onclick="location.href='/pos/pricelist/'"><button class="btn btn-primary">POS</button></li>
             </ul>
         </div>
     </div>

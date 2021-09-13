@@ -1087,6 +1087,7 @@ body #paymentError {
   margin-top: 3rem;
   font-weight: 600;
   font-size: 1.3rem;
+  text-align: center;
 }
 #admin .sidebar .collapseMenu {
   font-size: 0.8rem;
@@ -2349,6 +2350,10 @@ body #paymentError {
     width: 100%;
     font-size: 0.8rem;
   }
+
+  .adminLogin {
+    width: 90%;
+  }
 }
 @media (max-width: 767.98px) {
   html {
@@ -2905,6 +2910,10 @@ body #paymentError {
     width: 5rem;
     font-size: 0.6rem;
     margin-top: 1rem;
+  }
+
+  .adminLogin {
+    width: 99%;
   }
 }
 

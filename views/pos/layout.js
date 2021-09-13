@@ -54,14 +54,14 @@ module.exports = ({title, content}) => {
     <div class="sidebar border border-end ">
         <div class="text-center mt-2 sidebarItem"><img src="/img/logo.webp" alt="Logo" class="img-fluid">
         </div>
-        <h4>POS</h3>
+        <h4>POS</h4>
         <div class="sidebarItem ">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item list-group-item-action" onclick="location.href='/pos/pricelist/'">
                      Price List
                 </li>
                 <li class="list-group-item list-group-item-action change" onclick="location.href='/admin/dashboard/'">
-                     ADMIN
+                    <button class="btn btn-primary">ADMIN</button> 
                 </li>
             </ul>
         </div>
