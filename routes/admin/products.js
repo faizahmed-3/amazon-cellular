@@ -115,7 +115,7 @@ router.get('/edit/:id', async (req, res) => {
     const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
 
     req.session.errorUrl = req.originalUrl
-    req.session.errorProductEdit = product
+    req.session.errorProductEditID = product._id
 
     req.session.editProductPreviousUrl = req.headers.referer.split(req.headers.host).pop()
 
@@ -218,9 +218,9 @@ router.get('/error', async (req, res) => {
     const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
     
     if (req.session.errorUrl.toString() === '/admin/products/edit'){
-        const product = req.session.errorProductEdit
+        const product = await Product.findById(req.session.errorProductEditID)
         req.session.errorUrl = null
-        req.session.errorProductEdit = null
+        req.session.errorProductEditID = null
 
         res.send(editProductTemplate({ product, categories, brands, specials}));
     } else if (req.session.errorUrl.toString() === '/admin/products/new'){

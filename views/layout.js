@@ -17,7 +17,7 @@ module.exports = ({title, req, content}) => {
 </script>
 
     <!-- Required meta tags -->
-    <title>${title} | Amazon Cellular Outfitters</title>
+    <title>${title} | Amazon Cellular Kenya</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">

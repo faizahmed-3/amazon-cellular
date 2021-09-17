@@ -323,7 +323,7 @@ module.exports = ({product, error, categories, brands, specials}) => {
             <div class="my-3 d-md-flex justify-content-evenly">
                 <div>
                     <span id="visibility" class="mt-3">Visibility</span>
-                    <label class="switch">
+                    <label class="switch"> 
                         ${visibility(product.status)}
                     </label>
                 </div>
