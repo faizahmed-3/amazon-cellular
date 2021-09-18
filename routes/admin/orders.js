@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {emailOrderStatus} = require('../../middlewares/otherFunctions')
+const {emailOrderStatus, emailLowQuantity} = require('../../middlewares/otherFunctions')
 const viewOrdersTemplate = require('../../views/admin/orders/index');
 const newOrderTemplate = require('../../views/admin/orders/new');
 const editOrderTemplate = require('../../views/admin/orders/edit');
@@ -93,9 +93,18 @@ router.post('/edit/:id', async (req, res) => {
                 )
             }
 
-            await Product.findByIdAndUpdate(order.products[i].productID, {
+            product = await Product.findByIdAndUpdate(order.products[i].productID, {
                 $inc: {income: income, unitsSold: order.products[i].quantity, quantity: -order.products[i].quantity}
             }, {new: true})
+
+            if (product.quantity<0){
+                product.quantity = 0
+                await product.save()
+            }
+
+            if (product.quantity<= 1){
+                await emailLowQuantity(product).catch(console.error);
+            }
         }
         order.processed = true
         await order.save()

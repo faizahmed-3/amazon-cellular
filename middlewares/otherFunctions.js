@@ -684,6 +684,44 @@ Amazon Cellular Outfitters
     }
 }
 
+exports.emailLowQuantity = async function (product) {
+
+    try {
+
+        const transport = nodemailer.createTransport({
+            service: 'gmail',
+            secure: false,
+            auth: {
+                user: 'amazon.cellular.outfitters@gmail.com',
+                pass: config.get('EMAILPASS')
+            }
+        })
+
+        const mailOptions = {
+            from: '"Amazon Cellular 🛒" <amazon.cellular.outfitters@gmail.com>',
+            to: ['4faizahmed@gmail.com, fahmyahmed9@gmail.com'],
+            subject: `LOW QUANTITY FOR ${product.product_name}`,
+            html: `
+Dear Admin,
+<br><br>
+The quantity for the product above is low and will be switched off unless product quantity is updated. <a href="https://amazon-cellular.com/admin/products/edit/${product._id}">Click here to update the quantity</a>
+<br><br>
+Kind regards,<br>
+Amazon Cellular Outfitters
+
+
+`,
+        }
+
+        const result =await transport.sendMail(mailOptions)
+        return result;
+
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
 exports.emailForgotPassword = async function (email, fullName, link) {
     try {
         const accessToken = await oAuth2Client.getAccessToken()

@@ -366,6 +366,23 @@ if (c2c.length > 0) {
 }
 
 
+//show password
+const passIcons = document.querySelectorAll('.passIcon')
+if (passIcons.length > 0){
+    passIcons.forEach(passIcon => {
+        passIcon.addEventListener('click', ()=>{
+            const passInputs = document.querySelectorAll('.passInput')
+            passInputs.forEach(passInput => {
+                const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passInput.setAttribute('type', type);
+
+                passIcon.classList.toggle('bi-eye');
+            })
+        })
+    })
+}
+
+
 
 
 

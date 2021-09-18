@@ -955,6 +955,19 @@ body {
     color: $red;
     text-align: center;
   }
+
+  .form-control{
+    width: 99%;
+  }
+
+  .passInput{
+    display: inline;
+  }
+
+  .passIcon{
+    margin-left: -32px;
+    cursor: pointer;
+  }
 }
 
 

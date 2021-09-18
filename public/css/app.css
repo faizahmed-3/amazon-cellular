@@ -895,6 +895,16 @@ body #paymentError {
   color: #DC3545;
   text-align: center;
 }
+.register .form-control {
+  width: 99%;
+}
+.register .passInput {
+  display: inline;
+}
+.register .passIcon {
+  margin-left: -32px;
+  cursor: pointer;
+}
 
 #order {
   width: 90%;

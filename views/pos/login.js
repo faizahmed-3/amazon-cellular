@@ -70,8 +70,11 @@ module.exports = ({ input, error, incorrect}) => {
                 </div>
                 <div class="mb-2 form-group">
                     <label for="password" class="form-label" required>Password</label>
-                    <input name="password" type="password" class="form-control" id="password" required>
-                    <div class="inputError">${getError(error, 'password')}</div>
+                    <div class="d-block">
+                        <input name="password" type="password" class="form-control passInput" id="password" required>
+                        <i class="passIcon bi bi-eye-slash"></i>
+                        <div class="inputError">${getError(error, 'password')}</div>
+                    </div>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="mt-1 btn btn-success">SUBMIT</button>

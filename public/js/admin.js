@@ -454,6 +454,18 @@ if (bps.length>0){
     })
 }
 
+//show password
+const passIcon = document.querySelector('.passIcon')
+if (passIcon){
+        passIcon.addEventListener('click', ()=>{
+            const passInput = document.querySelector('.passInput')
+            const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passInput.setAttribute('type', type);
+
+            passIcon.classList.toggle('bi-eye');
+            })
+}
+
 
 
 
