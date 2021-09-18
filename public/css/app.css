@@ -1599,6 +1599,9 @@ body #paymentError {
   text-align: center;
   width: 12.4%;
 }
+#viewProducts .detailedCol {
+  min-width: 56px;
+}
 
 #map {
   height: 500px;

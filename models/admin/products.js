@@ -70,7 +70,24 @@ const productSchema = new mongoose.Schema({
         type: Number,
         min: 0,
         default: 0
-    }
+    },
+    bp: {
+        type: Number,
+        min: 0
+    },
+    rate: {
+        type: Number,
+        min: 0,
+        default: 31
+    },
+    buying: {
+        type: Number,
+        min: 0
+    },
+    selling: {
+        type: Number,
+        min: 0
+    },
 });
 
 productSchema.index({product_name: "text"})

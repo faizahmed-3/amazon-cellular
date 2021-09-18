@@ -12,8 +12,8 @@ const adminBrands = require('../routes/admin/brands');
 const adminSpecial= require('../routes/admin/special');
 const adminOrders= require('../routes/admin/orders');
 const adminCustomers= require('../routes/admin/customers');
-const adminSettings= require('../routes/admin/settings');
 const adminReports= require('../routes/admin/reports');
+const adminDetailed = require('../routes/admin/detailed');
 const homepage = require('../routes/index');
 const register = require('../routes/register');
 const login = require('../routes/login');
@@ -55,7 +55,7 @@ module.exports = function (app) {
     app.use('/admin/orders', adminOrders);
     app.use('/admin/customers', adminCustomers);
     app.use('/admin/reports', adminReports);
-    app.use('/admin/settings', adminSettings);
+    app.use('/admin/detailed', adminDetailed);
 
 
     app.use(error);

@@ -93,6 +93,65 @@ function printProductModal(product, wishlist, cart) {
     `
 }
 
+function printDetailedModal(product) {
+    return `
+<div class="modal fade product-view" id="_${product._id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Product view" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="product-title">${product.product_name}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-0">
+                <div class="container-fluid">
+                   <form method="POST" >
+            <div class="my-2 form-group">
+                <label for="bp" class="form-label" required>BP</label>
+                <input name="bp" type="number" class="form-control bp" aria-describedby="bp" min="0" value="${detailedPrice(product.bp)}" required>
+            </div>
+            <div class="mb-2 form-group">
+                <label for="rate" class="form-label" required>Rate</label>
+                <input name="rate" type="number" class="form-control rate" aria-describedby="rate" min="0" value="${detailedPrice(product.rate)}" required>
+            </div>
+            <div class="mb-2 form-group">
+                <label for="buying" class="form-label" >Buying Price</label>
+                <input name="buying" type="number" class="form-control buying" aria-describedby="buying" value="${detailedPrice(product.buying)}" readonly>
+            </div>
+            <div class="mb-2 form-group">
+                <label for="selling" class="form-label" required>Selling Price</label>
+                <input name="selling" type="number" class="form-control selling" aria-describedby="selling" value="${detailedPrice(product.selling)}" readonly>
+            </div>
+            <div class="mb-2 form-group">
+                <label for="shop_price" class="form-label" required>Wholesale Price</label>
+                <input name="shop_price" type="number" class="form-control shop_price" aria-describedby="shop_price" value="${product.shop_price}" required>
+            </div>
+            <div class="mb-2 form-group">
+                <label for="price" class="form-label" required>Site Price</label>
+                <input name="price" type="number" class="form-control price" aria-describedby="price" value="${product.price}" required>
+            </div>
+            <input type="hidden" name="id" value="${product._id}">
+
+            <div class="my-3 d-flex justify-content-evenly">
+                <button class="btn btn-success save" type="submit" value="submit" formaction="/admin/detailed/">SAVE</button>
+                <a class="btn btn-secondary save" data-bs-dismiss="modal">CANCEL</a>
+            </div>
+        </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    `
+}
+
+function detailedPrice(price) {
+    if (price){
+        return price
+    } else {
+        return 0
+    }
+}
+
 function printPricelistModal(product) {
 
     return `
@@ -786,6 +845,7 @@ exports.getInput = getInput;
 exports.getError = getError;
 exports.printProductModal = printProductModal;
 exports.printPricelistModal = printPricelistModal;
+exports.printDetailedModal = printDetailedModal;
 exports.printMainImage = printMainImage;
 exports.printWishlistModal = printWishlistModal;
 exports.printCartModal = printCartModal;
