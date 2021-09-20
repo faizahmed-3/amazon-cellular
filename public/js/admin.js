@@ -412,46 +412,96 @@ if (c2cp.length > 0) {
 //detailed price list calc
 const bps = document.querySelectorAll('.bp');
 if (bps.length>0){
+    function calculatePrices(evt) {
+        const path = evt.path || (evt.composedPath && evt.composedPath());
+
+        let newBp = path[3][0].value
+        let rate = path[3][1].value;
+        let shipping = parseFloat(path[3][2].value);
+        let buying = path[3][3];
+        let profitP = parseFloat(path[3][4].value);
+        let selling = path[3][5];
+
+        let newBuying = Math.ceil( (newBp * rate) + shipping)
+        buying.value = newBuying;
+        buying.innerHTML = newBuying;
+
+        let newSelling = Math.ceil((profitP/100 * newBuying) + newBuying)
+        selling.value = newSelling;
+        selling.innerHTML = newSelling;
+    }
+
     bps.forEach(bp =>{
         bp.addEventListener('change', evt => {
-            const path = evt.path || (evt.composedPath && evt.composedPath());
-
-            let newBp = path[2].children[0].children[1].value;
-            let rate = path[2].children[1].children[1].value;
-            let buying = path[2].children[2].children[1];
-            let selling = path[2].children[3].children[1];
-
-            let newBuying = Math.ceil( (newBp * rate) + 100)
-            buying.value = newBuying;
-            buying.innerHTML = newBuying;
-
-            let newSelling = Math.ceil((0.05 * newBuying) + newBuying)
-            selling.value = newSelling;
-            selling.innerHTML = newSelling;
-
+            calculatePrices(evt)
         })
     })
 
     const rates = document.querySelectorAll('.rate');
     rates.forEach(rate =>{
         rate.addEventListener('change', evt => {
-            const path = evt.path || (evt.composedPath && evt.composedPath());
-
-            let newBp = path[2].children[0].children[1].value;
-            let rate = path[2].children[1].children[1].value;
-            let buying = path[2].children[2].children[1];
-            let selling = path[2].children[3].children[1];
-
-            let newBuying = Math.ceil( (newBp * rate) + 100)
-            buying.value = newBuying;
-            buying.innerHTML = newBuying;
-
-            let newSelling = Math.ceil((0.05 * newBuying) + newBuying)
-            selling.value = newSelling;
-            selling.innerHTML = newSelling;
-
+            calculatePrices(evt)
         })
     })
+
+    const shippings = document.querySelectorAll('.shipping');
+    shippings.forEach(shipping =>{
+        shipping.addEventListener('change', evt => {
+            calculatePrices(evt)
+        })
+    })
+
+    const profitPs = document.querySelectorAll('.profitP');
+    profitPs.forEach(profitP =>{
+        profitP.addEventListener('change', evt => {
+            calculatePrices(evt)
+        })
+    })
+}
+
+//detailed price list calc new products
+const bp = document.querySelector('.bpNP');
+if (bps){
+    function calculatePricesNP(evt) {
+        const path = evt.path || (evt.composedPath && evt.composedPath());
+
+        let newBp = path[3][1].value
+        let rate = path[3][2].value;
+        let shipping = parseFloat(path[3][3].value);
+        let buying = path[3][4];
+        let profitP = parseFloat(path[3][5].value);
+        let selling = path[3][6];
+
+        let newBuying = Math.ceil( (newBp * rate) + shipping)
+        buying.value = newBuying;
+        buying.innerHTML = newBuying;
+
+        let newSelling = Math.ceil((profitP/100 * newBuying) + newBuying)
+        selling.value = newSelling;
+        selling.innerHTML = newSelling;
+    }
+
+    bp.addEventListener('change', evt => {
+        calculatePricesNP(evt)
+    })
+
+    const rate = document.querySelector('.rateNP');
+    rate.addEventListener('change', evt => {
+        calculatePricesNP(evt)
+    })
+
+
+    const shipping = document.querySelector('.shippingNP');
+    shipping.addEventListener('change', evt => {
+        calculatePricesNP(evt)
+    })
+
+
+    const profitP = document.querySelector('.profitPNP');
+    profitP.addEventListener('change', evt => {
+        calculatePricesNP(evt)
+    })
+
 }
 
 //show password

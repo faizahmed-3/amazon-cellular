@@ -35,8 +35,7 @@ const productSchema = new mongoose.Schema({
     },
     quantity: {
         type: Number,
-        min: 0,
-        required:true
+        min: 0
     },
     shop_price: {
         type: Number,
@@ -78,7 +77,17 @@ const productSchema = new mongoose.Schema({
     rate: {
         type: Number,
         min: 0,
-        default: 31
+        default: 30.3
+    },
+    shipping: {
+        type: Number,
+        min: 0,
+        default: 100
+    },
+    profitP: {
+        type: Number,
+        min: 0,
+        default: 5
     },
     buying: {
         type: Number,
@@ -88,6 +97,10 @@ const productSchema = new mongoose.Schema({
         type: Number,
         min: 0
     },
+    populateStatus: {
+        type: Boolean,
+        default: true
+    }
 });
 
 productSchema.index({product_name: "text"})

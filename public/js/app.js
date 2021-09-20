@@ -283,10 +283,10 @@ if (latitude) {
                     distance.value = dist
                     if (dist <= 1) {
                         delivery_fee.value = 0
-                        deliveryExplaination.innerHTML = `Delivery within 24 hours with an option of payment on delivery.`
+                        deliveryExplaination.innerHTML = `Quick delivery within 24 hours with an option of payment on delivery.`
                     } else if (dist <= 6.5) {
                         df = Math.round((dist * 58) / 50) * 50
-                        deliveryExplaination.innerHTML = `Delivery within 24 hours with an option of payment on delivery.`
+                        deliveryExplaination.innerHTML = `Quick delivery within 24 hours with an option of payment on delivery.`
                         if (df < 200) {
                             delivery_fee.value = 200
                         } else {
@@ -294,10 +294,10 @@ if (latitude) {
                         }
                     } else if (dist<=50){
                         delivery_fee.value = 300
-                        deliveryExplaination.innerHTML = `Lipa na MPESA only, no payment on delivery option.`
+                        deliveryExplaination.innerHTML = `Delivery may take a little bit long but mostly within 24 hours with no option of payment on delivery, lipa na MPESA only`
                     } else{
                         delivery_fee.value = 350
-                        deliveryExplaination.innerHTML = `Lipa na MPESA only, no payment on delivery option. Delivery may take more that 24 hours`
+                        deliveryExplaination.innerHTML = `Delivery may take more that 24 hours with no option of payment on delivery, lipa na MPESA only`
                     }
 
                 } else {
@@ -305,6 +305,7 @@ if (latitude) {
                     map.setCenter(shopLocation);
 
                     delivery_fee.value = "Unable to calculate delivery fee";
+                    deliveryExplaination.innerHTML = `An error occurred in calculating the delivery fee`
                 }
             });
 

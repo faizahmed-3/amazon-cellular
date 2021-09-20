@@ -96,7 +96,7 @@ function printProductModal(product, wishlist, cart) {
 function printDetailedModal(product) {
     return `
 <div class="modal fade product-view" id="_${product._id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Product view" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-xl pricelistModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="product-title">${product.product_name}</h5>
@@ -105,30 +105,46 @@ function printDetailedModal(product) {
             <div class="modal-body pt-0">
                 <div class="container-fluid">
                    <form method="POST" >
-            <div class="my-2 form-group">
-                <label for="bp" class="form-label" required>BP</label>
-                <input name="bp" type="number" class="form-control bp" aria-describedby="bp" min="0" value="${detailedPrice(product.bp)}" required>
-            </div>
-            <div class="mb-2 form-group">
+                   <div class="row mt-1">
+                        <div class="col-md-6 mb-2 form-group">
+                            <label for="bp" class="form-label" required>BP</label>
+                            <input name="bp" type="number" class="form-control bp" aria-describedby="bp" min="0" step="any"  step="any" value="${detailedPrice(product.bp)}" required>
+                        </div>
+                        <div class="col-md-6 mb-2 form-group">
                 <label for="rate" class="form-label" required>Rate</label>
-                <input name="rate" type="number" class="form-control rate" aria-describedby="rate" min="0" value="${detailedPrice(product.rate)}" required>
+                <input name="rate" type="number" class="form-control rate" aria-describedby="rate" min="0" step="any" value="${detailedPrice(product.rate)}" required>
             </div>
-            <div class="mb-2 form-group">
+                   </div>
+                   <div class="row">
+                        <div class="col-md-6 mb-2 form-group">
+                <label for="shipping" class="form-label" required>Shipping Fee</label>
+                <input name="shipping" type="number" class="form-control shipping" aria-describedby="shipping" min="0" step="any" value="${detailedPrice(product.shipping)}" required>
+            </div>
+                        <div class="col-md-6 mb-2 form-group">
                 <label for="buying" class="form-label" >Buying Price</label>
-                <input name="buying" type="number" class="form-control buying" aria-describedby="buying" value="${detailedPrice(product.buying)}" readonly>
+                <input name="buying" type="number" class="form-control buying" aria-describedby="buying" step="any" value="${detailedPrice(product.buying)}" readonly>
             </div>
-            <div class="mb-2 form-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-2 form-group">
+                <label for="profitP" class="form-label" required>Profit %</label>
+                <input name="profitP" type="number" class="form-control profitP" aria-describedby="profitP" min="0" step="any" value="${detailedPrice(product.profitP)}" required>
+            </div>
+                        <div class="col-md-6 mb-2 form-group">
                 <label for="selling" class="form-label" required>Selling Price</label>
-                <input name="selling" type="number" class="form-control selling" aria-describedby="selling" value="${detailedPrice(product.selling)}" readonly>
+                <input name="selling" type="number" class="form-control selling" aria-describedby="selling" step="any" value="${detailedPrice(product.selling)}" readonly>
             </div>
-            <div class="mb-2 form-group">
+                    </div>
+                    <div class="row">
+                         <div class="col-md-6 mb-2 form-group">
                 <label for="shop_price" class="form-label" required>Wholesale Price</label>
-                <input name="shop_price" type="number" class="form-control shop_price" aria-describedby="shop_price" value="${product.shop_price}" required>
+                <input name="shop_price" type="number" class="form-control shop_price" aria-describedby="shop_price" step="any" value="${product.shop_price}" required>
             </div>
-            <div class="mb-2 form-group">
+                         <div class="col-md-6 mb-2 form-group">
                 <label for="price" class="form-label" required>Site Price</label>
-                <input name="price" type="number" class="form-control price" aria-describedby="price" value="${product.price}" required>
+                <input name="price" type="number" class="form-control price" aria-describedby="price" step="any" value="${product.price}" required>
             </div>
+                    </div>
             <input type="hidden" name="id" value="${product._id}">
 
             <div class="my-3 d-flex justify-content-evenly">

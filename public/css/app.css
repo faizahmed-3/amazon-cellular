@@ -1610,7 +1610,8 @@ body #paymentError {
   width: 12.4%;
 }
 #viewProducts .detailedCol {
-  min-width: 56px;
+  min-width: 62px;
+  max-width: 62px;
 }
 
 #map {
@@ -2366,6 +2367,10 @@ body #paymentError {
 
   .adminLogin {
     width: 90%;
+  }
+
+  .pricelistModal {
+    min-width: 98%;
   }
 }
 @media (max-width: 767.98px) {
