@@ -960,11 +960,11 @@ body {
     width: 99%;
   }
 
-  .passInput{
+  .passInput, .confirmPassInput{
     display: inline;
   }
 
-  .passIcon{
+  .passIcon, .confirmPassIcon{
     margin-left: -32px;
     cursor: pointer;
   }
@@ -1702,9 +1702,26 @@ body {
     width: 12.4%;
   }
 
+  .detailedName{
+    font-weight: 500;
+    text-align: center;
+    font-size: 0.83rem;
+  }
+
   .detailedCol{
-    min-width: 62px;
-    max-width: 62px;
+    font-weight: 500;
+    font-size: 0.83rem;
+    min-width: 50px !important;
+    max-width: 50px !important;
+  }
+
+  .detailedDelete{
+    min-width: 10px !important;
+    max-width: 10px !important;
+  }
+
+  .detailedCell{
+    font-weight: 500;
   }
 }
 

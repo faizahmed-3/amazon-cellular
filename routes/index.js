@@ -17,19 +17,19 @@ const router = express.Router();
 async function shuffleSpecial() {
     const featured_products = await Product.aggregate([
         {$match: {specialID: mongoose.Types.ObjectId('6088050e65de8726600704b6')}},
-        {$match: {status: true}},
+        {$match: {status: true, populateStatus: true}},
         {$sample: {size: 6}}
     ]);
 
     const new_arrivals = await Product.aggregate([
         {$match: {specialID: mongoose.Types.ObjectId('6088051765de8726600704b7')}},
-        {$match: {status: true}},
+        {$match: {status: true, populateStatus: true}},
         {$sample: {size: 6}}
     ]);
 
     const sale = await Product.aggregate([
         {$match: {specialID: mongoose.Types.ObjectId('60891d6820824d1308bc6946')}},
-        {$match: {status: true}},
+        {$match: {status: true, populateStatus: true}},
         {$sample: {size: 6}}
     ]);
 
@@ -40,22 +40,22 @@ async function priceFilter(req, res, pfilter, sortBy, categoryID) {
     let variables = []
 
     if (Object.keys(pfilter).length > 0) {
-        let products = await Product.find(pfilter).and([{categoryID: req.params.id}, {status: true}]).collation({locale: "en"}).sort(sortBy)
+        let products = await Product.find(pfilter).and([{categoryID: req.params.id}, {status: true}, {populateStatus: true}]).collation({locale: "en"}).sort(sortBy)
 
         let [page, startingLimit, numberOfPages, resultsPerPage] = await ssPagination1(req, res, products, categoryID)
 
-        products = await Product.find(pfilter).and([{categoryID: req.params.id}, {status: true}]).collation({locale: "en"}).skip(startingLimit).limit(resultsPerPage).sort(sortBy)
+        products = await Product.find(pfilter).and([{categoryID: req.params.id}, {status: true}, {populateStatus: true}]).collation({locale: "en"}).skip(startingLimit).limit(resultsPerPage).sort(sortBy)
 
         let   [iterator, endingLink] = await ssPagination2(products, page, numberOfPages)
 
         variables = [products, page, iterator, endingLink, numberOfPages]
 
     } else {
-        let products = await Product.find({categoryID: req.params.id}, {status: true}).collation({locale: "en"}).sort('product_name')
+        let products = await Product.find({categoryID: req.params.id, status: true, populateStatus: true}).collation({locale: "en"}).sort('product_name')
 
         let [page, startingLimit, numberOfPages, resultsPerPage] = await ssPagination1(req, res, products, categoryID)
 
-        products = await Product.find({categoryID: req.params.id}, {status: true}).collation({locale: "en"}).skip(startingLimit).limit(resultsPerPage).sort('product_name')
+        products = await Product.find({categoryID: req.params.id, status: true, populateStatus: true}).collation({locale: "en"}).skip(startingLimit).limit(resultsPerPage).sort('product_name')
 
         let   [iterator, endingLink] = await ssPagination2(products, page, numberOfPages)
 
@@ -72,11 +72,11 @@ async function brandsFilter(req, res, bfilter, sortBy, categoryID) {
     let variables = []
 
     if (bfilter.length > 0) {
-        let products = await Product.find({status: true}).or(bfilter).collation({locale: "en"}).sort('product_name')
+        let products = await Product.find({status: true, populateStatus: true}).or(bfilter).collation({locale: "en"}).sort('product_name')
 
         let [page, startingLimit, numberOfPages, resultsPerPage] = await ssPagination1(req, res, products, categoryID)
 
-        products = await Product.find({status: true}).or(bfilter).collation({locale: "en"}).skip(startingLimit).limit(resultsPerPage).sort('product_name')
+        products = await Product.find({status: true, populateStatus: true}).or(bfilter).collation({locale: "en"}).skip(startingLimit).limit(resultsPerPage).sort('product_name')
 
         let   [iterator, endingLink] = await ssPagination2(products, page, numberOfPages)
 
@@ -85,14 +85,16 @@ async function brandsFilter(req, res, bfilter, sortBy, categoryID) {
     } else {
         let products = await Product.find({
             categoryID: req.params.id,
-            status: true
+            status: true,
+            populateStatus: true
         }).collation({locale: "en"}).sort('product_name')
 
         let [page, startingLimit, numberOfPages, resultsPerPage] = await ssPagination1(req, res, products, categoryID)
 
         products = await Product.find({
             categoryID: req.params.id,
-            status: true
+            status: true,
+            populateStatus: true
         }).collation({locale: "en"}).skip(startingLimit).limit(resultsPerPage).sort('product_name')
 
         let   [iterator, endingLink] = await ssPagination2(products, page, numberOfPages)
@@ -223,17 +225,20 @@ router.get('/', async (req, res) => {
     } catch (e) {
         const featured_products = await Product.find({
             specialID: '6088050e65de8726600704b6',
-            status: true
+            status: true,
+            populateStatus: true
         }).sort('-dateCreated').limit(6);
 
         const new_arrivals = await Product.find({
             specialID: '6088051765de8726600704b7',
-            status: true
+            status: true,
+            populateStatus: true
         }).sort('-dateCreated').limit(6);
 
         const sale = await Product.find({
             specialID: '60891d6820824d1308bc6946',
-            status: true
+            status: true,
+            populateStatus: true
         }).sort('-dateCreated').limit(6);
 
         const categories = await Category.find().sort('dateCreated')
@@ -257,13 +262,13 @@ router.get('/:id', async (req, res) => {
         req.session.sortBy = 'product_name'
     }
 
-    let products = await Product.find({categoryID: req.params.id, status: true}).sort(req.session.sortBy);
+    let products = await Product.find({categoryID: req.params.id, status: true, populateStatus: true}).sort(req.session.sortBy);
 
     let [page, startingLimit, numberOfPages, resultsPerPage] = await ssPagination1(req, res, products, req.params.id)
 
     products = await Product.find({
         categoryID: req.params.id,
-        status: true
+        status: true, populateStatus: true
     }).collation({locale: "en"}).skip(startingLimit).limit(resultsPerPage).sort(req.session.sortBy);
 
     let [iterator, endingLink] = await ssPagination2(products, page, numberOfPages)
@@ -408,13 +413,13 @@ router.get('/reset/:id', async (req, res) => {
         req.session.sortBy = 'product_name'
     }
 
-    let products = await Product.find({categoryID: req.params.id, status: true}).sort(req.session.sortBy);
+    let products = await Product.find({categoryID: req.params.id, status: true, populateStatus: true}).sort(req.session.sortBy);
 
     let [page, startingLimit, numberOfPages, resultsPerPage] = await ssPagination1(req, res, products, req.params.id)
 
     products = await Product.find({
         categoryID: req.params.id,
-        status: true
+        status: true, populateStatus: true
     }).collation({locale: "en"}).skip(startingLimit).limit(resultsPerPage).sort(req.session.sortBy);
 
     let [iterator, endingLink] = await ssPagination2(products, page, numberOfPages)

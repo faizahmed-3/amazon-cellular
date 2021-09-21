@@ -9,6 +9,7 @@ const {Product, validate} = require('../../models/admin/products');
 const addProductTemplate = require('../../views/admin/products/new');
 const viewProductsTemplate = require('../../views/admin/products/index');
 const editProductTemplate = require('../../views/admin/products/edit')
+const unpopulatedTemplate = require('../../views/admin/products/unpopulated')
 const express = require('express');
 const router = express.Router();
 
@@ -64,8 +65,15 @@ async function post(req, res) {
 
 
 router.get('/', async (req, res) => {
-    const products = await Product.find().collation({locale: "en" }).sort('product_name');
+    const products = await Product.find({populateStatus: true}).collation({locale: "en" }).sort('product_name');
+
     res.send(viewProductsTemplate({title: 'All Products', products}));
+});
+
+router.get('/unpopulated', async (req, res) => {
+    const products = await Product.find({populateStatus: false}).collation({locale: "en" }).sort('product_name');
+
+    res.send(unpopulatedTemplate({products}));
 });
 
 router.get('/new', async (req, res) => {
@@ -206,6 +214,8 @@ router.post('/edit/:id', productImagesUpload, async (req, res) => {
 
     if (editedImagesArray.length > 0) product.product_images = editedImagesArray;
 
+    if (!product.populateStatus) product.populateStatus = true
+
     await product.save();
 
     res.redirect(req.session.editProductPreviousUrl);
@@ -252,7 +262,7 @@ router.get('/categories/:id', async (req, res) => {
     const valid = mongoose.isValidObjectId(req.params.id);
     if (!valid) return res.status(400).send('Invalid ID passed');
 
-    const products = await Product.find({categoryID: req.params.id}).collation({locale: "en" }).sort('product_name');
+    const products = await Product.find({categoryID: req.params.id, populateStatus: true}).collation({locale: "en" }).sort('product_name');
 
     const category = await Category.findById(req.params.id).select('category_name')
 
@@ -263,7 +273,7 @@ router.get('/brands/:id', async (req, res) => {
     const valid = mongoose.isValidObjectId(req.params.id);
     if (!valid) return res.status(400).send('Invalid ID passed');
 
-    const products = await Product.find({brandID: req.params.id}).collation({locale: "en" }).sort('product_name');
+    const products = await Product.find({brandID: req.params.id, populateStatus: true}).collation({locale: "en" }).sort('product_name');
 
     const brand = await Brand.findById(req.params.id).select('brand_name')
 
@@ -274,7 +284,7 @@ router.get('/special/:id', async (req, res) => {
     const valid = mongoose.isValidObjectId(req.params.id);
     if (!valid) return res.status(400).send('Invalid ID passed');
 
-    const products = await Product.find({specialID: req.params.id}).collation({locale: "en" }).sort('product_name');
+    const products = await Product.find({specialID: req.params.id, populateStatus: true}).collation({locale: "en" }).sort('product_name');
 
     const special = await Special.findById(req.params.id).select('special_name')
 

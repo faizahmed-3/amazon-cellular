@@ -62,6 +62,17 @@ module.exports = ({title, content}) => {
                 </li>
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/orders/'">
                     <div>Orders</div></li>
+                <li class="list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#productsMenu">
+                     Products<i class="fas fa-caret-down ms-1"></i>
+                </li>
+                <div class="collapse collapseMenu" id="productsMenu">
+                    <div class="card card-body">
+                        <ul class="mt-0 px-0">
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/'">Populated Products </li>
+                            <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/unpopulated'">Unpopulated Products </li>
+                        </ul>
+                    </div>
+                </div>                    
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/'">
                      Products
                 </li>

@@ -52,11 +52,11 @@ router.get('/', async(req, res) => {
         query = req.session.query
     }
 
-   let products = await Product.find({$text: {$search: query}}, {score: {$meta: "textScore"}}).sort( {score: {$meta: "textScore"}});
+   let products = await Product.find({populateStatus: true, $text: {$search: query}}, {score: {$meta: "textScore"}}).sort( {score: {$meta: "textScore"}});
 
    let [page, startingLimit, numberOfPages, resultsPerPage] = await ssPagination1(req, res, products)
 
-    products = await Product.find({$text: {$search: query}}, {score: {$meta: "textScore"}}).skip(startingLimit).limit(resultsPerPage).sort( {score: {$meta: "textScore"}});
+    products = await Product.find({populateStatus: true, $text: {$search: query}}, {score: {$meta: "textScore"}}).skip(startingLimit).limit(resultsPerPage).sort( {score: {$meta: "textScore"}});
 
     let [iterator, endingLink] = await ssPagination2(products, page, numberOfPages)
 

@@ -4,6 +4,7 @@ const {getInput, getError} = require('../../../middlewares/otherFunctions')
 
 module.exports = ({product, error, categories, brands, specials}) => {
     const renderedCategories = categories.map(category => {
+        if (product.categoryID) {
             if (product.categoryID.toString() === category._id.toString()) {
                 return `
                 <option value="${category._id}" selected>${category.category_name}</option>
@@ -13,50 +14,63 @@ module.exports = ({product, error, categories, brands, specials}) => {
                 <option value="${category._id}">${category.category_name}</option>
             `
             }
+        }else {
+            return `
+                <option value="${category._id}">${category.category_name}</option>
+            `
+        }
         }).join('');
 
     const renderedBrands = brands.map(brand => {
-        if (brand.subBrands.length > 0) {
-            brand.subBrands.sort((a,b) => a.subBrandName.localeCompare(b.subBrandName))
-            let subBrands = brand.subBrands.map(subBrand => {
-                if (product.subBrandID){
-                    if (product.subBrandID.toString() === subBrand._id.toString()) {
-                        return `
+
+            if (brand.subBrands.length > 0) {
+                brand.subBrands.sort((a, b) => a.subBrandName.localeCompare(b.subBrandName))
+                let subBrands = brand.subBrands.map(subBrand => {
+                    if (product.subBrandID) {
+                        if (product.subBrandID.toString() === subBrand._id.toString()) {
+                            return `
                     <option class="subBrandOption" value="${brand._id}-${subBrand._id}" selected>${subBrand.subBrandName}</option>
                 `
+                        } else {
+                            return `
+                    <option class="subBrandOption" value="${brand._id}-${subBrand._id}">${subBrand.subBrandName}</option>
+                `
+                        }
                     } else {
                         return `
                     <option class="subBrandOption" value="${brand._id}-${subBrand._id}">${subBrand.subBrandName}</option>
                 `
                     }
-                } else {
-                    return `
-                    <option class="subBrandOption" value="${brand._id}-${subBrand._id}">${subBrand.subBrandName}</option>
-                `
-                }
 
 
-
-            }).join('')
-            return `
+                }).join('')
+                return `
                 <optgroup label="${brand.brand_name} &#9207;">
                 ${subBrands}
                 </optgroup>
             `
-        } else {
-            if (product.brandID.toString() === brand._id.toString()) {
-                return `
+            } else {
+                if (product.brandID) {
+                    if (product.brandID.toString() === brand._id.toString()) {
+                        return `
                 <option class="noSubBrand" value="${brand._id}" selected>${brand.brand_name}</option>
             `
-            } else {
-                return `
+                    } else {
+                        return `
                 <option class="noSubBrand" value="${brand._id}">${brand.brand_name}</option>
             `
+                    }
+                } else {
+                    return `
+                <option class="noSubBrand" value="${brand._id}">${brand.brand_name}</option>
+            `
+                }
             }
-        }
+
     }).join('');
 
     const renderedSpecials = specials.map(special => {
+        if (product.specialID) {
             if (product.specialID.toString() === special._id.toString()) {
                 return `
                    <option value="${special._id}" selected>${special.special_name}</option> 
@@ -66,7 +80,11 @@ module.exports = ({product, error, categories, brands, specials}) => {
                 <option value="${special._id}">${special.special_name}</option>
             `
             }
-
+        }else {
+            return `
+                <option value="${special._id}">${special.special_name}</option>
+            `
+        }
         }).join('');
 
     function checkDescription(content) {

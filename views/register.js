@@ -57,8 +57,8 @@ module.exports = ({req, wishlist, cart, input, error, exists}) =>{
                     <div class="mb-2 col-md-6 form-group">
                         <label for="password_confirmation" class="form-label" required>Confirm Password</label>
                         <div class="d-block">
-                            <input name="password_confirmation" type="password" class="form-control passInput" id="password_confirmation" value="${getInput(input, 'password_confirmation')}" required>
-                            <i class="passIcon bi bi-eye-slash"></i>
+                            <input name="password_confirmation" type="password" class="form-control confirmPassInput" id="password_confirmation" value="${getInput(input, 'password_confirmation')}" required>
+                            <i class="confirmPassIcon bi bi-eye-slash"></i>
                             <div class="inputError">${getError(error, 'password_confirmation')}</div>
                         </div>
                         

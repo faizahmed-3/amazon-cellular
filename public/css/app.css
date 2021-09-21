@@ -898,10 +898,10 @@ body #paymentError {
 .register .form-control {
   width: 99%;
 }
-.register .passInput {
+.register .passInput, .register .confirmPassInput {
   display: inline;
 }
-.register .passIcon {
+.register .passIcon, .register .confirmPassIcon {
   margin-left: -32px;
   cursor: pointer;
 }
@@ -1609,9 +1609,23 @@ body #paymentError {
   text-align: center;
   width: 12.4%;
 }
+#viewProducts .detailedName {
+  font-weight: 500;
+  text-align: center;
+  font-size: 0.83rem;
+}
 #viewProducts .detailedCol {
-  min-width: 62px;
-  max-width: 62px;
+  font-weight: 500;
+  font-size: 0.83rem;
+  min-width: 50px !important;
+  max-width: 50px !important;
+}
+#viewProducts .detailedDelete {
+  min-width: 10px !important;
+  max-width: 10px !important;
+}
+#viewProducts .detailedCell {
+  font-weight: 500;
 }
 
 #map {
@@ -1924,6 +1938,18 @@ body #paymentError {
   }
   #admin .mainPanel #stats span {
     font-size: 0.6rem;
+  }
+
+  #viewProducts .detailedName {
+    font-size: 0.75rem;
+  }
+  #viewProducts .detailedCol {
+    font-size: 0.75rem;
+    min-width: 30px !important;
+    max-width: 30px !important;
+  }
+  #viewProducts .detailedCell {
+    font-size: 0.8rem !important;
   }
 }
 @media (max-width: 991.98px) {
@@ -2351,6 +2377,17 @@ body #paymentError {
   }
   #viewProducts tr {
     font-size: 0.87rem;
+  }
+  #viewProducts .detailedName {
+    font-size: 0.73rem;
+  }
+  #viewProducts .detailedCol {
+    font-size: 0.73rem;
+    min-width: 25px !important;
+    max-width: 25px !important;
+  }
+  #viewProducts .detailedCell {
+    font-size: 0.75rem !important;
   }
 
   #add-product li {
@@ -2932,6 +2969,15 @@ body #paymentError {
 
   .adminLogin {
     width: 99%;
+  }
+
+  #viewProducts .detailedName {
+    min-width: 180px !important;
+    max-width: 180px !important;
+  }
+  #viewProducts .detailedCol {
+    min-width: 43px !important;
+    max-width: 43px !important;
   }
 }
 

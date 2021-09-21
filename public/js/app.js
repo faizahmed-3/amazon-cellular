@@ -368,18 +368,38 @@ if (c2c.length > 0) {
 
 
 //show password
-const passIcons = document.querySelectorAll('.passIcon')
-if (passIcons.length > 0){
-    passIcons.forEach(passIcon => {
-        passIcon.addEventListener('click', ()=>{
-            const passInputs = document.querySelectorAll('.passInput')
-            passInputs.forEach(passInput => {
-                const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passInput.setAttribute('type', type);
+const passIcon = document.querySelector('.passIcon')
+if (passIcon){
+    passIcon.addEventListener('click', ()=>{
+        const passInput = document.querySelector('.passInput')
+        const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passInput.setAttribute('type', type);
+        passIcon.classList.toggle('bi-eye');
 
-                passIcon.classList.toggle('bi-eye');
-            })
-        })
+        const confirmPassIcon = document.querySelector('.confirmPassIcon')
+        if (confirmPassIcon){
+            const confirmPassInput = document.querySelector('.confirmPassInput')
+            const type = confirmPassInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPassInput.setAttribute('type', type);
+            confirmPassIcon.classList.toggle('bi-eye');
+        }
+    })
+}
+
+//show confirm password
+const confirmPassIcon = document.querySelector('.confirmPassIcon')
+if (confirmPassIcon){
+    confirmPassIcon.addEventListener('click', ()=>{
+        const confirmPassInput = document.querySelector('.confirmPassInput')
+        const type = confirmPassInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        confirmPassInput.setAttribute('type', type);
+        confirmPassIcon.classList.toggle('bi-eye');
+
+        const passIcon = document.querySelector('.passIcon')
+        const passInput = document.querySelector('.passInput')
+        const type2 = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passInput.setAttribute('type', type2);
+        passIcon.classList.toggle('bi-eye');
     })
 }
 

@@ -418,6 +418,22 @@
     }
   }
 
+  #viewProducts{
+    .detailedName{
+      font-size: 0.75rem;
+    }
+
+    .detailedCol{
+      font-size: 0.75rem;
+      min-width: 30px !important;
+      max-width: 30px !important;
+    }
+
+    .detailedCell{
+      font-size: 0.8rem !important;
+    }
+  }
+
 }
 
 
@@ -1023,6 +1039,20 @@
 
     tr{
       font-size: 0.87rem;
+    }
+
+    .detailedName{
+      font-size: 0.73rem;
+    }
+
+    .detailedCol{
+      font-size: 0.73rem;
+      min-width: 25px !important;
+      max-width: 25px !important;
+    }
+
+    .detailedCell{
+      font-size: 0.75rem !important;
     }
   }
 
@@ -1722,6 +1752,18 @@
 
   .adminLogin{
     width: 99%;
+  }
+
+  #viewProducts{
+    .detailedName{
+      min-width: 180px !important;
+      max-width: 180px !important;
+    }
+
+    .detailedCol{
+      min-width: 43px !important;
+      max-width: 43px !important;
+    }
   }
 
 }

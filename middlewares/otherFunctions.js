@@ -99,59 +99,62 @@ function printDetailedModal(product) {
     <div class="modal-dialog modal-dialog-centered modal-xl pricelistModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="product-title">${product.product_name}</h5>
+                <h5 class="modal-title" id="product-title">Edit Product</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pt-0">
                 <div class="container-fluid">
                    <form method="POST" >
-                   <div class="row mt-1">
-                        <div class="col-md-6 mb-2 form-group">
-                            <label for="bp" class="form-label" required>BP</label>
-                            <input name="bp" type="number" class="form-control bp" aria-describedby="bp" min="0" step="any"  step="any" value="${detailedPrice(product.bp)}" required>
+                        <div class="my-2 form-group">
+                    <label for="product_name" class="form-label" required>Product Name</label>
+                    <input name="product_name" type="text" class="form-control product_name" aria-describedby="product_name" value="${product.product_name}" required>
+                </div>
+                       <div class="row">
+                            <div class="col-md-6 mb-2 form-group">
+                                <label for="bp" class="form-label" required>BP</label>
+                                <input name="bp" type="number" class="form-control bp" aria-describedby="bp" min="0" step="any"  step="any" value="${detailedPrice(product.bp)}" required>
+                            </div>
+                            <div class="col-md-6 mb-2 form-group">
+                    <label for="rate" class="form-label" required>Rate</label>
+                    <input name="rate" type="number" class="form-control rate" aria-describedby="rate" min="0" step="any" value="${detailedPrice(product.rate)}" required>
+                </div>
+                       </div>
+                       <div class="row">
+                            <div class="col-md-6 mb-2 form-group">
+                    <label for="shipping" class="form-label" required>Shipping Fee</label>
+                    <input name="shipping" type="number" class="form-control shipping" aria-describedby="shipping" min="0" step="any" value="${detailedPrice(product.shipping)}" required>
+                </div>
+                            <div class="col-md-6 mb-2 form-group">
+                    <label for="buying" class="form-label" >Buying Price</label>
+                    <input name="buying" type="number" class="form-control buying" aria-describedby="buying" step="any" value="${detailedPrice(product.buying)}" readonly>
+                </div>
                         </div>
-                        <div class="col-md-6 mb-2 form-group">
-                <label for="rate" class="form-label" required>Rate</label>
-                <input name="rate" type="number" class="form-control rate" aria-describedby="rate" min="0" step="any" value="${detailedPrice(product.rate)}" required>
-            </div>
-                   </div>
-                   <div class="row">
-                        <div class="col-md-6 mb-2 form-group">
-                <label for="shipping" class="form-label" required>Shipping Fee</label>
-                <input name="shipping" type="number" class="form-control shipping" aria-describedby="shipping" min="0" step="any" value="${detailedPrice(product.shipping)}" required>
-            </div>
-                        <div class="col-md-6 mb-2 form-group">
-                <label for="buying" class="form-label" >Buying Price</label>
-                <input name="buying" type="number" class="form-control buying" aria-describedby="buying" step="any" value="${detailedPrice(product.buying)}" readonly>
-            </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-2 form-group">
-                <label for="profitP" class="form-label" required>Profit %</label>
-                <input name="profitP" type="number" class="form-control profitP" aria-describedby="profitP" min="0" step="any" value="${detailedPrice(product.profitP)}" required>
-            </div>
-                        <div class="col-md-6 mb-2 form-group">
-                <label for="selling" class="form-label" required>Selling Price</label>
-                <input name="selling" type="number" class="form-control selling" aria-describedby="selling" step="any" value="${detailedPrice(product.selling)}" readonly>
-            </div>
-                    </div>
-                    <div class="row">
-                         <div class="col-md-6 mb-2 form-group">
-                <label for="shop_price" class="form-label" required>Wholesale Price</label>
-                <input name="shop_price" type="number" class="form-control shop_price" aria-describedby="shop_price" step="any" value="${product.shop_price}" required>
-            </div>
-                         <div class="col-md-6 mb-2 form-group">
-                <label for="price" class="form-label" required>Site Price</label>
-                <input name="price" type="number" class="form-control price" aria-describedby="price" step="any" value="${product.price}" required>
-            </div>
-                    </div>
-            <input type="hidden" name="id" value="${product._id}">
-
-            <div class="my-3 d-flex justify-content-evenly">
-                <button class="btn btn-success save" type="submit" value="submit" formaction="/admin/detailed/">SAVE</button>
-                <a class="btn btn-secondary save" data-bs-dismiss="modal">CANCEL</a>
-            </div>
-        </form> 
+                       <div class="row">
+                            <div class="col-md-6 mb-2 form-group">
+                    <label for="profitP" class="form-label" required>Profit %</label>
+                    <input name="profitP" type="number" class="form-control profitP" aria-describedby="profitP" min="0" step="any" value="${detailedPrice(product.profitP)}" required>
+                </div>
+                            <div class="col-md-6 mb-2 form-group">
+                    <label for="selling" class="form-label" required>Selling Price</label>
+                    <input name="selling" type="number" class="form-control selling" aria-describedby="selling" step="any" value="${detailedPrice(product.selling)}" readonly>
+                </div>
+                        </div>
+                       <div class="row">
+                             <div class="col-md-6 mb-2 form-group">
+                    <label for="shop_price" class="form-label" required>Wholesale Price</label>
+                    <input name="shop_price" type="number" class="form-control shop_price" aria-describedby="shop_price" step="any" value="${product.shop_price}" required>
+                </div>
+                             <div class="col-md-6 mb-2 form-group">
+                    <label for="price" class="form-label" required>Site Price</label>
+                    <input name="price" type="number" class="form-control price" aria-describedby="price" step="any" value="${product.price}" required>
+                </div>
+                        </div>
+                       <input type="hidden" name="id" value="${product._id}">
+                       <div class="my-3 d-flex justify-content-evenly">
+                    <button class="btn btn-success save" type="submit" value="submit" formaction="/admin/detailed/">SAVE</button>
+                    <a class="btn btn-secondary save" data-bs-dismiss="modal">CANCEL</a>
+                </div>
+                   </form> 
                 </div>
             </div>
         </div>

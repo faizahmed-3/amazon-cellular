@@ -7,30 +7,44 @@ module.exports = ({products}) => {
     const renderedProducts = products.map(product => {
         if (product.shop_price<= product.selling){
             return `
-<tr class="product-row pricelist-row" style="color: red" data-bs-toggle="modal" data-bs-target="#_${product._id}">
-    <td class="product-name">${product.product_name}</td>
-    <td>${printPrice(product.bp) }</td>
-    <td>${printPrice(product.rate) }</td>
-    <td>${printPrice(product.shipping) }</td>
-    <td>${printPrice(product.buying) }</td>
-    <td>${printPrice(product.profitP) }</td>
-    <td>${printPrice(product.selling) }</td>
-    <td>${product.shop_price}</td>
-    <td>${product.price}</td>
+<tr class="product-row pricelist-row" style="color: red">
+    <td class="product-name detailedCell" data-bs-toggle="modal" data-bs-target="#_${product._id}">${product.product_name}</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${printPrice(product.bp) }</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${printPrice(product.rate) }</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${printPrice(product.shipping) }</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${printPrice(product.buying) }</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${printPrice(product.profitP) }</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${printPrice(product.selling) }</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${product.shop_price}</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${product.price}</td>
+    <td>
+        <div  class="deleteForm">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#delete${product._id}" class="formBtn">
+            <i class="far fa-trash-alt "></i>
+            </button>
+        </div>
+    </td>
 </tr>
            `;
         } else {
             return `
-<tr class="product-row pricelist-row" data-bs-toggle="modal" data-bs-target="#_${product._id}">
-    <td class="product-name">${product.product_name}</td>
-    <td>${printPrice(product.bp) }</td>
-    <td>${printPrice(product.rate) }</td>
-    <td>${printPrice(product.shipping) }</td>
-    <td>${printPrice(product.buying) }</td>
-    <td>${printPrice(product.profitP) }</td>
-    <td>${printPrice(product.selling) }</td>
-    <td>${product.shop_price}</td>
-    <td>${product.price}</td>
+<tr class="product-row pricelist-row">
+    <td class="product-name detailedCell" data-bs-toggle="modal" data-bs-target="#_${product._id}">${product.product_name}</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${printPrice(product.bp) }</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${printPrice(product.rate) }</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${printPrice(product.shipping) }</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${printPrice(product.buying) }</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${printPrice(product.profitP) }</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${printPrice(product.selling) }</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${product.shop_price}</td>
+    <td data-bs-toggle="modal" data-bs-target="#_${product._id}" class="detailedCell">${product.price}</td>
+    <td>        
+        <div  class="deleteForm">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#delete${product._id}" class="formBtn">
+            <i class="far fa-trash-alt "></i>
+            </button>
+        </div>
+    </td>
 </tr>
            `;
         }
@@ -51,6 +65,26 @@ ${printDetailedModal(product)}
            `;
     }).join('');
 
+    const renderedDeleteModals = products.map(product => {
+        return `
+        <div class="modal fade" id="delete${product._id}" tabindex="-1" aria-labelledby="deleteProductModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <form method="POST" >
+                    <div class="modal-body">
+                        <p><b>DELETE</b> ${product.product_name}?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-danger" type="submit" formaction="/admin/detailed/delete/${product._id}">Confirm</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+           `;
+    }).join('');
+
     return layout({
         title: title,
         content: `
@@ -62,15 +96,16 @@ ${printDetailedModal(product)}
         <table class="table table-hover table-bordered mt-2" id="priceListT">
             <thead>
             <tr class="table-dark">
-                <th scope="col" class="product-name-heading">Product Name</th>
+                <th scope="col" class="detailedName">Product Name</th>
                 <th scope="col" class="detailedCol">BP</th>
                 <th scope="col" class="detailedCol">Rate</th>
-                <th scope="col" class="detailedCol">Shipping</th>
-                <th scope="col" class="detailedCol">Buying </th>
-                <th scope="col" class="detailedCol">Profit % </th>
-                <th scope="col" class="detailedCol">Selling </th>
+                <th scope="col" class="detailedCol">Ship</th>
+                <th scope="col" class="detailedCol">Buy </th>
+                <th scope="col" class="detailedCol">Profit </th>
+                <th scope="col" class="detailedCol">Sell </th>
                 <th scope="col" class="detailedCol">W/Sale </th>
-                <th scope="col" class="detailedCol">Website </th>
+                <th scope="col" class="detailedCol">Site </th>
+                <th scope="col" class="detailedDelete"></th>
             </tr>
             </thead>
             <tbody>
@@ -81,6 +116,7 @@ ${printDetailedModal(product)}
 </div>
 
 ${renderedProductModals}
+${renderedDeleteModals}
 
 `});
 }

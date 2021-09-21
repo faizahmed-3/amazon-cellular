@@ -26,7 +26,7 @@ router.get('/', async(req, res) => {
 
     const unitsSold = returnTotal(products, 'unitsSold')
 
-    const totalProducts = await Product.find({status: true}).countDocuments()
+    const totalProducts = await Product.find({status: true, populateStatus: true}).countDocuments()
 
     const totalOrders = await Order.find({orderStatus : 'Delivered'}).countDocuments()
 
@@ -34,9 +34,9 @@ router.get('/', async(req, res) => {
 
     const totalCustomers = await Customer.find().countDocuments()
 
-    const best = await Product.find().sort('-income').limit(10)
+    const best = await Product.find({populateStatus: true}).sort('-income').limit(10)
 
-    const worst = await Product.find().sort('income').limit(10)
+    const worst = await Product.find({populateStatus: true}).sort('income').limit(10)
 
     res.send(dashboardTemplate({orders, income, unitsSold, totalProducts, totalCustomers ,best, worst, allOrders, totalOrders, customers}));
 })
