@@ -73,9 +73,6 @@ module.exports = ({title, content}) => {
                         </ul>
                     </div>
                 </div>                    
-                <li class="list-group-item list-group-item-action" onclick="location.href='/admin/products/'">
-                     Products
-                </li>
                 <li class="list-group-item list-group-item-action" onclick="location.href='/admin/brands/'">
                      Brands
                 </li>
