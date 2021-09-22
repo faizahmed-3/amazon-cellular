@@ -22,6 +22,7 @@ module.exports = ({title, products}) => {
     <td class="product-name">${product.product_name}</td>
     <td>${product.shop_price}</td>
     <td>${product.price}</td>
+    <td>${product.price - product.shop_price}</td>
     <td>${product.unitsSold}</td>
     <td>${product.income}</td>
     <td>${product.quantity}</td>
@@ -74,6 +75,7 @@ module.exports = ({title, products}) => {
                 <th scope="col" class="product-name-heading">Product Name</th>
                 <th scope="col" class="product-others">Shop Price</th>
                 <th scope="col" class="product-others">Price</th>
+                <th scope="col" class="product-others">Profit</th>
                 <th scope="col" class="product-others">Units Sold</th>
                 <th scope="col" class="product-others">Income</th>
                 <th scope="col" class="product-others">Quantity</th>

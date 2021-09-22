@@ -63,74 +63,7 @@ async function post(req, res) {
 
 }
 
-
-router.get('/', async (req, res) => {
-    const products = await Product.find({populateStatus: true}).collation({locale: "en" }).sort('product_name');
-
-    res.send(viewProductsTemplate({title: 'All Products', products}));
-});
-
-router.get('/unpopulated', async (req, res) => {
-    const products = await Product.find({populateStatus: false}).collation({locale: "en" }).sort('product_name');
-
-    res.send(unpopulatedTemplate({products}));
-});
-
-router.get('/new', async (req, res) => {
-    const categories = await Category.find().select('_id category_name').collation({locale: "en" }).sort('category_name');
-    const brands = await Brand.find().select('_id brand_name subBrands').collation({locale: "en" }).sort('brand_name');
-    const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
-
-    req.session.errorUrl = req.originalUrl
-
-    res.send(addProductTemplate({categories, brands, specials}));
-});
-
-router.post('/', productImagesUpload, async (req, res) => {
-    const categories = await Category.find().select('_id category_name').collation({locale: "en" }).sort('category_name');
-    const brands = await Brand.find().select('_id brand_name subBrands').collation({locale: "en" }).sort('brand_name');
-    const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
-
-    await post(req, res);
-
-    res.redirect('/admin/products');
-});
-
-router.post('/copy', productImagesUpload, async (req, res) => {
-    const categories = await Category.find().select('_id category_name').collation({locale: "en" }).sort('category_name');
-    const brands = await Brand.find().select('_id brand_name subBrands').collation({locale: "en" }).sort('brand_name');
-    const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
-
-    await post(req, res);
-
-    res.send(addProductTemplate({
-        input: req.body,
-        categories,
-        brands,
-        specials
-    }))
-});
-
-router.get('/edit/:id', async (req, res) => {
-    const valid = mongoose.isValidObjectId(req.params.id);
-    if (!valid) return res.status(400).send('Invalid ID passed');
-
-    const product = await Product.findById(req.params.id);
-    if (!product) return res.status(400).send(`Sorry, that product doesn't exist`);
-
-    const categories = await Category.find().select('_id category_name').collation({locale: "en" }).sort('category_name');
-    const brands = await Brand.find().select('_id brand_name brandCategoryID subBrands').collation({locale: "en" }).sort('brand_name');
-    const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
-
-    req.session.errorUrl = req.originalUrl
-    req.session.errorProductEditID = product._id
-
-    req.session.editProductPreviousUrl = req.headers.referer.split(req.headers.host).pop()
-
-    res.send(editProductTemplate({product, categories, brands, specials}));
-});
-
-router.post('/edit/:id', productImagesUpload, async (req, res) => {
+async function editPost(req, res) {
     const valid = mongoose.isValidObjectId(req.params.id);
     if (!valid) return res.status(400).send('Invalid ID passed');
 
@@ -217,9 +150,95 @@ router.post('/edit/:id', productImagesUpload, async (req, res) => {
     if (!product.populateStatus) product.populateStatus = true
 
     await product.save();
+}
+
+
+router.get('/', async (req, res) => {
+    const products = await Product.find({populateStatus: true}).collation({locale: "en" }).sort('product_name');
+
+    res.send(viewProductsTemplate({title: 'All Products', products}));
+});
+
+router.get('/unpopulated', async (req, res) => {
+    const products = await Product.find({populateStatus: false}).collation({locale: "en" }).sort('product_name');
+
+    res.send(unpopulatedTemplate({products}));
+});
+
+router.get('/new', async (req, res) => {
+    const categories = await Category.find().select('_id category_name').collation({locale: "en" }).sort('category_name');
+    const brands = await Brand.find().select('_id brand_name subBrands').collation({locale: "en" }).sort('brand_name');
+    const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
+
+    req.session.errorUrl = req.originalUrl
+
+    res.send(addProductTemplate({categories, brands, specials}));
+});
+
+router.post('/', productImagesUpload, async (req, res) => {
+    const categories = await Category.find().select('_id category_name').collation({locale: "en" }).sort('category_name');
+    const brands = await Brand.find().select('_id brand_name subBrands').collation({locale: "en" }).sort('brand_name');
+    const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
+
+    await post(req, res);
+
+    res.redirect('/admin/products');
+});
+
+router.post('/copy', productImagesUpload, async (req, res) => {
+    const categories = await Category.find().select('_id category_name').collation({locale: "en" }).sort('category_name');
+    const brands = await Brand.find().select('_id brand_name subBrands').collation({locale: "en" }).sort('brand_name');
+    const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
+
+    await post(req, res);
+
+    res.send(addProductTemplate({
+        input: req.body,
+        categories,
+        brands,
+        specials
+    }))
+});
+
+router.get('/edit/:id', async (req, res) => {
+    const valid = mongoose.isValidObjectId(req.params.id);
+    if (!valid) return res.status(400).send('Invalid ID passed');
+
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(400).send(`Sorry, that product doesn't exist`);
+
+    const categories = await Category.find().select('_id category_name').collation({locale: "en" }).sort('category_name');
+    const brands = await Brand.find().select('_id brand_name brandCategoryID subBrands').collation({locale: "en" }).sort('brand_name');
+    const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
+
+    req.session.errorUrl = req.originalUrl
+    req.session.errorProductEditID = product._id
+
+    req.session.editProductPreviousUrl = req.headers.referer.split(req.headers.host).pop()
+
+    res.send(editProductTemplate({product, categories, brands, specials}));
+});
+
+router.post('/edit/:id', productImagesUpload, async (req, res) => {
+    await editPost(req,res)
 
     res.redirect(req.session.editProductPreviousUrl);
     req.session.editProductPreviousUrl = null
+});
+
+router.post('/edit/copy/:id', productImagesUpload, async (req, res) => {
+    await editPost(req,res)
+
+    const categories = await Category.find().select('_id category_name').collation({locale: "en" }).sort('category_name');
+    const brands = await Brand.find().select('_id brand_name subBrands').collation({locale: "en" }).sort('brand_name');
+    const specials = await Special.find().select('_id special_name subBrands').collation({locale: "en" }).sort('special_name');
+
+    res.send(addProductTemplate({
+        input: req.body,
+        categories,
+        brands,
+        specials
+    }))
 });
 
 router.get('/error', async (req, res) => {

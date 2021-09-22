@@ -345,8 +345,8 @@ module.exports = ({product, error, categories, brands, specials}) => {
                         ${visibility(product.status)}
                     </label>
                 </div>
-                <button class="btn btn-success save" type="submit" formaction="/admin/products/edit/${product.id}"
-                ">SAVE</button>
+                <button class="btn btn-success save" type="submit" formaction="/admin/products/edit/${product.id}">SAVE</button>
+                <button class="btn btn-warning save" type="submit" formaction="/admin/products/edit/copy/${product.id}">SAVE AND CREATE NEW COPY</button>
                 <a class="btn btn-secondary save" onclick="location.href='/admin/products/cancel'">CANCEL</a>
             </div>
         </form>
