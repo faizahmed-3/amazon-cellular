@@ -193,7 +193,7 @@ module.exports = ({product, error, categories, brands, specials}) => {
                         <option value="">-Select a category-</option>
                         ${renderedCategories}
                     </select>
-                    <div class="form-text">press the first letter repeatedly to scroll</div>
+                    <div class="form-text">quickly type the name to select</div>
                 </div>
 
                 <div class="mb-3 col-md-4 form-group ">
@@ -202,7 +202,7 @@ module.exports = ({product, error, categories, brands, specials}) => {
                         <option value="">-Select a brand or a sub brand-</option>
                         ${renderedBrands}
                     </select>
-                    <div class="form-text">press the first letter repeatedly to scroll</div>
+                    <div class="form-text">quickly type the name to select</div>
                 </div>
 
                 <div class="mb-3 col-md-4 form-group ">

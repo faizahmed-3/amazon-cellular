@@ -39,7 +39,7 @@ module.exports = () => {
            <div class="row">
                 <div class="col-md-6 mb-2 form-group">
         <label for="profitP" class="form-label" required>Profit %</label>
-        <input name="profitP" type="number" class="form-control profit" aria-describedby="profitP" min="0" step="any" value="5" required>
+        <input name="profitP" type="number" class="form-control profitP" aria-describedby="profitP" min="0" step="any" value="5" required>
     </div>
                 <div class="col-md-6 mb-2 form-group">
         <label for="selling" class="form-label">Selling Price</label>

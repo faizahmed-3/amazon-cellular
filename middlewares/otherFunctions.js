@@ -765,7 +765,7 @@ Dear ${fullName},
 Click the link below to reset your password for Amazon Cellular. The link expires after 15 minutes and it's for a one time use. <br>
 <a href="${link}">Reset my password</a>
 <br>
-If you did not initiate a forgot password request kindly report this incident by simply replying to this email or calling us on <a href="tel:+254705063256"> 0705063256 </a>
+If you did not initiate a forgot password request kindly report this incident by simply replying to this email or calling us on <a href="tel:+254792200373"> 0792200373 </a>
 <br><br>
 Kind regards,<br>
 Amazon Cellular Outfitters

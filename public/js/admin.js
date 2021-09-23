@@ -459,51 +459,6 @@ if (bps.length>0){
     })
 }
 
-//detailed price list calc new products
-const bp = document.querySelector('.bpNP');
-if (bp){
-    function calculatePricesNP(evt) {
-        const path = evt.path || (evt.composedPath && evt.composedPath());
-
-        let newBp = path[3][1].value
-        let rate = path[3][2].value;
-        let shipping = parseFloat(path[3][3].value);
-        let buying = path[3][4];
-        let profitP = parseFloat(path[3][5].value);
-        let selling = path[3][6];
-
-        let newBuying = Math.ceil( (newBp * rate) + shipping)
-        buying.value = newBuying;
-        buying.innerHTML = newBuying;
-
-        let newSelling = Math.ceil((profitP/100 * newBuying) + newBuying)
-        selling.value = newSelling;
-        selling.innerHTML = newSelling;
-    }
-
-    bp.addEventListener('change', evt => {
-        calculatePricesNP(evt)
-    })
-
-    const rate = document.querySelector('.rateNP');
-    rate.addEventListener('change', evt => {
-        calculatePricesNP(evt)
-    })
-
-
-    const shipping = document.querySelector('.shippingNP');
-    shipping.addEventListener('change', evt => {
-        calculatePricesNP(evt)
-    })
-
-
-    const profitP = document.querySelector('.profitPNP');
-    profitP.addEventListener('change', evt => {
-        calculatePricesNP(evt)
-    })
-
-}
-
 //show password
 const passIcon = document.querySelector('.passIcon')
 if (passIcon){

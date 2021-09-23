@@ -158,17 +158,17 @@ ${content}
                 <div class="text-center">
                     <p id="reach">Contact us</p>
                     <p>
-                        <button class="btn btn-primary phone"><a href="tel:+254705063256"><i
+                        <button class="btn btn-primary phone"><a href="tel:+254792200373"><i
                                 class="bi bi-telephone-fill"></i> Call </a></button>
                         <button class="btn btn-primary phone"><a href="mailto:amazon.cellular.outfitters@gmail.com"><i
                                 class="bi bi-envelope-fill"></i> Mail</a></button>
-                        <button class="btn btn-primary phone"><a href="sms:+254705063256"><i
+                        <button class="btn btn-primary phone"><a href="sms:+254792200373"><i
                                 class="bi bi-chat-dots-fill"></i> SMS</a></button>
                     </p>
                     <p>
                         <a href="https://www.facebook.com/Amazon-Cellular-Outfitters-100448395706615/"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/amazon_cellular_outfitters/"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/254705063256"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/254792200373"><i class="fab fa-whatsapp"></i></a>
                     </p>
                 </div>
             </div>

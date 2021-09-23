@@ -3,41 +3,125 @@ const title = 'Add Product';
 const {getInput, getError} = require('../../../middlewares/otherFunctions')
 
 module.exports = ({categories, brands, specials, input, error}) => {
-    const renderedCategories = categories.map(category => {
-            return `
+    function printCategories() {
+        let renderedCategories
+        if (input){
+            renderedCategories = categories.map(category => {
+                if (input.categoryID) {
+                    if (input.categoryID.toString() === category._id.toString()) {
+                        return `
+                <option value="${category._id}" selected>${category.category_name}</option>
+            `
+                    } else {
+                        return `
                 <option value="${category._id}">${category.category_name}</option>
             `
-        }).join('');
-
-    const renderedBrands = brands.map(brand => {
-        if (brand.subBrands.length > 0) {
-                brand.subBrands.sort((a,b) => a.subBrandName.localeCompare(b.subBrandName))
-                let subBrands = brand.subBrands.map(subBrand => {
+                    }
+                }else {
                     return `
+                <option value="${category._id}">${category.category_name}</option>
+            `
+                }
+            }).join('');
+        } else {
+            renderedCategories = categories.map(category => {
+                return `
+                <option value="${category._id}">${category.category_name}</option>
+            `
+            }).join('');
+        }
+        return renderedCategories
+    }
+
+    function printBrands() {
+        let renderedBrands
+        if (input){
+            renderedBrands = brands.map(brand => {
+
+                if (brand.subBrands.length > 0) {
+                    brand.subBrands.sort((a, b) => a.subBrandName.localeCompare(b.subBrandName))
+                    let subBrands = brand.subBrands.map(subBrand => {
+                        if (input.subBrandID) {
+                            if (input.subBrandID.toString() === subBrand._id.toString()) {
+                                return `
+                    <option class="subBrandOption" value="${brand._id}-${subBrand._id}" selected>${subBrand.subBrandName}</option>
+                `
+                            } else {
+                                return `
                     <option class="subBrandOption" value="${brand._id}-${subBrand._id}">${subBrand.subBrandName}</option>
                 `
-                }).join('')
-                return `
+                            }
+                        } else {
+                            return `
+                    <option class="subBrandOption" value="${brand._id}-${subBrand._id}">${subBrand.subBrandName}</option>
+                `
+                        }
+
+
+                    }).join('')
+                    return `
                 <optgroup label="${brand.brand_name} &#9207;">
                 ${subBrands}
                 </optgroup>
             `
-            } else {
-                return `
+                } else {
+                    if (input.brandID) {
+                        if (input.brandID.toString() === brand._id.toString()) {
+                            return `
+                <option class="noSubBrand" value="${brand._id}" selected>${brand.brand_name}</option>
+            `
+                        } else {
+                            return `
                 <option class="noSubBrand" value="${brand._id}">${brand.brand_name}</option>
             `
-            }
-        }).join('');
-
-    const renderedSpecials = specials.map(special => {
-            if (special.special_name.toUpperCase() === 'new arrivals'.toUpperCase()){
-                return`
-                   <option value="${special._id}" selected>${special.special_name}</option> 
-                `}
-            return `
-                <option value="${special._id}">${special.special_name}</option>
+                        }
+                    } else {
+                        return `
+                <option class="noSubBrand" value="${brand._id}">${brand.brand_name}</option>
             `
-        }).join('');
+                    }
+                }
+
+            }).join('');
+        } else {
+            renderedBrands = brands.map(brand => {
+                if (brand.subBrands.length > 0) {
+                    brand.subBrands.sort((a,b) => a.subBrandName.localeCompare(b.subBrandName))
+                    let subBrands = brand.subBrands.map(subBrand => {
+                        return `
+                    <option class="subBrandOption" value="${brand._id}-${subBrand._id}">${subBrand.subBrandName}</option>
+                `
+                    }).join('')
+                    return `
+                <optgroup label="${brand.brand_name} &#9207;">
+                ${subBrands}
+                </optgroup>
+            `
+                } else {
+                    return `
+                <option class="noSubBrand" value="${brand._id}">${brand.brand_name}</option>
+            `
+                }
+            }).join('');
+        }
+        return renderedBrands
+    }
+
+    function printSpecials() {
+        const rand = Math.floor(Math.random() * 3);
+        let renderedSpecials= ''
+
+        for (let i=0; i<=2; i++){
+            if (i === rand){
+                renderedSpecials += `<option value="${specials[i]._id}" selected>${specials[i].special_name}</option> `
+            } else {
+                renderedSpecials += `<option value="${specials[i]._id}">${specials[i].special_name}</option> `
+            }
+        }
+
+        return renderedSpecials
+    }
+
 
     function checkDescription(content) {
         if (content){
@@ -75,7 +159,7 @@ module.exports = ({categories, brands, specials, input, error}) => {
                     <select class="form-select" aria-label="Select Category" id="category" name="categoryID"
                             required>
                         <option value="">-Select a category-</option>
-                        ${renderedCategories}
+                        ${printCategories()}
                     </select>
                     <div class="form-text">quickly type the name to select</div>
                 </div>
@@ -83,16 +167,15 @@ module.exports = ({categories, brands, specials, input, error}) => {
                     <label for="brand" class="form-label" required>Brand</label>
                     <select class="form-select" aria-label="Select Brand" id="brand" name="brandID" required>
                         <option value="">-Select a brand or a sub brand-</option>
-                        ${renderedBrands}
+                        ${printBrands()}
                     </select>
                     <div class="form-text">quickly type the name to select</div>
                 </div>
                 <div class="mb-3 col-md-4 form-group ">
                     <label for="special" class="form-label" required>Special Category</label>
                     <select class="form-select" aria-label="Special Category" id="special" name="specialID"
-                            required>
-                        <option value="">-Select a special category-</option>
-                        ${renderedSpecials}
+                            required> 
+                        ${printSpecials()}
                     </select>
                 </div>
             </div>
